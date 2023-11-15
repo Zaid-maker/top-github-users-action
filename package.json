@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/gayanvoice/top-github-users-action#readme",
   "dependencies": {
-    "@octokit/graphql": "4.6.2",
+    "@octokit/graphql": "7.0.2",
     "fs-extra": "9.1.0",
     "simple-git": "2.39.0"
   },
