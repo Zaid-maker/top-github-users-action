@@ -1,7 +1,7 @@
 let OutputMarkdownModel = function (githubUsernameAndRepository,
-                                    locationDataModel,
-                                    readCacheResponseModel,
-                                    readConfigResponseModel) {
+    locationDataModel,
+    readCacheResponseModel,
+    readConfigResponseModel) {
     this.githubUsernameAndRepository = githubUsernameAndRepository;
     this.locationDataModel = locationDataModel;
     this.readCacheResponseModel = readCacheResponseModel;

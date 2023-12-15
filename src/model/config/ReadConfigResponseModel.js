@@ -1,17 +1,18 @@
 const LocationDataModel = require('../data/LocationDataModel');
-let ReadConfigResponseModel =  function (status, content) {
+
+let ReadConfigResponseModel = function (status, content) {
     let validate = function (value) {
         return !(value === '' || value === null || value === undefined || (typeof value) !== 'string');
     }
     let setDevMode = function (devMode) {
-        if(validate(devMode)){
+        if (validate(devMode)) {
             return devMode === "true";
         } else {
             return true;
         }
     }
     let setGeoName = function (geoName) {
-        if(validate(geoName)){
+        if (validate(geoName)) {
             return geoName;
         } else {
             return null;
@@ -23,7 +24,7 @@ let ReadConfigResponseModel =  function (status, content) {
             let country = location.country;
             let geoName = setGeoName(location.geoName);
             let imageUrl = location.imageUrl;
-            if(validate(country)) {
+            if (validate(country)) {
                 let array = [];
                 array.push(country)
                 for (const city of location.cities) {
@@ -37,8 +38,8 @@ let ReadConfigResponseModel =  function (status, content) {
         return locationArray;
     }
     this.status = status;
-    if(status) this.devMode = setDevMode(content.devMode);
-    if(status) this.locations = setLocations(content.locations);
-    if(status) this.checkpoint = content.checkpoint;
+    if (status) this.devMode = setDevMode(content.devMode);
+    if (status) this.locations = setLocations(content.locations);
+    if (status) this.checkpoint = content.checkpoint;
 }
 module.exports = ReadConfigResponseModel;

@@ -1,4 +1,5 @@
 const UserDataModel = require('../data/UserDataModel');
+
 let ReadCacheResponseModel = function (status, content) {
     let validate = function (value) {
         return (value === '' || value === null || value === undefined);
@@ -12,7 +13,7 @@ let ReadCacheResponseModel = function (status, content) {
     }
     let setUsers = function (content) {
         let array = [];
-        for(const user of content){
+        for (const user of content) {
             let userDataModel = new UserDataModel(
                 setValue(user.login),
                 setValue(user.name),
