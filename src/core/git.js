@@ -1,4 +1,5 @@
 const simpleGit = require('simple-git');
+
 let git = (function () {
     const git = simpleGit();
     let pull = async function () {
