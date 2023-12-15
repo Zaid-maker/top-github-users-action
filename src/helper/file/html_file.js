@@ -1,4 +1,5 @@
 const file = require('../../core/file');
+
 let htmlFile = function () {
     let outputHtmlFile = async function (fileName, html) {
         let outputFileResponseModel = await file.outputOther(fileName, html);
@@ -13,4 +14,5 @@ let htmlFile = function () {
         outputJsonFile: outputJsonFile
     };
 }();
+
 module.exports = htmlFile;

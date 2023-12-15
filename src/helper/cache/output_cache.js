@@ -1,4 +1,5 @@
 const cacheFile = require('../../helper/file/cache_file');
+
 let outputCache = (function () {
     let getCountryName = function (country) {
         return country.replace(/\s/g, '_').toLowerCase();
@@ -18,4 +19,5 @@ let outputCache = (function () {
         readCacheFile: readCacheFile
     };
 })();
+
 module.exports = outputCache;

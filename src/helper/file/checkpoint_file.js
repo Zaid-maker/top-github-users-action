@@ -1,5 +1,6 @@
 const file = require('../../core/file');
 const ReadCheckpointResponseModel = require('../../model/checkpoint/ReadCheckpointResponseModel');
+
 let checkpointFile = (function () {
     const path = 'checkpoint.json';
     let outputCheckpointFile = async function (json) {
@@ -9,7 +10,7 @@ let checkpointFile = (function () {
     let readCheckpointFile = async function () {
         let readFileResponseModel = await file.readJson(path);
         console.log(readFileResponseModel.message)
-        if(readFileResponseModel.status){
+        if (readFileResponseModel.status) {
             return new ReadCheckpointResponseModel(readFileResponseModel.status, readFileResponseModel.content);
         } else {
             return new ReadCheckpointResponseModel(readFileResponseModel.status);
@@ -20,4 +21,5 @@ let checkpointFile = (function () {
         outputCheckpointFile: outputCheckpointFile
     };
 })();
+
 module.exports = checkpointFile;
