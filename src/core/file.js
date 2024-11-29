@@ -1,36 +1,37 @@
-const fs = require('fs-extra')
-const OutputFileResponseModel = require('../model/file/OutputFileResponseModel');
-const ReadFileResponseModel = require('../model/file/ReadFileResponseModel');
+import fs from 'fs-extra';
+import OutputFileResponseModel from '../model/file/OutputFileResponseModel';
+import ReadFileResponseModel from '../model/file/ReadFileResponseModel';
 
-let file = (function () {
-    let outputJson = async function (fileName, json) {
+class FileHandler {
+    static async outputJson(fileName, json) {
         try {
-            await fs.outputJson(fileName, json)
+            await fs.outputJson(fileName, json);
             return new OutputFileResponseModel(true, `Json file has been updated at ${fileName}`);
         } catch (error) {
-            return new OutputFileResponseModel(false, `Json file has not been updated at ${fileName}`)
+            console.error('Error writing JSON file:', error);
+            return new OutputFileResponseModel(false, `Json file has not been updated at ${fileName}: ${error.message}`);
         }
     }
-    let outputOther = async function (fileName, file) {
+
+    static async outputOther(fileName, file) {
         try {
-            await fs.outputFile(fileName, file)
-            return new OutputFileResponseModel(true, `Other file has been updated at ${fileName}`)
+            await fs.outputFile(fileName, file);
+            return new OutputFileResponseModel(true, `Other file has been updated at ${fileName}`);
         } catch (error) {
-            return new OutputFileResponseModel(false, `Other file has not been updated at ${fileName}`)
+            console.error('Error writing file:', error);
+            return new OutputFileResponseModel(false, `Other file has not been updated at ${fileName}: ${error.message}`);
         }
     }
-    let readJson = async function (fileName) {
+
+    static async readJson(fileName) {
         try {
-            let json = await fs.readJson(fileName);
+            const json = await fs.readJson(fileName);
             return new ReadFileResponseModel(true, `Json file has been read at ${fileName}`, json);
         } catch (error) {
-            return new ReadFileResponseModel(false, `Json file has not been read at ${fileName}`);
+            console.error('Error reading JSON file:', error);
+            return new ReadFileResponseModel(false, `Json file has not been read at ${fileName}: ${error.message}`);
         }
     }
-    return {
-        outputJson: outputJson,
-        outputOther: outputOther,
-        readJson: readJson,
-    };
-})();
-module.exports = file;
+}
+
+export default FileHandler;

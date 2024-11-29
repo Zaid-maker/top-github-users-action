@@ -1,17 +1,15 @@
-const git = require('../../core/git');
+import git from '../../core/git';
 
-let pullGit = function () {
-    let pull = async function () {
-        console.log(`Git Pull`)
+class GitPuller {
+    static async pull() {
+        console.log('Git Pull');
         try {
             await git.pull();
         } catch (error) {
-            console.log(error);
+            console.error('Error during git pull:', error);
+            throw error; // Re-throw to allow caller to handle the error
         }
     }
-    return {
-        pull: pull
-    };
-}();
+}
 
-module.exports = pullGit;
+export default GitPuller;
