@@ -1,23 +1,40 @@
-const simpleGit = require('simple-git');
+import simpleGit from 'simple-git';
 
-let git = (function () {
-    const git = simpleGit();
-    let pull = async function () {
-        await git.pull();
+class GitHandler {
+    constructor() {
+        this.git = simpleGit();
     }
-    let commit = async function (username, email, message) {
-        await git.addConfig('user.name', username)
-        await git.addConfig('user.email', email)
-        await git.add('./*')
-        await git.commit(message)
+
+    async pull() {
+        try {
+            await this.git.pull();
+        } catch (error) {
+            console.error('Error during git pull:', error);
+            throw error;
+        }
     }
-    let push = async function (branch) {
-        await git.push('origin', branch);
+
+    async commit(username, email, message) {
+        try {
+            await this.git.addConfig('user.name', username);
+            await this.git.addConfig('user.email', email);
+            await this.git.add('./*');
+            await this.git.commit(message);
+        } catch (error) {
+            console.error('Error during git commit:', error);
+            throw error;
+        }
     }
-    return {
-        pull: pull,
-        commit: commit,
-        push: push
-    };
-})();
-module.exports = git;
+
+    async push(branch) {
+        try {
+            await this.git.push('origin', branch);
+        } catch (error) {
+            console.error('Error during git push:', error);
+            throw error;
+        }
+    }
+}
+
+// Export a singleton instance
+export default new GitHandler();

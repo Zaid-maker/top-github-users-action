@@ -1,42 +1,62 @@
-const OctokitPageInfoModel = require('./OctokitPageInfoModel');
-const UserDataModel = require('../data/UserDataModel');
-let OctokitResponseModel =  function (status, response) {
-    let validate = function (value) {
-        return (value === '' || value === null || value === undefined);
+import OctokitPageInfoModel from './OctokitPageInfoModel';
+import UserDataModel from '../data/UserDataModel';
+
+class OctokitResponseModel {
+    constructor(status, message, users = [], pageInfo = null) {
+        this.status = status;
+        this.message = message;
+        this.node = users;
+        this.pageInfo = pageInfo ? new OctokitPageInfoModel(pageInfo) : null;
     }
-    let setValue = function (value) {
-        if (validate(value)) {
-            return "undefined value";
-        } else {
-            return value;
-        }
+
+    static validate(value) {
+        return value === '' || value === null || value === undefined;
     }
-    let setPublicContributions = function (contributionsCollection) {
-        let totalContributions = contributionsCollection.contributionCalendar.totalContributions;
-        let privateContributions = contributionsCollection.restrictedContributionsCount;
+
+    static setValue(value) {
+        return this.validate(value) ? "undefined value" : value;
+    }
+
+    static calculatePublicContributions(contributionsCollection) {
+        const totalContributions = contributionsCollection.contributionCalendar.totalContributions;
+        const privateContributions = contributionsCollection.restrictedContributionsCount;
         return totalContributions - privateContributions;
     }
-    let setUsers = function (edges) {
-        let array = [];
-        for (const node of edges) {
-            if(node.node.__typename === 'User'){
-                let userDataModel = new UserDataModel(
-                    setValue(node.node.login),
-                    setValue(node.node.name),
-                    setValue(node.node.avatarUrl),
-                    setValue(node.node.location),
-                    setValue(node.node.company),
-                    setValue(node.node.twitterUsername),
-                    setValue(node.node.followers.totalCount),
-                    setValue(node.node.contributionsCollection.restrictedContributionsCount),
-                    setValue(setPublicContributions(node.node.contributionsCollection)))
-                array.push(userDataModel)
-            }
+
+    static processUserData(userData) {
+        if (userData.__typename !== 'User') {
+            return null;
         }
-        return array;
+
+        return new UserDataModel(
+            this.setValue(userData.login),
+            this.setValue(userData.name),
+            this.setValue(userData.avatarUrl),
+            this.setValue(userData.location),
+            this.setValue(userData.company),
+            this.setValue(userData.twitterUsername),
+            this.setValue(userData.followers.totalCount),
+            this.setValue(userData.contributionsCollection.restrictedContributionsCount),
+            this.setValue(this.calculatePublicContributions(userData.contributionsCollection))
+        );
     }
-    this.status = status;
-    if (status) this.node = setUsers(response.search.edges);
-    if (status) this.pageInfo = new OctokitPageInfoModel(response.search.pageInfo);
+
+    static fromApiResponse(status, response) {
+        if (!status || !response) {
+            return new OctokitResponseModel(false, 'Invalid response', [], null);
+        }
+
+        const users = response.search.edges
+            .map(edge => this.processUserData(edge.node))
+            .filter(user => user !== null);
+
+        return new OctokitResponseModel(
+            true,
+            'Successfully processed response',
+            users,
+            response.search.pageInfo
+        );
+    }
 }
-module.exports = OctokitResponseModel;
+
+export default OctokitResponseModel;
