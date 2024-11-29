@@ -1,5 +1,23 @@
-let OctokitPageInfoModel =  function (pageInfo) {
-    this.endCursor = pageInfo.endCursor;
-    this.hasNextPage = pageInfo.hasNextPage;
+class OctokitPageInfoModel {
+    constructor({ endCursor, hasNextPage }) {
+        this.endCursor = endCursor;
+        this.hasNextPage = hasNextPage;
+    }
+
+    static createEmpty() {
+        return new OctokitPageInfoModel({
+            endCursor: null,
+            hasNextPage: false
+        });
+    }
+
+    hasMore() {
+        return this.hasNextPage === true;
+    }
+
+    getNextCursor() {
+        return this.endCursor;
+    }
 }
-module.exports = OctokitPageInfoModel;
+
+export default OctokitPageInfoModel;

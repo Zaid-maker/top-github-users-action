@@ -1,40 +1,48 @@
-const markdownFile = require('../../helper/file/markdown_file');
-let outputMarkdown = (function () {
-    let setCountryName = function (country) {
+import path from 'path';
+import markdownFile from '../../helper/file/markdown_file';
+
+class MarkdownOutputHandler {
+    static formatCountryName(country) {
         return country.replace(/\s/g, '_').toLowerCase();
     }
-    let setIndexPath = function () {
-        return `README.md`;
+
+    static getFilePaths() {
+        return {
+            index: 'README.md',
+            publicContributions: country => path.join('markdown', 'public_contributions', `${this.formatCountryName(country)}.md`),
+            totalContributions: country => path.join('markdown', 'total_contributions', `${this.formatCountryName(country)}.md`),
+            followers: country => path.join('markdown', 'followers', `${this.formatCountryName(country)}.md`)
+        };
     }
-    let setPublicContributionsPath = function (country) {
-        let fileName = setCountryName(country)
-        return `markdown/public_contributions/${fileName}.md`;
+
+    static async saveMarkdownFile(filePath, content) {
+        try {
+            await markdownFile.outputMarkdownFile(filePath, content);
+        } catch (error) {
+            console.error(`Error saving markdown file ${filePath}:`, error);
+            throw error;
+        }
     }
-    let setTotalContributionsPath = function (country) {
-        let fileName = setCountryName(country)
-        return `markdown/total_contributions/${fileName}.md`;
+
+    static async saveIndexMarkdown(markdown) {
+        const filePath = this.getFilePaths().index;
+        await this.saveMarkdownFile(filePath, markdown);
     }
-    let setFollowersPath = function (country) {
-        let fileName = setCountryName(country)
-        return `markdown/followers/${fileName}.md`;
+
+    static async savePublicContributionsMarkdown(country, markdown) {
+        const filePath = this.getFilePaths().publicContributions(country);
+        await this.saveMarkdownFile(filePath, markdown);
     }
-    let saveIndexMarkdownFile = async function (markdown) {
-        await markdownFile.outputMarkdownFile(setIndexPath(), markdown);
+
+    static async saveTotalContributionsMarkdown(country, markdown) {
+        const filePath = this.getFilePaths().totalContributions(country);
+        await this.saveMarkdownFile(filePath, markdown);
     }
-    let savePublicContributionsMarkdownFile = async function (country, markdown) {
-        await markdownFile.outputMarkdownFile(setPublicContributionsPath(country), markdown);
+
+    static async saveFollowersMarkdown(country, markdown) {
+        const filePath = this.getFilePaths().followers(country);
+        await this.saveMarkdownFile(filePath, markdown);
     }
-    let saveTotalContributionsMarkdownFile = async function (country, markdown) {
-        await markdownFile.outputMarkdownFile(setTotalContributionsPath(country), markdown);
-    }
-    let saveFollowersMarkdownFile = async function (country, markdown) {
-        await markdownFile.outputMarkdownFile(setFollowersPath(country), markdown);
-    }
-    return {
-        saveIndexMarkdownFile: saveIndexMarkdownFile,
-        savePublicContributionsMarkdownFile: savePublicContributionsMarkdownFile,
-        saveTotalContributionsMarkdownFile: saveTotalContributionsMarkdownFile,
-        saveFollowersMarkdownFile: saveFollowersMarkdownFile,
-    };
-})();
-module.exports = outputMarkdown;
+}
+
+export default MarkdownOutputHandler;
