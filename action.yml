@@ -2,5 +2,5 @@ name: "JavaScript Action | File Handling and GitHub Operations"
 description: "The repository shows file handling and git operations"
 
 runs:
-  using: "node16"
+  using: "node20"
   main: "dist/index.js"
