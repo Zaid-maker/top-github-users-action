@@ -1,25 +1,63 @@
-const checkpointFile = require('../../helper/file/checkpoint_file');
-const CheckpointDataModel = require('../../model/data/CheckpointDataModel');
+import checkpointFile from '../../helper/file/checkpoint_file';
+import CheckpointDataModel from '../../model/data/CheckpointDataModel';
 
-let outputCheckpoint = (function () {
-    let saveCheckpointFile = async function (locationsArray, country, checkpoint) {
-        let indexOfTheCountry = locationsArray.findIndex(location => location.country === country);
-        if (indexOfTheCountry === checkpoint) {
-            console.log("checkpoint updated", country)
-            if (indexOfTheCountry >= locationsArray.length - 1) {
-                await checkpointFile.outputCheckpointFile(new CheckpointDataModel(0));
-            } else {
-                await checkpointFile.outputCheckpointFile(new CheckpointDataModel(indexOfTheCountry + 1))
+class CheckpointHandler {
+    static async saveCheckpoint(locationsArray, country, currentCheckpoint) {
+        try {
+            const countryIndex = locationsArray.findIndex(
+                location => location.country === country
+            );
+
+            if (countryIndex === currentCheckpoint) {
+                console.log('Checkpoint updated:', country);
+                
+                const nextCheckpoint = countryIndex >= locationsArray.length - 1
+                    ? 0  // Reset to beginning if we're at the end
+                    : countryIndex + 1;
+
+                await this.updateCheckpointFile(nextCheckpoint);
+                return true;
             }
+            
+            return false;
+        } catch (error) {
+            console.error('Error saving checkpoint:', error);
+            throw error;
         }
     }
-    let readCheckpointFile = async function () {
-        return await checkpointFile.readCheckpointFile();
-    }
-    return {
-        saveCheckpointFile: saveCheckpointFile,
-        readCheckpointFile: readCheckpointFile
-    };
-})();
 
-module.exports = outputCheckpoint;
+    static async updateCheckpointFile(checkpoint) {
+        try {
+            const checkpointData = new CheckpointDataModel(checkpoint);
+            await checkpointFile.outputCheckpointFile(checkpointData);
+            console.log(`Checkpoint file updated to: ${checkpoint}`);
+        } catch (error) {
+            console.error('Error updating checkpoint file:', error);
+            throw error;
+        }
+    }
+
+    static async readCheckpoint() {
+        try {
+            const response = await checkpointFile.readCheckpointFile();
+            console.log('Current checkpoint:', response.checkpoint);
+            return response;
+        } catch (error) {
+            console.error('Error reading checkpoint:', error);
+            throw error;
+        }
+    }
+
+    static async resetCheckpoint() {
+        try {
+            await this.updateCheckpointFile(0);
+            console.log('Checkpoint reset to 0');
+            return true;
+        } catch (error) {
+            console.error('Error resetting checkpoint:', error);
+            throw error;
+        }
+    }
+}
+
+export default CheckpointHandler;
