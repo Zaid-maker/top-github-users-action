@@ -9,20 +9,37 @@ on:
       - 'dist/**'
   workflow_dispatch:
 
-# Skip if the commit message contains [skip ci] or [skip changelog]
 jobs:
   should-run:
     runs-on: ubuntu-latest
     outputs:
       should-run: ${{ steps.check.outputs.should-run }}
     steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      
       - id: check
         run: |
+          # Skip if commit message contains skip tags
           if echo "${{ github.event.head_commit.message }}" | grep -qiE "\[skip ci\]|\[skip changelog\]"; then
             echo "should-run=false" >> $GITHUB_OUTPUT
-          else
-            echo "should-run=true" >> $GITHUB_OUTPUT
+            exit 0
           fi
+          
+          # Skip if this is a release-related commit
+          if echo "${{ github.event.head_commit.message }}" | grep -qiE "^(chore|docs).*: update CHANGELOG\.md for v[0-9]+\.[0-9]+\.[0-9]+"; then
+            echo "should-run=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          
+          # Skip if the previous commit was a version bump
+          if git log -1 --pretty=%B | grep -qE "^(chore|feat): release v[0-9]+\.[0-9]+\.[0-9]+"; then
+            echo "should-run=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          
+          echo "should-run=true" >> $GITHUB_OUTPUT
 
   update-changelog:
     needs: should-run
@@ -61,7 +78,13 @@ jobs:
           # Generate full changelog
           conventional-changelog -p angular -i CHANGELOG.md -s -r 0
 
+      - name: Check for changes
+        id: git-check
+        run: |
+          git diff --quiet CHANGELOG.md || echo "has_changes=true" >> $GITHUB_OUTPUT
+
       - name: Create Pull Request
+        if: steps.git-check.outputs.has_changes == 'true'
         uses: peter-evans/create-pull-request@v5
         with:
           commit-message: 'docs: update CHANGELOG.md [skip changelog]'
