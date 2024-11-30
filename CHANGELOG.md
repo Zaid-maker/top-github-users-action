@@ -1,156 +1,78 @@
-# Changelog
+## <small>1.0.5 (2024-11-30)</small>
 
-All notable changes to this project will be documented in this file.
+* feat: improve release and changelog automation ([d4d582e](https://github.com/Zaid-maker/top-github-users-action/commit/d4d582e))
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Migration Guide
 
-### Migrating from gayanvoice/top-github-users-action
+## <small>1.0.4 (2024-11-30)</small>
 
-This guide helps you migrate from the original action (gayanvoice/top-github-users-action) to this modernized version.
+* auto ([fe4d8c1](https://github.com/Zaid-maker/top-github-users-action/commit/fe4d8c1))
+* Fix tests ([11dbc0b](https://github.com/Zaid-maker/top-github-users-action/commit/11dbc0b))
+* git commit -m "fix: ensure consistent test environment across workflows" ([0439e5c](https://github.com/Zaid-maker/top-github-users-action/commit/0439e5c))
+* fix: improve config file handling and cross-platform compatibility ([414c923](https://github.com/Zaid-maker/top-github-users-action/commit/414c923))
+* docs(changelog): add v1.0.3 release notes ([8438e2a](https://github.com/Zaid-maker/top-github-users-action/commit/8438e2a))
 
-#### Key Differences
-- Modernized JavaScript codebase with better reliability
-- Improved error handling and logging
-- Updated dependencies for better security
-- Enhanced documentation and dark mode support
-- Maintained same core functionality and data format
 
-#### Steps to Migrate
 
-1. Update your workflow file from:
-```yaml
-# Old workflow
-name: Top GitHub Users
-on:
-  schedule:
-    - cron: '0 0 * * *'
-jobs:
-  main:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: gayanvoice/top-github-users-action@master
-        env:
-          CUSTOM_TOKEN: ${{ secrets.CUSTOM_TOKEN }}
-```
+## <small>1.0.3 (2024-11-30)</small>
 
-To:
-```yaml
-# New workflow
-name: Top GitHub Users
-on:
-  schedule:
-    - cron: '0 0 * * *'
-  workflow_dispatch:      # Added for manual triggers
-jobs:
-  main:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4    # Updated checkout version
-      - uses: Zaid-maker/top-github-users-action@v1.0.1
-        with:                        # Changed from env to with
-          CUSTOM_TOKEN: ${{ secrets.CUSTOM_TOKEN }}
-```
+* add test ([b1cb65a](https://github.com/Zaid-maker/top-github-users-action/commit/b1cb65a))
+* fix ([068964e](https://github.com/Zaid-maker/top-github-users-action/commit/068964e))
+* release script ([cf7829c](https://github.com/Zaid-maker/top-github-users-action/commit/cf7829c))
+* update ([440b8b9](https://github.com/Zaid-maker/top-github-users-action/commit/440b8b9))
+* update ([5f9d60b](https://github.com/Zaid-maker/top-github-users-action/commit/5f9d60b))
+* docs: update CHANGELOG for v1.0.2 ([b7471df](https://github.com/Zaid-maker/top-github-users-action/commit/b7471df))
 
-2. Repository Structure:
-   - Keep your existing `config.json` - it's compatible
-   - Keep your existing documentation files
-   - Keep your existing README.md customizations
 
-3. No Data Migration Needed:
-   - The output format remains the same
-   - Existing statistics will be preserved
-   - Generated markdown files are compatible
 
-4. Verify Your Token:
-   - Ensure your CUSTOM_TOKEN has required permissions
-   - Token needs repo and user scopes
-   - Check token expiration
+## <small>1.0.2 (2024-11-30)</small>
 
-5. Troubleshooting Common Issues:
-   - If the action fails, check the detailed error logs
-   - Verify your config.json is in the repository root
-   - Make sure your repository has Actions enabled
-   - Check if the token has sufficient permissions
+* fix: config file handling ([8467697](https://github.com/Zaid-maker/top-github-users-action/commit/8467697))
+* docs: add migration guide to CHANGELOG ([98406de](https://github.com/Zaid-maker/top-github-users-action/commit/98406de))
+* docs: update CHANGELOG for v1.0.0 and v1.0.1 ([db70d55](https://github.com/Zaid-maker/top-github-users-action/commit/db70d55))
+* docs: update migration guide for gayanvoice users ([d34ee5c](https://github.com/Zaid-maker/top-github-users-action/commit/d34ee5c))
 
-Need help? Open an issue at: https://github.com/Zaid-maker/top-github-users-action/issues
 
-## [1.0.3] - 2024-01-15
 
-### Fixed
-- Config file write operation error handling
-- Cross-platform compatibility in build scripts
-- GitHub Actions workflow reliability
+## <small>1.0.1 (2024-11-30)</small>
 
-### Added
-- Automated release workflow
-- Automated changelog generation
-- Comprehensive CI/CD pipeline
-- Node.js 20.x support
-- NPM caching in CI/CD
-- Security audit in build process
+* fix: ensure config.json is properly bundled ([d17bfe8](https://github.com/Zaid-maker/top-github-users-action/commit/d17bfe8))
 
-### Changed
-- Updated GitHub Actions to latest versions
-- Enhanced build artifact handling
-- Improved release automation
-- Better error reporting in config operations
 
-## [1.0.2] - 2024-01-15
 
-### Fixed
-- Config file content access in GitHubUsersMonitor
-- Config validation for required sections
-- Error messages for config loading
-- Path to devMode setting in config
+## 1.0.0 (2024-11-30)
 
-### Added
-- Better error logging for config issues
-- Config file validation checks
-- Detailed error messages for troubleshooting
+* chore: prepare v1.0.0 release ([342b3f1](https://github.com/Zaid-maker/top-github-users-action/commit/342b3f1))
+* [ImgBot] Optimize images ([ca25958](https://github.com/Zaid-maker/top-github-users-action/commit/ca25958))
+* add DISCLAIMER ([0eaae09](https://github.com/Zaid-maker/top-github-users-action/commit/0eaae09))
+* add workflow ([53785bb](https://github.com/Zaid-maker/top-github-users-action/commit/53785bb))
+* Create LICENSE ([6f4a307](https://github.com/Zaid-maker/top-github-users-action/commit/6f4a307))
+* enhance ([cb25fad](https://github.com/Zaid-maker/top-github-users-action/commit/cb25fad))
+* format ([b954820](https://github.com/Zaid-maker/top-github-users-action/commit/b954820))
+* format ([1142695](https://github.com/Zaid-maker/top-github-users-action/commit/1142695))
+* format ([ed7b9c5](https://github.com/Zaid-maker/top-github-users-action/commit/ed7b9c5))
+* modern ([b627ce5](https://github.com/Zaid-maker/top-github-users-action/commit/b627ce5))
+* modern ([6448952](https://github.com/Zaid-maker/top-github-users-action/commit/6448952))
+* modern ([5e6f0b0](https://github.com/Zaid-maker/top-github-users-action/commit/5e6f0b0))
+* modern ([5189556](https://github.com/Zaid-maker/top-github-users-action/commit/5189556))
+* modern ([e105be6](https://github.com/Zaid-maker/top-github-users-action/commit/e105be6))
+* modern code ([8da6805](https://github.com/Zaid-maker/top-github-users-action/commit/8da6805))
+* modern main index file ([b3241ed](https://github.com/Zaid-maker/top-github-users-action/commit/b3241ed))
+* push the project ([da5b608](https://github.com/Zaid-maker/top-github-users-action/commit/da5b608))
+* start from `v1.0.0` ([5c98340](https://github.com/Zaid-maker/top-github-users-action/commit/5c98340))
+* update ([d90d27a](https://github.com/Zaid-maker/top-github-users-action/commit/d90d27a))
+* update ([d41278c](https://github.com/Zaid-maker/top-github-users-action/commit/d41278c))
+* update ([86f6929](https://github.com/Zaid-maker/top-github-users-action/commit/86f6929))
+* update ([54d3439](https://github.com/Zaid-maker/top-github-users-action/commit/54d3439))
+* update ([50d0925](https://github.com/Zaid-maker/top-github-users-action/commit/50d0925))
+* update ([09a032b](https://github.com/Zaid-maker/top-github-users-action/commit/09a032b))
+* update action.yml ([0c16155](https://github.com/Zaid-maker/top-github-users-action/commit/0c16155))
+* update config ([9d9b8be](https://github.com/Zaid-maker/top-github-users-action/commit/9d9b8be))
+* update deps ([56c5753](https://github.com/Zaid-maker/top-github-users-action/commit/56c5753))
+* update docs ([1751096](https://github.com/Zaid-maker/top-github-users-action/commit/1751096))
+* update logos ([5c0d939](https://github.com/Zaid-maker/top-github-users-action/commit/5c0d939))
+* update README ([0c651ae](https://github.com/Zaid-maker/top-github-users-action/commit/0c651ae))
+* updates ([f7f79ee](https://github.com/Zaid-maker/top-github-users-action/commit/f7f79ee))
 
-## [1.0.1] - 2024-01-15
 
-### Fixed
-- Config file loading in production environment
-- Added config.json to dist folder during build
-- Improved error logging for config file operations
 
-### Changed
-- Updated config file path resolution to use `process.cwd()`
-- Enhanced build process to include config.json
-
-## [1.0.0] - 2024-01-15
-
-### Added
-- Complete modernization of codebase
-- ES Modules support
-- Class-based architecture
-- Comprehensive error handling
-- Enhanced type safety
-- Dark mode support in documentation
-- Detailed attribution section
-
-### Changed
-- Updated all dependencies to latest versions
-- Improved project structure
-- Enhanced documentation
-- Better code organization
-- Modern JavaScript practices
-
-### Updated Dependencies
-- @octokit/graphql: 4.6.2 → 7.0.2
-- fs-extra: 9.1.0 → 11.1.1
-- simple-git: 2.39.0 → 3.19.1
-- Node.js requirement: 20.x
-
-[1.0.3]: https://github.com/Zaid-maker/top-github-users-action/compare/v1.0.2...v1.0.3
-[1.0.2]: https://github.com/Zaid-maker/top-github-users-action/compare/v1.0.1...v1.0.2
-[1.0.1]: https://github.com/Zaid-maker/top-github-users-action/compare/v1.0.0...v1.0.1
-[1.0.0]: https://github.com/Zaid-maker/top-github-users-action/releases/tag/v1.0.0
-
-## Historical Note
-This project was originally created by [gayanvoice](https://github.com/gayanvoice) and has been modernized and maintained by [Zaid Hafeez](https://github.com/Zaid-maker). The v1.0.0 release represents a complete modernization of the codebase while maintaining the original functionality.
