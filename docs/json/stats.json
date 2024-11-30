@@ -1,0 +1,22 @@
+{
+    "totalCountries": 196,
+    "totalUsers": 147000,
+    "lastUpdated": "2024-01-09T00:00:00Z",
+    "topCountries": [
+        {
+            "name": "United States",
+            "users": 15000,
+            "contributions": 2500000
+        },
+        {
+            "name": "China",
+            "users": 12000,
+            "contributions": 2000000
+        },
+        {
+            "name": "India",
+            "users": 10000,
+            "contributions": 1800000
+        }
+    ]
+}
