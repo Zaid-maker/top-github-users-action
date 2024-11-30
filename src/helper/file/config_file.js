@@ -3,11 +3,12 @@ import file from '../../core/file';
 import ReadConfigResponseModel from '../../model/config/ReadConfigResponseModel';
 
 class ConfigFileHandler {
-    static CONFIG_PATH = 'config.json';
+    static CONFIG_PATH = path.join(process.cwd(), 'config.json');
 
     static async readConfigFile() {
         try {
             const response = await file.readJson(this.CONFIG_PATH);
+            console.log(`Reading config from: ${this.CONFIG_PATH}`);
             console.log(response.message);
 
             if (!response.status) {

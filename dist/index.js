@@ -10285,11 +10285,12 @@ var core_file = __nccwpck_require__(6990);
 
 
 class ConfigFileHandler {
-    static CONFIG_PATH = (/* unused pure expression or super */ null && ('config.json'));
+    static CONFIG_PATH = __nccwpck_require__.ab + "config.json";
 
     static async readConfigFile() {
         try {
             const response = await file.readJson(this.CONFIG_PATH);
+            console.log(`Reading config from: ${this.CONFIG_PATH}`);
             console.log(response.message);
 
             if (!response.status) {
