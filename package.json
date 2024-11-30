@@ -4,7 +4,7 @@
   "description": "Modern GitHub Action to track and analyze top GitHub users by country",
   "main": "dist/index.js",
   "scripts": {
-    "prepare": "ncc build src/index.js -o dist --source-map --license licenses.txt && copy config.json dist\\",
+    "prepare": "ncc build src/index.js -o dist --source-map --license licenses.txt && cp config.json dist/",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"
