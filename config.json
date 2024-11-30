@@ -1,6 +1,15 @@
 {
-  "devMode": "true",
-  "locations":[
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "GitHub Users Monitor Configuration",
+  "description": "Configuration for tracking top GitHub users by country",
+  "version": "2.0.0",
+  "settings": {
+    "devMode": true,
+    "minUsersThreshold": 750,
+    "maxErrorIterations": 4,
+    "updateFrequency": "daily"
+  },
+  "locations": [
     { "country":  "afghanistan", "geoName": "afghanistan", "cities": ["kabul", "kandahar", "herat", "Kunduz", "lashkargah", "ghazni", "khost", "zaranj"], "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_Afghanistan.svg" },
     { "country":  "albania", "geoName": "albania", "cities": ["tirana", "durrës", "vlorë", "elbasan", "shkodër", "kamëz", "fier", "korçë"], "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/36/Flag_of_Albania.svg" },
     { "country":  "algeria", "geoName": "algeria", "cities": ["algiers", "oran", "constantine", "batna", "djelfa", "sétif", "annaba", "sidibelabbès", "biskra", "tiaret"], "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/7/77/Flag_of_Algeria.svg" },
