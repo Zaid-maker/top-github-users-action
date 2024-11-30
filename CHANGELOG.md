@@ -78,6 +78,19 @@ jobs:
 
 Need help? Open an issue at: https://github.com/Zaid-maker/top-github-users-action/issues
 
+## [1.0.2] - 2024-01-15
+
+### Fixed
+- Config file content access in GitHubUsersMonitor
+- Config validation for required sections
+- Error messages for config loading
+- Path to devMode setting in config
+
+### Added
+- Better error logging for config issues
+- Config file validation checks
+- Detailed error messages for troubleshooting
+
 ## [1.0.1] - 2024-01-15
 
 ### Fixed
@@ -113,6 +126,7 @@ Need help? Open an issue at: https://github.com/Zaid-maker/top-github-users-acti
 - simple-git: 2.39.0 → 3.19.1
 - Node.js requirement: 20.x
 
+[1.0.2]: https://github.com/Zaid-maker/top-github-users-action/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/Zaid-maker/top-github-users-action/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/Zaid-maker/top-github-users-action/releases/tag/v1.0.0
 
