@@ -168,9 +168,32 @@ The `config.json` file supports these settings:
 
 Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
 
-## Credits
+## Credits and Attribution
 
-This project was originally created by [gayanvoice](https://github.com/gayanvoice) and is now maintained by [Zaid Hafeez](https://github.com/Zaid-maker).
+### Original Project
+- **Creator**: [Gayan Kuruppu](https://github.com/gayanvoice)
+- **Original Repository**: [gayanvoice/top-github-users](https://github.com/gayanvoice/top-github-users)
+- **Initial Release**: 2021
+- **Original Features**:
+  - GitHub user tracking by country
+  - Public contribution rankings
+  - Automated data collection
+  - Basic documentation site
+
+### Current Maintenance
+- **Maintainer**: [Zaid Hafeez](https://github.com/Zaid-maker)
+- **Current Repository**: [Zaid-maker/top-github-users-action](https://github.com/Zaid-maker/top-github-users-action)
+- **Major Updates**:
+  - Complete ES Module conversion
+  - Modern JavaScript practices
+  - Enhanced error handling
+  - Improved documentation
+  - Updated dependencies
+  - Better type safety
+  - Performance optimizations
+
+### Acknowledgments
+This project builds upon the excellent foundation laid by Gayan Kuruppu. The current version maintains the original vision while modernizing the codebase for better maintainability and reliability.
 
 ## License
 

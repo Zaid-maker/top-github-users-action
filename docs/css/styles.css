@@ -13,6 +13,20 @@
     --text-color: #24292e;
     --border-color: #e1e4e8;
     --card-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    --background-secondary: #f2f2f2;
+    --text-primary: #333;
+    --background-primary: #fff;
+    --text-secondary: #666;
+    --link-color: #337ab7;
+    --link-hover-color: #23527c;
+    --background-dark: #0d1117;
+    --background-darker: #161b22;
+    --text-light: #c9d1d9;
+    --text-muted: #8b949e;
+    --border-dark: #30363d;
+    --card-shadow-dark: 0 2px 4px rgba(0,0,0,0.4);
+    --highlight-color: #238636;
+    --highlight-color-dark: #2ea043;
 }
 
 /* Global Styles */
@@ -21,6 +35,7 @@ body {
     line-height: 1.6;
     color: var(--text-color);
     background-color: var(--background-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Header */
@@ -54,6 +69,7 @@ body {
     padding: 1rem;
     box-shadow: var(--card-shadow);
     margin-bottom: 2rem;
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* Stats Container */
@@ -70,6 +86,7 @@ body {
     border-radius: 8px;
     box-shadow: var(--card-shadow);
     text-align: center;
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .stat-card h3 {
@@ -108,7 +125,90 @@ body {
     opacity: 0.8;
 }
 
-/* Responsive Design */
+/* Attribution Styles */
+.attribution {
+    margin: 2rem 0;
+    padding: 2rem;
+    background: var(--background-secondary);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.attribution h3 {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}
+
+.attribution-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    align-items: start;
+}
+
+.attribution-content > div {
+    padding: 1.5rem;
+    background: var(--background-primary);
+    border-radius: 6px;
+    transition: transform 0.2s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.attribution-content > div:hover {
+    transform: translateY(-2px);
+}
+
+.attribution-content h4 {
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.attribution-content p {
+    color: var(--text-secondary);
+    margin: 0.5rem 0;
+    line-height: 1.5;
+}
+
+.attribution-content a {
+    color: var(--link-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.attribution-content a:hover {
+    color: var(--link-hover-color);
+    text-decoration: underline;
+}
+
+.license {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.license a {
+    color: var(--link-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.license a:hover {
+    color: var(--link-hover-color);
+    text-decoration: underline;
+}
+
+/* Responsive Adjustments */
 @media (max-width: 768px) {
     .header h1 {
         font-size: 2rem;
@@ -128,6 +228,148 @@ body {
 
     .stat-card p {
         font-size: 1.2rem;
+    }
+
+    .attribution {
+        margin: 1.5rem 0;
+        padding: 1.5rem;
+    }
+
+    .attribution h3 {
+        font-size: 1.3rem;
+    }
+
+    .attribution-content {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .attribution-content > div {
+        padding: 1.25rem;
+    }
+
+    .attribution-content h4 {
+        font-size: 1.1rem;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text-color: #c9d1d9;
+        --border-color: #30363d;
+        --card-shadow: var(--card-shadow-dark);
+        --background-secondary: #161b22;
+        --text-primary: #c9d1d9;
+        --background-primary: #0d1117;
+        --text-secondary: #8b949e;
+        --link-color: #58a6ff;
+        --link-hover-color: #79b8ff;
+    }
+
+    body {
+        background-color: var(--background-dark);
+        color: var(--text-light);
+    }
+
+    .attribution {
+        background: var(--background-darker);
+        border: 1px solid var(--border-dark);
+        box-shadow: var(--card-shadow-dark);
+    }
+
+    .attribution h3 {
+        color: var(--text-light);
+        border-bottom-color: var(--border-dark);
+    }
+
+    .attribution-content > div {
+        background: var(--background-dark);
+        border: 1px solid var(--border-dark);
+        box-shadow: var(--card-shadow-dark);
+    }
+
+    .attribution-content > div:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+        border-color: var(--highlight-color-dark);
+    }
+
+    .attribution-content h4 {
+        color: var(--text-light);
+        border-bottom-color: var(--border-dark);
+    }
+
+    .attribution-content p {
+        color: var(--text-muted);
+    }
+
+    .attribution-content a {
+        color: var(--link-color);
+        position: relative;
+        text-decoration: none;
+    }
+
+    .attribution-content a:hover {
+        color: var(--link-hover-color);
+    }
+
+    .attribution-content a::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        bottom: -2px;
+        left: 0;
+        background-color: var(--link-hover-color);
+        transform: scaleX(0);
+        transform-origin: bottom right;
+        transition: transform 0.3s ease;
+    }
+
+    .attribution-content a:hover::after {
+        transform: scaleX(1);
+        transform-origin: bottom left;
+    }
+
+    .license {
+        color: var(--text-muted);
+        border-top-color: var(--border-dark);
+    }
+
+    .license a {
+        color: var(--link-color);
+    }
+
+    .license a:hover {
+        color: var(--link-hover-color);
+    }
+
+    /* Stats Cards Dark Mode */
+    .stat-card {
+        background: var(--background-darker);
+        border: 1px solid var(--border-dark);
+        box-shadow: var(--card-shadow-dark);
+    }
+
+    .stat-card:hover {
+        border-color: var(--highlight-color-dark);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+    }
+
+    .stat-card h3 {
+        color: var(--text-light);
+    }
+
+    .stat-card p {
+        color: var(--text-muted);
+    }
+
+    /* Canvas Container Dark Mode */
+    .canvas-container {
+        background: var(--background-darker);
+        border: 1px solid var(--border-dark);
+        box-shadow: var(--card-shadow-dark);
     }
 }
 

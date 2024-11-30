@@ -1,8 +1,21 @@
 /*!
- * top-github-users-action 1.0.0
+ * Top GitHub Users Action
+ * Version: 1.0.0
+ * 
+ * Current Repository:
  * https://github.com/Zaid-maker/top-github-users-action
- * (c) 2024 Zaid Hafeez
- * Originally created by Gayan Kuruppu
+ * 
+ * Original Work:
+ * Copyright (c) 2021 Gayan Kuruppu (https://github.com/gayanvoice)
+ * 
+ * Current Maintenance:
+ * Copyright (c) 2024 Zaid Hafeez (https://github.com/Zaid-maker)
+ * 
+ * This project is a modernized fork of the original work, updated with:
+ * - Modern JavaScript practices
+ * - Enhanced error handling
+ * - Current dependencies
+ * 
  * Released under the MIT License
  */
 import { pullGit } from './helper/git/pull-git';

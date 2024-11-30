@@ -27,7 +27,23 @@
   "contributors": [
     {
       "name": "Gayan Kuruppu",
-      "url": "https://github.com/gayanvoice"
+      "url": "https://github.com/gayanvoice",
+      "role": "Original Creator",
+      "contributions": [
+        "Initial implementation",
+        "Core functionality",
+        "Documentation"
+      ]
+    },
+    {
+      "name": "Zaid Hafeez",
+      "url": "https://github.com/Zaid-maker",
+      "role": "Maintainer",
+      "contributions": [
+        "Code modernization",
+        "Dependency updates",
+        "Documentation improvements"
+      ]
     }
   ],
   "license": "MIT",
