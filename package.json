@@ -1,7 +1,7 @@
 {
   "name": "top-github-users-action",
-  "version": "2.0.0",
-  "description": "Fetch most active users by country in every 24 hours",
+  "version": "1.0.0",
+  "description": "Modern GitHub Action to track and analyze top GitHub users by country",
   "main": "dist/index.js",
   "scripts": {
     "prepare": "ncc build src/index.js -o dist --source-map --license licenses.txt",
@@ -9,19 +9,35 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gayanvoice/top-github-users-action.git"
+    "url": "git+https://github.com/Zaid-maker/top-github-users-action.git"
   },
   "keywords": [
     "GitHub",
     "Actions",
-    "JavaScript"
+    "JavaScript",
+    "ES Modules",
+    "GraphQL",
+    "User Analytics",
+    "GitHub Statistics"
   ],
-  "author": "Gayan Kuruppu",
+  "author": {
+    "name": "Zaid Hafeez",
+    "url": "https://github.com/Zaid-maker"
+  },
+  "contributors": [
+    {
+      "name": "Gayan Kuruppu",
+      "url": "https://github.com/gayanvoice"
+    }
+  ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/gayanvoice/top-github-users-action/issues"
+    "url": "https://github.com/Zaid-maker/top-github-users-action/issues"
   },
-  "homepage": "https://github.com/gayanvoice/top-github-users-action#readme",
+  "homepage": "https://github.com/Zaid-maker/top-github-users-action#readme",
+  "engines": {
+    "node": ">=20"
+  },
   "dependencies": {
     "@octokit/graphql": "^7.0.2",
     "fs-extra": "^11.1.1",

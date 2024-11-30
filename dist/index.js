@@ -81,9 +81,10 @@ exports.READABLE = exports.FILE + exports.FOLDER;
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
+var __webpack_unused_export__;
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.createDeferred = exports.deferred = void 0;
+__webpack_unused_export__ = ({ value: true });
+exports.dD = exports.gX = void 0;
 /**
  * Creates a new `DeferredPromise`
  *
@@ -121,7 +122,7 @@ function deferred() {
         },
     };
 }
-exports.deferred = deferred;
+exports.gX = deferred;
 /**
  * Alias of the exported `deferred` function, to help consumers wanting to use `deferred` as the
  * local variable name rather than the factory import name, without needing to rename on import.
@@ -130,7 +131,7 @@ exports.deferred = deferred;
  import {createDeferred} from '@kwsites/promise-deferred`;
  ```
  */
-exports.createDeferred = deferred;
+exports.dD = deferred;
 /**
  * Default export allows use as:
  *
@@ -138,878 +139,8 @@ exports.createDeferred = deferred;
  import deferred from '@kwsites/promise-deferred`;
  ```
  */
-exports["default"] = deferred;
+__webpack_unused_export__ = deferred;
 //# sourceMappingURL=index.js.map
-
-/***/ }),
-
-/***/ 9440:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-"use strict";
-
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-// pkg/dist-src/index.js
-var dist_src_exports = {};
-__export(dist_src_exports, {
-  endpoint: () => endpoint
-});
-module.exports = __toCommonJS(dist_src_exports);
-
-// pkg/dist-src/defaults.js
-var import_universal_user_agent = __nccwpck_require__(5030);
-
-// pkg/dist-src/version.js
-var VERSION = "9.0.5";
-
-// pkg/dist-src/defaults.js
-var userAgent = `octokit-endpoint.js/${VERSION} ${(0, import_universal_user_agent.getUserAgent)()}`;
-var DEFAULTS = {
-  method: "GET",
-  baseUrl: "https://api.github.com",
-  headers: {
-    accept: "application/vnd.github.v3+json",
-    "user-agent": userAgent
-  },
-  mediaType: {
-    format: ""
-  }
-};
-
-// pkg/dist-src/util/lowercase-keys.js
-function lowercaseKeys(object) {
-  if (!object) {
-    return {};
-  }
-  return Object.keys(object).reduce((newObj, key) => {
-    newObj[key.toLowerCase()] = object[key];
-    return newObj;
-  }, {});
-}
-
-// pkg/dist-src/util/is-plain-object.js
-function isPlainObject(value) {
-  if (typeof value !== "object" || value === null)
-    return false;
-  if (Object.prototype.toString.call(value) !== "[object Object]")
-    return false;
-  const proto = Object.getPrototypeOf(value);
-  if (proto === null)
-    return true;
-  const Ctor = Object.prototype.hasOwnProperty.call(proto, "constructor") && proto.constructor;
-  return typeof Ctor === "function" && Ctor instanceof Ctor && Function.prototype.call(Ctor) === Function.prototype.call(value);
-}
-
-// pkg/dist-src/util/merge-deep.js
-function mergeDeep(defaults, options) {
-  const result = Object.assign({}, defaults);
-  Object.keys(options).forEach((key) => {
-    if (isPlainObject(options[key])) {
-      if (!(key in defaults))
-        Object.assign(result, { [key]: options[key] });
-      else
-        result[key] = mergeDeep(defaults[key], options[key]);
-    } else {
-      Object.assign(result, { [key]: options[key] });
-    }
-  });
-  return result;
-}
-
-// pkg/dist-src/util/remove-undefined-properties.js
-function removeUndefinedProperties(obj) {
-  for (const key in obj) {
-    if (obj[key] === void 0) {
-      delete obj[key];
-    }
-  }
-  return obj;
-}
-
-// pkg/dist-src/merge.js
-function merge(defaults, route, options) {
-  if (typeof route === "string") {
-    let [method, url] = route.split(" ");
-    options = Object.assign(url ? { method, url } : { url: method }, options);
-  } else {
-    options = Object.assign({}, route);
-  }
-  options.headers = lowercaseKeys(options.headers);
-  removeUndefinedProperties(options);
-  removeUndefinedProperties(options.headers);
-  const mergedOptions = mergeDeep(defaults || {}, options);
-  if (options.url === "/graphql") {
-    if (defaults && defaults.mediaType.previews?.length) {
-      mergedOptions.mediaType.previews = defaults.mediaType.previews.filter(
-        (preview) => !mergedOptions.mediaType.previews.includes(preview)
-      ).concat(mergedOptions.mediaType.previews);
-    }
-    mergedOptions.mediaType.previews = (mergedOptions.mediaType.previews || []).map((preview) => preview.replace(/-preview/, ""));
-  }
-  return mergedOptions;
-}
-
-// pkg/dist-src/util/add-query-parameters.js
-function addQueryParameters(url, parameters) {
-  const separator = /\?/.test(url) ? "&" : "?";
-  const names = Object.keys(parameters);
-  if (names.length === 0) {
-    return url;
-  }
-  return url + separator + names.map((name) => {
-    if (name === "q") {
-      return "q=" + parameters.q.split("+").map(encodeURIComponent).join("+");
-    }
-    return `${name}=${encodeURIComponent(parameters[name])}`;
-  }).join("&");
-}
-
-// pkg/dist-src/util/extract-url-variable-names.js
-var urlVariableRegex = /\{[^}]+\}/g;
-function removeNonChars(variableName) {
-  return variableName.replace(/^\W+|\W+$/g, "").split(/,/);
-}
-function extractUrlVariableNames(url) {
-  const matches = url.match(urlVariableRegex);
-  if (!matches) {
-    return [];
-  }
-  return matches.map(removeNonChars).reduce((a, b) => a.concat(b), []);
-}
-
-// pkg/dist-src/util/omit.js
-function omit(object, keysToOmit) {
-  const result = { __proto__: null };
-  for (const key of Object.keys(object)) {
-    if (keysToOmit.indexOf(key) === -1) {
-      result[key] = object[key];
-    }
-  }
-  return result;
-}
-
-// pkg/dist-src/util/url-template.js
-function encodeReserved(str) {
-  return str.split(/(%[0-9A-Fa-f]{2})/g).map(function(part) {
-    if (!/%[0-9A-Fa-f]/.test(part)) {
-      part = encodeURI(part).replace(/%5B/g, "[").replace(/%5D/g, "]");
-    }
-    return part;
-  }).join("");
-}
-function encodeUnreserved(str) {
-  return encodeURIComponent(str).replace(/[!'()*]/g, function(c) {
-    return "%" + c.charCodeAt(0).toString(16).toUpperCase();
-  });
-}
-function encodeValue(operator, value, key) {
-  value = operator === "+" || operator === "#" ? encodeReserved(value) : encodeUnreserved(value);
-  if (key) {
-    return encodeUnreserved(key) + "=" + value;
-  } else {
-    return value;
-  }
-}
-function isDefined(value) {
-  return value !== void 0 && value !== null;
-}
-function isKeyOperator(operator) {
-  return operator === ";" || operator === "&" || operator === "?";
-}
-function getValues(context, operator, key, modifier) {
-  var value = context[key], result = [];
-  if (isDefined(value) && value !== "") {
-    if (typeof value === "string" || typeof value === "number" || typeof value === "boolean") {
-      value = value.toString();
-      if (modifier && modifier !== "*") {
-        value = value.substring(0, parseInt(modifier, 10));
-      }
-      result.push(
-        encodeValue(operator, value, isKeyOperator(operator) ? key : "")
-      );
-    } else {
-      if (modifier === "*") {
-        if (Array.isArray(value)) {
-          value.filter(isDefined).forEach(function(value2) {
-            result.push(
-              encodeValue(operator, value2, isKeyOperator(operator) ? key : "")
-            );
-          });
-        } else {
-          Object.keys(value).forEach(function(k) {
-            if (isDefined(value[k])) {
-              result.push(encodeValue(operator, value[k], k));
-            }
-          });
-        }
-      } else {
-        const tmp = [];
-        if (Array.isArray(value)) {
-          value.filter(isDefined).forEach(function(value2) {
-            tmp.push(encodeValue(operator, value2));
-          });
-        } else {
-          Object.keys(value).forEach(function(k) {
-            if (isDefined(value[k])) {
-              tmp.push(encodeUnreserved(k));
-              tmp.push(encodeValue(operator, value[k].toString()));
-            }
-          });
-        }
-        if (isKeyOperator(operator)) {
-          result.push(encodeUnreserved(key) + "=" + tmp.join(","));
-        } else if (tmp.length !== 0) {
-          result.push(tmp.join(","));
-        }
-      }
-    }
-  } else {
-    if (operator === ";") {
-      if (isDefined(value)) {
-        result.push(encodeUnreserved(key));
-      }
-    } else if (value === "" && (operator === "&" || operator === "?")) {
-      result.push(encodeUnreserved(key) + "=");
-    } else if (value === "") {
-      result.push("");
-    }
-  }
-  return result;
-}
-function parseUrl(template) {
-  return {
-    expand: expand.bind(null, template)
-  };
-}
-function expand(template, context) {
-  var operators = ["+", "#", ".", "/", ";", "?", "&"];
-  template = template.replace(
-    /\{([^\{\}]+)\}|([^\{\}]+)/g,
-    function(_, expression, literal) {
-      if (expression) {
-        let operator = "";
-        const values = [];
-        if (operators.indexOf(expression.charAt(0)) !== -1) {
-          operator = expression.charAt(0);
-          expression = expression.substr(1);
-        }
-        expression.split(/,/g).forEach(function(variable) {
-          var tmp = /([^:\*]*)(?::(\d+)|(\*))?/.exec(variable);
-          values.push(getValues(context, operator, tmp[1], tmp[2] || tmp[3]));
-        });
-        if (operator && operator !== "+") {
-          var separator = ",";
-          if (operator === "?") {
-            separator = "&";
-          } else if (operator !== "#") {
-            separator = operator;
-          }
-          return (values.length !== 0 ? operator : "") + values.join(separator);
-        } else {
-          return values.join(",");
-        }
-      } else {
-        return encodeReserved(literal);
-      }
-    }
-  );
-  if (template === "/") {
-    return template;
-  } else {
-    return template.replace(/\/$/, "");
-  }
-}
-
-// pkg/dist-src/parse.js
-function parse(options) {
-  let method = options.method.toUpperCase();
-  let url = (options.url || "/").replace(/:([a-z]\w+)/g, "{$1}");
-  let headers = Object.assign({}, options.headers);
-  let body;
-  let parameters = omit(options, [
-    "method",
-    "baseUrl",
-    "url",
-    "headers",
-    "request",
-    "mediaType"
-  ]);
-  const urlVariableNames = extractUrlVariableNames(url);
-  url = parseUrl(url).expand(parameters);
-  if (!/^http/.test(url)) {
-    url = options.baseUrl + url;
-  }
-  const omittedParameters = Object.keys(options).filter((option) => urlVariableNames.includes(option)).concat("baseUrl");
-  const remainingParameters = omit(parameters, omittedParameters);
-  const isBinaryRequest = /application\/octet-stream/i.test(headers.accept);
-  if (!isBinaryRequest) {
-    if (options.mediaType.format) {
-      headers.accept = headers.accept.split(/,/).map(
-        (format) => format.replace(
-          /application\/vnd(\.\w+)(\.v3)?(\.\w+)?(\+json)?$/,
-          `application/vnd$1$2.${options.mediaType.format}`
-        )
-      ).join(",");
-    }
-    if (url.endsWith("/graphql")) {
-      if (options.mediaType.previews?.length) {
-        const previewsFromAcceptHeader = headers.accept.match(/[\w-]+(?=-preview)/g) || [];
-        headers.accept = previewsFromAcceptHeader.concat(options.mediaType.previews).map((preview) => {
-          const format = options.mediaType.format ? `.${options.mediaType.format}` : "+json";
-          return `application/vnd.github.${preview}-preview${format}`;
-        }).join(",");
-      }
-    }
-  }
-  if (["GET", "HEAD"].includes(method)) {
-    url = addQueryParameters(url, remainingParameters);
-  } else {
-    if ("data" in remainingParameters) {
-      body = remainingParameters.data;
-    } else {
-      if (Object.keys(remainingParameters).length) {
-        body = remainingParameters;
-      }
-    }
-  }
-  if (!headers["content-type"] && typeof body !== "undefined") {
-    headers["content-type"] = "application/json; charset=utf-8";
-  }
-  if (["PATCH", "PUT"].includes(method) && typeof body === "undefined") {
-    body = "";
-  }
-  return Object.assign(
-    { method, url, headers },
-    typeof body !== "undefined" ? { body } : null,
-    options.request ? { request: options.request } : null
-  );
-}
-
-// pkg/dist-src/endpoint-with-defaults.js
-function endpointWithDefaults(defaults, route, options) {
-  return parse(merge(defaults, route, options));
-}
-
-// pkg/dist-src/with-defaults.js
-function withDefaults(oldDefaults, newDefaults) {
-  const DEFAULTS2 = merge(oldDefaults, newDefaults);
-  const endpoint2 = endpointWithDefaults.bind(null, DEFAULTS2);
-  return Object.assign(endpoint2, {
-    DEFAULTS: DEFAULTS2,
-    defaults: withDefaults.bind(null, DEFAULTS2),
-    merge: merge.bind(null, DEFAULTS2),
-    parse
-  });
-}
-
-// pkg/dist-src/index.js
-var endpoint = withDefaults(null, DEFAULTS);
-// Annotate the CommonJS export names for ESM import in node:
-0 && (0);
-
-
-/***/ }),
-
-/***/ 8467:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-"use strict";
-
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-// pkg/dist-src/index.js
-var dist_src_exports = {};
-__export(dist_src_exports, {
-  GraphqlResponseError: () => GraphqlResponseError,
-  graphql: () => graphql2,
-  withCustomRequest: () => withCustomRequest
-});
-module.exports = __toCommonJS(dist_src_exports);
-var import_request3 = __nccwpck_require__(6234);
-var import_universal_user_agent = __nccwpck_require__(5030);
-
-// pkg/dist-src/version.js
-var VERSION = "7.1.0";
-
-// pkg/dist-src/with-defaults.js
-var import_request2 = __nccwpck_require__(6234);
-
-// pkg/dist-src/graphql.js
-var import_request = __nccwpck_require__(6234);
-
-// pkg/dist-src/error.js
-function _buildMessageForResponseErrors(data) {
-  return `Request failed due to following response errors:
-` + data.errors.map((e) => ` - ${e.message}`).join("\n");
-}
-var GraphqlResponseError = class extends Error {
-  constructor(request2, headers, response) {
-    super(_buildMessageForResponseErrors(response));
-    this.request = request2;
-    this.headers = headers;
-    this.response = response;
-    this.name = "GraphqlResponseError";
-    this.errors = response.errors;
-    this.data = response.data;
-    if (Error.captureStackTrace) {
-      Error.captureStackTrace(this, this.constructor);
-    }
-  }
-};
-
-// pkg/dist-src/graphql.js
-var NON_VARIABLE_OPTIONS = [
-  "method",
-  "baseUrl",
-  "url",
-  "headers",
-  "request",
-  "query",
-  "mediaType"
-];
-var FORBIDDEN_VARIABLE_OPTIONS = ["query", "method", "url"];
-var GHES_V3_SUFFIX_REGEX = /\/api\/v3\/?$/;
-function graphql(request2, query, options) {
-  if (options) {
-    if (typeof query === "string" && "query" in options) {
-      return Promise.reject(
-        new Error(`[@octokit/graphql] "query" cannot be used as variable name`)
-      );
-    }
-    for (const key in options) {
-      if (!FORBIDDEN_VARIABLE_OPTIONS.includes(key))
-        continue;
-      return Promise.reject(
-        new Error(
-          `[@octokit/graphql] "${key}" cannot be used as variable name`
-        )
-      );
-    }
-  }
-  const parsedOptions = typeof query === "string" ? Object.assign({ query }, options) : query;
-  const requestOptions = Object.keys(
-    parsedOptions
-  ).reduce((result, key) => {
-    if (NON_VARIABLE_OPTIONS.includes(key)) {
-      result[key] = parsedOptions[key];
-      return result;
-    }
-    if (!result.variables) {
-      result.variables = {};
-    }
-    result.variables[key] = parsedOptions[key];
-    return result;
-  }, {});
-  const baseUrl = parsedOptions.baseUrl || request2.endpoint.DEFAULTS.baseUrl;
-  if (GHES_V3_SUFFIX_REGEX.test(baseUrl)) {
-    requestOptions.url = baseUrl.replace(GHES_V3_SUFFIX_REGEX, "/api/graphql");
-  }
-  return request2(requestOptions).then((response) => {
-    if (response.data.errors) {
-      const headers = {};
-      for (const key of Object.keys(response.headers)) {
-        headers[key] = response.headers[key];
-      }
-      throw new GraphqlResponseError(
-        requestOptions,
-        headers,
-        response.data
-      );
-    }
-    return response.data.data;
-  });
-}
-
-// pkg/dist-src/with-defaults.js
-function withDefaults(request2, newDefaults) {
-  const newRequest = request2.defaults(newDefaults);
-  const newApi = (query, options) => {
-    return graphql(newRequest, query, options);
-  };
-  return Object.assign(newApi, {
-    defaults: withDefaults.bind(null, newRequest),
-    endpoint: newRequest.endpoint
-  });
-}
-
-// pkg/dist-src/index.js
-var graphql2 = withDefaults(import_request3.request, {
-  headers: {
-    "user-agent": `octokit-graphql.js/${VERSION} ${(0, import_universal_user_agent.getUserAgent)()}`
-  },
-  method: "POST",
-  url: "/graphql"
-});
-function withCustomRequest(customRequest) {
-  return withDefaults(customRequest, {
-    method: "POST",
-    url: "/graphql"
-  });
-}
-// Annotate the CommonJS export names for ESM import in node:
-0 && (0);
-
-
-/***/ }),
-
-/***/ 537:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-"use strict";
-
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
-  // If the importer is in node compatibility mode or this is not an ESM
-  // file that has been converted to a CommonJS file using a Babel-
-  // compatible transform (i.e. "__esModule" has not been set), then set
-  // "default" to the CommonJS "module.exports" for node compatibility.
-  isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
-  mod
-));
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-// pkg/dist-src/index.js
-var dist_src_exports = {};
-__export(dist_src_exports, {
-  RequestError: () => RequestError
-});
-module.exports = __toCommonJS(dist_src_exports);
-var import_deprecation = __nccwpck_require__(8932);
-var import_once = __toESM(__nccwpck_require__(1223));
-var logOnceCode = (0, import_once.default)((deprecation) => console.warn(deprecation));
-var logOnceHeaders = (0, import_once.default)((deprecation) => console.warn(deprecation));
-var RequestError = class extends Error {
-  constructor(message, statusCode, options) {
-    super(message);
-    if (Error.captureStackTrace) {
-      Error.captureStackTrace(this, this.constructor);
-    }
-    this.name = "HttpError";
-    this.status = statusCode;
-    let headers;
-    if ("headers" in options && typeof options.headers !== "undefined") {
-      headers = options.headers;
-    }
-    if ("response" in options) {
-      this.response = options.response;
-      headers = options.response.headers;
-    }
-    const requestCopy = Object.assign({}, options.request);
-    if (options.request.headers.authorization) {
-      requestCopy.headers = Object.assign({}, options.request.headers, {
-        authorization: options.request.headers.authorization.replace(
-          / .*$/,
-          " [REDACTED]"
-        )
-      });
-    }
-    requestCopy.url = requestCopy.url.replace(/\bclient_secret=\w+/g, "client_secret=[REDACTED]").replace(/\baccess_token=\w+/g, "access_token=[REDACTED]");
-    this.request = requestCopy;
-    Object.defineProperty(this, "code", {
-      get() {
-        logOnceCode(
-          new import_deprecation.Deprecation(
-            "[@octokit/request-error] `error.code` is deprecated, use `error.status`."
-          )
-        );
-        return statusCode;
-      }
-    });
-    Object.defineProperty(this, "headers", {
-      get() {
-        logOnceHeaders(
-          new import_deprecation.Deprecation(
-            "[@octokit/request-error] `error.headers` is deprecated, use `error.response.headers`."
-          )
-        );
-        return headers || {};
-      }
-    });
-  }
-};
-// Annotate the CommonJS export names for ESM import in node:
-0 && (0);
-
-
-/***/ }),
-
-/***/ 6234:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-"use strict";
-
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __export = (target, all) => {
-  for (var name in all)
-    __defProp(target, name, { get: all[name], enumerable: true });
-};
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
-
-// pkg/dist-src/index.js
-var dist_src_exports = {};
-__export(dist_src_exports, {
-  request: () => request
-});
-module.exports = __toCommonJS(dist_src_exports);
-var import_endpoint = __nccwpck_require__(9440);
-var import_universal_user_agent = __nccwpck_require__(5030);
-
-// pkg/dist-src/version.js
-var VERSION = "8.4.0";
-
-// pkg/dist-src/is-plain-object.js
-function isPlainObject(value) {
-  if (typeof value !== "object" || value === null)
-    return false;
-  if (Object.prototype.toString.call(value) !== "[object Object]")
-    return false;
-  const proto = Object.getPrototypeOf(value);
-  if (proto === null)
-    return true;
-  const Ctor = Object.prototype.hasOwnProperty.call(proto, "constructor") && proto.constructor;
-  return typeof Ctor === "function" && Ctor instanceof Ctor && Function.prototype.call(Ctor) === Function.prototype.call(value);
-}
-
-// pkg/dist-src/fetch-wrapper.js
-var import_request_error = __nccwpck_require__(537);
-
-// pkg/dist-src/get-buffer-response.js
-function getBufferResponse(response) {
-  return response.arrayBuffer();
-}
-
-// pkg/dist-src/fetch-wrapper.js
-function fetchWrapper(requestOptions) {
-  var _a, _b, _c, _d;
-  const log = requestOptions.request && requestOptions.request.log ? requestOptions.request.log : console;
-  const parseSuccessResponseBody = ((_a = requestOptions.request) == null ? void 0 : _a.parseSuccessResponseBody) !== false;
-  if (isPlainObject(requestOptions.body) || Array.isArray(requestOptions.body)) {
-    requestOptions.body = JSON.stringify(requestOptions.body);
-  }
-  let headers = {};
-  let status;
-  let url;
-  let { fetch } = globalThis;
-  if ((_b = requestOptions.request) == null ? void 0 : _b.fetch) {
-    fetch = requestOptions.request.fetch;
-  }
-  if (!fetch) {
-    throw new Error(
-      "fetch is not set. Please pass a fetch implementation as new Octokit({ request: { fetch }}). Learn more at https://github.com/octokit/octokit.js/#fetch-missing"
-    );
-  }
-  return fetch(requestOptions.url, {
-    method: requestOptions.method,
-    body: requestOptions.body,
-    redirect: (_c = requestOptions.request) == null ? void 0 : _c.redirect,
-    headers: requestOptions.headers,
-    signal: (_d = requestOptions.request) == null ? void 0 : _d.signal,
-    // duplex must be set if request.body is ReadableStream or Async Iterables.
-    // See https://fetch.spec.whatwg.org/#dom-requestinit-duplex.
-    ...requestOptions.body && { duplex: "half" }
-  }).then(async (response) => {
-    url = response.url;
-    status = response.status;
-    for (const keyAndValue of response.headers) {
-      headers[keyAndValue[0]] = keyAndValue[1];
-    }
-    if ("deprecation" in headers) {
-      const matches = headers.link && headers.link.match(/<([^>]+)>; rel="deprecation"/);
-      const deprecationLink = matches && matches.pop();
-      log.warn(
-        `[@octokit/request] "${requestOptions.method} ${requestOptions.url}" is deprecated. It is scheduled to be removed on ${headers.sunset}${deprecationLink ? `. See ${deprecationLink}` : ""}`
-      );
-    }
-    if (status === 204 || status === 205) {
-      return;
-    }
-    if (requestOptions.method === "HEAD") {
-      if (status < 400) {
-        return;
-      }
-      throw new import_request_error.RequestError(response.statusText, status, {
-        response: {
-          url,
-          status,
-          headers,
-          data: void 0
-        },
-        request: requestOptions
-      });
-    }
-    if (status === 304) {
-      throw new import_request_error.RequestError("Not modified", status, {
-        response: {
-          url,
-          status,
-          headers,
-          data: await getResponseData(response)
-        },
-        request: requestOptions
-      });
-    }
-    if (status >= 400) {
-      const data = await getResponseData(response);
-      const error = new import_request_error.RequestError(toErrorMessage(data), status, {
-        response: {
-          url,
-          status,
-          headers,
-          data
-        },
-        request: requestOptions
-      });
-      throw error;
-    }
-    return parseSuccessResponseBody ? await getResponseData(response) : response.body;
-  }).then((data) => {
-    return {
-      status,
-      url,
-      headers,
-      data
-    };
-  }).catch((error) => {
-    if (error instanceof import_request_error.RequestError)
-      throw error;
-    else if (error.name === "AbortError")
-      throw error;
-    let message = error.message;
-    if (error.name === "TypeError" && "cause" in error) {
-      if (error.cause instanceof Error) {
-        message = error.cause.message;
-      } else if (typeof error.cause === "string") {
-        message = error.cause;
-      }
-    }
-    throw new import_request_error.RequestError(message, 500, {
-      request: requestOptions
-    });
-  });
-}
-async function getResponseData(response) {
-  const contentType = response.headers.get("content-type");
-  if (/application\/json/.test(contentType)) {
-    return response.json().catch(() => response.text()).catch(() => "");
-  }
-  if (!contentType || /^text\/|charset=utf-8$/.test(contentType)) {
-    return response.text();
-  }
-  return getBufferResponse(response);
-}
-function toErrorMessage(data) {
-  if (typeof data === "string")
-    return data;
-  let suffix;
-  if ("documentation_url" in data) {
-    suffix = ` - ${data.documentation_url}`;
-  } else {
-    suffix = "";
-  }
-  if ("message" in data) {
-    if (Array.isArray(data.errors)) {
-      return `${data.message}: ${data.errors.map(JSON.stringify).join(", ")}${suffix}`;
-    }
-    return `${data.message}${suffix}`;
-  }
-  return `Unknown error: ${JSON.stringify(data)}`;
-}
-
-// pkg/dist-src/with-defaults.js
-function withDefaults(oldEndpoint, newDefaults) {
-  const endpoint2 = oldEndpoint.defaults(newDefaults);
-  const newApi = function(route, parameters) {
-    const endpointOptions = endpoint2.merge(route, parameters);
-    if (!endpointOptions.request || !endpointOptions.request.hook) {
-      return fetchWrapper(endpoint2.parse(endpointOptions));
-    }
-    const request2 = (route2, parameters2) => {
-      return fetchWrapper(
-        endpoint2.parse(endpoint2.merge(route2, parameters2))
-      );
-    };
-    Object.assign(request2, {
-      endpoint: endpoint2,
-      defaults: withDefaults.bind(null, endpoint2)
-    });
-    return endpointOptions.request.hook(request2, endpointOptions);
-  };
-  return Object.assign(newApi, {
-    endpoint: endpoint2,
-    defaults: withDefaults.bind(null, endpoint2)
-  });
-}
-
-// pkg/dist-src/index.js
-var request = withDefaults(import_endpoint.endpoint, {
-  headers: {
-    "user-agent": `octokit-request.js/${VERSION} ${(0, import_universal_user_agent.getUserAgent)()}`
-  }
-});
-// Annotate the CommonJS export names for ESM import in node:
-0 && (0);
-
 
 /***/ }),
 
@@ -1855,34 +986,6 @@ formatters.O = function (v) {
 	this.inspectOpts.colors = this.useColors;
 	return util.inspect(v, this.inspectOpts);
 };
-
-
-/***/ }),
-
-/***/ 8932:
-/***/ ((__unused_webpack_module, exports) => {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-class Deprecation extends Error {
-  constructor(message) {
-    super(message); // Maintains proper stack trace (only available on V8)
-
-    /* istanbul ignore next */
-
-    if (Error.captureStackTrace) {
-      Error.captureStackTrace(this, this.constructor);
-    }
-
-    this.name = 'Deprecation';
-  }
-
-}
-
-exports.Deprecation = Deprecation;
 
 
 /***/ }),
@@ -4760,68 +3863,265 @@ function plural(ms, msAbs, n, name) {
 
 /***/ }),
 
-/***/ 1223:
+/***/ 9318:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-var wrappy = __nccwpck_require__(2940)
-module.exports = wrappy(once)
-module.exports.strict = wrappy(onceStrict)
+"use strict";
 
-once.proto = once(function () {
-  Object.defineProperty(Function.prototype, 'once', {
-    value: function () {
-      return once(this)
-    },
-    configurable: true
-  })
+const os = __nccwpck_require__(2037);
+const tty = __nccwpck_require__(6224);
+const hasFlag = __nccwpck_require__(1621);
 
-  Object.defineProperty(Function.prototype, 'onceStrict', {
-    value: function () {
-      return onceStrict(this)
-    },
-    configurable: true
-  })
-})
+const {env} = process;
 
-function once (fn) {
-  var f = function () {
-    if (f.called) return f.value
-    f.called = true
-    return f.value = fn.apply(this, arguments)
-  }
-  f.called = false
-  return f
+let forceColor;
+if (hasFlag('no-color') ||
+	hasFlag('no-colors') ||
+	hasFlag('color=false') ||
+	hasFlag('color=never')) {
+	forceColor = 0;
+} else if (hasFlag('color') ||
+	hasFlag('colors') ||
+	hasFlag('color=true') ||
+	hasFlag('color=always')) {
+	forceColor = 1;
 }
 
-function onceStrict (fn) {
-  var f = function () {
-    if (f.called)
-      throw new Error(f.onceError)
-    f.called = true
-    return f.value = fn.apply(this, arguments)
-  }
-  var name = fn.name || 'Function wrapped with `once`'
-  f.onceError = name + " shouldn't be called more than once"
-  f.called = false
-  return f
+if ('FORCE_COLOR' in env) {
+	if (env.FORCE_COLOR === 'true') {
+		forceColor = 1;
+	} else if (env.FORCE_COLOR === 'false') {
+		forceColor = 0;
+	} else {
+		forceColor = env.FORCE_COLOR.length === 0 ? 1 : Math.min(parseInt(env.FORCE_COLOR, 10), 3);
+	}
+}
+
+function translateLevel(level) {
+	if (level === 0) {
+		return false;
+	}
+
+	return {
+		level,
+		hasBasic: true,
+		has256: level >= 2,
+		has16m: level >= 3
+	};
+}
+
+function supportsColor(haveStream, streamIsTTY) {
+	if (forceColor === 0) {
+		return 0;
+	}
+
+	if (hasFlag('color=16m') ||
+		hasFlag('color=full') ||
+		hasFlag('color=truecolor')) {
+		return 3;
+	}
+
+	if (hasFlag('color=256')) {
+		return 2;
+	}
+
+	if (haveStream && !streamIsTTY && forceColor === undefined) {
+		return 0;
+	}
+
+	const min = forceColor || 0;
+
+	if (env.TERM === 'dumb') {
+		return min;
+	}
+
+	if (process.platform === 'win32') {
+		// Windows 10 build 10586 is the first Windows release that supports 256 colors.
+		// Windows 10 build 14931 is the first release that supports 16m/TrueColor.
+		const osRelease = os.release().split('.');
+		if (
+			Number(osRelease[0]) >= 10 &&
+			Number(osRelease[2]) >= 10586
+		) {
+			return Number(osRelease[2]) >= 14931 ? 3 : 2;
+		}
+
+		return 1;
+	}
+
+	if ('CI' in env) {
+		if (['TRAVIS', 'CIRCLECI', 'APPVEYOR', 'GITLAB_CI', 'GITHUB_ACTIONS', 'BUILDKITE'].some(sign => sign in env) || env.CI_NAME === 'codeship') {
+			return 1;
+		}
+
+		return min;
+	}
+
+	if ('TEAMCITY_VERSION' in env) {
+		return /^(9\.(0*[1-9]\d*)\.|\d{2,}\.)/.test(env.TEAMCITY_VERSION) ? 1 : 0;
+	}
+
+	if (env.COLORTERM === 'truecolor') {
+		return 3;
+	}
+
+	if ('TERM_PROGRAM' in env) {
+		const version = parseInt((env.TERM_PROGRAM_VERSION || '').split('.')[0], 10);
+
+		switch (env.TERM_PROGRAM) {
+			case 'iTerm.app':
+				return version >= 3 ? 3 : 2;
+			case 'Apple_Terminal':
+				return 2;
+			// No default
+		}
+	}
+
+	if (/-256(color)?$/i.test(env.TERM)) {
+		return 2;
+	}
+
+	if (/^screen|^xterm|^vt100|^vt220|^rxvt|color|ansi|cygwin|linux/i.test(env.TERM)) {
+		return 1;
+	}
+
+	if ('COLORTERM' in env) {
+		return 1;
+	}
+
+	return min;
+}
+
+function getSupportLevel(stream) {
+	const level = supportsColor(stream, stream && stream.isTTY);
+	return translateLevel(level);
+}
+
+module.exports = {
+	supportsColor: getSupportLevel,
+	stdout: translateLevel(supportsColor(true, tty.isatty(1))),
+	stderr: translateLevel(supportsColor(true, tty.isatty(2)))
+};
+
+
+/***/ }),
+
+/***/ 9046:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+
+exports.fromCallback = function (fn) {
+  return Object.defineProperty(function (...args) {
+    if (typeof args[args.length - 1] === 'function') fn.apply(this, args)
+    else {
+      return new Promise((resolve, reject) => {
+        args.push((err, res) => (err != null) ? reject(err) : resolve(res))
+        fn.apply(this, args)
+      })
+    }
+  }, 'name', { value: fn.name })
+}
+
+exports.fromPromise = function (fn) {
+  return Object.defineProperty(function (...args) {
+    const cb = args[args.length - 1]
+    if (typeof cb !== 'function') return fn.apply(this, args)
+    else {
+      args.pop()
+      fn.apply(this, args).then(r => cb(null, r), cb)
+    }
+  }, 'name', { value: fn.name })
 }
 
 
 /***/ }),
 
-/***/ 9103:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+/***/ 6990:
+/***/ ((__unused_webpack_module, __webpack_exports__, __nccwpck_require__) => {
 
 "use strict";
+__nccwpck_require__.r(__webpack_exports__);
+/* harmony export */ __nccwpck_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var fs_extra__WEBPACK_IMPORTED_MODULE_2__ = __nccwpck_require__(5630);
+/* harmony import */ var fs_extra__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__nccwpck_require__.n(fs_extra__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _model_file_OutputFileResponseModel__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(5961);
+/* harmony import */ var _model_file_OutputFileResponseModel__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__nccwpck_require__.n(_model_file_OutputFileResponseModel__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _model_file_ReadFileResponseModel__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(9810);
+/* harmony import */ var _model_file_ReadFileResponseModel__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__nccwpck_require__.n(_model_file_ReadFileResponseModel__WEBPACK_IMPORTED_MODULE_1__);
 
-var __create = Object.create;
+
+
+
+class FileHandler {
+    static async outputJson(fileName, json) {
+        try {
+            await fs_extra__WEBPACK_IMPORTED_MODULE_2___default().outputJson(fileName, json);
+            return new (_model_file_OutputFileResponseModel__WEBPACK_IMPORTED_MODULE_0___default())(true, `Json file has been updated at ${fileName}`);
+        } catch (error) {
+            console.error('Error writing JSON file:', error);
+            return new (_model_file_OutputFileResponseModel__WEBPACK_IMPORTED_MODULE_0___default())(false, `Json file has not been updated at ${fileName}: ${error.message}`);
+        }
+    }
+
+    static async outputOther(fileName, file) {
+        try {
+            await fs_extra__WEBPACK_IMPORTED_MODULE_2___default().outputFile(fileName, file);
+            return new (_model_file_OutputFileResponseModel__WEBPACK_IMPORTED_MODULE_0___default())(true, `Other file has been updated at ${fileName}`);
+        } catch (error) {
+            console.error('Error writing file:', error);
+            return new (_model_file_OutputFileResponseModel__WEBPACK_IMPORTED_MODULE_0___default())(false, `Other file has not been updated at ${fileName}: ${error.message}`);
+        }
+    }
+
+    static async readJson(fileName) {
+        try {
+            const json = await fs_extra__WEBPACK_IMPORTED_MODULE_2___default().readJson(fileName);
+            return new (_model_file_ReadFileResponseModel__WEBPACK_IMPORTED_MODULE_1___default())(true, `Json file has been read at ${fileName}`, json);
+        } catch (error) {
+            console.error('Error reading JSON file:', error);
+            return new (_model_file_ReadFileResponseModel__WEBPACK_IMPORTED_MODULE_1___default())(false, `Json file has not been read at ${fileName}: ${error.message}`);
+        }
+    }
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FileHandler);
+
+
+/***/ }),
+
+/***/ 8369:
+/***/ ((__unused_webpack_module, __webpack_exports__, __nccwpck_require__) => {
+
+"use strict";
+// ESM COMPAT FLAG
+__nccwpck_require__.r(__webpack_exports__);
+
+// EXPORTS
+__nccwpck_require__.d(__webpack_exports__, {
+  "default": () => (/* binding */ git)
+});
+
+// EXTERNAL MODULE: ./node_modules/@kwsites/file-exists/dist/index.js
+var dist = __nccwpck_require__(4751);
+// EXTERNAL MODULE: ./node_modules/debug/src/index.js
+var src = __nccwpck_require__(8237);
+;// CONCATENATED MODULE: external "child_process"
+const external_child_process_namespaceObject = require("child_process");
+// EXTERNAL MODULE: ./node_modules/@kwsites/promise-deferred/dist/index.js
+var promise_deferred_dist = __nccwpck_require__(9819);
+;// CONCATENATED MODULE: external "node:events"
+const external_node_events_namespaceObject = require("node:events");
+;// CONCATENATED MODULE: ./node_modules/simple-git/dist/esm/index.js
 var __defProp = Object.defineProperty;
 var __defProps = Object.defineProperties;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
 var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getOwnPropSymbols = Object.getOwnPropertySymbols;
-var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __propIsEnum = Object.prototype.propertyIsEnumerable;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
@@ -4855,10 +4155,6 @@ var __copyProps = (to, from, except, desc) => {
   }
   return to;
 };
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
-  isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
-  mod
-));
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 var __async = (__this, __arguments, generator) => {
   return new Promise((resolve, reject) => {
@@ -4880,6 +4176,26 @@ var __async = (__this, __arguments, generator) => {
     step((generator = generator.apply(__this, __arguments)).next());
   });
 };
+
+// src/lib/args/pathspec.ts
+function pathspec(...paths) {
+  const key = new String(paths);
+  cache.set(key, paths);
+  return key;
+}
+function isPathSpec(path) {
+  return path instanceof String && cache.has(path);
+}
+function toPaths(pathSpec) {
+  return cache.get(pathSpec) || [];
+}
+var cache;
+var init_pathspec = __esm({
+  "src/lib/args/pathspec.ts"() {
+    "use strict";
+    cache = /* @__PURE__ */ new WeakMap();
+  }
+});
 
 // src/lib/errors/git-error.ts
 var GitError;
@@ -4911,58 +4227,6 @@ var init_git_response_error = __esm({
   }
 });
 
-// src/lib/args/pathspec.ts
-function pathspec(...paths) {
-  const key = new String(paths);
-  cache.set(key, paths);
-  return key;
-}
-function isPathSpec(path) {
-  return path instanceof String && cache.has(path);
-}
-function toPaths(pathSpec) {
-  return cache.get(pathSpec) || [];
-}
-var cache;
-var init_pathspec = __esm({
-  "src/lib/args/pathspec.ts"() {
-    "use strict";
-    cache = /* @__PURE__ */ new WeakMap();
-  }
-});
-
-// src/lib/errors/git-construct-error.ts
-var GitConstructError;
-var init_git_construct_error = __esm({
-  "src/lib/errors/git-construct-error.ts"() {
-    "use strict";
-    init_git_error();
-    GitConstructError = class extends GitError {
-      constructor(config, message) {
-        super(void 0, message);
-        this.config = config;
-      }
-    };
-  }
-});
-
-// src/lib/errors/git-plugin-error.ts
-var GitPluginError;
-var init_git_plugin_error = __esm({
-  "src/lib/errors/git-plugin-error.ts"() {
-    "use strict";
-    init_git_error();
-    GitPluginError = class extends GitError {
-      constructor(task, plugin, message) {
-        super(task, message);
-        this.task = task;
-        this.plugin = plugin;
-        Object.setPrototypeOf(this, new.target.prototype);
-      }
-    };
-  }
-});
-
 // src/lib/errors/task-configuration-error.ts
 var TaskConfigurationError;
 var init_task_configuration_error = __esm({
@@ -4978,6 +4242,7 @@ var init_task_configuration_error = __esm({
 });
 
 // src/lib/utils/util.ts
+
 function asFunction(source) {
   return typeof source === "function" ? source : NOOP;
 }
@@ -5015,7 +4280,7 @@ function forEachLineWithContent(input, callback) {
   return toLinesWithContent(input, true).map((line) => callback(line));
 }
 function folderExists(path) {
-  return (0, import_file_exists.exists)(path, import_file_exists.FOLDER);
+  return (0,dist.exists)(path, dist.FOLDER);
 }
 function append(target, item) {
   if (Array.isArray(target)) {
@@ -5087,11 +4352,10 @@ function orVoid(input) {
   }
   return input;
 }
-var import_file_exists, NULL, NOOP, objectToString;
+var NULL, NOOP, objectToString;
 var init_util = __esm({
   "src/lib/utils/util.ts"() {
     "use strict";
-    import_file_exists = __nccwpck_require__(4751);
     NULL = "\0";
     NOOP = () => {
     };
@@ -5971,527 +5235,10 @@ var init_reset = __esm({
   }
 });
 
-// src/lib/api.ts
-var api_exports = {};
-__export(api_exports, {
-  CheckRepoActions: () => CheckRepoActions,
-  CleanOptions: () => CleanOptions,
-  DiffNameStatus: () => DiffNameStatus,
-  GitConfigScope: () => GitConfigScope,
-  GitConstructError: () => GitConstructError,
-  GitError: () => GitError,
-  GitPluginError: () => GitPluginError,
-  GitResponseError: () => GitResponseError,
-  ResetMode: () => ResetMode,
-  TaskConfigurationError: () => TaskConfigurationError,
-  grepQueryBuilder: () => grepQueryBuilder,
-  pathspec: () => pathspec
-});
-var init_api = __esm({
-  "src/lib/api.ts"() {
-    "use strict";
-    init_pathspec();
-    init_git_construct_error();
-    init_git_error();
-    init_git_plugin_error();
-    init_git_response_error();
-    init_task_configuration_error();
-    init_check_is_repo();
-    init_clean();
-    init_config();
-    init_diff_name_status();
-    init_grep();
-    init_reset();
-  }
-});
-
-// src/lib/plugins/abort-plugin.ts
-function abortPlugin(signal) {
-  if (!signal) {
-    return;
-  }
-  const onSpawnAfter = {
-    type: "spawn.after",
-    action(_data, context) {
-      function kill() {
-        context.kill(new GitPluginError(void 0, "abort", "Abort signal received"));
-      }
-      signal.addEventListener("abort", kill);
-      context.spawned.on("close", () => signal.removeEventListener("abort", kill));
-    }
-  };
-  const onSpawnBefore = {
-    type: "spawn.before",
-    action(_data, context) {
-      if (signal.aborted) {
-        context.kill(new GitPluginError(void 0, "abort", "Abort already signaled"));
-      }
-    }
-  };
-  return [onSpawnBefore, onSpawnAfter];
-}
-var init_abort_plugin = __esm({
-  "src/lib/plugins/abort-plugin.ts"() {
-    "use strict";
-    init_git_plugin_error();
-  }
-});
-
-// src/lib/plugins/block-unsafe-operations-plugin.ts
-function isConfigSwitch(arg) {
-  return typeof arg === "string" && arg.trim().toLowerCase() === "-c";
-}
-function preventProtocolOverride(arg, next) {
-  if (!isConfigSwitch(arg)) {
-    return;
-  }
-  if (!/^\s*protocol(.[a-z]+)?.allow/.test(next)) {
-    return;
-  }
-  throw new GitPluginError(
-    void 0,
-    "unsafe",
-    "Configuring protocol.allow is not permitted without enabling allowUnsafeExtProtocol"
-  );
-}
-function preventUploadPack(arg, method) {
-  if (/^\s*--(upload|receive)-pack/.test(arg)) {
-    throw new GitPluginError(
-      void 0,
-      "unsafe",
-      `Use of --upload-pack or --receive-pack is not permitted without enabling allowUnsafePack`
-    );
-  }
-  if (method === "clone" && /^\s*-u\b/.test(arg)) {
-    throw new GitPluginError(
-      void 0,
-      "unsafe",
-      `Use of clone with option -u is not permitted without enabling allowUnsafePack`
-    );
-  }
-  if (method === "push" && /^\s*--exec\b/.test(arg)) {
-    throw new GitPluginError(
-      void 0,
-      "unsafe",
-      `Use of push with option --exec is not permitted without enabling allowUnsafePack`
-    );
-  }
-}
-function blockUnsafeOperationsPlugin({
-  allowUnsafeProtocolOverride = false,
-  allowUnsafePack = false
-} = {}) {
-  return {
-    type: "spawn.args",
-    action(args, context) {
-      args.forEach((current, index) => {
-        const next = index < args.length ? args[index + 1] : "";
-        allowUnsafeProtocolOverride || preventProtocolOverride(current, next);
-        allowUnsafePack || preventUploadPack(current, context.method);
-      });
-      return args;
-    }
-  };
-}
-var init_block_unsafe_operations_plugin = __esm({
-  "src/lib/plugins/block-unsafe-operations-plugin.ts"() {
-    "use strict";
-    init_git_plugin_error();
-  }
-});
-
-// src/lib/plugins/command-config-prefixing-plugin.ts
-function commandConfigPrefixingPlugin(configuration) {
-  const prefix = prefixedArray(configuration, "-c");
-  return {
-    type: "spawn.args",
-    action(data) {
-      return [...prefix, ...data];
-    }
-  };
-}
-var init_command_config_prefixing_plugin = __esm({
-  "src/lib/plugins/command-config-prefixing-plugin.ts"() {
-    "use strict";
-    init_utils();
-  }
-});
-
-// src/lib/plugins/completion-detection.plugin.ts
-function completionDetectionPlugin({
-  onClose = true,
-  onExit = 50
-} = {}) {
-  function createEvents() {
-    let exitCode = -1;
-    const events = {
-      close: (0, import_promise_deferred.deferred)(),
-      closeTimeout: (0, import_promise_deferred.deferred)(),
-      exit: (0, import_promise_deferred.deferred)(),
-      exitTimeout: (0, import_promise_deferred.deferred)()
-    };
-    const result = Promise.race([
-      onClose === false ? never : events.closeTimeout.promise,
-      onExit === false ? never : events.exitTimeout.promise
-    ]);
-    configureTimeout(onClose, events.close, events.closeTimeout);
-    configureTimeout(onExit, events.exit, events.exitTimeout);
-    return {
-      close(code) {
-        exitCode = code;
-        events.close.done();
-      },
-      exit(code) {
-        exitCode = code;
-        events.exit.done();
-      },
-      get exitCode() {
-        return exitCode;
-      },
-      result
-    };
-  }
-  function configureTimeout(flag, event, timeout) {
-    if (flag === false) {
-      return;
-    }
-    (flag === true ? event.promise : event.promise.then(() => delay(flag))).then(timeout.done);
-  }
-  return {
-    type: "spawn.after",
-    action(_0, _1) {
-      return __async(this, arguments, function* (_data, { spawned, close }) {
-        var _a3, _b;
-        const events = createEvents();
-        let deferClose = true;
-        let quickClose = () => void (deferClose = false);
-        (_a3 = spawned.stdout) == null ? void 0 : _a3.on("data", quickClose);
-        (_b = spawned.stderr) == null ? void 0 : _b.on("data", quickClose);
-        spawned.on("error", quickClose);
-        spawned.on("close", (code) => events.close(code));
-        spawned.on("exit", (code) => events.exit(code));
-        try {
-          yield events.result;
-          if (deferClose) {
-            yield delay(50);
-          }
-          close(events.exitCode);
-        } catch (err) {
-          close(events.exitCode, err);
-        }
-      });
-    }
-  };
-}
-var import_promise_deferred, never;
-var init_completion_detection_plugin = __esm({
-  "src/lib/plugins/completion-detection.plugin.ts"() {
-    "use strict";
-    import_promise_deferred = __nccwpck_require__(9819);
-    init_utils();
-    never = (0, import_promise_deferred.deferred)().promise;
-  }
-});
-
-// src/lib/plugins/custom-binary.plugin.ts
-function isBadArgument(arg) {
-  return !arg || !/^([a-z]:)?([a-z0-9/.\\_-]+)$/i.test(arg);
-}
-function toBinaryConfig(input, allowUnsafe) {
-  if (input.length < 1 || input.length > 2) {
-    throw new GitPluginError(void 0, "binary", WRONG_NUMBER_ERR);
-  }
-  const isBad = input.some(isBadArgument);
-  if (isBad) {
-    if (allowUnsafe) {
-      console.warn(WRONG_CHARS_ERR);
-    } else {
-      throw new GitPluginError(void 0, "binary", WRONG_CHARS_ERR);
-    }
-  }
-  const [binary, prefix] = input;
-  return {
-    binary,
-    prefix
-  };
-}
-function customBinaryPlugin(plugins, input = ["git"], allowUnsafe = false) {
-  let config = toBinaryConfig(asArray(input), allowUnsafe);
-  plugins.on("binary", (input2) => {
-    config = toBinaryConfig(asArray(input2), allowUnsafe);
-  });
-  plugins.append("spawn.binary", () => {
-    return config.binary;
-  });
-  plugins.append("spawn.args", (data) => {
-    return config.prefix ? [config.prefix, ...data] : data;
-  });
-}
-var WRONG_NUMBER_ERR, WRONG_CHARS_ERR;
-var init_custom_binary_plugin = __esm({
-  "src/lib/plugins/custom-binary.plugin.ts"() {
-    "use strict";
-    init_git_plugin_error();
-    init_utils();
-    WRONG_NUMBER_ERR = `Invalid value supplied for custom binary, requires a single string or an array containing either one or two strings`;
-    WRONG_CHARS_ERR = `Invalid value supplied for custom binary, restricted characters must be removed or supply the unsafe.allowUnsafeCustomBinary option`;
-  }
-});
-
-// src/lib/plugins/error-detection.plugin.ts
-function isTaskError(result) {
-  return !!(result.exitCode && result.stdErr.length);
-}
-function getErrorMessage(result) {
-  return Buffer.concat([...result.stdOut, ...result.stdErr]);
-}
-function errorDetectionHandler(overwrite = false, isError = isTaskError, errorMessage = getErrorMessage) {
-  return (error, result) => {
-    if (!overwrite && error || !isError(result)) {
-      return error;
-    }
-    return errorMessage(result);
-  };
-}
-function errorDetectionPlugin(config) {
-  return {
-    type: "task.error",
-    action(data, context) {
-      const error = config(data.error, {
-        stdErr: context.stdErr,
-        stdOut: context.stdOut,
-        exitCode: context.exitCode
-      });
-      if (Buffer.isBuffer(error)) {
-        return { error: new GitError(void 0, error.toString("utf-8")) };
-      }
-      return {
-        error
-      };
-    }
-  };
-}
-var init_error_detection_plugin = __esm({
-  "src/lib/plugins/error-detection.plugin.ts"() {
-    "use strict";
-    init_git_error();
-  }
-});
-
-// src/lib/plugins/plugin-store.ts
-var import_node_events, PluginStore;
-var init_plugin_store = __esm({
-  "src/lib/plugins/plugin-store.ts"() {
-    "use strict";
-    import_node_events = __nccwpck_require__(5673);
-    init_utils();
-    PluginStore = class {
-      constructor() {
-        this.plugins = /* @__PURE__ */ new Set();
-        this.events = new import_node_events.EventEmitter();
-      }
-      on(type, listener) {
-        this.events.on(type, listener);
-      }
-      reconfigure(type, data) {
-        this.events.emit(type, data);
-      }
-      append(type, action) {
-        const plugin = append(this.plugins, { type, action });
-        return () => this.plugins.delete(plugin);
-      }
-      add(plugin) {
-        const plugins = [];
-        asArray(plugin).forEach((plugin2) => plugin2 && this.plugins.add(append(plugins, plugin2)));
-        return () => {
-          plugins.forEach((plugin2) => this.plugins.delete(plugin2));
-        };
-      }
-      exec(type, data, context) {
-        let output = data;
-        const contextual = Object.freeze(Object.create(context));
-        for (const plugin of this.plugins) {
-          if (plugin.type === type) {
-            output = plugin.action(output, contextual);
-          }
-        }
-        return output;
-      }
-    };
-  }
-});
-
-// src/lib/plugins/progress-monitor-plugin.ts
-function progressMonitorPlugin(progress) {
-  const progressCommand = "--progress";
-  const progressMethods = ["checkout", "clone", "fetch", "pull", "push"];
-  const onProgress = {
-    type: "spawn.after",
-    action(_data, context) {
-      var _a2;
-      if (!context.commands.includes(progressCommand)) {
-        return;
-      }
-      (_a2 = context.spawned.stderr) == null ? void 0 : _a2.on("data", (chunk) => {
-        const message = /^([\s\S]+?):\s*(\d+)% \((\d+)\/(\d+)\)/.exec(chunk.toString("utf8"));
-        if (!message) {
-          return;
-        }
-        progress({
-          method: context.method,
-          stage: progressEventStage(message[1]),
-          progress: asNumber(message[2]),
-          processed: asNumber(message[3]),
-          total: asNumber(message[4])
-        });
-      });
-    }
-  };
-  const onArgs = {
-    type: "spawn.args",
-    action(args, context) {
-      if (!progressMethods.includes(context.method)) {
-        return args;
-      }
-      return including(args, progressCommand);
-    }
-  };
-  return [onArgs, onProgress];
-}
-function progressEventStage(input) {
-  return String(input.toLowerCase().split(" ", 1)) || "unknown";
-}
-var init_progress_monitor_plugin = __esm({
-  "src/lib/plugins/progress-monitor-plugin.ts"() {
-    "use strict";
-    init_utils();
-  }
-});
-
-// src/lib/plugins/simple-git-plugin.ts
-var init_simple_git_plugin = __esm({
-  "src/lib/plugins/simple-git-plugin.ts"() {
-    "use strict";
-  }
-});
-
-// src/lib/plugins/spawn-options-plugin.ts
-function spawnOptionsPlugin(spawnOptions) {
-  const options = pick(spawnOptions, ["uid", "gid"]);
-  return {
-    type: "spawn.options",
-    action(data) {
-      return __spreadValues(__spreadValues({}, options), data);
-    }
-  };
-}
-var init_spawn_options_plugin = __esm({
-  "src/lib/plugins/spawn-options-plugin.ts"() {
-    "use strict";
-    init_utils();
-  }
-});
-
-// src/lib/plugins/timout-plugin.ts
-function timeoutPlugin({
-  block,
-  stdErr = true,
-  stdOut = true
-}) {
-  if (block > 0) {
-    return {
-      type: "spawn.after",
-      action(_data, context) {
-        var _a2, _b;
-        let timeout;
-        function wait() {
-          timeout && clearTimeout(timeout);
-          timeout = setTimeout(kill, block);
-        }
-        function stop() {
-          var _a3, _b2;
-          (_a3 = context.spawned.stdout) == null ? void 0 : _a3.off("data", wait);
-          (_b2 = context.spawned.stderr) == null ? void 0 : _b2.off("data", wait);
-          context.spawned.off("exit", stop);
-          context.spawned.off("close", stop);
-          timeout && clearTimeout(timeout);
-        }
-        function kill() {
-          stop();
-          context.kill(new GitPluginError(void 0, "timeout", `block timeout reached`));
-        }
-        stdOut && ((_a2 = context.spawned.stdout) == null ? void 0 : _a2.on("data", wait));
-        stdErr && ((_b = context.spawned.stderr) == null ? void 0 : _b.on("data", wait));
-        context.spawned.on("exit", stop);
-        context.spawned.on("close", stop);
-        wait();
-      }
-    };
-  }
-}
-var init_timout_plugin = __esm({
-  "src/lib/plugins/timout-plugin.ts"() {
-    "use strict";
-    init_git_plugin_error();
-  }
-});
-
-// src/lib/plugins/index.ts
-var init_plugins = __esm({
-  "src/lib/plugins/index.ts"() {
-    "use strict";
-    init_abort_plugin();
-    init_block_unsafe_operations_plugin();
-    init_command_config_prefixing_plugin();
-    init_completion_detection_plugin();
-    init_custom_binary_plugin();
-    init_error_detection_plugin();
-    init_plugin_store();
-    init_progress_monitor_plugin();
-    init_simple_git_plugin();
-    init_spawn_options_plugin();
-    init_timout_plugin();
-  }
-});
-
-// src/lib/plugins/suffix-paths.plugin.ts
-function suffixPathsPlugin() {
-  return {
-    type: "spawn.args",
-    action(data) {
-      const prefix = [];
-      let suffix;
-      function append2(args) {
-        (suffix = suffix || []).push(...args);
-      }
-      for (let i = 0; i < data.length; i++) {
-        const param = data[i];
-        if (isPathSpec(param)) {
-          append2(toPaths(param));
-          continue;
-        }
-        if (param === "--") {
-          append2(
-            data.slice(i + 1).flatMap((item) => isPathSpec(item) && toPaths(item) || item)
-          );
-          break;
-        }
-        prefix.push(param);
-      }
-      return !suffix ? prefix : [...prefix, "--", ...suffix.map(String)];
-    }
-  };
-}
-var init_suffix_paths_plugin = __esm({
-  "src/lib/plugins/suffix-paths.plugin.ts"() {
-    "use strict";
-    init_pathspec();
-  }
-});
-
 // src/lib/git-logger.ts
+
 function createLog() {
-  return (0, import_debug.default)("simple-git");
+  return src("simple-git");
 }
 function prefixedLogger(to, prefix, forward) {
   if (!prefix || !String(prefix).replace(/\s*/, "")) {
@@ -6541,14 +5288,12 @@ function createLogger(label, verbose, initialStep, infoDebugger = createLog()) {
     });
   }
 }
-var import_debug;
 var init_git_logger = __esm({
   "src/lib/git-logger.ts"() {
     "use strict";
-    import_debug = __toESM(__nccwpck_require__(8237));
     init_utils();
-    import_debug.default.formatters.L = (value) => String(filterHasLength(value) ? value.length : "-");
-    import_debug.default.formatters.B = (value) => {
+    src.formatters.L = (value) => String(filterHasLength(value) ? value.length : "-");
+    src.formatters.B = (value) => {
       if (Buffer.isBuffer(value)) {
         return value.toString("utf8");
       }
@@ -6630,6 +5375,7 @@ var init_tasks_pending_queue = __esm({
 });
 
 // src/lib/runners/git-executor-chain.ts
+
 function pluginContext(task, commands) {
   return {
     method: first(task.commands) || "",
@@ -6649,11 +5395,10 @@ function onDataReceived(target, name, logger, output) {
     target.push(buffer);
   };
 }
-var import_child_process, GitExecutorChain;
+var GitExecutorChain;
 var init_git_executor_chain = __esm({
   "src/lib/runners/git-executor-chain.ts"() {
     "use strict";
-    import_child_process = __nccwpck_require__(2081);
     init_git_error();
     init_task();
     init_utils();
@@ -6806,7 +5551,7 @@ var init_git_executor_chain = __esm({
                 rejection = reason || rejection;
               }
             }));
-            const spawned = (0, import_child_process.spawn)(command, args, spawnOptions);
+            const spawned = (0,external_child_process_namespaceObject.spawn)(command, args, spawnOptions);
             spawned.stdout.on(
               "data",
               onDataReceived(stdOut, "stdOut", logger, outputLogger.step("stdOut"))
@@ -8454,18 +7199,18 @@ var scheduler_exports = {};
 __export(scheduler_exports, {
   Scheduler: () => Scheduler
 });
-var import_promise_deferred2, createScheduledTask, Scheduler;
+
+var createScheduledTask, Scheduler;
 var init_scheduler = __esm({
   "src/lib/runners/scheduler.ts"() {
     "use strict";
     init_utils();
-    import_promise_deferred2 = __nccwpck_require__(9819);
     init_git_logger();
     createScheduledTask = (() => {
       let id = 0;
       return () => {
         id++;
-        const { promise, done } = (0, import_promise_deferred2.createDeferred)();
+        const { promise, done } = (0,promise_deferred_dist/* createDeferred */.dD)();
         return {
           promise,
           done,
@@ -9189,7 +7934,7 @@ var init_tag = __esm({
 
 // src/git.js
 var require_git = __commonJS({
-  "src/git.js"(exports2, module2) {
+  "src/git.js"(exports, module) {
     "use strict";
     var { GitExecutor: GitExecutor2 } = (init_git_executor(), __toCommonJS(git_executor_exports));
     var { SimpleGitApi: SimpleGitApi2 } = (init_simple_git_api(), __toCommonJS(simple_git_api_exports));
@@ -9563,26 +8308,446 @@ var require_git = __commonJS({
         trailingFunctionArgument2(arguments)
       );
     };
-    module2.exports = Git2;
+    module.exports = Git2;
   }
 });
 
-// src/lib/git-factory.ts
-var git_factory_exports = {};
-__export(git_factory_exports, {
-  esModuleFactory: () => esModuleFactory,
-  gitExportFactory: () => gitExportFactory,
-  gitInstanceFactory: () => gitInstanceFactory
-});
-function esModuleFactory(defaultExport) {
-  return Object.defineProperties(defaultExport, {
-    __esModule: { value: true },
-    default: { value: defaultExport }
+// src/lib/api.ts
+init_pathspec();
+
+// src/lib/errors/git-construct-error.ts
+init_git_error();
+var GitConstructError = class extends GitError {
+  constructor(config, message) {
+    super(void 0, message);
+    this.config = config;
+  }
+};
+
+// src/lib/api.ts
+init_git_error();
+
+// src/lib/errors/git-plugin-error.ts
+init_git_error();
+var GitPluginError = class extends GitError {
+  constructor(task, plugin, message) {
+    super(task, message);
+    this.task = task;
+    this.plugin = plugin;
+    Object.setPrototypeOf(this, new.target.prototype);
+  }
+};
+
+// src/lib/api.ts
+init_git_response_error();
+init_task_configuration_error();
+init_check_is_repo();
+init_clean();
+init_config();
+init_diff_name_status();
+init_grep();
+init_reset();
+
+// src/lib/plugins/abort-plugin.ts
+function abortPlugin(signal) {
+  if (!signal) {
+    return;
+  }
+  const onSpawnAfter = {
+    type: "spawn.after",
+    action(_data, context) {
+      function kill() {
+        context.kill(new GitPluginError(void 0, "abort", "Abort signal received"));
+      }
+      signal.addEventListener("abort", kill);
+      context.spawned.on("close", () => signal.removeEventListener("abort", kill));
+    }
+  };
+  const onSpawnBefore = {
+    type: "spawn.before",
+    action(_data, context) {
+      if (signal.aborted) {
+        context.kill(new GitPluginError(void 0, "abort", "Abort already signaled"));
+      }
+    }
+  };
+  return [onSpawnBefore, onSpawnAfter];
+}
+
+// src/lib/plugins/block-unsafe-operations-plugin.ts
+function isConfigSwitch(arg) {
+  return typeof arg === "string" && arg.trim().toLowerCase() === "-c";
+}
+function preventProtocolOverride(arg, next) {
+  if (!isConfigSwitch(arg)) {
+    return;
+  }
+  if (!/^\s*protocol(.[a-z]+)?.allow/.test(next)) {
+    return;
+  }
+  throw new GitPluginError(
+    void 0,
+    "unsafe",
+    "Configuring protocol.allow is not permitted without enabling allowUnsafeExtProtocol"
+  );
+}
+function preventUploadPack(arg, method) {
+  if (/^\s*--(upload|receive)-pack/.test(arg)) {
+    throw new GitPluginError(
+      void 0,
+      "unsafe",
+      `Use of --upload-pack or --receive-pack is not permitted without enabling allowUnsafePack`
+    );
+  }
+  if (method === "clone" && /^\s*-u\b/.test(arg)) {
+    throw new GitPluginError(
+      void 0,
+      "unsafe",
+      `Use of clone with option -u is not permitted without enabling allowUnsafePack`
+    );
+  }
+  if (method === "push" && /^\s*--exec\b/.test(arg)) {
+    throw new GitPluginError(
+      void 0,
+      "unsafe",
+      `Use of push with option --exec is not permitted without enabling allowUnsafePack`
+    );
+  }
+}
+function blockUnsafeOperationsPlugin({
+  allowUnsafeProtocolOverride = false,
+  allowUnsafePack = false
+} = {}) {
+  return {
+    type: "spawn.args",
+    action(args, context) {
+      args.forEach((current, index) => {
+        const next = index < args.length ? args[index + 1] : "";
+        allowUnsafeProtocolOverride || preventProtocolOverride(current, next);
+        allowUnsafePack || preventUploadPack(current, context.method);
+      });
+      return args;
+    }
+  };
+}
+
+// src/lib/plugins/command-config-prefixing-plugin.ts
+init_utils();
+function commandConfigPrefixingPlugin(configuration) {
+  const prefix = prefixedArray(configuration, "-c");
+  return {
+    type: "spawn.args",
+    action(data) {
+      return [...prefix, ...data];
+    }
+  };
+}
+
+// src/lib/plugins/completion-detection.plugin.ts
+init_utils();
+
+var never = (0,promise_deferred_dist/* deferred */.gX)().promise;
+function completionDetectionPlugin({
+  onClose = true,
+  onExit = 50
+} = {}) {
+  function createEvents() {
+    let exitCode = -1;
+    const events = {
+      close: (0,promise_deferred_dist/* deferred */.gX)(),
+      closeTimeout: (0,promise_deferred_dist/* deferred */.gX)(),
+      exit: (0,promise_deferred_dist/* deferred */.gX)(),
+      exitTimeout: (0,promise_deferred_dist/* deferred */.gX)()
+    };
+    const result = Promise.race([
+      onClose === false ? never : events.closeTimeout.promise,
+      onExit === false ? never : events.exitTimeout.promise
+    ]);
+    configureTimeout(onClose, events.close, events.closeTimeout);
+    configureTimeout(onExit, events.exit, events.exitTimeout);
+    return {
+      close(code) {
+        exitCode = code;
+        events.close.done();
+      },
+      exit(code) {
+        exitCode = code;
+        events.exit.done();
+      },
+      get exitCode() {
+        return exitCode;
+      },
+      result
+    };
+  }
+  function configureTimeout(flag, event, timeout) {
+    if (flag === false) {
+      return;
+    }
+    (flag === true ? event.promise : event.promise.then(() => delay(flag))).then(timeout.done);
+  }
+  return {
+    type: "spawn.after",
+    action(_0, _1) {
+      return __async(this, arguments, function* (_data, { spawned, close }) {
+        var _a3, _b;
+        const events = createEvents();
+        let deferClose = true;
+        let quickClose = () => void (deferClose = false);
+        (_a3 = spawned.stdout) == null ? void 0 : _a3.on("data", quickClose);
+        (_b = spawned.stderr) == null ? void 0 : _b.on("data", quickClose);
+        spawned.on("error", quickClose);
+        spawned.on("close", (code) => events.close(code));
+        spawned.on("exit", (code) => events.exit(code));
+        try {
+          yield events.result;
+          if (deferClose) {
+            yield delay(50);
+          }
+          close(events.exitCode);
+        } catch (err) {
+          close(events.exitCode, err);
+        }
+      });
+    }
+  };
+}
+
+// src/lib/plugins/custom-binary.plugin.ts
+init_utils();
+var WRONG_NUMBER_ERR = `Invalid value supplied for custom binary, requires a single string or an array containing either one or two strings`;
+var WRONG_CHARS_ERR = `Invalid value supplied for custom binary, restricted characters must be removed or supply the unsafe.allowUnsafeCustomBinary option`;
+function isBadArgument(arg) {
+  return !arg || !/^([a-z]:)?([a-z0-9/.\\_-]+)$/i.test(arg);
+}
+function toBinaryConfig(input, allowUnsafe) {
+  if (input.length < 1 || input.length > 2) {
+    throw new GitPluginError(void 0, "binary", WRONG_NUMBER_ERR);
+  }
+  const isBad = input.some(isBadArgument);
+  if (isBad) {
+    if (allowUnsafe) {
+      console.warn(WRONG_CHARS_ERR);
+    } else {
+      throw new GitPluginError(void 0, "binary", WRONG_CHARS_ERR);
+    }
+  }
+  const [binary, prefix] = input;
+  return {
+    binary,
+    prefix
+  };
+}
+function customBinaryPlugin(plugins, input = ["git"], allowUnsafe = false) {
+  let config = toBinaryConfig(asArray(input), allowUnsafe);
+  plugins.on("binary", (input2) => {
+    config = toBinaryConfig(asArray(input2), allowUnsafe);
+  });
+  plugins.append("spawn.binary", () => {
+    return config.binary;
+  });
+  plugins.append("spawn.args", (data) => {
+    return config.prefix ? [config.prefix, ...data] : data;
   });
 }
-function gitExportFactory(factory) {
-  return Object.assign(factory.bind(null), api_exports);
+
+// src/lib/plugins/error-detection.plugin.ts
+init_git_error();
+function isTaskError(result) {
+  return !!(result.exitCode && result.stdErr.length);
 }
+function getErrorMessage(result) {
+  return Buffer.concat([...result.stdOut, ...result.stdErr]);
+}
+function errorDetectionHandler(overwrite = false, isError = isTaskError, errorMessage = getErrorMessage) {
+  return (error, result) => {
+    if (!overwrite && error || !isError(result)) {
+      return error;
+    }
+    return errorMessage(result);
+  };
+}
+function errorDetectionPlugin(config) {
+  return {
+    type: "task.error",
+    action(data, context) {
+      const error = config(data.error, {
+        stdErr: context.stdErr,
+        stdOut: context.stdOut,
+        exitCode: context.exitCode
+      });
+      if (Buffer.isBuffer(error)) {
+        return { error: new GitError(void 0, error.toString("utf-8")) };
+      }
+      return {
+        error
+      };
+    }
+  };
+}
+
+// src/lib/plugins/plugin-store.ts
+init_utils();
+
+var PluginStore = class {
+  constructor() {
+    this.plugins = /* @__PURE__ */ new Set();
+    this.events = new external_node_events_namespaceObject.EventEmitter();
+  }
+  on(type, listener) {
+    this.events.on(type, listener);
+  }
+  reconfigure(type, data) {
+    this.events.emit(type, data);
+  }
+  append(type, action) {
+    const plugin = append(this.plugins, { type, action });
+    return () => this.plugins.delete(plugin);
+  }
+  add(plugin) {
+    const plugins = [];
+    asArray(plugin).forEach((plugin2) => plugin2 && this.plugins.add(append(plugins, plugin2)));
+    return () => {
+      plugins.forEach((plugin2) => this.plugins.delete(plugin2));
+    };
+  }
+  exec(type, data, context) {
+    let output = data;
+    const contextual = Object.freeze(Object.create(context));
+    for (const plugin of this.plugins) {
+      if (plugin.type === type) {
+        output = plugin.action(output, contextual);
+      }
+    }
+    return output;
+  }
+};
+
+// src/lib/plugins/progress-monitor-plugin.ts
+init_utils();
+function progressMonitorPlugin(progress) {
+  const progressCommand = "--progress";
+  const progressMethods = ["checkout", "clone", "fetch", "pull", "push"];
+  const onProgress = {
+    type: "spawn.after",
+    action(_data, context) {
+      var _a2;
+      if (!context.commands.includes(progressCommand)) {
+        return;
+      }
+      (_a2 = context.spawned.stderr) == null ? void 0 : _a2.on("data", (chunk) => {
+        const message = /^([\s\S]+?):\s*(\d+)% \((\d+)\/(\d+)\)/.exec(chunk.toString("utf8"));
+        if (!message) {
+          return;
+        }
+        progress({
+          method: context.method,
+          stage: progressEventStage(message[1]),
+          progress: asNumber(message[2]),
+          processed: asNumber(message[3]),
+          total: asNumber(message[4])
+        });
+      });
+    }
+  };
+  const onArgs = {
+    type: "spawn.args",
+    action(args, context) {
+      if (!progressMethods.includes(context.method)) {
+        return args;
+      }
+      return including(args, progressCommand);
+    }
+  };
+  return [onArgs, onProgress];
+}
+function progressEventStage(input) {
+  return String(input.toLowerCase().split(" ", 1)) || "unknown";
+}
+
+// src/lib/plugins/spawn-options-plugin.ts
+init_utils();
+function spawnOptionsPlugin(spawnOptions) {
+  const options = pick(spawnOptions, ["uid", "gid"]);
+  return {
+    type: "spawn.options",
+    action(data) {
+      return __spreadValues(__spreadValues({}, options), data);
+    }
+  };
+}
+
+// src/lib/plugins/timout-plugin.ts
+function timeoutPlugin({
+  block,
+  stdErr = true,
+  stdOut = true
+}) {
+  if (block > 0) {
+    return {
+      type: "spawn.after",
+      action(_data, context) {
+        var _a2, _b;
+        let timeout;
+        function wait() {
+          timeout && clearTimeout(timeout);
+          timeout = setTimeout(kill, block);
+        }
+        function stop() {
+          var _a3, _b2;
+          (_a3 = context.spawned.stdout) == null ? void 0 : _a3.off("data", wait);
+          (_b2 = context.spawned.stderr) == null ? void 0 : _b2.off("data", wait);
+          context.spawned.off("exit", stop);
+          context.spawned.off("close", stop);
+          timeout && clearTimeout(timeout);
+        }
+        function kill() {
+          stop();
+          context.kill(new GitPluginError(void 0, "timeout", `block timeout reached`));
+        }
+        stdOut && ((_a2 = context.spawned.stdout) == null ? void 0 : _a2.on("data", wait));
+        stdErr && ((_b = context.spawned.stderr) == null ? void 0 : _b.on("data", wait));
+        context.spawned.on("exit", stop);
+        context.spawned.on("close", stop);
+        wait();
+      }
+    };
+  }
+}
+
+// src/lib/plugins/suffix-paths.plugin.ts
+init_pathspec();
+function suffixPathsPlugin() {
+  return {
+    type: "spawn.args",
+    action(data) {
+      const prefix = [];
+      let suffix;
+      function append2(args) {
+        (suffix = suffix || []).push(...args);
+      }
+      for (let i = 0; i < data.length; i++) {
+        const param = data[i];
+        if (isPathSpec(param)) {
+          append2(toPaths(param));
+          continue;
+        }
+        if (param === "--") {
+          append2(
+            data.slice(i + 1).flatMap((item) => isPathSpec(item) && toPaths(item) || item)
+          );
+          break;
+        }
+        prefix.push(param);
+      }
+      return !suffix ? prefix : [...prefix, "--", ...suffix.map(String)];
+    }
+  };
+}
+
+// src/lib/git-factory.ts
+init_utils();
+var Git = require_git();
 function gitInstanceFactory(baseDir, options) {
   var _a2;
   const plugins = new PluginStore();
@@ -9611,23 +8776,70 @@ function gitInstanceFactory(baseDir, options) {
   customBinaryPlugin(plugins, config.binary, (_a2 = config.unsafe) == null ? void 0 : _a2.allowUnsafeCustomBinary);
   return new Git(config, plugins);
 }
-var Git;
-var init_git_factory = __esm({
-  "src/lib/git-factory.ts"() {
-    "use strict";
-    init_api();
-    init_plugins();
-    init_suffix_paths_plugin();
-    init_utils();
-    Git = require_git();
-  }
-});
 
 // src/lib/runners/promise-wrapped.ts
-var promise_wrapped_exports = {};
-__export(promise_wrapped_exports, {
-  gitP: () => gitP
-});
+init_git_response_error();
+var functionNamesBuilderApi = (/* unused pure expression or super */ null && (["customBinary", "env", "outputHandler", "silent"]));
+var functionNamesPromiseApi = (/* unused pure expression or super */ null && ([
+  "add",
+  "addAnnotatedTag",
+  "addConfig",
+  "addRemote",
+  "addTag",
+  "applyPatch",
+  "binaryCatFile",
+  "branch",
+  "branchLocal",
+  "catFile",
+  "checkIgnore",
+  "checkIsRepo",
+  "checkout",
+  "checkoutBranch",
+  "checkoutLatestTag",
+  "checkoutLocalBranch",
+  "clean",
+  "clone",
+  "commit",
+  "cwd",
+  "deleteLocalBranch",
+  "deleteLocalBranches",
+  "diff",
+  "diffSummary",
+  "exec",
+  "fetch",
+  "getRemotes",
+  "init",
+  "listConfig",
+  "listRemote",
+  "log",
+  "merge",
+  "mergeFromTo",
+  "mirror",
+  "mv",
+  "pull",
+  "push",
+  "pushTags",
+  "raw",
+  "rebase",
+  "remote",
+  "removeRemote",
+  "reset",
+  "revert",
+  "revparse",
+  "rm",
+  "rmKeepLocal",
+  "show",
+  "stash",
+  "stashList",
+  "status",
+  "subModule",
+  "submoduleAdd",
+  "submoduleInit",
+  "submoduleUpdate",
+  "tag",
+  "tags",
+  "updateServerInfo"
+]));
 function gitP(...args) {
   let git;
   let chain = Promise.resolve();
@@ -9694,469 +8906,54 @@ function toError(error) {
   }
   return new GitResponseError(error);
 }
-var functionNamesBuilderApi, functionNamesPromiseApi;
-var init_promise_wrapped = __esm({
-  "src/lib/runners/promise-wrapped.ts"() {
-    "use strict";
-    init_git_response_error();
-    init_git_factory();
-    functionNamesBuilderApi = ["customBinary", "env", "outputHandler", "silent"];
-    functionNamesPromiseApi = [
-      "add",
-      "addAnnotatedTag",
-      "addConfig",
-      "addRemote",
-      "addTag",
-      "applyPatch",
-      "binaryCatFile",
-      "branch",
-      "branchLocal",
-      "catFile",
-      "checkIgnore",
-      "checkIsRepo",
-      "checkout",
-      "checkoutBranch",
-      "checkoutLatestTag",
-      "checkoutLocalBranch",
-      "clean",
-      "clone",
-      "commit",
-      "cwd",
-      "deleteLocalBranch",
-      "deleteLocalBranches",
-      "diff",
-      "diffSummary",
-      "exec",
-      "fetch",
-      "getRemotes",
-      "init",
-      "listConfig",
-      "listRemote",
-      "log",
-      "merge",
-      "mergeFromTo",
-      "mirror",
-      "mv",
-      "pull",
-      "push",
-      "pushTags",
-      "raw",
-      "rebase",
-      "remote",
-      "removeRemote",
-      "reset",
-      "revert",
-      "revparse",
-      "rm",
-      "rmKeepLocal",
-      "show",
-      "stash",
-      "stashList",
-      "status",
-      "subModule",
-      "submoduleAdd",
-      "submoduleInit",
-      "submoduleUpdate",
-      "tag",
-      "tags",
-      "updateServerInfo"
-    ];
-  }
-});
 
-// src/index.js
-var { gitP: gitP2 } = (init_promise_wrapped(), __toCommonJS(promise_wrapped_exports));
-var { esModuleFactory: esModuleFactory2, gitInstanceFactory: gitInstanceFactory2, gitExportFactory: gitExportFactory2 } = (init_git_factory(), __toCommonJS(git_factory_exports));
-var simpleGit = esModuleFactory2(gitExportFactory2(gitInstanceFactory2));
-module.exports = Object.assign(simpleGit, { gitP: gitP2, simpleGit });
+// src/esm.mjs
+var simpleGit = (/* unused pure expression or super */ null && (gitInstanceFactory));
+var esm_default = gitInstanceFactory;
+
 //# sourceMappingURL=index.js.map
 
-
-/***/ }),
-
-/***/ 9318:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-"use strict";
-
-const os = __nccwpck_require__(2037);
-const tty = __nccwpck_require__(6224);
-const hasFlag = __nccwpck_require__(1621);
-
-const {env} = process;
-
-let forceColor;
-if (hasFlag('no-color') ||
-	hasFlag('no-colors') ||
-	hasFlag('color=false') ||
-	hasFlag('color=never')) {
-	forceColor = 0;
-} else if (hasFlag('color') ||
-	hasFlag('colors') ||
-	hasFlag('color=true') ||
-	hasFlag('color=always')) {
-	forceColor = 1;
-}
-
-if ('FORCE_COLOR' in env) {
-	if (env.FORCE_COLOR === 'true') {
-		forceColor = 1;
-	} else if (env.FORCE_COLOR === 'false') {
-		forceColor = 0;
-	} else {
-		forceColor = env.FORCE_COLOR.length === 0 ? 1 : Math.min(parseInt(env.FORCE_COLOR, 10), 3);
-	}
-}
-
-function translateLevel(level) {
-	if (level === 0) {
-		return false;
-	}
-
-	return {
-		level,
-		hasBasic: true,
-		has256: level >= 2,
-		has16m: level >= 3
-	};
-}
-
-function supportsColor(haveStream, streamIsTTY) {
-	if (forceColor === 0) {
-		return 0;
-	}
-
-	if (hasFlag('color=16m') ||
-		hasFlag('color=full') ||
-		hasFlag('color=truecolor')) {
-		return 3;
-	}
-
-	if (hasFlag('color=256')) {
-		return 2;
-	}
-
-	if (haveStream && !streamIsTTY && forceColor === undefined) {
-		return 0;
-	}
-
-	const min = forceColor || 0;
-
-	if (env.TERM === 'dumb') {
-		return min;
-	}
-
-	if (process.platform === 'win32') {
-		// Windows 10 build 10586 is the first Windows release that supports 256 colors.
-		// Windows 10 build 14931 is the first release that supports 16m/TrueColor.
-		const osRelease = os.release().split('.');
-		if (
-			Number(osRelease[0]) >= 10 &&
-			Number(osRelease[2]) >= 10586
-		) {
-			return Number(osRelease[2]) >= 14931 ? 3 : 2;
-		}
-
-		return 1;
-	}
-
-	if ('CI' in env) {
-		if (['TRAVIS', 'CIRCLECI', 'APPVEYOR', 'GITLAB_CI', 'GITHUB_ACTIONS', 'BUILDKITE'].some(sign => sign in env) || env.CI_NAME === 'codeship') {
-			return 1;
-		}
-
-		return min;
-	}
-
-	if ('TEAMCITY_VERSION' in env) {
-		return /^(9\.(0*[1-9]\d*)\.|\d{2,}\.)/.test(env.TEAMCITY_VERSION) ? 1 : 0;
-	}
-
-	if (env.COLORTERM === 'truecolor') {
-		return 3;
-	}
-
-	if ('TERM_PROGRAM' in env) {
-		const version = parseInt((env.TERM_PROGRAM_VERSION || '').split('.')[0], 10);
-
-		switch (env.TERM_PROGRAM) {
-			case 'iTerm.app':
-				return version >= 3 ? 3 : 2;
-			case 'Apple_Terminal':
-				return 2;
-			// No default
-		}
-	}
-
-	if (/-256(color)?$/i.test(env.TERM)) {
-		return 2;
-	}
-
-	if (/^screen|^xterm|^vt100|^vt220|^rxvt|color|ansi|cygwin|linux/i.test(env.TERM)) {
-		return 1;
-	}
-
-	if ('COLORTERM' in env) {
-		return 1;
-	}
-
-	return min;
-}
-
-function getSupportLevel(stream) {
-	const level = supportsColor(stream, stream && stream.isTTY);
-	return translateLevel(level);
-}
-
-module.exports = {
-	supportsColor: getSupportLevel,
-	stdout: translateLevel(supportsColor(true, tty.isatty(1))),
-	stderr: translateLevel(supportsColor(true, tty.isatty(2)))
-};
+;// CONCATENATED MODULE: ./src/core/git.js
 
 
-/***/ }),
-
-/***/ 5030:
-/***/ ((__unused_webpack_module, exports) => {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-
-function getUserAgent() {
-  if (typeof navigator === "object" && "userAgent" in navigator) {
-    return navigator.userAgent;
-  }
-
-  if (typeof process === "object" && process.version !== undefined) {
-    return `Node.js/${process.version.substr(1)} (${process.platform}; ${process.arch})`;
-  }
-
-  return "<environment undetectable>";
-}
-
-exports.getUserAgent = getUserAgent;
-//# sourceMappingURL=index.js.map
-
-
-/***/ }),
-
-/***/ 9046:
-/***/ ((__unused_webpack_module, exports) => {
-
-"use strict";
-
-
-exports.fromCallback = function (fn) {
-  return Object.defineProperty(function (...args) {
-    if (typeof args[args.length - 1] === 'function') fn.apply(this, args)
-    else {
-      return new Promise((resolve, reject) => {
-        args.push((err, res) => (err != null) ? reject(err) : resolve(res))
-        fn.apply(this, args)
-      })
+class GitHandler {
+    constructor() {
+        this.git = esm_default();
     }
-  }, 'name', { value: fn.name })
-}
 
-exports.fromPromise = function (fn) {
-  return Object.defineProperty(function (...args) {
-    const cb = args[args.length - 1]
-    if (typeof cb !== 'function') return fn.apply(this, args)
-    else {
-      args.pop()
-      fn.apply(this, args).then(r => cb(null, r), cb)
-    }
-  }, 'name', { value: fn.name })
-}
-
-
-/***/ }),
-
-/***/ 2940:
-/***/ ((module) => {
-
-// Returns a wrapper function that returns a wrapped callback
-// The wrapper function should do some stuff, and return a
-// presumably different callback function.
-// This makes sure that own properties are retained, so that
-// decorations and such are not lost along the way.
-module.exports = wrappy
-function wrappy (fn, cb) {
-  if (fn && cb) return wrappy(fn)(cb)
-
-  if (typeof fn !== 'function')
-    throw new TypeError('need wrapper function')
-
-  Object.keys(fn).forEach(function (k) {
-    wrapper[k] = fn[k]
-  })
-
-  return wrapper
-
-  function wrapper() {
-    var args = new Array(arguments.length)
-    for (var i = 0; i < args.length; i++) {
-      args[i] = arguments[i]
-    }
-    var ret = fn.apply(this, args)
-    var cb = args[args.length-1]
-    if (typeof ret === 'function' && ret !== cb) {
-      Object.keys(cb).forEach(function (k) {
-        ret[k] = cb[k]
-      })
-    }
-    return ret
-  }
-}
-
-
-/***/ }),
-
-/***/ 6990:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-const fs = __nccwpck_require__(5630)
-const OutputFileResponseModel = __nccwpck_require__(5961);
-const ReadFileResponseModel = __nccwpck_require__(9810);
-
-let file = (function () {
-    let outputJson = async function (fileName, json) {
+    async pull() {
         try {
-            await fs.outputJson(fileName, json)
-            return new OutputFileResponseModel(true, `Json file has been updated at ${fileName}`);
+            await this.git.pull();
         } catch (error) {
-            return new OutputFileResponseModel(false, `Json file has not been updated at ${fileName}`)
+            console.error('Error during git pull:', error);
+            throw error;
         }
     }
-    let outputOther = async function (fileName, file) {
+
+    async commit(username, email, message) {
         try {
-            await fs.outputFile(fileName, file)
-            return new OutputFileResponseModel(true, `Other file has been updated at ${fileName}`)
+            await this.git.addConfig('user.name', username);
+            await this.git.addConfig('user.email', email);
+            await this.git.add('./*');
+            await this.git.commit(message);
         } catch (error) {
-            return new OutputFileResponseModel(false, `Other file has not been updated at ${fileName}`)
+            console.error('Error during git commit:', error);
+            throw error;
         }
     }
-    let readJson = async function (fileName) {
+
+    async push(branch) {
         try {
-            let json = await fs.readJson(fileName);
-            return new ReadFileResponseModel(true, `Json file has been read at ${fileName}`, json);
+            await this.git.push('origin', branch);
         } catch (error) {
-            return new ReadFileResponseModel(false, `Json file has not been read at ${fileName}`);
+            console.error('Error during git push:', error);
+            throw error;
         }
     }
-    return {
-        outputJson: outputJson,
-        outputOther: outputOther,
-        readJson: readJson,
-    };
-})();
-module.exports = file;
+}
 
-
-/***/ }),
-
-/***/ 1193:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-const simpleGit = __nccwpck_require__(9103);
-
-let git = (function () {
-    const git = simpleGit();
-    let pull = async function () {
-        await git.pull();
-    }
-    let commit = async function (username, email, message) {
-        await git.addConfig('user.name', username)
-        await git.addConfig('user.email', email)
-        await git.add('./*')
-        await git.commit(message)
-    }
-    let push = async function (branch) {
-        await git.push('origin', branch);
-    }
-    return {
-        pull: pull,
-        commit: commit,
-        push: push
-    };
-})();
-module.exports = git;
-
-/***/ }),
-
-/***/ 3006:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-const { graphql } = __nccwpck_require__(8467);
-const OctokitResponseModel = __nccwpck_require__(5857);
-
-let octokit = function () {
-  let getHeader = function (AUTH_KEY) {
-    return {
-      headers: {
-        authorization: `token ${AUTH_KEY}`,
-      },
-    }
-  }
-  let getQuery = function (locations, numberOfUsers, cursor) {
-    return {
-      query: `query {
-              search(type: USER, query:"${locations} sort:followers-desc", first:${numberOfUsers}, after:${cursor}) {
-                edges {
-                  node {
-                    __typename
-                    ... on User {
-                      login,
-                      avatarUrl(size: 72),
-                      name,
-                      location,
-                      company,
-                      twitterUsername,
-                      followers {
-                        totalCount
-                      }
-                      contributionsCollection {
-                        contributionCalendar {
-                          totalContributions
-                        }
-                        restrictedContributionsCount
-                      }
-                    }
-                  }
-                }
-                 pageInfo {
-                    endCursor
-                    hasNextPage
-                  }
-              }
-            }`};
-  }
-  let setCursor = function (cursor) {
-    if (cursor === null) {
-      return cursor
-    } else {
-      return `"${cursor}"`;
-    }
-  }
-  let request = async function (AUTH_KEY, locations, cursor) {
-    try {
-      const graphqlWithAuth = graphql.defaults(getHeader(AUTH_KEY));
-      const response = await graphqlWithAuth(getQuery(locations, 10, setCursor(cursor)));
-      return new OctokitResponseModel(true, response);
-    } catch (error) {
-      console.log(error)
-      return new OctokitResponseModel(false)
-    }
-
-  }
-  return {
-    request: request
-  };
-}();
-module.exports = octokit;
+// Export a singleton instance
+/* harmony default export */ const git = (new GitHandler());
 
 /***/ }),
 
@@ -10190,37 +8987,6 @@ module.exports = outputCache;
 
 /***/ }),
 
-/***/ 9911:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-const checkpointFile = __nccwpck_require__(5227);
-const CheckpointDataModel = __nccwpck_require__(9510);
-
-let outputCheckpoint = (function () {
-    let saveCheckpointFile = async function (locationsArray, country, checkpoint) {
-        let indexOfTheCountry = locationsArray.findIndex(location => location.country === country);
-        if (indexOfTheCountry === checkpoint) {
-            console.log("checkpoint updated", country)
-            if (indexOfTheCountry >= locationsArray.length - 1) {
-                await checkpointFile.outputCheckpointFile(new CheckpointDataModel(0));
-            } else {
-                await checkpointFile.outputCheckpointFile(new CheckpointDataModel(indexOfTheCountry + 1))
-            }
-        }
-    }
-    let readCheckpointFile = async function () {
-        return await checkpointFile.readCheckpointFile();
-    }
-    return {
-        saveCheckpointFile: saveCheckpointFile,
-        readCheckpointFile: readCheckpointFile
-    };
-})();
-
-module.exports = outputCheckpoint;
-
-/***/ }),
-
 /***/ 845:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
@@ -10251,110 +9017,10 @@ module.exports = cacheFile;
 
 /***/ }),
 
-/***/ 5227:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-const file = __nccwpck_require__(6990);
-const ReadCheckpointResponseModel = __nccwpck_require__(603);
-
-let checkpointFile = (function () {
-    const path = 'checkpoint.json';
-    let outputCheckpointFile = async function (json) {
-        let outputFileResponseModel = await file.outputJson(path, json);
-        console.log(outputFileResponseModel.message)
-    }
-    let readCheckpointFile = async function () {
-        let readFileResponseModel = await file.readJson(path);
-        console.log(readFileResponseModel.message)
-        if (readFileResponseModel.status) {
-            return new ReadCheckpointResponseModel(readFileResponseModel.status, readFileResponseModel.content);
-        } else {
-            return new ReadCheckpointResponseModel(readFileResponseModel.status);
-        }
-    }
-    return {
-        readCheckpointFile: readCheckpointFile,
-        outputCheckpointFile: outputCheckpointFile
-    };
-})();
-
-module.exports = checkpointFile;
-
-/***/ }),
-
-/***/ 6264:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-const file = __nccwpck_require__(6990);
-const ReadConfigResponseModel = __nccwpck_require__(3317);
-
-let configFile = (function () {
-    const path = 'config.json';
-    let readConfigFile = async function () {
-        let readFileResponseModel = await file.readJson(path);
-        console.log(readFileResponseModel.message)
-        if (readFileResponseModel.status) {
-            return new ReadConfigResponseModel(readFileResponseModel.status, readFileResponseModel.content);
-        } else {
-            return new ReadConfigResponseModel(readFileResponseModel.status);
-        }
-    }
-    return {
-        readConfigFile: readConfigFile
-    };
-})();
-
-module.exports = configFile;
-
-/***/ }),
-
-/***/ 8769:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-const file = __nccwpck_require__(6990);
-
-let htmlFile = function () {
-    let outputHtmlFile = async function (fileName, html) {
-        let outputFileResponseModel = await file.outputOther(fileName, html);
-        console.log(outputFileResponseModel.message)
-    }
-    let outputJsonFile = async function (fileName, json) {
-        let outputFileResponseModel = await file.outputJson(fileName, json);
-        console.log(outputFileResponseModel.message)
-    }
-    return {
-        outputHtmlFile: outputHtmlFile,
-        outputJsonFile: outputJsonFile
-    };
-}();
-
-module.exports = htmlFile;
-
-/***/ }),
-
-/***/ 2025:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-const file = __nccwpck_require__(6990);
-
-let markdownFile = (function () {
-    let outputMarkdownFile = async function (fileName, markdown) {
-        let outputFileResponseModel = await file.outputOther(fileName, markdown);
-        console.log(outputFileResponseModel.message)
-    }
-    return {
-        outputMarkdownFile: outputMarkdownFile,
-    };
-})();
-
-module.exports = markdownFile;
-
-/***/ }),
-
 /***/ 6763:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-const git = __nccwpck_require__(1193);
+const git = __nccwpck_require__(8369);
 
 let commitGit = function () {
     let INSIGHT_BOT_USERNAME = 'github-actions[bot]';
@@ -10376,33 +9042,10 @@ module.exports = commitGit;
 
 /***/ }),
 
-/***/ 8591:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-const git = __nccwpck_require__(1193);
-
-let pullGit = function () {
-    let pull = async function () {
-        console.log(`Git Pull`)
-        try {
-            await git.pull();
-        } catch (error) {
-            console.log(error);
-        }
-    }
-    return {
-        pull: pull
-    };
-}();
-
-module.exports = pullGit;
-
-/***/ }),
-
 /***/ 6278:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-const git = __nccwpck_require__(1193);
+const git = __nccwpck_require__(8369);
 
 let pushGit = function () {
     const BRANCH = 'main';
@@ -10501,34 +9144,6 @@ let createRankingJsonFile = (function () {
     };
 })();
 module.exports = createRankingJsonFile;
-
-/***/ }),
-
-/***/ 9316:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-const htmlFile = __nccwpck_require__(8769);
-let outputHtml = (function () {
-    const HTML_FILE = "index.html";
-    const RANKING_FILE = "ranking.json"
-    let setHtmlFilePath = function () {
-        return `docs/${HTML_FILE}`;
-    }
-    let setRankingJsonFilePath = function () {
-        return `docs/${RANKING_FILE}`;
-    }
-    let saveHtmlFile = async function (html) {
-        await htmlFile.outputHtmlFile(setHtmlFilePath(), html);
-    }
-    let saveRankingJsonFile = async function (json) {
-        await htmlFile.outputJsonFile(setRankingJsonFilePath(), json);
-    }
-    return {
-        saveHtmlFile: saveHtmlFile,
-        saveRankingJsonFile: saveRankingJsonFile
-    };
-})();
-module.exports = outputHtml;
 
 /***/ }),
 
@@ -10874,52 +9489,6 @@ let formatMarkdown = function () {
 }();
 module.exports = formatMarkdown;
 
-
-/***/ }),
-
-/***/ 8167:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-const markdownFile = __nccwpck_require__(2025);
-let outputMarkdown = (function () {
-    let setCountryName = function (country) {
-        return country.replace(/\s/g, '_').toLowerCase();
-    }
-    let setIndexPath = function () {
-        return `README.md`;
-    }
-    let setPublicContributionsPath = function (country) {
-        let fileName = setCountryName(country)
-        return `markdown/public_contributions/${fileName}.md`;
-    }
-    let setTotalContributionsPath = function (country) {
-        let fileName = setCountryName(country)
-        return `markdown/total_contributions/${fileName}.md`;
-    }
-    let setFollowersPath = function (country) {
-        let fileName = setCountryName(country)
-        return `markdown/followers/${fileName}.md`;
-    }
-    let saveIndexMarkdownFile = async function (markdown) {
-        await markdownFile.outputMarkdownFile(setIndexPath(), markdown);
-    }
-    let savePublicContributionsMarkdownFile = async function (country, markdown) {
-        await markdownFile.outputMarkdownFile(setPublicContributionsPath(country), markdown);
-    }
-    let saveTotalContributionsMarkdownFile = async function (country, markdown) {
-        await markdownFile.outputMarkdownFile(setTotalContributionsPath(country), markdown);
-    }
-    let saveFollowersMarkdownFile = async function (country, markdown) {
-        await markdownFile.outputMarkdownFile(setFollowersPath(country), markdown);
-    }
-    return {
-        saveIndexMarkdownFile: saveIndexMarkdownFile,
-        savePublicContributionsMarkdownFile: savePublicContributionsMarkdownFile,
-        saveTotalContributionsMarkdownFile: saveTotalContributionsMarkdownFile,
-        saveFollowersMarkdownFile: saveFollowersMarkdownFile,
-    };
-})();
-module.exports = outputMarkdown;
 
 /***/ }),
 
@@ -11270,62 +9839,6 @@ module.exports = createTotalContributionsPage;
 
 /***/ }),
 
-/***/ 639:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-const octokit = __nccwpck_require__(3006);
-let requestOctokit = function () {
-    let setLocation = function (place) {
-        return place.replace(' ', '_').toLowerCase();
-    }
-    let setQuery = function (location) {
-        let query = '';
-        for (const place of location) {
-            query = query + `location:${setLocation(place)} `;
-        }
-        return query;
-    }
-    function randomIntFromInterval(min, max) {
-        return Math.floor(Math.random() * (max - min + 1) + min)
-    }
-    const setDelay = function(timeout){
-        return new Promise(res => setTimeout(res, timeout));
-    }
-    let request = async function (AUTH_KEY, MAXIMUM_ERROR_ITERATIONS, location) {
-        let hasNextPage = true;
-        let cursor = null;
-        let array = [];
-        let iterations = 0;
-        let errors = 0;
-        for (; hasNextPage;) {
-            let octokitResponseModel = await octokit.request(AUTH_KEY, setQuery(location), cursor);
-            if(octokitResponseModel.status){
-                hasNextPage = octokitResponseModel.pageInfo.hasNextPage;
-                cursor = octokitResponseModel.pageInfo.endCursor;
-                for(const userDataModel of octokitResponseModel.node){
-                    console.log(`iterations:(${iterations}) errors:(${errors}/${MAXIMUM_ERROR_ITERATIONS}) ${userDataModel.login} ${userDataModel.followers}`)
-                    array.push(userDataModel)
-                }
-                let interval = randomIntFromInterval(1000, 5000)
-                console.log(`interval:${interval}ms hasNextPage:${hasNextPage} cursor:${cursor} users:${array.length}`);
-                await setDelay(interval);
-                iterations ++;
-            } else {
-                await setDelay(60000);
-                errors ++;
-            }
-            if(errors >= MAXIMUM_ERROR_ITERATIONS) hasNextPage = false;
-        }
-        return array;
-    }
-    return {
-        request: request
-    };
-}();
-module.exports = requestOctokit;
-
-/***/ }),
-
 /***/ 128:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
@@ -11366,78 +9879,6 @@ module.exports = ReadCacheResponseModel;
 
 /***/ }),
 
-/***/ 603:
-/***/ ((module) => {
-
-let ReadCheckpointResponseModel = function (status, content) {
-    let validate = function (value) {
-        return !(value === '' || value === null || value === undefined);
-    }
-    let setCheckpoint = function (checkpoint) {
-        if (validate(checkpoint)) {
-            return checkpoint;
-        } else {
-            return 0;
-        }
-    }
-    this.status = status;
-    if (status) this.checkpoint = setCheckpoint(content.checkpoint);
-}
-module.exports = ReadCheckpointResponseModel;
-
-/***/ }),
-
-/***/ 3317:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-const LocationDataModel = __nccwpck_require__(9827);
-
-let ReadConfigResponseModel = function (status, content) {
-    let validate = function (value) {
-        return !(value === '' || value === null || value === undefined || (typeof value) !== 'string');
-    }
-    let setDevMode = function (devMode) {
-        if (validate(devMode)) {
-            return devMode === "true";
-        } else {
-            return true;
-        }
-    }
-    let setGeoName = function (geoName) {
-        if (validate(geoName)) {
-            return geoName;
-        } else {
-            return null;
-        }
-    }
-    let setLocations = function (locations) {
-        let locationArray = [];
-        for (const location of locations) {
-            let country = location.country;
-            let geoName = setGeoName(location.geoName);
-            let imageUrl = location.imageUrl;
-            if (validate(country)) {
-                let array = [];
-                array.push(country)
-                for (const city of location.cities) {
-                    if (validate(city)) {
-                        array.push(city)
-                    }
-                }
-                locationArray.push(new LocationDataModel(country, geoName, array, imageUrl))
-            }
-        }
-        return locationArray;
-    }
-    this.status = status;
-    if (status) this.devMode = setDevMode(content.devMode);
-    if (status) this.locations = setLocations(content.locations);
-    if (status) this.checkpoint = content.checkpoint;
-}
-module.exports = ReadConfigResponseModel;
-
-/***/ }),
-
 /***/ 9510:
 /***/ ((module) => {
 
@@ -11448,47 +9889,155 @@ module.exports = CheckpointDataModel;
 
 /***/ }),
 
-/***/ 9827:
-/***/ ((module) => {
-
-let LocationDataModel = function (
-    country,
-    geoName,
-    locations,
-    imageUrl) {
-    this.country = country;
-    this.geoName = geoName;
-    this.locations = locations;
-    this.imageUrl = imageUrl;
-}
-module.exports = LocationDataModel;
-
-/***/ }),
-
 /***/ 1689:
-/***/ ((module) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __nccwpck_require__) => {
 
-let UserDataModel = function (
-    login,
-    name,
-    avatarUrl,
-    location,
-    company,
-    twitterUsername,
-    followers,
-    privateContributions,
-    publicContributions) {
-    this.login = login;
-    this.name = name;
-    this.avatarUrl = avatarUrl;
-    this.location = location;
-    this.company = company;
-    this.twitterUsername = twitterUsername;
-    this.followers = followers;
-    this.privateContributions = privateContributions;
-    this.publicContributions = publicContributions;
+"use strict";
+__nccwpck_require__.r(__webpack_exports__);
+/* harmony export */ __nccwpck_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+class UserDataModel {
+    #login;
+    #name;
+    #avatarUrl;
+    #location;
+    #company;
+    #twitterUsername;
+    #followers;
+    #privateContributions;
+    #publicContributions;
+
+    constructor({
+        login,
+        name,
+        avatarUrl,
+        location,
+        company,
+        twitterUsername,
+        followers,
+        privateContributions,
+        publicContributions
+    }) {
+        this.#login = this.#validateString(login, 'login');
+        this.#name = this.#validateString(name, 'name');
+        this.#avatarUrl = this.#validateString(avatarUrl, 'avatarUrl');
+        this.#location = this.#validateString(location, 'location');
+        this.#company = this.#validateString(company, 'company');
+        this.#twitterUsername = this.#validateString(twitterUsername, 'twitterUsername');
+        this.#followers = this.#validateNumber(followers, 'followers');
+        this.#privateContributions = this.#validateNumber(privateContributions, 'privateContributions');
+        this.#publicContributions = this.#validateNumber(publicContributions, 'publicContributions');
+    }
+
+    #validateString(value, field) {
+        if (value === null || value === undefined) {
+            console.warn(`${field} is undefined or null`);
+            return 'undefined value';
+        }
+        return String(value).trim();
+    }
+
+    #validateNumber(value, field) {
+        if (value === null || value === undefined) {
+            console.warn(`${field} is undefined or null`);
+            return 0;
+        }
+        const num = Number(value);
+        if (isNaN(num)) {
+            console.warn(`${field} is not a valid number: ${value}`);
+            return 0;
+        }
+        return num;
+    }
+
+    get login() { return this.#login; }
+    get name() { return this.#name; }
+    get avatarUrl() { return this.#avatarUrl; }
+    get location() { return this.#location; }
+    get company() { return this.#company; }
+    get twitterUsername() { return this.#twitterUsername; }
+    get followers() { return this.#followers; }
+    get privateContributions() { return this.#privateContributions; }
+    get publicContributions() { return this.#publicContributions; }
+
+    getTotalContributions() {
+        return this.#publicContributions + this.#privateContributions;
+    }
+
+    getContributionStats() {
+        return {
+            total: this.getTotalContributions(),
+            public: this.#publicContributions,
+            private: this.#privateContributions,
+            publicPercentage: this.#calculatePercentage(this.#publicContributions),
+            privatePercentage: this.#calculatePercentage(this.#privateContributions)
+        };
+    }
+
+    #calculatePercentage(value) {
+        const total = this.getTotalContributions();
+        return total === 0 ? 0 : ((value / total) * 100).toFixed(1);
+    }
+
+    getSocialLinks() {
+        return {
+            github: `https://github.com/${this.#login}`,
+            twitter: this.#twitterUsername !== 'undefined value' 
+                ? `https://twitter.com/${this.#twitterUsername}`
+                : null
+        };
+    }
+
+    toJSON() {
+        return {
+            login: this.#login,
+            name: this.#name,
+            avatarUrl: this.#avatarUrl,
+            location: this.#location,
+            company: this.#company,
+            twitterUsername: this.#twitterUsername,
+            followers: this.#followers,
+            contributions: this.getContributionStats(),
+            socialLinks: this.getSocialLinks()
+        };
+    }
+
+    toString() {
+        return `UserDataModel(login=${this.#login}, name=${this.#name}, contributions=${this.getTotalContributions()})`;
+    }
+
+    static fromGitHubData(data) {
+        return new UserDataModel({
+            login: data.login,
+            name: data.name,
+            avatarUrl: data.avatar_url,
+            location: data.location,
+            company: data.company,
+            twitterUsername: data.twitter_username,
+            followers: data.followers,
+            privateContributions: data.private_contributions || 0,
+            publicContributions: data.public_contributions || 0
+        });
+    }
+
+    static fromGraphQLData(data) {
+        return new UserDataModel({
+            login: data.login,
+            name: data.name,
+            avatarUrl: data.avatarUrl,
+            location: data.location,
+            company: data.company,
+            twitterUsername: data.twitterUsername,
+            followers: data.followers?.totalCount,
+            privateContributions: data.contributionsCollection?.restrictedContributionsCount,
+            publicContributions: data.contributionsCollection?.totalContributions - 
+                               (data.contributionsCollection?.restrictedContributionsCount || 0)
+        });
+    }
 }
-module.exports = UserDataModel;
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (UserDataModel);
 
 /***/ }),
 
@@ -11531,78 +10080,11 @@ module.exports = OutputMarkdownModel;
 
 /***/ }),
 
-/***/ 8917:
-/***/ ((module) => {
-
-let OctokitPageInfoModel =  function (pageInfo) {
-    this.endCursor = pageInfo.endCursor;
-    this.hasNextPage = pageInfo.hasNextPage;
-}
-module.exports = OctokitPageInfoModel;
-
-/***/ }),
-
-/***/ 5857:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-const OctokitPageInfoModel = __nccwpck_require__(8917);
-const UserDataModel = __nccwpck_require__(1689);
-let OctokitResponseModel =  function (status, response) {
-    let validate = function (value) {
-        return (value === '' || value === null || value === undefined);
-    }
-    let setValue = function (value) {
-        if (validate(value)) {
-            return "undefined value";
-        } else {
-            return value;
-        }
-    }
-    let setPublicContributions = function (contributionsCollection) {
-        let totalContributions = contributionsCollection.contributionCalendar.totalContributions;
-        let privateContributions = contributionsCollection.restrictedContributionsCount;
-        return totalContributions - privateContributions;
-    }
-    let setUsers = function (edges) {
-        let array = [];
-        for (const node of edges) {
-            if(node.node.__typename === 'User'){
-                let userDataModel = new UserDataModel(
-                    setValue(node.node.login),
-                    setValue(node.node.name),
-                    setValue(node.node.avatarUrl),
-                    setValue(node.node.location),
-                    setValue(node.node.company),
-                    setValue(node.node.twitterUsername),
-                    setValue(node.node.followers.totalCount),
-                    setValue(node.node.contributionsCollection.restrictedContributionsCount),
-                    setValue(setPublicContributions(node.node.contributionsCollection)))
-                array.push(userDataModel)
-            }
-        }
-        return array;
-    }
-    this.status = status;
-    if (status) this.node = setUsers(response.search.edges);
-    if (status) this.pageInfo = new OctokitPageInfoModel(response.search.pageInfo);
-}
-module.exports = OctokitResponseModel;
-
-/***/ }),
-
 /***/ 9491:
 /***/ ((module) => {
 
 "use strict";
 module.exports = require("assert");
-
-/***/ }),
-
-/***/ 2081:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("child_process");
 
 /***/ }),
 
@@ -11619,14 +10101,6 @@ module.exports = require("constants");
 
 "use strict";
 module.exports = require("fs");
-
-/***/ }),
-
-/***/ 5673:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("node:events");
 
 /***/ }),
 
@@ -11703,121 +10177,766 @@ module.exports = require("util");
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__nccwpck_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__nccwpck_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__nccwpck_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__nccwpck_require__.o(definition, key) && !__nccwpck_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__nccwpck_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__nccwpck_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/compat */
 /******/ 	
 /******/ 	if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = __dirname + "/";
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+// This entry need to be wrapped in an IIFE because it need to be in strict mode.
 (() => {
+"use strict";
+// ESM COMPAT FLAG
+__nccwpck_require__.r(__webpack_exports__);
+
+// NAMESPACE OBJECT: ./src/helper/git/pull-git.js
+var pull_git_namespaceObject = {};
+__nccwpck_require__.r(pull_git_namespaceObject);
+
+// NAMESPACE OBJECT: ./src/helper/file/config_file.js
+var config_file_namespaceObject = {};
+__nccwpck_require__.r(config_file_namespaceObject);
+
+// NAMESPACE OBJECT: ./src/helper/checkpoint/output_checkpoint.js
+var output_checkpoint_namespaceObject = {};
+__nccwpck_require__.r(output_checkpoint_namespaceObject);
+
+// NAMESPACE OBJECT: ./src/helper/markdown/output_markdown.js
+var output_markdown_namespaceObject = {};
+__nccwpck_require__.r(output_markdown_namespaceObject);
+
+// NAMESPACE OBJECT: ./src/helper/html/output_html.js
+var output_html_namespaceObject = {};
+__nccwpck_require__.r(output_html_namespaceObject);
+
+// NAMESPACE OBJECT: ./src/helper/octokit/request_octokit.js
+var request_octokit_namespaceObject = {};
+__nccwpck_require__.r(request_octokit_namespaceObject);
+
+// EXTERNAL MODULE: ./src/core/git.js + 3 modules
+var core_git = __nccwpck_require__(8369);
+;// CONCATENATED MODULE: ./src/helper/git/pull-git.js
+
+
+class GitPuller {
+    static async pull() {
+        console.log('Git Pull');
+        try {
+            await git.pull();
+        } catch (error) {
+            console.error('Error during git pull:', error);
+            throw error; // Re-throw to allow caller to handle the error
+        }
+    }
+}
+
+/* harmony default export */ const pull_git = ((/* unused pure expression or super */ null && (GitPuller)));
+// EXTERNAL MODULE: ./src/helper/git/commit-git.js
+var commit_git = __nccwpck_require__(6763);
+// EXTERNAL MODULE: ./src/helper/git/push-git.js
+var push_git = __nccwpck_require__(6278);
+// EXTERNAL MODULE: external "path"
+var external_path_ = __nccwpck_require__(1017);
+// EXTERNAL MODULE: ./src/core/file.js
+var core_file = __nccwpck_require__(6990);
+;// CONCATENATED MODULE: ./src/helper/file/config_file.js
+
+
+
+
+class ConfigFileHandler {
+    static CONFIG_PATH = (/* unused pure expression or super */ null && ('config.json'));
+
+    static async readConfigFile() {
+        try {
+            const response = await file.readJson(this.CONFIG_PATH);
+            console.log(response.message);
+
+            if (!response.status) {
+                throw new Error(`Failed to read config file: ${response.message}`);
+            }
+
+            return new ReadConfigResponseModel(true, response.content);
+        } catch (error) {
+            console.error('Error reading config file:', error);
+            return new ReadConfigResponseModel(false, null, error.message);
+        }
+    }
+
+    static async updateConfigFile(updates) {
+        try {
+            const currentConfig = await this.readConfigFile();
+            if (!currentConfig.status) {
+                throw new Error('Failed to read existing config');
+            }
+
+            const updatedConfig = {
+                ...currentConfig.content,
+                ...updates,
+                lastUpdated: new Date().toISOString()
+            };
+
+            const response = await file.outputJson(this.CONFIG_PATH, updatedConfig);
+            console.log(response.message);
+
+            return new ReadConfigResponseModel(true, updatedConfig);
+        } catch (error) {
+            console.error('Error updating config file:', error);
+            return new ReadConfigResponseModel(false, null, error.message);
+        }
+    }
+
+    static validateConfig(config) {
+        const requiredFields = ['locations'];
+        const missingFields = requiredFields.filter(field => !(field in config));
+        
+        if (missingFields.length > 0) {
+            throw new Error(`Missing required fields in config: ${missingFields.join(', ')}`);
+        }
+
+        return true;
+    }
+}
+
+/* harmony default export */ const config_file = ((/* unused pure expression or super */ null && (ConfigFileHandler)));
+;// CONCATENATED MODULE: ./src/helper/file/checkpoint_file.js
+
+
+
+class CheckpointFileHandler {
+    static CHECKPOINT_PATH = (/* unused pure expression or super */ null && ('checkpoint.json'));
+
+    static async outputCheckpointFile(checkpointData) {
+        try {
+            const response = await file.outputJson(this.CHECKPOINT_PATH, checkpointData);
+            console.log(`Checkpoint saved: ${response.message}`);
+            return response;
+        } catch (error) {
+            console.error('Error writing checkpoint file:', error);
+            throw error;
+        }
+    }
+
+    static async readCheckpointFile() {
+        try {
+            const response = await file.readJson(this.CHECKPOINT_PATH);
+            console.log(`Checkpoint read: ${response.message}`);
+
+            if (!response.status) {
+                throw new Error(`Failed to read checkpoint: ${response.message}`);
+            }
+
+            return new ReadCheckpointResponseModel(true, response.content);
+        } catch (error) {
+            console.error('Error reading checkpoint file:', error);
+            // Return a new checkpoint starting at 0 if file doesn't exist or is corrupted
+            return new ReadCheckpointResponseModel(false, { checkpoint: 0 });
+        }
+    }
+
+    static async updateCheckpoint(checkpoint) {
+        try {
+            const data = {
+                checkpoint,
+                lastUpdated: new Date().toISOString()
+            };
+            return await this.outputCheckpointFile(data);
+        } catch (error) {
+            console.error('Error updating checkpoint:', error);
+            throw error;
+        }
+    }
+
+    static async resetCheckpoint() {
+        try {
+            return await this.updateCheckpoint(0);
+        } catch (error) {
+            console.error('Error resetting checkpoint:', error);
+            throw error;
+        }
+    }
+}
+
+/* harmony default export */ const checkpoint_file = ((/* unused pure expression or super */ null && (CheckpointFileHandler)));
+// EXTERNAL MODULE: ./src/model/data/CheckpointDataModel.js
+var data_CheckpointDataModel = __nccwpck_require__(9510);
+;// CONCATENATED MODULE: ./src/helper/checkpoint/output_checkpoint.js
+
+
+
+class CheckpointHandler {
+    static async saveCheckpoint(locationsArray, country, currentCheckpoint) {
+        try {
+            const countryIndex = locationsArray.findIndex(
+                location => location.country === country
+            );
+
+            if (countryIndex === currentCheckpoint) {
+                console.log('Checkpoint updated:', country);
+                
+                const nextCheckpoint = countryIndex >= locationsArray.length - 1
+                    ? 0  // Reset to beginning if we're at the end
+                    : countryIndex + 1;
+
+                await this.updateCheckpointFile(nextCheckpoint);
+                return true;
+            }
+            
+            return false;
+        } catch (error) {
+            console.error('Error saving checkpoint:', error);
+            throw error;
+        }
+    }
+
+    static async updateCheckpointFile(checkpoint) {
+        try {
+            const checkpointData = new CheckpointDataModel(checkpoint);
+            await checkpointFile.outputCheckpointFile(checkpointData);
+            console.log(`Checkpoint file updated to: ${checkpoint}`);
+        } catch (error) {
+            console.error('Error updating checkpoint file:', error);
+            throw error;
+        }
+    }
+
+    static async readCheckpoint() {
+        try {
+            const response = await checkpointFile.readCheckpointFile();
+            console.log('Current checkpoint:', response.checkpoint);
+            return response;
+        } catch (error) {
+            console.error('Error reading checkpoint:', error);
+            throw error;
+        }
+    }
+
+    static async resetCheckpoint() {
+        try {
+            await this.updateCheckpointFile(0);
+            console.log('Checkpoint reset to 0');
+            return true;
+        } catch (error) {
+            console.error('Error resetting checkpoint:', error);
+            throw error;
+        }
+    }
+}
+
+/* harmony default export */ const output_checkpoint = ((/* unused pure expression or super */ null && (CheckpointHandler)));
+// EXTERNAL MODULE: ./src/helper/cache/output_cache.js
+var output_cache = __nccwpck_require__(9862);
+;// CONCATENATED MODULE: ./src/helper/file/markdown_file.js
+
+
+class MarkdownFileHandler {
+    static async outputMarkdownFile(fileName, markdown) {
+        try {
+            const response = await file.outputOther(fileName, markdown);
+            console.log(response.message);
+            return response;
+        } catch (error) {
+            console.error(`Error writing markdown file ${fileName}:`, error);
+            throw error;
+        }
+    }
+
+    static async appendToMarkdownFile(fileName, content) {
+        try {
+            const existingContent = await file.readJson(fileName).catch(() => '');
+            const newContent = existingContent ? `${existingContent}\n${content}` : content;
+            return await this.outputMarkdownFile(fileName, newContent);
+        } catch (error) {
+            console.error(`Error appending to markdown file ${fileName}:`, error);
+            throw error;
+        }
+    }
+}
+
+/* harmony default export */ const markdown_file = ((/* unused pure expression or super */ null && (MarkdownFileHandler)));
+;// CONCATENATED MODULE: ./src/helper/markdown/output_markdown.js
+
+
+
+class MarkdownOutputHandler {
+    static formatCountryName(country) {
+        return country.replace(/\s/g, '_').toLowerCase();
+    }
+
+    static getFilePaths() {
+        return {
+            index: 'README.md',
+            publicContributions: country => path.join('markdown', 'public_contributions', `${this.formatCountryName(country)}.md`),
+            totalContributions: country => path.join('markdown', 'total_contributions', `${this.formatCountryName(country)}.md`),
+            followers: country => path.join('markdown', 'followers', `${this.formatCountryName(country)}.md`)
+        };
+    }
+
+    static async saveMarkdownFile(filePath, content) {
+        try {
+            await markdownFile.outputMarkdownFile(filePath, content);
+        } catch (error) {
+            console.error(`Error saving markdown file ${filePath}:`, error);
+            throw error;
+        }
+    }
+
+    static async saveIndexMarkdown(markdown) {
+        const filePath = this.getFilePaths().index;
+        await this.saveMarkdownFile(filePath, markdown);
+    }
+
+    static async savePublicContributionsMarkdown(country, markdown) {
+        const filePath = this.getFilePaths().publicContributions(country);
+        await this.saveMarkdownFile(filePath, markdown);
+    }
+
+    static async saveTotalContributionsMarkdown(country, markdown) {
+        const filePath = this.getFilePaths().totalContributions(country);
+        await this.saveMarkdownFile(filePath, markdown);
+    }
+
+    static async saveFollowersMarkdown(country, markdown) {
+        const filePath = this.getFilePaths().followers(country);
+        await this.saveMarkdownFile(filePath, markdown);
+    }
+}
+
+/* harmony default export */ const output_markdown = ((/* unused pure expression or super */ null && (MarkdownOutputHandler)));
+;// CONCATENATED MODULE: ./src/helper/file/html_file.js
+
+
+class HtmlFileHandler {
+    static async outputHtmlFile(fileName, html) {
+        try {
+            const response = await file.outputOther(fileName, html);
+            console.log(`HTML file saved: ${response.message}`);
+            return response;
+        } catch (error) {
+            console.error(`Error writing HTML file ${fileName}:`, error);
+            throw error;
+        }
+    }
+
+    static async outputJsonFile(fileName, json) {
+        try {
+            const response = await file.outputJson(fileName, json);
+            console.log(`JSON file saved: ${response.message}`);
+            return response;
+        } catch (error) {
+            console.error(`Error writing JSON file ${fileName}:`, error);
+            throw error;
+        }
+    }
+
+    static async readJsonFile(fileName) {
+        try {
+            const response = await file.readJson(fileName);
+            if (!response.status) {
+                throw new Error(`Failed to read JSON file: ${response.message}`);
+            }
+            return response.content;
+        } catch (error) {
+            console.error(`Error reading JSON file ${fileName}:`, error);
+            throw error;
+        }
+    }
+
+    static async appendToHtmlFile(fileName, content) {
+        try {
+            const existingContent = await file.readOther(fileName).catch(() => '');
+            const newContent = existingContent ? `${existingContent}\n${content}` : content;
+            return await this.outputHtmlFile(fileName, newContent);
+        } catch (error) {
+            console.error(`Error appending to HTML file ${fileName}:`, error);
+            throw error;
+        }
+    }
+}
+
+/* harmony default export */ const html_file = ((/* unused pure expression or super */ null && (HtmlFileHandler)));
+;// CONCATENATED MODULE: ./src/helper/html/output_html.js
+
+
+
+class HtmlOutputHandler {
+    static DOCS_DIR = (/* unused pure expression or super */ null && ('docs'));
+    static HTML_FILE = (/* unused pure expression or super */ null && ('index.html'));
+    static RANKING_FILE = (/* unused pure expression or super */ null && ('ranking.json'));
+
+    static getPaths() {
+        return {
+            html: path.join(this.DOCS_DIR, this.HTML_FILE),
+            ranking: path.join(this.DOCS_DIR, this.RANKING_FILE)
+        };
+    }
+
+    static async saveHtmlFile(html) {
+        try {
+            const filePath = this.getPaths().html;
+            await htmlFile.outputHtmlFile(filePath, html);
+            console.log(`HTML file saved successfully at ${filePath}`);
+            return true;
+        } catch (error) {
+            console.error('Error saving HTML file:', error);
+            throw error;
+        }
+    }
+
+    static async saveRankingFile(rankingData) {
+        try {
+            const filePath = this.getPaths().ranking;
+            const jsonData = {
+                lastUpdated: new Date().toISOString(),
+                data: rankingData
+            };
+
+            await htmlFile.outputJsonFile(filePath, jsonData);
+            console.log(`Ranking data saved successfully at ${filePath}`);
+            return true;
+        } catch (error) {
+            console.error('Error saving ranking file:', error);
+            throw error;
+        }
+    }
+
+    static async updateRankingFile(newData) {
+        try {
+            const filePath = this.getPaths().ranking;
+            const existingData = await htmlFile.readJsonFile(filePath).catch(() => ({ data: [] }));
+            
+            const updatedData = {
+                lastUpdated: new Date().toISOString(),
+                data: [...existingData.data, ...newData]
+            };
+
+            await htmlFile.outputJsonFile(filePath, updatedData);
+            console.log(`Ranking data updated successfully at ${filePath}`);
+            return true;
+        } catch (error) {
+            console.error('Error updating ranking file:', error);
+            throw error;
+        }
+    }
+}
+
+/* harmony default export */ const output_html = ((/* unused pure expression or super */ null && (HtmlOutputHandler)));
+// EXTERNAL MODULE: ./src/helper/html/file/create_html_file.js
+var create_html_file = __nccwpck_require__(8900);
+// EXTERNAL MODULE: ./src/helper/html/file/create_ranking_json_file.js
+var create_ranking_json_file = __nccwpck_require__(7818);
+// EXTERNAL MODULE: ./src/helper/markdown/page/create_index_page.js
+var create_index_page = __nccwpck_require__(2833);
+// EXTERNAL MODULE: ./src/helper/markdown/page/create_public_contributions_page.js
+var create_public_contributions_page = __nccwpck_require__(4486);
+// EXTERNAL MODULE: ./src/helper/markdown/page/create_total_contributions_page.js
+var create_total_contributions_page = __nccwpck_require__(5389);
+// EXTERNAL MODULE: ./src/helper/markdown/page/create_followers_page.js
+var create_followers_page = __nccwpck_require__(5815);
+;// CONCATENATED MODULE: ./src/helper/octokit/request_octokit.js
+
+
+class OctokitRequestHandler {
+    static setLocation(place) {
+        return place.replace(/\s+/g, '_').toLowerCase();
+    }
+
+    static setQuery(location) {
+        return location
+            .map(place => `location:${this.setLocation(place)}`)
+            .join(' ');
+    }
+
+    static getRandomDelay(min = 1000, max = 5000) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+
+    static delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    static async request(AUTH_KEY, MAXIMUM_ERROR_ITERATIONS, location) {
+        let hasNextPage = true;
+        let cursor = null;
+        const users = [];
+        let iterations = 0;
+        let errors = 0;
+
+        while (hasNextPage && errors < MAXIMUM_ERROR_ITERATIONS) {
+            try {
+                const octokitResponseModel = await octokit.request(
+                    AUTH_KEY,
+                    this.setQuery(location),
+                    cursor
+                );
+
+                if (octokitResponseModel.status) {
+                    hasNextPage = octokitResponseModel.pageInfo.hasNextPage;
+                    cursor = octokitResponseModel.pageInfo.endCursor;
+
+                    for (const userData of octokitResponseModel.node) {
+                        console.log(
+                            `iterations:(${iterations}) errors:(${errors}/${MAXIMUM_ERROR_ITERATIONS}) ${userData.login} ${userData.followers}`
+                        );
+                        users.push(userData);
+                    }
+
+                    const delayMs = this.getRandomDelay();
+                    console.log(
+                        `interval:${delayMs}ms hasNextPage:${hasNextPage} cursor:${cursor} users:${users.length}`
+                    );
+                    await this.delay(delayMs);
+                    iterations++;
+                } else {
+                    await this.delay(60000); // 1 minute delay on error
+                    errors++;
+                }
+            } catch (error) {
+                console.error('Error fetching GitHub data:', error);
+                await this.delay(60000);
+                errors++;
+            }
+        }
+
+        return users;
+    }
+}
+
+/* harmony default export */ const request_octokit = ((/* unused pure expression or super */ null && (OctokitRequestHandler)));
+// EXTERNAL MODULE: ./src/helper/markdown/format_markdown.js
+var format_markdown = __nccwpck_require__(3164);
+// EXTERNAL MODULE: ./src/model/markdown/OutputMarkdownModel.js
+var OutputMarkdownModel = __nccwpck_require__(4343);
+;// CONCATENATED MODULE: ./src/index.js
 /*!
  * top-github-users-monitor 2.0.0
  * https://github.com/gayanvoice/top-github-users-monitor
  * (c) 2021 gayanvoice
  * Released under the MIT License
  */
-const pullGit = __nccwpck_require__(8591);
-const commitGit = __nccwpck_require__(6763);
-const pushGit = __nccwpck_require__(6278);
-const configFile = __nccwpck_require__(6264);
-const outputCheckpoint = __nccwpck_require__(9911);
-const outputCache = __nccwpck_require__(9862);
-const outputMarkdown = __nccwpck_require__(8167);
-const outputHtml = __nccwpck_require__(9316);
-const createHtmlFile = __nccwpck_require__(8900);
-const createRankingJsonFile = __nccwpck_require__(7818);
-const createIndexPage = __nccwpck_require__(2833);
-const createPublicContributionsPage = __nccwpck_require__(4486);
-const createTotalContributionsPage = __nccwpck_require__(5389);
-const createFollowersPage = __nccwpck_require__(5815);
-const requestOctokit = __nccwpck_require__(639);
-const formatMarkdown = __nccwpck_require__(3164);
-const OutputMarkdownModel = __nccwpck_require__(4343);
-let Index = function () {
-    // const AUTH_KEY = "";
-    // const GITHUB_USERNAME_AND_REPOSITORY = 'gayanvoice/top-github-users';
-    const AUTH_KEY = process.env.CUSTOM_TOKEN;
-    const GITHUB_USERNAME_AND_REPOSITORY = process.env.GITHUB_REPOSITORY;
-    const MAXIMUM_ERROR_ITERATIONS = 4;
-    let getCheckpoint = async function (locationsArray, country, checkpoint) {
-        let indexOfTheCountry = locationsArray.findIndex(location => location.country === country);
-        if(indexOfTheCountry === checkpoint){
-            console.log("checkpoint set", country)
-            return true;
-        } else {
-            console.log("checkpoint not set", country)
-            return false;
-        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class GitHubUsersMonitor {
+    static AUTH_KEY = process.env.CUSTOM_TOKEN;
+    static GITHUB_REPOSITORY = process.env.GITHUB_REPOSITORY;
+    static MAXIMUM_ERROR_ITERATIONS = 4;
+    static MINIMUM_USERS_THRESHOLD = 750;
+
+    static async #isCheckpoint(locationsArray, country, checkpoint) {
+        const indexOfCountry = locationsArray.findIndex(location => location.country === country);
+        const isMatch = indexOfCountry === checkpoint;
+        console.log(`Checkpoint ${isMatch ? 'set' : 'not set'} for ${country}`);
+        return isMatch;
     }
-    let saveCache = async function (readConfigResponseModel, readCheckpointResponseModel) {
-        console.log(`########## SaveCache ##########`)
-        for await(const locationDataModel of readConfigResponseModel.locations){
-            let isCheckpoint = await getCheckpoint(readConfigResponseModel.locations, locationDataModel.country, readCheckpointResponseModel.checkpoint);
-            if(isCheckpoint){
-                let json = await requestOctokit.request(AUTH_KEY, MAXIMUM_ERROR_ITERATIONS, locationDataModel.locations);
-                let readCacheResponseModel =  await outputCache.readCacheFile(locationDataModel.country);
-                if(readCacheResponseModel.status){
-                    if(readCacheResponseModel.users.length > json.length){
-                        if(json.length > 750) {
-                            console.log(`request success minimum:750 cache:${readCacheResponseModel.users.length} octokit:${json.length}`);
-                            await outputCache.saveCacheFile(locationDataModel.country, json);
-                        }
-                        else
-                        {
-                            console.log(`octokit error minimum:750 cache:${readCacheResponseModel.users.length} octokit:${json.length}`);
-                        }
-                    } else {
-                        console.log(`request success cache:${readCacheResponseModel.users.length} octokit:${json.length}`);
-                        await outputCache.saveCacheFile(locationDataModel.country, json);
-                    }
-                } else {
-                    console.log(`request success octokit:${json.length}`);
-                    await outputCache.saveCacheFile(locationDataModel.country, json);
-                }
+
+    static async #validateAndSaveCache(country, newUsers, existingUsers) {
+        if (!existingUsers) {
+            console.log(`Request success: new cache with ${newUsers.length} users`);
+            await output_cache.outputCache.saveCacheFile(country, newUsers);
+            return;
+        }
+
+        if (existingUsers.length <= newUsers.length) {
+            console.log(`Cache update: ${existingUsers.length} → ${newUsers.length} users`);
+            await output_cache.outputCache.saveCacheFile(country, newUsers);
+            return;
+        }
+
+        if (newUsers.length >= this.MINIMUM_USERS_THRESHOLD) {
+            console.log(`Minimum threshold met: ${newUsers.length} users (minimum: ${this.MINIMUM_USERS_THRESHOLD})`);
+            await output_cache.outputCache.saveCacheFile(country, newUsers);
+            return;
+        }
+
+        console.warn(`Cache update skipped: ${newUsers.length} users below minimum threshold of ${this.MINIMUM_USERS_THRESHOLD}`);
+    }
+
+    static async #saveCache(config, checkpoint) {
+        console.log('########## SaveCache ##########');
+        
+        for (const location of config.locations) {
+            if (!await this.#isCheckpoint(config.locations, location.country, checkpoint.checkpoint)) {
+                continue;
+            }
+
+            try {
+                const users = await request_octokit_namespaceObject.requestOctokit.request(
+                    this.AUTH_KEY,
+                    this.MAXIMUM_ERROR_ITERATIONS,
+                    location.locations
+                );
+
+                const existingCache = await output_cache.outputCache.readCacheFile(location.country);
+                await this.#validateAndSaveCache(
+                    location.country,
+                    users,
+                    existingCache.status ? existingCache.users : null
+                );
+            } catch (error) {
+                console.error(`Error processing cache for ${location.country}:`, error);
             }
         }
     }
-    let saveMarkdown = async function (readConfigResponseModel, readCheckpointResponseModel) {
-        console.log(`########## SaveMarkDown ##########`)
-        for await(const locationDataModel of readConfigResponseModel.locations){
-            let isCheckpoint = await getCheckpoint(readConfigResponseModel.locations, locationDataModel.country, readCheckpointResponseModel.checkpoint)
-            if(isCheckpoint){
-                let readCacheResponseModel =  await outputCache.readCacheFile(locationDataModel.country);
-                if(readCacheResponseModel.status) {
-                    let outputMarkdownModel =  new OutputMarkdownModel(GITHUB_USERNAME_AND_REPOSITORY, locationDataModel, readCacheResponseModel, readConfigResponseModel);
-                    await outputMarkdown.savePublicContributionsMarkdownFile(locationDataModel.country, createPublicContributionsPage.create(outputMarkdownModel));
-                    await outputMarkdown.saveTotalContributionsMarkdownFile(locationDataModel.country, createTotalContributionsPage.create(outputMarkdownModel));
-                    await outputMarkdown.saveFollowersMarkdownFile(locationDataModel.country, createFollowersPage.create(outputMarkdownModel));
-                }
+
+    static async #saveMarkdown(config, checkpoint) {
+        console.log('########## SaveMarkDown ##########');
+        
+        for (const location of config.locations) {
+            if (!await this.#isCheckpoint(config.locations, location.country, checkpoint.checkpoint)) {
+                continue;
             }
-            await outputCheckpoint.saveCheckpointFile(readConfigResponseModel.locations, locationDataModel.country, readCheckpointResponseModel.checkpoint)
+
+            try {
+                const cache = await output_cache.outputCache.readCacheFile(location.country);
+                if (!cache.status) {
+                    console.warn(`No cache found for ${location.country}, skipping markdown generation`);
+                    continue;
+                }
+
+                const markdownModel = new OutputMarkdownModel.OutputMarkdownModel(
+                    this.GITHUB_REPOSITORY,
+                    location,
+                    cache,
+                    config
+                );
+
+                await Promise.all([
+                    output_markdown_namespaceObject.outputMarkdown.savePublicContributionsMarkdownFile(
+                        location.country,
+                        create_public_contributions_page.createPublicContributionsPage.create(markdownModel)
+                    ),
+                    output_markdown_namespaceObject.outputMarkdown.saveTotalContributionsMarkdownFile(
+                        location.country,
+                        create_total_contributions_page.createTotalContributionsPage.create(markdownModel)
+                    ),
+                    output_markdown_namespaceObject.outputMarkdown.saveFollowersMarkdownFile(
+                        location.country,
+                        create_followers_page.createFollowersPage.create(markdownModel)
+                    )
+                ]);
+
+                await output_checkpoint_namespaceObject.outputCheckpoint.saveCheckpointFile(
+                    config.locations,
+                    location.country,
+                    checkpoint.checkpoint
+                );
+            } catch (error) {
+                console.error(`Error generating markdown for ${location.country}:`, error);
+            }
         }
-        if(!readConfigResponseModel.devMode) await outputMarkdown.saveIndexMarkdownFile(createIndexPage.create(GITHUB_USERNAME_AND_REPOSITORY, readConfigResponseModel));
-    }
-    let saveHtml = async function (readConfigResponseModel) {
-        console.log(`########## SaveHtml ##########`);
-        await outputHtml.saveRankingJsonFile(await createRankingJsonFile.create(readConfigResponseModel));
-        await outputHtml.saveHtmlFile(createHtmlFile.create());
-    }
-    let main = async function () {
-        let readConfigResponseModel = await configFile.readConfigFile();
-        let readCheckpointResponseModel = await outputCheckpoint.readCheckpointFile();
-        if(readConfigResponseModel.status && readCheckpointResponseModel.status){
-            if(!readConfigResponseModel.devMode) await pullGit.pull();
-            let checkpointCountry = readConfigResponseModel.locations[readCheckpointResponseModel.checkpoint].country
-            await saveCache(readConfigResponseModel, readCheckpointResponseModel);
-            await saveMarkdown(readConfigResponseModel, readCheckpointResponseModel)
-            await saveHtml(readConfigResponseModel)
-            if(!readConfigResponseModel.devMode) await commitGit.commit(`Update ${formatMarkdown.capitalizeTheFirstLetterOfEachWord(checkpointCountry)}`);
-            if(!readConfigResponseModel.devMode) await pushGit.push();
+
+        if (!config.devMode) {
+            await output_markdown_namespaceObject.outputMarkdown.saveIndexMarkdownFile(
+                create_index_page.createIndexPage.create(this.GITHUB_REPOSITORY, config)
+            );
         }
     }
-    return {
-        main: main,
-    };
-}();
-Index.main().then(() => { });
+
+    static async #saveHtml(config) {
+        console.log('########## SaveHtml ##########');
+        try {
+            const rankingJson = await create_ranking_json_file.createRankingJsonFile.create(config);
+            await Promise.all([
+                output_html_namespaceObject.outputHtml.saveRankingJsonFile(rankingJson),
+                output_html_namespaceObject.outputHtml.saveHtmlFile(create_html_file.createHtmlFile.create())
+            ]);
+        } catch (error) {
+            console.error('Error generating HTML files:', error);
+        }
+    }
+
+    static async run() {
+        try {
+            const config = await config_file_namespaceObject.configFile.readConfigFile();
+            const checkpoint = await output_checkpoint_namespaceObject.outputCheckpoint.readCheckpointFile();
+
+            if (!config.status || !checkpoint.status) {
+                throw new Error('Failed to read configuration or checkpoint');
+            }
+
+            if (!config.devMode) {
+                await pull_git_namespaceObject.pullGit.pull();
+            }
+
+            const checkpointCountry = config.locations[checkpoint.checkpoint].country;
+
+            await this.#saveCache(config, checkpoint);
+            await this.#saveMarkdown(config, checkpoint);
+            await this.#saveHtml(config);
+
+            if (!config.devMode) {
+                const countryName = format_markdown.formatMarkdown.capitalizeTheFirstLetterOfEachWord(checkpointCountry);
+                await commit_git.commitGit.commit(`Update ${countryName}`);
+                await push_git.pushGit.push();
+            }
+        } catch (error) {
+            console.error('Error in GitHub Users Monitor:', error);
+            process.exit(1);
+        }
+    }
+}
+
+// Run the monitor
+GitHubUsersMonitor.run().catch(error => {
+    console.error('Fatal error:', error);
+    process.exit(1);
+});
 })();
 
 module.exports = __webpack_exports__;
