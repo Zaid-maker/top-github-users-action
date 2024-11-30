@@ -10749,9 +10749,23 @@ var format_markdown = __nccwpck_require__(3164);
 var OutputMarkdownModel = __nccwpck_require__(4343);
 ;// CONCATENATED MODULE: ./src/index.js
 /*!
- * top-github-users-monitor 2.0.0
- * https://github.com/gayanvoice/top-github-users-monitor
- * (c) 2021 gayanvoice
+ * Top GitHub Users Action
+ * Version: 1.0.0
+ * 
+ * Current Repository:
+ * https://github.com/Zaid-maker/top-github-users-action
+ * 
+ * Original Work:
+ * Copyright (c) 2021 Gayan Kuruppu (https://github.com/gayanvoice)
+ * 
+ * Current Maintenance:
+ * Copyright (c) 2024 Zaid Hafeez (https://github.com/Zaid-maker)
+ * 
+ * This project is a modernized fork of the original work, updated with:
+ * - Modern JavaScript practices
+ * - Enhanced error handling
+ * - Current dependencies
+ * 
  * Released under the MIT License
  */
 
