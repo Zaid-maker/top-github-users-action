@@ -1,6 +1,8 @@
 # Top GitHub Users Action <img src="https://github.githubassets.com/images/modules/site/features/actions-icon-actions.svg" height=48 width=48 /> [<img alt="Image of my-profile-views-counter" src="https://github.com/gayanvoice/my-profile-views-counter/blob/master/graph/373376349/small/week.png" height="20">](https://github.com/gayanvoice/my-profile-views-counter/blob/master/readme/373376349/week.md)
 [![Image of my-profile-views-counter](https://github.com/gayanvoice/my-profile-views-counter/blob/master/svg/373376349/badge.svg)](https://github.com/gayanvoice/my-profile-views-counter/blob/master/readme/373376349/week.md)
 
+> **DISCLAIMER**: This repository is a modernized fork of the original work by [gayanvoice](https://github.com/gayanvoice). The codebase has been updated with modern JavaScript practices, improved error handling, and current dependencies while maintaining the original functionality. This fork aims to ensure the project remains reliable and maintainable for future use.
+
 A modern GitHub Action to track and analyze top GitHub users by country using the GitHub GraphQL API. This action generates detailed rankings and insights about the most active GitHub users in different countries. Visit [gayanvoice/top-github-users](https://github.com/gayanvoice/top-github-users) for the full list.
 
 ## Features
