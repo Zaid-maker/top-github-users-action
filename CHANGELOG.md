@@ -7,59 +7,76 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Migration Guide
 
-### Upgrading to v1.0.x
+### Migrating from gayanvoice/top-github-users-action
 
-#### Requirements
-- Node.js 20.x or later
-- GitHub Personal Access Token with appropriate scopes
-- GitHub Actions enabled in your repository
+This guide helps you migrate from the original action (gayanvoice/top-github-users-action) to this modernized version.
 
-#### Steps to Upgrade
+#### Key Differences
+- Modernized JavaScript codebase with better reliability
+- Improved error handling and logging
+- Updated dependencies for better security
+- Enhanced documentation and dark mode support
+- Maintained same core functionality and data format
 
-1. Update your workflow file:
+#### Steps to Migrate
+
+1. Update your workflow file from:
 ```yaml
-name: Update GitHub Users
+# Old workflow
+name: Top GitHub Users
 on:
   schedule:
-    - cron: '0 0 * * *'  # Runs daily at midnight
-  workflow_dispatch:      # Allows manual trigger
-
+    - cron: '0 0 * * *'
 jobs:
-  update-users:
+  main:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: Zaid-maker/top-github-users-action@v1.0.1
-        with:
+      - uses: actions/checkout@v2
+      - uses: gayanvoice/top-github-users-action@master
+        env:
           CUSTOM_TOKEN: ${{ secrets.CUSTOM_TOKEN }}
 ```
 
-2. Configure environment variables:
-   - `CUSTOM_TOKEN`: Your GitHub Personal Access Token
-   - `GITHUB_REPOSITORY`: Set automatically by GitHub Actions
-
-3. Optional: Create custom config.json:
-```json
-{
-  "settings": {
-    "devMode": false,
-    "minUsersThreshold": 750,
-    "maxErrorIterations": 4,
-    "updateFrequency": "daily"
-  }
-}
+To:
+```yaml
+# New workflow
+name: Top GitHub Users
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:      # Added for manual triggers
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4    # Updated checkout version
+      - uses: Zaid-maker/top-github-users-action@v1.0.1
+        with:                        # Changed from env to with
+          CUSTOM_TOKEN: ${{ secrets.CUSTOM_TOKEN }}
 ```
 
-4. Breaking Changes from v0.x:
-   - Now uses ES Modules instead of CommonJS
-   - Requires Node.js 20.x (up from Node.js 12.x)
-   - New configuration structure in config.json
-   - Changed environment variable names
+2. Repository Structure:
+   - Keep your existing `config.json` - it's compatible
+   - Keep your existing documentation files
+   - Keep your existing README.md customizations
 
-5. Troubleshooting:
-   - If config.json is not found, ensure it's in your repository root
-   - For token issues, verify your PAT has correct permissions
-   - Check GitHub Actions logs for detailed error messages
+3. No Data Migration Needed:
+   - The output format remains the same
+   - Existing statistics will be preserved
+   - Generated markdown files are compatible
+
+4. Verify Your Token:
+   - Ensure your CUSTOM_TOKEN has required permissions
+   - Token needs repo and user scopes
+   - Check token expiration
+
+5. Troubleshooting Common Issues:
+   - If the action fails, check the detailed error logs
+   - Verify your config.json is in the repository root
+   - Make sure your repository has Actions enabled
+   - Check if the token has sufficient permissions
+
+Need help? Open an issue at: https://github.com/Zaid-maker/top-github-users-action/issues
 
 ## [1.0.1] - 2024-01-15
 
