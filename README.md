@@ -35,35 +35,42 @@ The action uses a modern, class-based architecture to efficiently track and anal
 
 ## Technologies
 
-<table>
-	<tr>
-		<td>
-			<a href="https://www.w3schools.com/js/">
-				<img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Unofficial_JavaScript_logo_2.svg" height=96 width=96 />
-			</a>
-		</td>
-		<td>
-			<a href="https://github.com/features/actions">
-				<img src="https://github.githubassets.com/images/modules/site/features/actions-icon-actions.svg" height=96 width=96 />
-			</a>
-		</td>
-		<td>
-			<a href="https://nodejs.org/en/">
-				<img src="https://nodejs.org/static/images/logos/nodejs-new-pantone-white.svg" height=96 width=96 />
-			</a>
-		</td>
-		<td>
-			<a href="https://docs.github.com/en/graphql">
-				<img src="https://upload.wikimedia.org/wikipedia/commons/1/17/GraphQL_Logo.svg" height=96 width=96 />
-			</a>
-		</td>
-		<td>
-			<a href="https://github.com/">
-				<img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" height=96 width=96 />
-			</a>
-		</td>
-	</tr>
-</table>
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">
+          <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" width="100" alt="JavaScript"/>
+          <br>JavaScript
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://github.com/features/actions">
+          <img src="https://raw.githubusercontent.com/github/explore/2c7e603b797535e5ad8b4beb575ab3b7354666e1/topics/actions/actions.png" width="100" alt="GitHub Actions"/>
+          <br>GitHub Actions
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://nodejs.org/">
+          <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original.svg" width="100" alt="Node.js"/>
+          <br>Node.js
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://graphql.org/">
+          <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/graphql/graphql-plain.svg" width="100" alt="GraphQL"/>
+          <br>GraphQL
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://github.com/">
+          <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/github/github-original.svg" width="100" alt="GitHub"/>
+          <br>GitHub
+        </a>
+      </td>
+    </tr>
+  </table>
+</div>
 
 ## Setup Guide
 
