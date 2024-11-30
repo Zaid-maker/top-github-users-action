@@ -21,7 +21,7 @@
 import { pullGit } from './helper/git/pull-git';
 import { commitGit } from './helper/git/commit-git';
 import { pushGit } from './helper/git/push-git';
-import { configFile } from './helper/file/config_file';
+import ConfigFileHandler from './helper/file/config_file';
 import { outputCheckpoint } from './helper/checkpoint/output_checkpoint';
 import { outputCache } from './helper/cache/output_cache';
 import { outputMarkdown } from './helper/markdown/output_markdown';
@@ -167,7 +167,7 @@ class GitHubUsersMonitor {
 
     static async run() {
         try {
-            const configResponse = await configFile.readConfigFile();
+            const configResponse = await ConfigFileHandler.readConfigFile();
             const checkpoint = await outputCheckpoint.readCheckpointFile();
 
             if (!configResponse.status || !checkpoint.status) {

@@ -10233,10 +10233,6 @@ __nccwpck_require__.r(__webpack_exports__);
 var pull_git_namespaceObject = {};
 __nccwpck_require__.r(pull_git_namespaceObject);
 
-// NAMESPACE OBJECT: ./src/helper/file/config_file.js
-var config_file_namespaceObject = {};
-__nccwpck_require__.r(config_file_namespaceObject);
-
 // NAMESPACE OBJECT: ./src/helper/checkpoint/output_checkpoint.js
 var output_checkpoint_namespaceObject = {};
 __nccwpck_require__.r(output_checkpoint_namespaceObject);
@@ -10279,6 +10275,224 @@ var push_git = __nccwpck_require__(6278);
 var external_path_ = __nccwpck_require__(1017);
 // EXTERNAL MODULE: ./src/core/file.js
 var core_file = __nccwpck_require__(6990);
+;// CONCATENATED MODULE: ./src/model/data/LocationDataModel.js
+class LocationDataModel {
+    #country;
+    #geoName;
+    #locations;
+    #imageUrl;
+
+    constructor(country, geoName, locations, imageUrl) {
+        if (!country) {
+            throw new Error('Country is required');
+        }
+        this.#country = country;
+        this.#geoName = geoName || null;
+        this.#locations = this.#validateLocations(locations);
+        this.#imageUrl = imageUrl || null;
+    }
+
+    #validateLocations(locations) {
+        if (!Array.isArray(locations)) {
+            throw new Error('Locations must be an array');
+        }
+        return locations.filter(location => location && typeof location === 'string');
+    }
+
+    get country() {
+        return this.#country;
+    }
+
+    get geoName() {
+        return this.#geoName;
+    }
+
+    get locations() {
+        return [...this.#locations];
+    }
+
+    get imageUrl() {
+        return this.#imageUrl;
+    }
+
+    get cities() {
+        return this.#locations.slice(1);
+    }
+
+    addCity(city) {
+        if (!city || typeof city !== 'string') {
+            throw new Error('City must be a non-empty string');
+        }
+        if (!this.#locations.includes(city)) {
+            this.#locations.push(city);
+        }
+    }
+
+    removeCity(city) {
+        const index = this.#locations.indexOf(city);
+        if (index > 0) { // Don't remove the country (index 0)
+            this.#locations.splice(index, 1);
+        }
+    }
+
+    toJSON() {
+        return {
+            country: this.country,
+            geoName: this.geoName,
+            locations: this.locations,
+            imageUrl: this.imageUrl
+        };
+    }
+
+    toString() {
+        return `LocationDataModel(country=${this.country}, geoName=${this.geoName}, cities=[${this.cities.join(', ')}])`;
+    }
+
+    static fromJSON(json) {
+        return new LocationDataModel(
+            json.country,
+            json.geoName,
+            json.locations || [json.country],
+            json.imageUrl
+        );
+    }
+}
+
+/* harmony default export */ const data_LocationDataModel = (LocationDataModel);
+;// CONCATENATED MODULE: ./src/model/config/ReadConfigResponseModel.js
+
+
+class ReadConfigResponseModel {
+    #status;
+    #content;
+    #message;
+    #devMode;
+    #locations;
+    #checkpoint;
+
+    constructor(status, content, message = '') {
+        this.#status = status;
+        this.#content = content;
+        this.#message = message;
+
+        if (status && content) {
+            this.#devMode = this.#validateAndSetDevMode(content.devMode);
+            this.#locations = this.#validateAndSetLocations(content.locations);
+            this.#checkpoint = content.checkpoint ?? 0;
+        } else {
+            this.#devMode = true;
+            this.#locations = [];
+            this.#checkpoint = 0;
+        }
+    }
+
+    static #isValidString(value) {
+        return typeof value === 'string' && value !== '';
+    }
+
+    #validateAndSetDevMode(devMode) {
+        if (ReadConfigResponseModel.#isValidString(devMode)) {
+            return devMode.toLowerCase() === 'true';
+        }
+        return true; // Default to dev mode if invalid
+    }
+
+    #validateGeoName(geoName) {
+        return ReadConfigResponseModel.#isValidString(geoName) ? geoName : null;
+    }
+
+    #validateAndSetLocations(locations) {
+        if (!Array.isArray(locations)) {
+            console.warn('Invalid locations format: expected array');
+            return [];
+        }
+
+        return locations
+            .filter(location => location && typeof location === 'object')
+            .map(location => {
+                try {
+                    const country = location.country;
+                    const geoName = this.#validateGeoName(location.geoName);
+                    const imageUrl = location.imageUrl;
+                    
+                    if (!ReadConfigResponseModel.#isValidString(country)) {
+                        throw new Error(`Invalid country: ${country}`);
+                    }
+
+                    const cities = Array.isArray(location.cities) 
+                        ? location.cities.filter(city => ReadConfigResponseModel.#isValidString(city))
+                        : [];
+
+                    const allLocations = [country, ...cities];
+                    
+                    return new data_LocationDataModel(country, geoName, allLocations, imageUrl);
+                } catch (error) {
+                    console.warn(`Skipping invalid location: ${error.message}`);
+                    return null;
+                }
+            })
+            .filter(Boolean); // Remove null entries
+    }
+
+    get status() {
+        return this.#status;
+    }
+
+    get content() {
+        return this.#content;
+    }
+
+    get message() {
+        return this.#message;
+    }
+
+    get devMode() {
+        return this.#devMode;
+    }
+
+    get locations() {
+        return [...this.#locations];
+    }
+
+    get checkpoint() {
+        return this.#checkpoint;
+    }
+
+    addLocation(country, geoName = null, cities = [], imageUrl = null) {
+        const locations = [country, ...cities];
+        const locationModel = new data_LocationDataModel(country, geoName, locations, imageUrl);
+        this.#locations.push(locationModel);
+    }
+
+    removeLocation(country) {
+        this.#locations = this.#locations.filter(loc => loc.country !== country);
+    }
+
+    toJSON() {
+        return {
+            status: this.status,
+            content: this.content,
+            message: this.message,
+            devMode: this.devMode,
+            locations: this.locations.map(loc => loc.toJSON()),
+            checkpoint: this.checkpoint
+        };
+    }
+
+    toString() {
+        return `ReadConfigResponseModel(status=${this.status}, content=${this.content}, message=${this.message}, devMode=${this.devMode}, locations=${this.locations.length}, checkpoint=${this.checkpoint})`;
+    }
+
+    static fromJSON(json) {
+        return new ReadConfigResponseModel(true, {
+            devMode: json.devMode,
+            locations: json.locations,
+            checkpoint: json.checkpoint
+        }, json.message);
+    }
+}
+
+/* harmony default export */ const config_ReadConfigResponseModel = (ReadConfigResponseModel);
 ;// CONCATENATED MODULE: ./src/helper/file/config_file.js
 
 
@@ -10297,7 +10511,7 @@ class ConfigFileHandler {
         for (const configPath of this.CONFIG_PATHS) {
             try {
                 console.log(`Attempting to read config from: ${configPath}`);
-                const response = await file.readJson(configPath);
+                const response = await core_file["default"].readJson(configPath);
                 
                 if (!response.status) {
                     console.error(`Config file read failed at ${configPath}: ${response.message}`);
@@ -10320,14 +10534,14 @@ class ConfigFileHandler {
                 }
 
                 console.log(`Successfully loaded config file from ${configPath}`);
-                return new ReadConfigResponseModel(true, response.content);
+                return new config_ReadConfigResponseModel(true, response.content);
             } catch (error) {
                 console.error(`Error reading config file from ${configPath}:`, error);
                 lastError = error;
             }
         }
 
-        return new ReadConfigResponseModel(false, null, lastError ? lastError.message : 'Failed to read config file from any location');
+        return new config_ReadConfigResponseModel(false, null, lastError ? lastError.message : 'Failed to read config file from any location');
     }
 
     static async updateConfigFile(updates) {
@@ -10343,17 +10557,17 @@ class ConfigFileHandler {
                 lastUpdated: new Date().toISOString()
             };
 
-            const response = await file.outputJson(this.CONFIG_PATHS[0], updatedConfig);
+            const response = await core_file["default"].outputJson(this.CONFIG_PATHS[0], updatedConfig);
             console.log(response.message);
             
             if (!response.status) {
                 throw new Error(response.message);
             }
 
-            return new ReadConfigResponseModel(true, updatedConfig);
+            return new config_ReadConfigResponseModel(true, updatedConfig);
         } catch (error) {
             console.error('Error updating config file:', error);
-            return new ReadConfigResponseModel(false, null, error.message);
+            return new config_ReadConfigResponseModel(false, null, error.message);
         }
     }
 
@@ -10369,7 +10583,7 @@ class ConfigFileHandler {
     }
 }
 
-/* harmony default export */ const config_file = ((/* unused pure expression or super */ null && (ConfigFileHandler)));
+/* harmony default export */ const config_file = (ConfigFileHandler);
 ;// CONCATENATED MODULE: ./src/helper/file/checkpoint_file.js
 
 
@@ -10948,7 +11162,7 @@ class GitHubUsersMonitor {
 
     static async run() {
         try {
-            const configResponse = await config_file_namespaceObject.configFile.readConfigFile();
+            const configResponse = await config_file.readConfigFile();
             const checkpoint = await output_checkpoint_namespaceObject.outputCheckpoint.readCheckpointFile();
 
             if (!configResponse.status || !checkpoint.status) {
