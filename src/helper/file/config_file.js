@@ -53,6 +53,10 @@ class ConfigFileHandler {
 
             const response = await file.outputJson(this.CONFIG_PATH, updatedConfig);
             console.log(response.message);
+            
+            if (!response.status) {
+                throw new Error(response.message);
+            }
 
             return new ReadConfigResponseModel(true, updatedConfig);
         } catch (error) {

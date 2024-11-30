@@ -2,13 +2,17 @@ import LocationDataModel from '../data/LocationDataModel';
 
 class ReadConfigResponseModel {
     #status;
+    #content;
+    #message;
     #devMode;
     #locations;
     #checkpoint;
 
-    constructor(status, content) {
+    constructor(status, content, message = '') {
         this.#status = status;
-        
+        this.#content = content;
+        this.#message = message;
+
         if (status && content) {
             this.#devMode = this.#validateAndSetDevMode(content.devMode);
             this.#locations = this.#validateAndSetLocations(content.locations);
@@ -72,6 +76,14 @@ class ReadConfigResponseModel {
         return this.#status;
     }
 
+    get content() {
+        return this.#content;
+    }
+
+    get message() {
+        return this.#message;
+    }
+
     get devMode() {
         return this.#devMode;
     }
@@ -97,6 +109,8 @@ class ReadConfigResponseModel {
     toJSON() {
         return {
             status: this.status,
+            content: this.content,
+            message: this.message,
             devMode: this.devMode,
             locations: this.locations.map(loc => loc.toJSON()),
             checkpoint: this.checkpoint
@@ -104,7 +118,7 @@ class ReadConfigResponseModel {
     }
 
     toString() {
-        return `ReadConfigResponseModel(status=${this.status}, devMode=${this.devMode}, locations=${this.locations.length}, checkpoint=${this.checkpoint})`;
+        return `ReadConfigResponseModel(status=${this.status}, content=${this.content}, message=${this.message}, devMode=${this.devMode}, locations=${this.locations.length}, checkpoint=${this.checkpoint})`;
     }
 
     static fromJSON(json) {
@@ -112,7 +126,7 @@ class ReadConfigResponseModel {
             devMode: json.devMode,
             locations: json.locations,
             checkpoint: json.checkpoint
-        });
+        }, json.message);
     }
 }
 
