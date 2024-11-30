@@ -1,6 +1,6 @@
 {
   "name": "top-github-users-action",
-  "version": "1.0.0",
+  "version": "1.0.5",
   "description": "Modern GitHub Action to track and analyze top GitHub users by country",
   "main": "dist/index.js",
   "scripts": {
@@ -10,6 +10,8 @@
     "test:coverage": "cross-env NODE_ENV=test jest --coverage",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "changelog:first": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
+    "changelog:preview": "conventional-changelog -p angular -u",
+    "changelog:update": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
     "version": "npm run changelog && git add CHANGELOG.md"
   },
   "repository": {

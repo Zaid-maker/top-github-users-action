@@ -47,12 +47,24 @@ jobs:
             echo "::warning::Tests failed but continuing with release"
           fi
 
-      - name: Generate Changelog
+      - name: Configure Git
         run: |
-          npm run changelog
-          echo "CHANGELOG_CONTENT<<EOF" >> $GITHUB_ENV
-          cat CHANGELOG.md >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+
+      - name: Update Changelog
+        run: |
+          # Generate full changelog
+          npm run changelog:first
+          
+          # Stage and commit the changelog
+          git add CHANGELOG.md
+          git commit -m "docs: update CHANGELOG.md for ${{ github.ref_name }} [skip ci]" || echo "No changes to commit"
+
+      - name: Push changelog update
+        run: |
+          # Push directly to main since this is a release
+          git push origin HEAD:main || echo "No changes to push"
 
       - name: Build action
         run: npm run prepare

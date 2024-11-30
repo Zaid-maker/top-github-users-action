@@ -1,0 +1,82 @@
+name: Auto Update Changelog
+
+on:
+  push:
+    branches: ["main"]
+    paths-ignore:
+      - 'CHANGELOG.md'
+      - '.github/**'
+      - 'dist/**'
+  workflow_dispatch:
+
+# Skip if the commit message contains [skip ci] or [skip changelog]
+jobs:
+  should-run:
+    runs-on: ubuntu-latest
+    outputs:
+      should-run: ${{ steps.check.outputs.should-run }}
+    steps:
+      - id: check
+        run: |
+          if echo "${{ github.event.head_commit.message }}" | grep -qiE "\[skip ci\]|\[skip changelog\]"; then
+            echo "should-run=false" >> $GITHUB_OUTPUT
+          else
+            echo "should-run=true" >> $GITHUB_OUTPUT
+          fi
+
+  update-changelog:
+    needs: should-run
+    if: needs.should-run.outputs.should-run == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: |
+          npm ci
+          npm install -g conventional-changelog-cli
+
+      - name: Configure Git
+        run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+
+      - name: Generate Changelog
+        run: |
+          # Generate full changelog
+          conventional-changelog -p angular -i CHANGELOG.md -s -r 0
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          commit-message: 'docs: update CHANGELOG.md [skip changelog]'
+          title: '📝 Update CHANGELOG.md'
+          body: |
+            This PR automatically updates the CHANGELOG.md file based on recent commits.
+            
+            Changes:
+            - Regenerates full changelog using conventional commits
+            - Updates formatting and structure
+            
+            This is an automated PR created by the changelog workflow.
+          branch: update-changelog
+          base: main
+          labels: |
+            documentation
+            automated pr
+          delete-branch: true
