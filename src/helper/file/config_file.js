@@ -3,39 +3,49 @@ import file from '../../core/file';
 import ReadConfigResponseModel from '../../model/config/ReadConfigResponseModel';
 
 class ConfigFileHandler {
-    static CONFIG_PATH = path.join(process.cwd(), 'config.json');
+    static CONFIG_PATHS = [
+        path.join(process.cwd(), 'config.json'),
+        path.join(__dirname, '../../../config.json'),
+        path.join(__dirname, '../../../dist/config.json')
+    ];
 
     static async readConfigFile() {
-        try {
-            console.log(`Attempting to read config from: ${this.CONFIG_PATH}`);
-            const response = await file.readJson(this.CONFIG_PATH);
-            
-            if (!response.status) {
-                console.error(`Config file read failed: ${response.message}`);
-                throw new Error(`Failed to read config file: ${response.message}`);
-            }
+        let lastError = null;
 
-            if (!response.content) {
-                console.error('Config file is empty or invalid');
-                throw new Error('Config file is empty or invalid');
-            }
+        for (const configPath of this.CONFIG_PATHS) {
+            try {
+                console.log(`Attempting to read config from: ${configPath}`);
+                const response = await file.readJson(configPath);
+                
+                if (!response.status) {
+                    console.error(`Config file read failed at ${configPath}: ${response.message}`);
+                    continue;
+                }
 
-            if (!response.content.settings) {
-                console.error('Config file missing required settings section');
-                throw new Error('Config file missing required settings section');
-            }
+                if (!response.content) {
+                    console.error(`Config file is empty or invalid at ${configPath}`);
+                    continue;
+                }
 
-            if (!response.content.locations) {
-                console.error('Config file missing required locations section');
-                throw new Error('Config file missing required locations section');
-            }
+                if (!response.content.settings) {
+                    console.error(`Config file missing required settings section at ${configPath}`);
+                    continue;
+                }
 
-            console.log('Successfully loaded config file');
-            return new ReadConfigResponseModel(true, response.content);
-        } catch (error) {
-            console.error('Error reading config file:', error);
-            return new ReadConfigResponseModel(false, null, error.message);
+                if (!response.content.locations) {
+                    console.error(`Config file missing required locations section at ${configPath}`);
+                    continue;
+                }
+
+                console.log(`Successfully loaded config file from ${configPath}`);
+                return new ReadConfigResponseModel(true, response.content);
+            } catch (error) {
+                console.error(`Error reading config file from ${configPath}:`, error);
+                lastError = error;
+            }
         }
+
+        return new ReadConfigResponseModel(false, null, lastError ? lastError.message : 'Failed to read config file from any location');
     }
 
     static async updateConfigFile(updates) {
@@ -51,7 +61,7 @@ class ConfigFileHandler {
                 lastUpdated: new Date().toISOString()
             };
 
-            const response = await file.outputJson(this.CONFIG_PATH, updatedConfig);
+            const response = await file.outputJson(this.CONFIG_PATHS[0], updatedConfig);
             console.log(response.message);
             
             if (!response.status) {
