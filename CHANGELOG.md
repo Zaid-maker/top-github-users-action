@@ -78,6 +78,27 @@ jobs:
 
 Need help? Open an issue at: https://github.com/Zaid-maker/top-github-users-action/issues
 
+## [1.0.3] - 2024-01-15
+
+### Fixed
+- Config file write operation error handling
+- Cross-platform compatibility in build scripts
+- GitHub Actions workflow reliability
+
+### Added
+- Automated release workflow
+- Automated changelog generation
+- Comprehensive CI/CD pipeline
+- Node.js 20.x support
+- NPM caching in CI/CD
+- Security audit in build process
+
+### Changed
+- Updated GitHub Actions to latest versions
+- Enhanced build artifact handling
+- Improved release automation
+- Better error reporting in config operations
+
 ## [1.0.2] - 2024-01-15
 
 ### Fixed
@@ -126,6 +147,7 @@ Need help? Open an issue at: https://github.com/Zaid-maker/top-github-users-acti
 - simple-git: 2.39.0 → 3.19.1
 - Node.js requirement: 20.x
 
+[1.0.3]: https://github.com/Zaid-maker/top-github-users-action/compare/v1.0.2...v1.0.3
 [1.0.2]: https://github.com/Zaid-maker/top-github-users-action/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/Zaid-maker/top-github-users-action/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/Zaid-maker/top-github-users-action/releases/tag/v1.0.0
