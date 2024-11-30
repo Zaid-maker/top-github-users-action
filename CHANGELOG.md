@@ -1,5 +1,18 @@
 ## <small>1.0.5 (2024-11-30)</small>
 
+
+
+
+## <small>1.0.6 (2024-11-30)</small>
+
+* fix: correct configFile import and usage ([4340b6d](https://github.com/Zaid-maker/top-github-users-action/commit/4340b6d))
+* fix workflow ([1d9fe6b](https://github.com/Zaid-maker/top-github-users-action/commit/1d9fe6b))
+* docs: update CHANGELOG.md for v1.0.5 [skip ci] ([9900d6a](https://github.com/Zaid-maker/top-github-users-action/commit/9900d6a))
+
+
+
+## <small>1.0.5 (2024-11-30)</small>
+
 * feat: improve release and changelog automation ([d4d582e](https://github.com/Zaid-maker/top-github-users-action/commit/d4d582e))
 
 
