@@ -1,6 +1,21 @@
-name: "JavaScript Action | File Handling and GitHub Operations"
-description: "The repository shows file handling and git operations"
+name: 'Top GitHub Users by Country'
+author: 'Zaid Hafeez'
+description: 'Track and analyze top GitHub users by country using modern JavaScript and GraphQL API'
+
+branding:
+  icon: 'users'
+  color: 'blue'
 
 runs:
-  using: "node20"
-  main: "dist/index.js"
+  using: 'node20'
+  main: 'dist/index.js'
+
+inputs:
+  token:
+    description: 'GitHub token with necessary permissions'
+    required: true
+    default: '${{ github.token }}'
+  
+outputs:
+  summary:
+    description: 'Summary of tracked users and countries'

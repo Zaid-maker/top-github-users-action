@@ -1,7 +1,8 @@
 /*!
- * top-github-users-monitor 2.0.0
- * https://github.com/gayanvoice/top-github-users-monitor
- * (c) 2021 gayanvoice
+ * top-github-users-action 1.0.0
+ * https://github.com/Zaid-maker/top-github-users-action
+ * (c) 2024 Zaid Hafeez
+ * Originally created by Gayan Kuruppu
  * Released under the MIT License
  */
 import { pullGit } from './helper/git/pull-git';

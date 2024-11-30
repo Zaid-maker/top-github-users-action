@@ -3,7 +3,7 @@
 
 > **DISCLAIMER**: This repository is a modernized fork of the original work by [gayanvoice](https://github.com/gayanvoice). The codebase has been updated with modern JavaScript practices, improved error handling, and current dependencies while maintaining the original functionality. This fork aims to ensure the project remains reliable and maintainable for future use.
 
-A modern GitHub Action to track and analyze top GitHub users by country using the GitHub GraphQL API. This action generates detailed rankings and insights about the most active GitHub users in different countries. Visit [gayanvoice/top-github-users](https://github.com/gayanvoice/top-github-users) for the full list.
+A modern GitHub Action to track and analyze top GitHub users by country using the GitHub GraphQL API. This action generates detailed rankings and insights about the most active GitHub users in different countries. Visit [Zaid-maker/top-github-users](https://github.com/Zaid-maker/top-github-users) for the full list.
 
 ## Features
 
@@ -144,7 +144,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - uses: gayanvoice/top-github-users-action@master
+      - uses: Zaid-maker/top-github-users-action@master
         env:
           CUSTOM_TOKEN: ${{ secrets.CUSTOM_TOKEN }}
 ```
@@ -166,11 +166,15 @@ The `config.json` file supports these settings:
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+
+## Credits
+
+This project was originally created by [gayanvoice](https://github.com/gayanvoice) and is now maintained by [Zaid Hafeez](https://github.com/Zaid-maker).
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 <table>
 	<tr>
