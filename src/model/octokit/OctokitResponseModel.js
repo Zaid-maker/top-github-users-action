@@ -2,60 +2,131 @@ import OctokitPageInfoModel from './OctokitPageInfoModel';
 import UserDataModel from '../data/UserDataModel';
 
 class OctokitResponseModel {
+    #status;
+    #message;
+    #users;
+    #pageInfo;
+
     constructor(status, message, users = [], pageInfo = null) {
-        this.status = status;
-        this.message = message;
-        this.node = users;
-        this.pageInfo = pageInfo ? new OctokitPageInfoModel(pageInfo) : null;
+        this.#status = Boolean(status);
+        this.#message = this.#validateMessage(message);
+        this.#users = this.#validateUsers(users);
+        this.#pageInfo = this.#validatePageInfo(pageInfo);
     }
 
-    static validate(value) {
-        return value === '' || value === null || value === undefined;
+    #validateMessage(message) {
+        return message && typeof message === 'string' ? message : 'No message provided';
     }
 
-    static setValue(value) {
-        return this.validate(value) ? "undefined value" : value;
-    }
-
-    static calculatePublicContributions(contributionsCollection) {
-        const totalContributions = contributionsCollection.contributionCalendar.totalContributions;
-        const privateContributions = contributionsCollection.restrictedContributionsCount;
-        return totalContributions - privateContributions;
-    }
-
-    static processUserData(userData) {
-        if (userData.__typename !== 'User') {
-            return null;
+    #validateUsers(users) {
+        if (!Array.isArray(users)) {
+            console.warn('Users must be an array, received:', typeof users);
+            return [];
         }
+        return users.filter(user => user instanceof UserDataModel);
+    }
 
-        return new UserDataModel(
-            this.setValue(userData.login),
-            this.setValue(userData.name),
-            this.setValue(userData.avatarUrl),
-            this.setValue(userData.location),
-            this.setValue(userData.company),
-            this.setValue(userData.twitterUsername),
-            this.setValue(userData.followers.totalCount),
-            this.setValue(userData.contributionsCollection.restrictedContributionsCount),
-            this.setValue(this.calculatePublicContributions(userData.contributionsCollection))
+    #validatePageInfo(pageInfo) {
+        if (pageInfo === null) {
+            return OctokitPageInfoModel.createEmpty();
+        }
+        return pageInfo instanceof OctokitPageInfoModel
+            ? pageInfo
+            : new OctokitPageInfoModel(pageInfo);
+    }
+
+    get status() { return this.#status; }
+    get message() { return this.#message; }
+    get users() { return [...this.#users]; }
+    get pageInfo() { return this.#pageInfo; }
+
+    hasUsers() {
+        return this.#users.length > 0;
+    }
+
+    getUserCount() {
+        return this.#users.length;
+    }
+
+    hasNextPage() {
+        return this.#pageInfo.hasMore();
+    }
+
+    getNextCursor() {
+        return this.#pageInfo.getNextCursor();
+    }
+
+    addUsers(newUsers) {
+        const validUsers = newUsers.filter(user => user instanceof UserDataModel);
+        this.#users.push(...validUsers);
+    }
+
+    sortUsersByContributions() {
+        this.#users.sort((a, b) => b.getTotalContributions() - a.getTotalContributions());
+    }
+
+    getUsersByLocation(location) {
+        return this.#users.filter(user => 
+            user.location.toLowerCase().includes(location.toLowerCase())
         );
+    }
+
+    toJSON() {
+        return {
+            status: this.#status,
+            message: this.#message,
+            userCount: this.getUserCount(),
+            users: this.#users.map(user => user.toJSON()),
+            pageInfo: this.#pageInfo.toJSON()
+        };
+    }
+
+    toString() {
+        return `OctokitResponseModel(status=${this.#status}, users=${this.getUserCount()}, hasNext=${this.hasNextPage()})`;
     }
 
     static fromApiResponse(status, response) {
         if (!status || !response) {
-            return new OctokitResponseModel(false, 'Invalid response', [], null);
+            return new OctokitResponseModel(false, 'Invalid response');
         }
 
-        const users = response.search.edges
-            .map(edge => this.processUserData(edge.node))
-            .filter(user => user !== null);
+        try {
+            const users = response.search.edges
+                .map(edge => this.#processUserData(edge.node))
+                .filter(user => user !== null);
 
-        return new OctokitResponseModel(
-            true,
-            'Successfully processed response',
-            users,
-            response.search.pageInfo
-        );
+            const pageInfo = new OctokitPageInfoModel(response.search.pageInfo);
+
+            return new OctokitResponseModel(
+                true,
+                'Successfully processed API response',
+                users,
+                pageInfo
+            );
+        } catch (error) {
+            console.error('Error processing API response:', error);
+            return new OctokitResponseModel(
+                false,
+                `Error processing API response: ${error.message}`
+            );
+        }
+    }
+
+    static #processUserData(userData) {
+        if (!userData || userData.__typename !== 'User') {
+            return null;
+        }
+
+        try {
+            return UserDataModel.fromGraphQLData(userData);
+        } catch (error) {
+            console.warn('Error processing user data:', error);
+            return null;
+        }
+    }
+
+    static createEmpty(message = 'Empty response') {
+        return new OctokitResponseModel(true, message);
     }
 }
 
