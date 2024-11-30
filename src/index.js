@@ -145,7 +145,7 @@ class GitHubUsersMonitor {
             }
         }
 
-        if (!config.devMode) {
+        if (!config.settings.devMode) {
             await outputMarkdown.saveIndexMarkdownFile(
                 createIndexPage.create(this.GITHUB_REPOSITORY, config)
             );
@@ -167,14 +167,16 @@ class GitHubUsersMonitor {
 
     static async run() {
         try {
-            const config = await configFile.readConfigFile();
+            const configResponse = await configFile.readConfigFile();
             const checkpoint = await outputCheckpoint.readCheckpointFile();
 
-            if (!config.status || !checkpoint.status) {
+            if (!configResponse.status || !checkpoint.status) {
                 throw new Error('Failed to read configuration or checkpoint');
             }
 
-            if (!config.devMode) {
+            const config = configResponse.content;
+
+            if (!config.settings.devMode) {
                 await pullGit.pull();
             }
 
@@ -184,7 +186,7 @@ class GitHubUsersMonitor {
             await this.#saveMarkdown(config, checkpoint);
             await this.#saveHtml(config);
 
-            if (!config.devMode) {
+            if (!config.settings.devMode) {
                 const countryName = formatMarkdown.capitalizeTheFirstLetterOfEachWord(checkpointCountry);
                 await commitGit.commit(`Update ${countryName}`);
                 await pushGit.push();

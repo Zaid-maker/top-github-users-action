@@ -7,14 +7,30 @@ class ConfigFileHandler {
 
     static async readConfigFile() {
         try {
+            console.log(`Attempting to read config from: ${this.CONFIG_PATH}`);
             const response = await file.readJson(this.CONFIG_PATH);
-            console.log(`Reading config from: ${this.CONFIG_PATH}`);
-            console.log(response.message);
-
+            
             if (!response.status) {
+                console.error(`Config file read failed: ${response.message}`);
                 throw new Error(`Failed to read config file: ${response.message}`);
             }
 
+            if (!response.content) {
+                console.error('Config file is empty or invalid');
+                throw new Error('Config file is empty or invalid');
+            }
+
+            if (!response.content.settings) {
+                console.error('Config file missing required settings section');
+                throw new Error('Config file missing required settings section');
+            }
+
+            if (!response.content.locations) {
+                console.error('Config file missing required locations section');
+                throw new Error('Config file missing required locations section');
+            }
+
+            console.log('Successfully loaded config file');
             return new ReadConfigResponseModel(true, response.content);
         } catch (error) {
             console.error('Error reading config file:', error);

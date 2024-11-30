@@ -10289,14 +10289,30 @@ class ConfigFileHandler {
 
     static async readConfigFile() {
         try {
+            console.log(`Attempting to read config from: ${this.CONFIG_PATH}`);
             const response = await file.readJson(this.CONFIG_PATH);
-            console.log(`Reading config from: ${this.CONFIG_PATH}`);
-            console.log(response.message);
-
+            
             if (!response.status) {
+                console.error(`Config file read failed: ${response.message}`);
                 throw new Error(`Failed to read config file: ${response.message}`);
             }
 
+            if (!response.content) {
+                console.error('Config file is empty or invalid');
+                throw new Error('Config file is empty or invalid');
+            }
+
+            if (!response.content.settings) {
+                console.error('Config file missing required settings section');
+                throw new Error('Config file missing required settings section');
+            }
+
+            if (!response.content.locations) {
+                console.error('Config file missing required locations section');
+                throw new Error('Config file missing required locations section');
+            }
+
+            console.log('Successfully loaded config file');
             return new ReadConfigResponseModel(true, response.content);
         } catch (error) {
             console.error('Error reading config file:', error);
@@ -10896,7 +10912,7 @@ class GitHubUsersMonitor {
             }
         }
 
-        if (!config.devMode) {
+        if (!config.settings.devMode) {
             await output_markdown_namespaceObject.outputMarkdown.saveIndexMarkdownFile(
                 create_index_page.createIndexPage.create(this.GITHUB_REPOSITORY, config)
             );
@@ -10918,14 +10934,16 @@ class GitHubUsersMonitor {
 
     static async run() {
         try {
-            const config = await config_file_namespaceObject.configFile.readConfigFile();
+            const configResponse = await config_file_namespaceObject.configFile.readConfigFile();
             const checkpoint = await output_checkpoint_namespaceObject.outputCheckpoint.readCheckpointFile();
 
-            if (!config.status || !checkpoint.status) {
+            if (!configResponse.status || !checkpoint.status) {
                 throw new Error('Failed to read configuration or checkpoint');
             }
 
-            if (!config.devMode) {
+            const config = configResponse.content;
+
+            if (!config.settings.devMode) {
                 await pull_git_namespaceObject.pullGit.pull();
             }
 
@@ -10935,7 +10953,7 @@ class GitHubUsersMonitor {
             await this.#saveMarkdown(config, checkpoint);
             await this.#saveHtml(config);
 
-            if (!config.devMode) {
+            if (!config.settings.devMode) {
                 const countryName = format_markdown.formatMarkdown.capitalizeTheFirstLetterOfEachWord(checkpointCountry);
                 await commit_git.commitGit.commit(`Update ${countryName}`);
                 await push_git.pushGit.push();
