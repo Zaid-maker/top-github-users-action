@@ -1,15 +1,38 @@
-let ReadCheckpointResponseModel = function (status, content) {
-    let validate = function (value) {
-        return !(value === '' || value === null || value === undefined);
+class ReadCheckpointResponseModel {
+    #status;
+    #checkpoint;
+
+    constructor(status, content) {
+        this.#status = status;
+        this.#checkpoint = status ? this.#validateAndSetCheckpoint(content?.checkpoint) : 0;
     }
-    let setCheckpoint = function (checkpoint) {
-        if (validate(checkpoint)) {
-            return checkpoint;
-        } else {
-            return 0;
-        }
+
+    static #isValid(value) {
+        return value !== '' && value !== null && value !== undefined;
     }
-    this.status = status;
-    if (status) this.checkpoint = setCheckpoint(content.checkpoint);
+
+    #validateAndSetCheckpoint(checkpoint) {
+        return ReadCheckpointResponseModel.#isValid(checkpoint) ? checkpoint : 0;
+    }
+
+    get status() {
+        return this.#status;
+    }
+
+    get checkpoint() {
+        return this.#checkpoint;
+    }
+
+    toJSON() {
+        return {
+            status: this.status,
+            checkpoint: this.checkpoint
+        };
+    }
+
+    toString() {
+        return `ReadCheckpointResponseModel(status=${this.status}, checkpoint=${this.checkpoint})`;
+    }
 }
-module.exports = ReadCheckpointResponseModel;
+
+export default ReadCheckpointResponseModel;
