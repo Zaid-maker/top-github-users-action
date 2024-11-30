@@ -31,6 +31,13 @@ jobs:
         env:
           CI: true
 
+      - name: Generate Changelog
+        run: |
+          npm run changelog
+          echo "CHANGELOG_CONTENT<<EOF" >> $GITHUB_ENV
+          cat CHANGELOG.md >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
       - name: Build action
         run: npm run prepare
 
@@ -41,6 +48,8 @@ jobs:
             dist/*
             LICENSE
             README.md
-          generate_release_notes: true
+            CHANGELOG.md
+          body: ${{ env.CHANGELOG_CONTENT }}
+          generate_release_notes: false
           draft: false
           prerelease: false
