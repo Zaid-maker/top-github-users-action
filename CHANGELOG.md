@@ -1,78 +1,57 @@
-## <small>1.0.5 (2024-11-30)</small>
-
-* feat: improve release and changelog automation ([d4d582e](https://github.com/Zaid-maker/top-github-users-action/commit/d4d582e))
+## [1.0.5](https://github.com/Zaid-maker/top-github-users-action/compare/v1.0.6...v1.0.5) (2024-11-30)
 
 
 
-## <small>1.0.4 (2024-11-30)</small>
-
-* auto ([fe4d8c1](https://github.com/Zaid-maker/top-github-users-action/commit/fe4d8c1))
-* Fix tests ([11dbc0b](https://github.com/Zaid-maker/top-github-users-action/commit/11dbc0b))
-* git commit -m "fix: ensure consistent test environment across workflows" ([0439e5c](https://github.com/Zaid-maker/top-github-users-action/commit/0439e5c))
-* fix: improve config file handling and cross-platform compatibility ([414c923](https://github.com/Zaid-maker/top-github-users-action/commit/414c923))
-* docs(changelog): add v1.0.3 release notes ([8438e2a](https://github.com/Zaid-maker/top-github-users-action/commit/8438e2a))
+## [1.0.6](https://github.com/Zaid-maker/top-github-users-action/compare/v1.0.5...v1.0.6) (2024-11-30)
 
 
+### Bug Fixes
 
-## <small>1.0.3 (2024-11-30)</small>
-
-* add test ([b1cb65a](https://github.com/Zaid-maker/top-github-users-action/commit/b1cb65a))
-* fix ([068964e](https://github.com/Zaid-maker/top-github-users-action/commit/068964e))
-* release script ([cf7829c](https://github.com/Zaid-maker/top-github-users-action/commit/cf7829c))
-* update ([440b8b9](https://github.com/Zaid-maker/top-github-users-action/commit/440b8b9))
-* update ([5f9d60b](https://github.com/Zaid-maker/top-github-users-action/commit/5f9d60b))
-* docs: update CHANGELOG for v1.0.2 ([b7471df](https://github.com/Zaid-maker/top-github-users-action/commit/b7471df))
+* correct configFile import and usage ([4340b6d](https://github.com/Zaid-maker/top-github-users-action/commit/4340b6d6a7ed665fd2aad311e1abf9d57fdea1c7))
 
 
 
-## <small>1.0.2 (2024-11-30)</small>
-
-* fix: config file handling ([8467697](https://github.com/Zaid-maker/top-github-users-action/commit/8467697))
-* docs: add migration guide to CHANGELOG ([98406de](https://github.com/Zaid-maker/top-github-users-action/commit/98406de))
-* docs: update CHANGELOG for v1.0.0 and v1.0.1 ([db70d55](https://github.com/Zaid-maker/top-github-users-action/commit/db70d55))
-* docs: update migration guide for gayanvoice users ([d34ee5c](https://github.com/Zaid-maker/top-github-users-action/commit/d34ee5c))
+## [1.0.5](https://github.com/Zaid-maker/top-github-users-action/compare/v1.0.4...v1.0.5) (2024-11-30)
 
 
+### Features
 
-## <small>1.0.1 (2024-11-30)</small>
-
-* fix: ensure config.json is properly bundled ([d17bfe8](https://github.com/Zaid-maker/top-github-users-action/commit/d17bfe8))
+* improve release and changelog automation ([d4d582e](https://github.com/Zaid-maker/top-github-users-action/commit/d4d582e8c31f9753114cd1c96f57b4000c6916a1))
 
 
 
-## 1.0.0 (2024-11-30)
+## [1.0.4](https://github.com/Zaid-maker/top-github-users-action/compare/v1.0.3...v1.0.4) (2024-11-30)
 
-* chore: prepare v1.0.0 release ([342b3f1](https://github.com/Zaid-maker/top-github-users-action/commit/342b3f1))
-* [ImgBot] Optimize images ([ca25958](https://github.com/Zaid-maker/top-github-users-action/commit/ca25958))
-* add DISCLAIMER ([0eaae09](https://github.com/Zaid-maker/top-github-users-action/commit/0eaae09))
-* add workflow ([53785bb](https://github.com/Zaid-maker/top-github-users-action/commit/53785bb))
-* Create LICENSE ([6f4a307](https://github.com/Zaid-maker/top-github-users-action/commit/6f4a307))
-* enhance ([cb25fad](https://github.com/Zaid-maker/top-github-users-action/commit/cb25fad))
-* format ([b954820](https://github.com/Zaid-maker/top-github-users-action/commit/b954820))
-* format ([1142695](https://github.com/Zaid-maker/top-github-users-action/commit/1142695))
-* format ([ed7b9c5](https://github.com/Zaid-maker/top-github-users-action/commit/ed7b9c5))
-* modern ([b627ce5](https://github.com/Zaid-maker/top-github-users-action/commit/b627ce5))
-* modern ([6448952](https://github.com/Zaid-maker/top-github-users-action/commit/6448952))
-* modern ([5e6f0b0](https://github.com/Zaid-maker/top-github-users-action/commit/5e6f0b0))
-* modern ([5189556](https://github.com/Zaid-maker/top-github-users-action/commit/5189556))
-* modern ([e105be6](https://github.com/Zaid-maker/top-github-users-action/commit/e105be6))
-* modern code ([8da6805](https://github.com/Zaid-maker/top-github-users-action/commit/8da6805))
-* modern main index file ([b3241ed](https://github.com/Zaid-maker/top-github-users-action/commit/b3241ed))
-* push the project ([da5b608](https://github.com/Zaid-maker/top-github-users-action/commit/da5b608))
-* start from `v1.0.0` ([5c98340](https://github.com/Zaid-maker/top-github-users-action/commit/5c98340))
-* update ([d90d27a](https://github.com/Zaid-maker/top-github-users-action/commit/d90d27a))
-* update ([d41278c](https://github.com/Zaid-maker/top-github-users-action/commit/d41278c))
-* update ([86f6929](https://github.com/Zaid-maker/top-github-users-action/commit/86f6929))
-* update ([54d3439](https://github.com/Zaid-maker/top-github-users-action/commit/54d3439))
-* update ([50d0925](https://github.com/Zaid-maker/top-github-users-action/commit/50d0925))
-* update ([09a032b](https://github.com/Zaid-maker/top-github-users-action/commit/09a032b))
-* update action.yml ([0c16155](https://github.com/Zaid-maker/top-github-users-action/commit/0c16155))
-* update config ([9d9b8be](https://github.com/Zaid-maker/top-github-users-action/commit/9d9b8be))
-* update deps ([56c5753](https://github.com/Zaid-maker/top-github-users-action/commit/56c5753))
-* update docs ([1751096](https://github.com/Zaid-maker/top-github-users-action/commit/1751096))
-* update logos ([5c0d939](https://github.com/Zaid-maker/top-github-users-action/commit/5c0d939))
-* update README ([0c651ae](https://github.com/Zaid-maker/top-github-users-action/commit/0c651ae))
-* updates ([f7f79ee](https://github.com/Zaid-maker/top-github-users-action/commit/f7f79ee))
+
+### Bug Fixes
+
+* improve config file handling and cross-platform compatibility ([414c923](https://github.com/Zaid-maker/top-github-users-action/commit/414c92394601c155170d183ece75892c5aa923bb))
+
+
+
+## [1.0.3](https://github.com/Zaid-maker/top-github-users-action/compare/v1.0.2...v1.0.3) (2024-11-30)
+
+
+
+## [1.0.2](https://github.com/Zaid-maker/top-github-users-action/compare/v1.0.1...v1.0.2) (2024-11-30)
+
+
+### Bug Fixes
+
+* config file handling ([8467697](https://github.com/Zaid-maker/top-github-users-action/commit/84676972fb919f2f465c7bfb656bf12608f6cc4e))
+
+
+
+## [1.0.1](https://github.com/Zaid-maker/top-github-users-action/compare/v1.0.0...v1.0.1) (2024-11-30)
+
+
+### Bug Fixes
+
+* ensure config.json is properly bundled ([d17bfe8](https://github.com/Zaid-maker/top-github-users-action/commit/d17bfe8698f5d066473053cbd80887df89d89853))
+
+
+
+# 1.0.0 (2024-11-30)
 
 
 
