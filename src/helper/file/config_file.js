@@ -1,6 +1,6 @@
 import path from 'path';
-import file from '../../core/file';
-import ReadConfigResponseModel from '../../model/config/ReadConfigResponseModel';
+import file from '../../core/file.js';
+import ReadConfigResponseModel from '../../model/config/ReadConfigResponseModel.js';
 
 class ConfigFileHandler {
     static CONFIG_PATHS = [

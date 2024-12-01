@@ -1,5 +1,5 @@
-import OctokitPageInfoModel from './OctokitPageInfoModel';
-import UserDataModel from '../data/UserDataModel';
+import OctokitPageInfoModel from './OctokitPageInfoModel.js';
+import UserDataModel from '../data/UserDataModel.js';
 
 class OctokitResponseModel {
     #status;

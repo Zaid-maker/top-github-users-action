@@ -1,4 +1,4 @@
-import LocationDataModel from '../data/LocationDataModel';
+import LocationDataModel from '../data/LocationDataModel.js';
 
 class ReadConfigResponseModel {
     #status;

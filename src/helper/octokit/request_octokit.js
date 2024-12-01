@@ -1,4 +1,4 @@
-import octokit from '../../core/octokit';
+import octokit from '../../core/octokit.js';
 
 class OctokitRequestHandler {
     static setLocation(place) {

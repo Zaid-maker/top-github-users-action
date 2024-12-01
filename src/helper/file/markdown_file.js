@@ -1,4 +1,4 @@
-import file from '../../core/file';
+import file from '../../core/file.js';
 
 class MarkdownFileHandler {
     static async outputMarkdownFile(fileName, markdown) {

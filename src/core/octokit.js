@@ -1,5 +1,5 @@
-import { graphql } from '@octokit/graphql';
-import OctokitResponseModel from '../model/octokit/OctokitResponseModel';
+import { graphql } from '@octokit/graphql.js';
+import OctokitResponseModel from '../model/octokit/OctokitResponseModel.js';
 
 class OctokitHandler {
     static getHeader(AUTH_KEY) {

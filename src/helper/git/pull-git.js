@@ -1,4 +1,4 @@
-import git from '../../core/git';
+import git from '../../core/git.js';
 
 class GitPuller {
     static async pull() {

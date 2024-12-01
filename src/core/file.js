@@ -1,6 +1,6 @@
 import fs from 'fs-extra';
-import OutputFileResponseModel from '../model/file/OutputFileResponseModel';
-import ReadFileResponseModel from '../model/file/ReadFileResponseModel';
+import OutputFileResponseModel from '../model/file/OutputFileResponseModel.js';
+import ReadFileResponseModel from '../model/file/ReadFileResponseModel.js';
 
 class FileHandler {
     static async outputJson(fileName, json) {

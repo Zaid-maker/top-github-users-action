@@ -18,23 +18,23 @@
  * 
  * Released under the MIT License
  */
-import { pullGit } from './helper/git/pull-git';
-import { commitGit } from './helper/git/commit-git';
-import { pushGit } from './helper/git/push-git';
-import ConfigFileHandler from './helper/file/config_file';
-import CheckpointHandler from './helper/checkpoint/output_checkpoint';
-import CacheHandler from './helper/cache/output_cache';
-import { outputMarkdown } from './helper/markdown/output_markdown';
-import { outputHtml } from './helper/html/output_html';
-import { createHtmlFile } from './helper/html/file/create_html_file';
-import { createRankingJsonFile } from './helper/html/file/create_ranking_json_file';
-import { createIndexPage } from './helper/markdown/page/create_index_page';
-import { createPublicContributionsPage } from './helper/markdown/page/create_public_contributions_page';
-import { createTotalContributionsPage } from './helper/markdown/page/create_total_contributions_page';
-import { createFollowersPage } from './helper/markdown/page/create_followers_page';
-import OctokitHandler from './helper/octokit/request_octokit';
-import { formatMarkdown } from './helper/markdown/format_markdown';
-import { OutputMarkdownModel } from './model/markdown/OutputMarkdownModel';
+import { pullGit } from './helper/git/pull-git.js';
+import { commitGit } from './helper/git/commit-git.js';
+import { pushGit } from './helper/git/push-git.js';
+import ConfigFileHandler from './helper/file/config_file.js';
+import CheckpointHandler from './helper/checkpoint/output_checkpoint.js';
+import CacheHandler from './helper/cache/output_cache.js';
+import { outputMarkdown } from './helper/markdown/output_markdown.js';
+import { outputHtml } from './helper/html/output_html.js';
+import { createHtmlFile } from './helper/html/file/create_html_file.js';
+import { createRankingJsonFile } from './helper/html/file/create_ranking_json_file.js';
+import { createIndexPage } from './helper/markdown/page/create_index_page.js';
+import { createPublicContributionsPage } from './helper/markdown/page/create_public_contributions_page.js';
+import { createTotalContributionsPage } from './helper/markdown/page/create_total_contributions_page.js';
+import { createFollowersPage } from './helper/markdown/page/create_followers_page.js';
+import OctokitHandler from './helper/octokit/request_octokit.js';
+import { formatMarkdown } from './helper/markdown/format_markdown.js';
+import { OutputMarkdownModel } from './model/markdown/OutputMarkdownModel.js';
 
 class GitHubUsersMonitor {
     static AUTH_KEY = process.env.CUSTOM_TOKEN;

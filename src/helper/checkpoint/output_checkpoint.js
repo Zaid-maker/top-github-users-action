@@ -1,5 +1,5 @@
-import checkpointFile from '../../helper/file/checkpoint_file';
-import CheckpointDataModel from '../../model/data/CheckpointDataModel';
+import checkpointFile from '../../helper/file/checkpoint_file.js';
+import CheckpointDataModel from '../../model/data/CheckpointDataModel.js';
 
 class CheckpointHandler {
     static async saveCheckpoint(locationsArray, country, currentCheckpoint) {

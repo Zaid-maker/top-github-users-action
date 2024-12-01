@@ -1,5 +1,5 @@
-import path from 'path';
-import htmlFile from '../../helper/file/html_file';
+import path from 'path.js';
+import htmlFile from '../../helper/file/html_file.js';
 
 class HtmlOutputHandler {
     static DOCS_DIR = 'docs';

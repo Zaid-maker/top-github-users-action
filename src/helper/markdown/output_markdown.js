@@ -1,5 +1,5 @@
-import path from 'path';
-import markdownFile from '../../helper/file/markdown_file';
+import path from 'path.js';
+import markdownFile from '../../helper/file/markdown_file.js';
 
 class MarkdownOutputHandler {
     static formatCountryName(country) {

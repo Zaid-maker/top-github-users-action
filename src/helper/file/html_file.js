@@ -1,4 +1,4 @@
-import file from '../../core/file';
+import file from '../../core/file.js';
 
 class HtmlFileHandler {
     static async outputHtmlFile(fileName, html) {

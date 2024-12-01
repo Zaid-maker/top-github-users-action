@@ -1,5 +1,5 @@
-import file from '../../core/file';
-import ReadCheckpointResponseModel from '../../model/checkpoint/ReadCheckpointResponseModel';
+import file from '../../core/file.js';
+import ReadCheckpointResponseModel from '../../model/checkpoint/ReadCheckpointResponseModel.js';
 
 class CheckpointFileHandler {
     static CHECKPOINT_PATH = 'checkpoint.json';
