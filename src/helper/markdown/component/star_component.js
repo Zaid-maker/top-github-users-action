@@ -1,16 +1,10 @@
-let starComponent = function () {
-    let create = function () {
-        let table = `<table>\n`;
-        table = table + `\t<tr>\n`;
-        table = table + `\t\t<td>\n`;
-        table = table + `\t\t\tDon't forget to star ⭐ this repository\n`
-        table = table + `\t\t</td>\n`;
-        table = table + `\t</tr>\n`;
-        table = table + `</table>\n\n`;
-        return table;
+class StarComponent {
+    static create(githubUsernameAndRepository) {
+        let markdown = '';
+        markdown = markdown + '### ⭐ Give a Star\n\n';
+        markdown = markdown + `You can also give a star to support the project. Feel free to follow ${githubUsernameAndRepository.split('/')[0]} to get notified about new updates.\n\n`;
+        return markdown;
     }
-    return {
-        create: create,
-    };
-}();
-module.exports = starComponent;
+}
+
+export { StarComponent as starComponent };
