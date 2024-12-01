@@ -1,5 +1,12 @@
-## <small>1.0.5 (2024-11-30)</small>
+## <small>1.0.5 (2024-12-01)</small>
 
+
+
+
+## <small>1.0.7 (2024-12-01)</small>
+
+* fix: improve checkpoint file handling ([ddb5a21](https://github.com/Zaid-maker/top-github-users-action/commit/ddb5a21))
+* docs: update CHANGELOG.md for v1.0.6 [skip ci] ([54b2fe8](https://github.com/Zaid-maker/top-github-users-action/commit/54b2fe8))
 
 
 
