@@ -1,10 +1,9 @@
-require('./sourcemap-register.js');/******/ (() => { // webpackBootstrap
-/******/ 	var __webpack_modules__ = ({
+import './sourcemap-register.cjs';import { createRequire as __WEBPACK_EXTERNAL_createRequire } from "module";
+/******/ var __webpack_modules__ = ({
 
 /***/ 4751:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
-"use strict";
 
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
@@ -18,7 +17,6 @@ __export(__nccwpck_require__(2825));
 /***/ 2825:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
-"use strict";
 
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
@@ -80,7 +78,6 @@ exports.READABLE = exports.FILE + exports.FOLDER;
 /***/ 9819:
 /***/ ((__unused_webpack_module, exports) => {
 
-"use strict";
 var __webpack_unused_export__;
 
 __webpack_unused_export__ = ({ value: true });
@@ -147,7 +144,6 @@ __webpack_unused_export__ = deferred;
 /***/ 9440:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-"use strict";
 
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -531,7 +527,6 @@ var endpoint = withDefaults(null, DEFAULTS);
 /***/ 8467:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-"use strict";
 
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -689,7 +684,6 @@ function withCustomRequest(customRequest) {
 /***/ 537:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-"use strict";
 
 var __create = Object.create;
 var __defProp = Object.defineProperty;
@@ -787,7 +781,6 @@ var RequestError = class extends Error {
 /***/ 6234:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-"use strict";
 
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -1863,7 +1856,6 @@ formatters.O = function (v) {
 /***/ 8932:
 /***/ ((__unused_webpack_module, exports) => {
 
-"use strict";
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
@@ -1891,7 +1883,6 @@ exports.Deprecation = Deprecation;
 /***/ 9618:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-"use strict";
 
 
 const fs = __nccwpck_require__(7758)
@@ -2060,7 +2051,6 @@ module.exports = copySync
 /***/ 8834:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-"use strict";
 
 
 const fs = __nccwpck_require__(1176)
@@ -2245,7 +2235,6 @@ module.exports = copy
 /***/ 1335:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-"use strict";
 
 
 const u = (__nccwpck_require__(9046).fromPromise)
@@ -2260,7 +2249,6 @@ module.exports = {
 /***/ 6970:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-"use strict";
 
 
 const u = (__nccwpck_require__(9046).fromPromise)
@@ -2307,7 +2295,6 @@ module.exports = {
 /***/ 2164:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-"use strict";
 
 
 const u = (__nccwpck_require__(9046).fromPromise)
@@ -2381,7 +2368,6 @@ module.exports = {
 /***/ 55:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-"use strict";
 
 
 const { createFile, createFileSync } = __nccwpck_require__(2164)
@@ -2412,7 +2398,6 @@ module.exports = {
 /***/ 3797:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-"use strict";
 
 
 const u = (__nccwpck_require__(9046).fromPromise)
@@ -2484,7 +2469,6 @@ module.exports = {
 /***/ 3727:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-"use strict";
 
 
 const path = __nccwpck_require__(1017)
@@ -2593,7 +2577,6 @@ module.exports = {
 /***/ 8254:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-"use strict";
 
 
 const fs = __nccwpck_require__(1176)
@@ -2635,7 +2618,6 @@ module.exports = {
 /***/ 2549:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-"use strict";
 
 
 const u = (__nccwpck_require__(9046).fromPromise)
@@ -2710,7 +2692,6 @@ module.exports = {
 /***/ 1176:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
-"use strict";
 
 // This is adapted from https://github.com/normalize/mz
 // Copyright (c) 2014-2016 Jonathan Ong me@jongleberry.com and Contributors
@@ -2858,7 +2839,6 @@ if (typeof fs.realpath.native === 'function') {
 /***/ 5630:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-"use strict";
 
 
 module.exports = {
@@ -2882,7 +2862,6 @@ module.exports = {
 /***/ 213:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-"use strict";
 
 
 const u = (__nccwpck_require__(9046).fromPromise)
@@ -2906,7 +2885,6 @@ module.exports = jsonFile
 /***/ 8970:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-"use strict";
 
 
 const jsonFile = __nccwpck_require__(6160)
@@ -2925,7 +2903,6 @@ module.exports = {
 /***/ 9421:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-"use strict";
 
 
 const { stringify } = __nccwpck_require__(5902)
@@ -2945,7 +2922,6 @@ module.exports = outputJsonSync
 /***/ 531:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-"use strict";
 
 
 const { stringify } = __nccwpck_require__(5902)
@@ -2965,7 +2941,6 @@ module.exports = outputJson
 /***/ 8605:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-"use strict";
 
 const u = (__nccwpck_require__(9046).fromPromise)
 const { makeDir: _makeDir, makeDirSync } = __nccwpck_require__(2751)
@@ -2987,7 +2962,6 @@ module.exports = {
 /***/ 2751:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-"use strict";
 
 const fs = __nccwpck_require__(1176)
 const { checkPath } = __nccwpck_require__(9907)
@@ -3022,7 +2996,6 @@ module.exports.makeDirSync = (dir, options) => {
 /***/ 9907:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-"use strict";
 // Adapted from https://github.com/sindresorhus/make-dir
 // Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
@@ -3051,7 +3024,6 @@ module.exports.checkPath = function checkPath (pth) {
 /***/ 1497:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-"use strict";
 
 
 const u = (__nccwpck_require__(9046).fromPromise)
@@ -3066,7 +3038,6 @@ module.exports = {
 /***/ 2047:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-"use strict";
 
 
 const fs = __nccwpck_require__(7758)
@@ -3129,7 +3100,6 @@ module.exports = moveSync
 /***/ 2231:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-"use strict";
 
 
 const fs = __nccwpck_require__(1176)
@@ -3196,7 +3166,6 @@ module.exports = move
 /***/ 1832:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-"use strict";
 
 
 const u = (__nccwpck_require__(9046).fromPromise)
@@ -3235,7 +3204,6 @@ module.exports = {
 /***/ 3835:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-"use strict";
 
 const u = (__nccwpck_require__(9046).fromPromise)
 const fs = __nccwpck_require__(1176)
@@ -3255,7 +3223,6 @@ module.exports = {
 /***/ 7357:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-"use strict";
 
 
 const fs = __nccwpck_require__(7758)
@@ -3280,7 +3247,6 @@ module.exports = {
 /***/ 3901:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-"use strict";
 
 
 const fs = __nccwpck_require__(1176)
@@ -3446,7 +3412,6 @@ module.exports = {
 /***/ 2548:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-"use strict";
 
 
 const fs = __nccwpck_require__(1176)
@@ -3490,7 +3455,6 @@ module.exports = {
 /***/ 7356:
 /***/ ((module) => {
 
-"use strict";
 
 
 module.exports = clone
@@ -4463,7 +4427,6 @@ function patch (fs) {
 /***/ 1621:
 /***/ ((module) => {
 
-"use strict";
 
 
 module.exports = (flag, argv = process.argv) => {
@@ -4813,7 +4776,6 @@ function onceStrict (fn) {
 /***/ 9318:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-"use strict";
 
 const os = __nccwpck_require__(2037);
 const tty = __nccwpck_require__(6224);
@@ -4956,7 +4918,6 @@ module.exports = {
 /***/ 5030:
 /***/ ((__unused_webpack_module, exports) => {
 
-"use strict";
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
@@ -4982,7 +4943,6 @@ exports.getUserAgent = getUserAgent;
 /***/ 9046:
 /***/ ((__unused_webpack_module, exports) => {
 
-"use strict";
 
 
 exports.fromCallback = function (fn) {
@@ -5051,83 +5011,161 @@ function wrappy (fn, cb) {
 
 /***/ }),
 
-/***/ 6990:
-/***/ ((__unused_webpack_module, __webpack_exports__, __nccwpck_require__) => {
+/***/ 9491:
+/***/ ((module) => {
 
-"use strict";
-__nccwpck_require__.r(__webpack_exports__);
-/* harmony export */ __nccwpck_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var fs_extra__WEBPACK_IMPORTED_MODULE_2__ = __nccwpck_require__(5630);
-/* harmony import */ var fs_extra__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__nccwpck_require__.n(fs_extra__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _model_file_OutputFileResponseModel__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(5961);
-/* harmony import */ var _model_file_OutputFileResponseModel__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__nccwpck_require__.n(_model_file_OutputFileResponseModel__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _model_file_ReadFileResponseModel__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(9810);
-/* harmony import */ var _model_file_ReadFileResponseModel__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__nccwpck_require__.n(_model_file_ReadFileResponseModel__WEBPACK_IMPORTED_MODULE_1__);
+module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("assert");
+
+/***/ }),
+
+/***/ 2057:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("constants");
+
+/***/ }),
+
+/***/ 7147:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("fs");
+
+/***/ }),
+
+/***/ 2037:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("os");
+
+/***/ }),
+
+/***/ 1017:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("path");
+
+/***/ }),
+
+/***/ 2781:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("stream");
+
+/***/ }),
+
+/***/ 6224:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("tty");
+
+/***/ }),
+
+/***/ 3837:
+/***/ ((module) => {
+
+module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("util");
+
+/***/ })
+
+/******/ });
+/************************************************************************/
+/******/ // The module cache
+/******/ var __webpack_module_cache__ = {};
+/******/ 
+/******/ // The require function
+/******/ function __nccwpck_require__(moduleId) {
+/******/ 	// Check if module is in cache
+/******/ 	var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 	if (cachedModule !== undefined) {
+/******/ 		return cachedModule.exports;
+/******/ 	}
+/******/ 	// Create a new module (and put it into the cache)
+/******/ 	var module = __webpack_module_cache__[moduleId] = {
+/******/ 		// no module.id needed
+/******/ 		// no module.loaded needed
+/******/ 		exports: {}
+/******/ 	};
+/******/ 
+/******/ 	// Execute the module function
+/******/ 	var threw = true;
+/******/ 	try {
+/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __nccwpck_require__);
+/******/ 		threw = false;
+/******/ 	} finally {
+/******/ 		if(threw) delete __webpack_module_cache__[moduleId];
+/******/ 	}
+/******/ 
+/******/ 	// Return the exports of the module
+/******/ 	return module.exports;
+/******/ }
+/******/ 
+/************************************************************************/
+/******/ /* webpack/runtime/define property getters */
+/******/ (() => {
+/******/ 	// define getter functions for harmony exports
+/******/ 	__nccwpck_require__.d = (exports, definition) => {
+/******/ 		for(var key in definition) {
+/******/ 			if(__nccwpck_require__.o(definition, key) && !__nccwpck_require__.o(exports, key)) {
+/******/ 				Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 			}
+/******/ 		}
+/******/ 	};
+/******/ })();
+/******/ 
+/******/ /* webpack/runtime/hasOwnProperty shorthand */
+/******/ (() => {
+/******/ 	__nccwpck_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ })();
+/******/ 
+/******/ /* webpack/runtime/compat */
+/******/ 
+/******/ if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = new URL('.', import.meta.url).pathname.slice(import.meta.url.match(/^file:\/\/\/\w:/) ? 1 : 0, -1) + "/";
+/******/ 
+/************************************************************************/
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+(() => {
+
+// EXPORTS
+__nccwpck_require__.d(__webpack_exports__, {
+  "l": () => (/* binding */ GitHubUsersMonitor)
+});
+
+;// CONCATENATED MODULE: external "child_process"
+const external_child_process_namespaceObject = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("child_process");
+// EXTERNAL MODULE: external "util"
+var external_util_ = __nccwpck_require__(3837);
+;// CONCATENATED MODULE: ./src/helper/git/pull-git.js
 
 
 
+const execAsync = (0,external_util_.promisify)(external_child_process_namespaceObject.exec);
 
-class FileHandler {
-    static async outputJson(fileName, json) {
+class GitPullHandler {
+    static async pull() {
         try {
-            await fs_extra__WEBPACK_IMPORTED_MODULE_2___default().outputJson(fileName, json);
-            return new (_model_file_OutputFileResponseModel__WEBPACK_IMPORTED_MODULE_0___default())(true, `Json file has been updated at ${fileName}`);
+            const { stdout, stderr } = await execAsync('git pull');
+            if (stderr) {
+                console.error('Git pull stderr:', stderr);
+            }
+            console.log('Git pull stdout:', stdout);
+            return true;
         } catch (error) {
-            console.error('Error writing JSON file:', error);
-            return new (_model_file_OutputFileResponseModel__WEBPACK_IMPORTED_MODULE_0___default())(false, `Json file has not been updated at ${fileName}: ${error.message}`);
-        }
-    }
-
-    static async outputOther(fileName, file) {
-        try {
-            await fs_extra__WEBPACK_IMPORTED_MODULE_2___default().outputFile(fileName, file);
-            return new (_model_file_OutputFileResponseModel__WEBPACK_IMPORTED_MODULE_0___default())(true, `Other file has been updated at ${fileName}`);
-        } catch (error) {
-            console.error('Error writing file:', error);
-            return new (_model_file_OutputFileResponseModel__WEBPACK_IMPORTED_MODULE_0___default())(false, `Other file has not been updated at ${fileName}: ${error.message}`);
-        }
-    }
-
-    static async readJson(fileName) {
-        try {
-            const json = await fs_extra__WEBPACK_IMPORTED_MODULE_2___default().readJson(fileName);
-            return new (_model_file_ReadFileResponseModel__WEBPACK_IMPORTED_MODULE_1___default())(true, `Json file has been read at ${fileName}`, json);
-        } catch (error) {
-            console.error('Error reading JSON file:', error);
-            return new (_model_file_ReadFileResponseModel__WEBPACK_IMPORTED_MODULE_1___default())(false, `Json file has not been read at ${fileName}: ${error.message}`);
+            console.error('Error executing git pull:', error);
+            return false;
         }
     }
 }
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FileHandler);
-
-
-/***/ }),
-
-/***/ 8369:
-/***/ ((__unused_webpack_module, __webpack_exports__, __nccwpck_require__) => {
-
-"use strict";
-// ESM COMPAT FLAG
-__nccwpck_require__.r(__webpack_exports__);
-
-// EXPORTS
-__nccwpck_require__.d(__webpack_exports__, {
-  "default": () => (/* binding */ git)
-});
 
 // EXTERNAL MODULE: ./node_modules/@kwsites/file-exists/dist/index.js
 var dist = __nccwpck_require__(4751);
 // EXTERNAL MODULE: ./node_modules/debug/src/index.js
 var src = __nccwpck_require__(8237);
-;// CONCATENATED MODULE: external "child_process"
-const external_child_process_namespaceObject = require("child_process");
 // EXTERNAL MODULE: ./node_modules/@kwsites/promise-deferred/dist/index.js
 var promise_deferred_dist = __nccwpck_require__(9819);
 ;// CONCATENATED MODULE: external "node:events"
-const external_node_events_namespaceObject = require("node:events");
+const external_node_events_namespaceObject = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("node:events");
 ;// CONCATENATED MODULE: ./node_modules/simple-git/dist/esm/index.js
 var __defProp = Object.defineProperty;
 var __defProps = Object.defineProperties;
@@ -9967,1319 +10005,47 @@ class GitHandler {
 
 // Export a singleton instance
 /* harmony default export */ const git = (new GitHandler());
+;// CONCATENATED MODULE: ./src/helper/git/commit-git.js
 
-/***/ }),
 
-/***/ 9862:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-const cacheFile = __nccwpck_require__(845);
-
-let outputCache = (function () {
-    let getCountryName = function (country) {
-        return country.replace(/\s/g, '_').toLowerCase();
+class GitCommitter {
+    static async commit(message) {
+        const gitHandler = git.getGit();
+        await gitHandler.add('.');
+        await gitHandler.commit(message);
     }
-    let getPath = function (country) {
-        let fileName = getCountryName(country)
-        return `cache/${fileName}.json`;
-    }
-    let saveCacheFile = async function (country, json) {
-        await cacheFile.outputCacheFile(getPath(country), json);
-    }
-    let readCacheFile = async function (country) {
-        return await cacheFile.readCacheFile(getPath(country));
-    }
-    return {
-        saveCacheFile: saveCacheFile,
-        readCacheFile: readCacheFile
-    };
-})();
-
-module.exports = outputCache;
+}
 
 
-/***/ }),
+;// CONCATENATED MODULE: ./src/helper/git/push-git.js
 
-/***/ 845:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-const file = __nccwpck_require__(6990);
-const ReadCacheResponseModel = __nccwpck_require__(128);
 
-let cacheFile = (function () {
-    let outputCacheFile = async function (fileName, json) {
-        let outputFileResponseModel = await file.outputJson(fileName, json);
-        console.log(outputFileResponseModel.message)
-    }
-    let readCacheFile = async function (fileName) {
-        let readFileResponseModel = await file.readJson(fileName);
-        console.log(readFileResponseModel.message)
-        if (readFileResponseModel.status) {
-            return new ReadCacheResponseModel(readFileResponseModel.status, readFileResponseModel.content)
-        } else {
-            return new ReadCacheResponseModel(readFileResponseModel.status)
-        }
-    }
-    return {
-        outputCacheFile: outputCacheFile,
-        readCacheFile: readCacheFile
-    };
-})();
+const push_git_execAsync = (0,external_util_.promisify)(external_child_process_namespaceObject.exec);
 
-module.exports = cacheFile;
-
-/***/ }),
-
-/***/ 6763:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-const git = __nccwpck_require__(8369);
-
-let commitGit = function () {
-    let INSIGHT_BOT_USERNAME = 'github-actions[bot]';
-    let INSIGHT_BOT_EMAIL = '41898282+github-actions[bot]@users.noreply.github.com';
-    let commit = async function (message) {
-        console.log(`Git Commit "${message}"`)
+class GitPushHandler {
+    static async push() {
         try {
-            await git.commit(INSIGHT_BOT_USERNAME, INSIGHT_BOT_EMAIL, message);
+            const { stdout, stderr } = await push_git_execAsync('git push');
+            if (stderr) {
+                console.error('Git push stderr:', stderr);
+            }
+            console.log('Git push stdout:', stdout);
+            return true;
         } catch (error) {
-            console.log(error);
-        }
-    }
-    return {
-        commit: commit
-    };
-}();
-
-module.exports = commitGit;
-
-/***/ }),
-
-/***/ 6278:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-const git = __nccwpck_require__(8369);
-
-let pushGit = function () {
-    const BRANCH = 'main';
-    let push = async function () {
-        console.log(`Git Push`);
-        try {
-            await git.push(BRANCH);
-        } catch (error) {
-            console.log(error);
-        }
-    }
-    return {
-        push: push
-    };
-}();
-
-module.exports = pushGit;
-
-/***/ }),
-
-/***/ 8900:
-/***/ ((module) => {
-
-let createHtmlFile = (function () {
-    let create = function () {
-        let html = `<!DOCTYPE html>\n`;
-        html = html + `<html>\n`;
-        html = html + `\t<head>\n`;
-        html = html + `\t\t<title>Total Public Contributions in GitHub by Country</title>\n`;
-        html = html + `\t\t<link rel="stylesheet" href="./css/styles.css">\n`;
-        html = html + `\t\t<script src="./javascript/chart.min.js"></script>\n`;
-        html = html + `\t\t<script src="./javascript/index.umd.min.js"></script>\n`;
-        html = html + `\t\t<script src="./javascript/graph.js"></script>\n`;
-        html = html + `\t\t<script src="./javascript/resizeCanvas.js"></script>\n`;
-        html = html + `\t</head>\n`;
-        html = html + `\t<body>\n`;
-        html = html + `\t<div class="header">\n`;
-        html = html + `\t\t<div class="description">\n`;
-        html = html + `\t\t\t<strong>Total Public Contributions in GitHub by Country</strong>\n`;
-        html = html + `\t\t</div>\n`;
-        html = html + `\t</div>\n`;
-        html = html + `\t<div class="canvas">\n`;
-        html = html + `\t\t<canvas id="canvas"></canvas>\n`;
-        html = html + `\t</div>\n`;
-        html = html + `\t<div class="footer">\n`;
-        html = html + `\t\t<div class="description">\n`;
-        html = html + `\t\t\tList of most active GitHub users based on public contributions by country.\n`;
-        html = html + `\t\t\tGo to repository <a href="https://github.com/gayanvoice/top-github-users">gayanvoice/top-github-users</a>\n`;
-        html = html + `\t\t</div>\n`;
-        html = html + `\t</div>\n`;
-        html = html + `\t<script type="application/javascript">\n`;
-        html = html + `\t\tresizeCanvas()\n`;
-        html = html + `\t</script>\n`;
-        html = html + `\t</body>\n`;
-        html = html + `</html>`
-        return html;
-    }
-    return {
-        create: create,
-    };
-})();
-module.exports = createHtmlFile;
-
-/***/ }),
-
-/***/ 7818:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-const outputCache = __nccwpck_require__(9862);
-let createRankingJsonFile = (function () {
-    let create = async function (readConfigResponseModel) {
-        let countriesArray = [];
-        for await(const locationDataModel of readConfigResponseModel.locations){
-            if(locationDataModel.geoName === null){
-                console.log(`Ranking not available for ${locationDataModel.country}`)
-            } else {
-                console.log(`Ranking available for ${locationDataModel.country}`)
-                let readCacheResponseModel =  await outputCache.readCacheFile(locationDataModel.country);
-                let totalPublicContributions = 0;
-                if(readCacheResponseModel.status) {
-                    for(const user of readCacheResponseModel.users){
-                        if(user.publicContributions > 10000){
-                            totalPublicContributions = totalPublicContributions + 10000;
-                        } else {
-                            totalPublicContributions = totalPublicContributions + (user.publicContributions);
-                        }
-                    }
-                    countriesArray.push({ name: locationDataModel.geoName, value: totalPublicContributions})
-                }
-            }
-        }
-        return { ranking: countriesArray};
-    }
-    return {
-        create: create,
-    };
-})();
-module.exports = createRankingJsonFile;
-
-/***/ }),
-
-/***/ 5091:
-/***/ ((module) => {
-
-let headerComponent = function () {
-    let create = function (pageTitle, country) {
-        let markdown = ``;
-        if(pageTitle === undefined && country === undefined){
-            markdown = markdown + `# Top GitHub Users By Country `;
-            markdown = markdown + `[<img alt="Image of insights" src="https://github.com/gayanvoice/insights/blob/master/graph/373383893/small/week.png" height="24">](https://github.com/gayanvoice/insights/blob/master/readme/373383893/week.md)\n`
-            markdown = markdown + `[![Top GitHub Users](https://github.com/gayanvoice/top-github-users/actions/workflows/action.yml/badge.svg)](https://github.com/gayanvoice/top-github-users/actions/workflows/action.yml) `;
-            markdown = markdown + `[![Image of insights](https://github.com/gayanvoice/insights/blob/master/svg/373383893/badge.svg)](https://github.com/gayanvoice/insights/blob/master/readme/373383893/week.md)\n\n`;
-        } else {
-            markdown = markdown + `# Top GitHub Users By ${pageTitle} in ${country} `;
-            markdown = markdown + `[<img alt="Image of insights" src="https://github.com/gayanvoice/insights/blob/master/graph/373383893/small/week.png" height="24">](https://github.com/gayanvoice/insights/blob/master/readme/373383893/week.md)\n`
-            markdown = markdown + `[![Top GitHub Users](https://github.com/gayanvoice/top-github-users/actions/workflows/action.yml/badge.svg)](https://github.com/gayanvoice/top-github-users/actions/workflows/action.yml) `;
-            markdown = markdown + `[![Image of insights](https://github.com/gayanvoice/insights/blob/master/svg/373383893/badge.svg)](https://github.com/gayanvoice/insights/blob/master/readme/373383893/week.md)\n\n`;
-        }
-        return markdown;
-    }
-    return {
-        create: create,
-    };
-}();
-module.exports = headerComponent;
-
-/***/ }),
-
-/***/ 9805:
-/***/ ((module) => {
-
-let licenseComponent = function () {
-    let create = function (githubUserAndRepository) {
-        let markdown = `## 📄 License\n\n`;
-        markdown = markdown + `- GitHub Action - [${githubUserAndRepository}-action](https://github.com/${githubUserAndRepository}-action)\n`;
-        markdown = markdown + `- Repository - [${githubUserAndRepository}](https://github.com/${githubUserAndRepository})\n`;
-        markdown = markdown + `- Data in the \`./cache\` directory - [Open Database License](https://opendatacommons.org/licenses/odbl/1-0/)\n`;
-        markdown = markdown + `- Code - [MIT](./LICENSE) © [Gayan Kuruppu](https://github.com/gayanvoice)\n`;
-        return markdown;
-    }
-    return {
-        create: create,
-    };
-}();
-module.exports = licenseComponent;
-
-/***/ }),
-
-/***/ 1049:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-const formatMarkdown = __nccwpck_require__(3164);
-let shortcutMenuComponent = function () {
-    let create = function (indexUrl, country, index) {
-        let publicContributionsUrl  = `${indexUrl}/blob/main/markdown/public_contributions/${formatMarkdown.getCountryName(country)}.md`;
-        let totalContributionsUrl  = `${indexUrl}/blob/main/markdown/total_contributions/${formatMarkdown.getCountryName(country)}.md`;
-        let followersUrl  = `${indexUrl}/blob/main/markdown/followers/${formatMarkdown.getCountryName(country)}.md`;
-        let table = `<table>\n`;
-        table = table + `\t<tr>\n`;
-        if(index === 0){
-            table = table + `\t\t<td>\n`;
-            table = table + `\t\t\t<strong>Top Users By Public Contributions</strong>\n`;
-            table = table + `\t\t</td>\n`;
-        } else {
-            table = table + `\t\t<td>\n`;
-            table = table + `\t\t\t<a href="${publicContributionsUrl}">Top Users By Public Contributions</a>\n`;
-            table = table + `\t\t</td>\n`;
-        }
-        if(index === 1){
-            table = table + `\t\t<td>\n`;
-            table = table + `\t\t\t<strong>Top Users By Total Contributions</strong>\n`;
-            table = table + `\t\t</td>\n`;
-        } else {
-            table = table + `\t\t<td>\n`;
-            table = table + `\t\t\t<a href="${totalContributionsUrl}">Top Users By Total Contributions</a>\n`;
-            table = table + `\t\t</td>\n`;
-        }
-        if(index === 2){
-            table = table + `\t\t<td>\n`;
-            table = table + `\t\t\t<strong>Top Users By Followers</strong>\n`;
-            table = table + `\t\t</td>\n`;
-        } else {
-            table = table + `\t\t<td>\n`;
-            table = table + `\t\t\t<a href="${followersUrl}">Top Users By Followers</a>\n`;
-            table = table + `\t\t</td>\n`;
-        }
-        table = table + `\t</tr>\n`;
-        table = table + `</table>\n\n`;
-        return table;
-    }
-    return {
-        create: create,
-    };
-}();
-module.exports = shortcutMenuComponent;
-
-
-/***/ }),
-
-/***/ 8272:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-const formatMarkdown = __nccwpck_require__(3164);
-let socialMediaComponent = (function () {
-    let createSocialMediaTable = function (title, description, url) {
-        let facebookPost = `sharer.php?t=${title}&u=${url}&_rdc=1&_rdr`;
-        let facebookMessengerPost = `send?link=${url}&app_id=291494419107518&redirect_uri=${url}`;
-        let twitterPost = `tweet?text=${title}&url=${url}`;
-        let whatsAppPost = `send?text=${title} ${url}`;
-        let telegramPost = `url?url=${url}&text=${title}`;
-        let linkedInPost = `shareArticle?title=${title}&url=${url}`;
-        let vkontaktePost = `share.php?url=${url}`;
-        let bloggerPost = `blog-this.g?n=${description}&t=${title}&u=${url}`;
-        let wordpressPost = `press-this.php?u=${url}&t=${title}&s=${description}&i=`;
-        let email = `name?cc=cc&bcc=bcc&subject=${title}&body=${description}-${url}`;
-        let redditPost = `submit?title=${title}&url=${url}`;
-        let socialMediaArray = [
-            {
-                site: `Facebook`,
-                shareUrl: `https://web.facebook.com/${facebookPost}`,
-                iconUrl: `https://github.com/gayanvoice/github-active-users-monitor/raw/master/public/images/icons/facebook.svg`,
-            },
-            {
-                site: `Facebook Messenger`,
-                shareUrl: `https://www.facebook.com/dialog/${facebookMessengerPost}`,
-                iconUrl: `https://github.com/gayanvoice/github-active-users-monitor/raw/master/public/images/icons/facebook_messenger.svg`,
-            },
-            {
-                site: `Twitter`,
-                shareUrl: `https://twitter.com/intent/${twitterPost}`,
-                iconUrl: `https://github.com/gayanvoice/github-active-users-monitor/raw/master/public/images/icons/twitter.svg`
-            },
-            {
-                site: `WhatsApp`,
-                shareUrl: `https://web.whatsapp.com/${whatsAppPost}`,
-                iconUrl: `https://github.com/gayanvoice/github-active-users-monitor/blob/master/public/images/icons/whatsapp.svg`
-            },
-            {
-                site: `Telegram`,
-                shareUrl: `https://t.me/share/${telegramPost}`,
-                iconUrl: `https://github.com/gayanvoice/github-active-users-monitor/blob/master/public/images/icons/telegram.svg`
-            },
-            {
-                site: `LinkedIn`,
-                shareUrl: `https://www.linkedin.com/${linkedInPost}`,
-                iconUrl: `https://github.com/gayanvoice/github-active-users-monitor/blob/master/public/images/icons/linkedin.svg`
-            },
-            {
-                site: `Vkontakte`,
-                shareUrl: `https://vk.com/${vkontaktePost}`,
-                iconUrl: `https://github.com/gayanvoice/github-active-users-monitor/blob/master/public/images/icons/vkontakte.svg`,
-            },
-            {
-                site: `Blogger`,
-                shareUrl: `https://www.blogger.com/${bloggerPost}`,
-                iconUrl: `https://github.com/gayanvoice/github-active-users-monitor/blob/master/public/images/icons/blogger.svg`,
-            },
-            {
-                site: `Wordpress`,
-                shareUrl: `https://wordpress.com/wp-admin/${wordpressPost}`,
-                iconUrl: `https://github.com/gayanvoice/github-active-users-monitor/blob/master/public/images/icons/wordpress.svg`,
-            },
-            {
-                site: `Email`,
-                shareUrl: `mailto:recipient ${email}`,
-                iconUrl: `https://github.com/gayanvoice/github-active-users-monitor/blob/master/public/images/icons/gmail.svg`
-            },
-            {
-                site: `Reddit`,
-                shareUrl: `https://www.reddit.com/${redditPost}`,
-                iconUrl: `https://github.com/gayanvoice/github-active-users-monitor/blob/master/public/images/icons/reddit.svg`,
-            }
-        ];
-        let table = `<table>\n`;
-        table = table + `\t<tr>\n`;
-        for(const socialMedia of socialMediaArray){
-            table = table + `\t\t<td>\n`;
-            table = table + `\t\t\t<a href="${socialMedia.shareUrl}">\n`
-            table = table + `\t\t\t\t<img src="${socialMedia.iconUrl}" height="48" width="48" alt="${socialMedia.site}"/>\n`
-            table = table + `\t\t\t</a>\n`;
-            table = table + `\t\t</td>\n`;
-        }
-        table = table + `\t</tr>\n`;
-        table = table + `</table>\n\n`;
-        return table;
-    }
-    let create = function (title, description, url) {
-        return createSocialMediaTable(
-            encodeURI(title),
-            encodeURI(description),
-            encodeURI(url));
-    }
-    return {
-        create: create,
-    };
-})();
-module.exports = socialMediaComponent;
-
-
-/***/ }),
-
-/***/ 8810:
-/***/ ((module) => {
-
-let starComponent = function () {
-    let create = function () {
-        let table = `<table>\n`;
-        table = table + `\t<tr>\n`;
-        table = table + `\t\t<td>\n`;
-        table = table + `\t\t\tDon't forget to star ⭐ this repository\n`
-        table = table + `\t\t</td>\n`;
-        table = table + `\t</tr>\n`;
-        table = table + `</table>\n\n`;
-        return table;
-    }
-    return {
-        create: create,
-    };
-}();
-module.exports = starComponent;
-
-/***/ }),
-
-/***/ 6433:
-/***/ ((module) => {
-
-let thirdPartyComponent = function () {
-    let create = function () {
-        let markdown = `## 📦 Third party\n\n`;
-        markdown = markdown + `- [@octokit/graphql](https://www.npmjs.com/package/@octokit/graphql) - Send GraphQL requests to GitHub API.\n`;
-        markdown = markdown + `- [fs-extra](https://www.npmjs.com/package/fs-extra) - Creating directories and files.\n`
-        markdown = markdown + `- [simple-git](https://www.npmjs.com/package/simple-git) - Handling Git commands.\n`
-        return markdown;
-    }
-    return {
-        create: create,
-    };
-}();
-module.exports = thirdPartyComponent;
-
-
-/***/ }),
-
-/***/ 3164:
-/***/ ((module) => {
-
-let formatMarkdown = function () {
-    let capitalizeTheFirstLetterOfEachWord = function (words) {
-        let separateWord = words.toLowerCase().split(' ');
-        for (let i = 0; i < separateWord.length; i++) {
-            separateWord[i] = separateWord[i].charAt(0).toUpperCase() +
-                separateWord[i].substring(1);
-        }
-        return separateWord.join(' ');
-    }
-    let breakWords = function (words, numberOfWords) {
-        let separateWord = words.toLowerCase().split(' ');
-        let sentence = ``;
-        let iterations = 1;
-        for (const word of separateWord) {
-           if(iterations === numberOfWords){
-               iterations = numberOfWords;
-               sentence  = sentence + `${capitalizeTheFirstLetterOfEachWord(word).substring(0, 20)}<br/>`;
-           } else {
-               iterations++;
-               sentence  = sentence + `${capitalizeTheFirstLetterOfEachWord(word).substring(0, 20)} `;
-           }
-        }
-        return sentence
-    }
-    let getDate = function () {
-        let date = new Date();
-        let time = date.toLocaleString('en-US', { timeZone: 'UTC', hour: 'numeric', minute: 'numeric', hour12: true })
-        return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()} ${time} UTC`
-    }
-    let getCompany = function (company) {
-        if(company === 'undefined value'){
-            return `No Company`;
-        } else {
-            return breakWords(company, 4)
-        }
-    }
-    let getName = function (name) {
-        if(name === 'undefined value'){
-            return `No Name`;
-        } else {
-            return name
-        }
-    }
-    let getTwitterUsername = function (twitterUsername) {
-        if(twitterUsername === 'undefined value'){
-            return `No Twitter Username`;
-        } else {
-            return `<a href="https://twitter.com/${twitterUsername}">${twitterUsername}</a>`
-        }
-    }
-    let getLocations = function (locationDataModel) {
-        let locations = locationDataModel.locations;
-        let placesString = ``;
-        for(const location of locations){
-            if(location === locations[0]) {
-                placesString = placesString +  `\`${capitalizeTheFirstLetterOfEachWord(location)}\` and cities`;
-            } else {
-                placesString = placesString + ` \`${capitalizeTheFirstLetterOfEachWord(location)}\``
-            }
-        }
-        return placesString
-    }
-    let getMinimumFollowersRequirement = function (readCacheResponseModel) {
-        let users = readCacheResponseModel.users;
-        users.sort((a, b) => parseFloat(b.followers) - parseFloat(a.followers));
-        return users[users.length - 1].followers;
-    }
-    let getCountryName = function (country) {
-        return country.replace(/\s/g, '_').toLowerCase();
-    }
-    let getNumberOfCities = function (readConfigResponseModel) {
-        let numberOfCities = 0;
-        for(const locationDataModel of readConfigResponseModel.locations) {
-            for (const location of locationDataModel.locations) {
-                if (locationDataModel.country !== location) {
-                    numberOfCities++;
-                }
-            }
-        }
-        return numberOfCities;
-    }
-    return {
-        capitalizeTheFirstLetterOfEachWord: capitalizeTheFirstLetterOfEachWord,
-        breakWords: breakWords,
-        getDate: getDate,
-        getCompany: getCompany,
-        getName: getName,
-        getTwitterUsername: getTwitterUsername,
-        getLocations: getLocations,
-        getMinimumFollowersRequirement: getMinimumFollowersRequirement,
-        getCountryName: getCountryName,
-        getNumberOfCities: getNumberOfCities
-
-    };
-}();
-module.exports = formatMarkdown;
-
-
-/***/ }),
-
-/***/ 5815:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-const formatMarkdown = __nccwpck_require__(3164);
-const headerComponent = __nccwpck_require__(5091);
-const starComponent = __nccwpck_require__(8810);
-const socialMediaComponent = __nccwpck_require__(8272);
-const shortcutMenuComponent = __nccwpck_require__(1049);
-const thirdPartyComponent = __nccwpck_require__(6433);
-const licenseComponent = __nccwpck_require__(9805);
-let createFollowersPage = (function () {
-    let createUserTableByPublicContributions = function (readCacheResponseModel) {
-        readCacheResponseModel.users.sort((a, b) => parseFloat(b.followers) - parseFloat(a.followers));
-        let index = 1;
-        let table = ``;
-        if (readCacheResponseModel.users === undefined || readCacheResponseModel.users.length === 0) {
-            table = table + `<h4>The table is empty</h4>`;
-        } else {
-            table = table + `<table>\n`;
-            table = table + `\t<tr>\n`;
-            table = table + `\t\t<th>#</th>\n`;
-            table = table + `\t\t<th>Name</th>\n`;
-            table = table + `\t\t<th>Company</th>\n`;
-            table = table + `\t\t<th>Twitter Username</th>\n`;
-            table = table + `\t\t<th>Location</th>\n`;
-            table = table + `\t\t<th>Followers</th>\n`;
-            table = table + `\t</tr>\n`;
-            for (const user of readCacheResponseModel.users) {
-                if (user.followers > 0 && index <= 1000) {
-                    table = table + `\t<tr>\n`;
-                    table = table + `\t\t<td>${index}</td>\n`;
-                    table = table + `\t\t<td>\n`;
-                    table = table + `\t\t\t<a href="https://github.com/${user.login}">\n`;
-                    table = table + `\t\t\t\t<img src="${user.avatarUrl}" width="24" alt="Avatar of ${user.login}"> ${user.login}\n`;
-                    table = table + `\t\t\t</a><br/>\n`;
-                    table = table + `\t\t\t${formatMarkdown.getName(user.name)}\n`;
-                    table = table + `\t\t</td>\n`;
-                    table = table + `\t\t<td>${formatMarkdown.getCompany(user.company)}</td>\n`;
-                    table = table + `\t\t<td>${formatMarkdown.getTwitterUsername(user.twitterUsername)}</td>\n`;
-                    table = table + `\t\t<td>${user.location}</td>\n`;
-                    table = table + `\t\t<td>${user.followers}</td>\n`;
-                    table = table + `\t</tr>\n`;
-                }
-                index++;
-            }
-            table = table + `</table>\n\n`;
-        }
-        return table;
-    }
-    let create = function (outputMarkdownModel) {
-        let country = formatMarkdown.capitalizeTheFirstLetterOfEachWord(outputMarkdownModel.locationDataModel.country);
-        let markdown = headerComponent.create(`Followers`, country);
-        markdown = markdown + `<a href="https://gayanvoice.github.io/top-github-users/index.html">\n`;
-        markdown = markdown + `\t<img align="right" width="200" src="${outputMarkdownModel.locationDataModel.imageUrl}" alt="${country}">\n`;
-        markdown = markdown + `</a>\n\n`;
-        markdown = markdown + `The \`number of followers\` of users in ${country} on \`${formatMarkdown.getDate()}\`. `;
-        markdown = markdown + `This list contains users from ${formatMarkdown.getLocations(outputMarkdownModel.locationDataModel)}.\n\n`;
-        markdown = markdown + `There are \`${outputMarkdownModel.readConfigResponseModel.locations.length} countries\` and \`${formatMarkdown.getNumberOfCities(outputMarkdownModel.readConfigResponseModel)} cities\` can be found [here](https://github.com/${outputMarkdownModel.githubUsernameAndRepository}).\n\n`;
-        markdown = markdown + `There are \`${outputMarkdownModel.readCacheResponseModel.users.length} users\`  in ${country}. You need at least \`${formatMarkdown.getMinimumFollowersRequirement(outputMarkdownModel.readCacheResponseModel)} followers\` to be on this list.\n\n`;
-        markdown = markdown + starComponent.create();
-        markdown = markdown + shortcutMenuComponent.create(
-            `https://github.com/${outputMarkdownModel.githubUsernameAndRepository}`,
-            outputMarkdownModel.locationDataModel.country,
-            2);
-        markdown = markdown + `### 🚀 Share on\n\n`;
-        markdown = markdown + socialMediaComponent.create(
-            `Top GitHub Users By Followers in ${country}`,
-            "Most active github users based on number of followers by country",
-            `https://github.com/${outputMarkdownModel.githubUsernameAndRepository}/blob/main/markdown/followers/${formatMarkdown.getCountryName(outputMarkdownModel.locationDataModel.country)}.md`);
-        markdown = markdown + createUserTableByPublicContributions(outputMarkdownModel.readCacheResponseModel);
-        markdown = markdown + `### 🚀 Share on\n\n`;
-        markdown = markdown + socialMediaComponent.create(
-            `Top GitHub Users By Followers in ${country}`,
-            `List of most active github users based on number of followers by country`,
-            `https://github.com/${outputMarkdownModel.githubUsernameAndRepository}/blob/main/markdown/followers/${formatMarkdown.getCountryName(outputMarkdownModel.locationDataModel.country)}.md`);
-        markdown = markdown + thirdPartyComponent.create();
-        markdown = markdown + licenseComponent.create(outputMarkdownModel.githubUsernameAndRepository);
-        return markdown;
-    }
-    return {
-        create: create,
-    };
-})();
-module.exports = createFollowersPage;
-
-/***/ }),
-
-/***/ 2833:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-const formatMarkdown = __nccwpck_require__(3164);
-const headerComponent = __nccwpck_require__(5091);
-const starComponent = __nccwpck_require__(8810);
-const socialMediaComponent = __nccwpck_require__(8272);
-const thirdPartyComponent = __nccwpck_require__(6433);
-const licenseComponent = __nccwpck_require__(9805);
-let createIndexPage = (function () {
-    let createListOfCities = function (locationDataModel) {
-        let cities = ``;
-        for(const location of locationDataModel.locations) {
-            if(locationDataModel.country !== location) {
-                cities = cities + `\t\t\t<code>${formatMarkdown.capitalizeTheFirstLetterOfEachWord(location)}</code> \n`;
-            }
-        }
-        return cities;
-    }
-    let createListOfCountriesAndCitiesTable = function (indexUrl, readConfigResponseModel) {
-        readConfigResponseModel.locations.sort((a,b) => a.country > b.country ? 1 : -1);
-        let table = `<table>\n`;
-        table = table + `\t<tr>\n`;
-        table = table + `\t\t<th>\n`;
-        table = table + `\t\t\tCountry/State\n`;
-        table = table + `\t\t</th>\n`;
-        table = table + `\t\t<th>\n`;
-        table = table + `\t\t\tCities\n`;
-        table = table + `\t\t</th>\n`;
-        table = table + `\t</tr>\n`;
-        for(const locationDataModel of readConfigResponseModel.locations) {
-            table = table + `\t<tr>\n`;
-            table = table + `\t\t<td>\n`;
-            table = table + `\t\t\t<a href="${indexUrl}/blob/main/markdown/public_contributions/${formatMarkdown.getCountryName(locationDataModel.country)}.md">\n`;
-            table = table + `\t\t\t\t${formatMarkdown.capitalizeTheFirstLetterOfEachWord(locationDataModel.country)}\n`;
-            table = table + `\t\t\t</a>\n`;
-            table = table + `\t\t</td>\n`;
-            table = table + `\t\t<td>\n`;
-            table = table + createListOfCities(locationDataModel);
-            table = table + `\t\t</td>\n`;
-            table = table + `\t</tr>\n`;
-        }
-        table = table + `</table>\n\n`;
-        return table;
-    }
-    let create = function (githubUsernameAndRepository, readConfigResponseModel) {
-        let markdown = headerComponent.create();
-        markdown = markdown + `<a href="https://gayanvoice.github.io/top-github-users/index.html">\n`;
-        markdown = markdown + `\t<img align="right" width="400" src="https://github.com/gayanvoice/top-github-users-monitor/raw/master/public/images/banner/top-github-users-map.png" alt="top-github-users-by-country">\n`;
-        markdown = markdown + `</a>\n\n`;
-        markdown = markdown + `List of most active GitHub users based on \`public contributions\` \`private contributions\` and \`number of followers\`  by country or state. `;
-        markdown = markdown + `The list updated \`${formatMarkdown.getDate()}\`.\n\n`;
-        markdown = markdown + `This repository contains users \`${readConfigResponseModel.locations.length} countries\` and \`${formatMarkdown.getNumberOfCities(readConfigResponseModel)} cities\`. \n`;
-        markdown = markdown + `To get into the list you need to have minimum number of followers that varies in each country. `;
-        markdown = markdown + `The list can be found in [config.json](https://github.com/${githubUsernameAndRepository}/blob/main/config.json).\n\n`;
-        markdown = markdown + `Contribute to GitHub action [gayanvoice/top-github-users-action](https://github.com/gayanvoice/top-github-users-action). `;
-        markdown = markdown + `The project maintained by [gayanvoice](https://github.com/gayanvoice). `
-        markdown = markdown + `Don't forget to follow him on [GitHub](https://github.com/gayanvoice), [Twitter](https://twitter.com/gayanvoice), and [Medium](https://gayanvoice.medium.com/).\n\n`;
-        markdown = markdown + starComponent.create();
-        markdown = markdown + `### 🚀 Share on\n\n`;
-        markdown = markdown + socialMediaComponent.create(
-            "Top GitHub Users By Country",
-            "List of most active github users based on public contributions, total contributions, and number of followers by country",
-            `https://github.com/${githubUsernameAndRepository}`);
-        markdown = markdown + createListOfCountriesAndCitiesTable(
-            `https://github.com/${githubUsernameAndRepository}`,
-            readConfigResponseModel);
-        markdown = markdown + `### 🚀 Share on\n\n`;
-        markdown = markdown + socialMediaComponent.create(
-            "Top GitHub Users By Country",
-            "List of most active github users based on public contributions, total contributions, and number of followers by country",
-            `https://github.com/${githubUsernameAndRepository}`);
-        markdown = markdown + thirdPartyComponent.create();
-        markdown = markdown + licenseComponent.create(githubUsernameAndRepository);
-        return markdown;
-    }
-    return {
-        create: create,
-    };
-})();
-module.exports = createIndexPage;
-
-/***/ }),
-
-/***/ 4486:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-const formatMarkdown = __nccwpck_require__(3164);
-const headerComponent = __nccwpck_require__(5091);
-const starComponent = __nccwpck_require__(8810);
-const socialMediaComponent = __nccwpck_require__(8272);
-const shortcutMenuComponent = __nccwpck_require__(1049);
-const thirdPartyComponent = __nccwpck_require__(6433);
-const licenseComponent = __nccwpck_require__(9805);
-let createPublicContributionsPage = (function () {
-    let createUserTableByPublicContributions = function (readCacheResponseModel) {
-        readCacheResponseModel.users.sort((a, b) => parseFloat(b.publicContributions) - parseFloat(a.publicContributions));
-        let index = 1;
-        let table = ``;
-        if (readCacheResponseModel.users === undefined || readCacheResponseModel.users.length === 0) {
-            table = table + `<h4>The table is empty</h4>`;
-        } else {
-            table = table + `<table>\n`;
-            table = table + `\t<tr>\n`;
-            table = table + `\t\t<th>#</th>\n`;
-            table = table + `\t\t<th>Name</th>\n`;
-            table = table + `\t\t<th>Company</th>\n`;
-            table = table + `\t\t<th>Twitter Username</th>\n`;
-            table = table + `\t\t<th>Location</th>\n`;
-            table = table + `\t\t<th>Public Contributions</th>\n`;
-            table = table + `\t</tr>\n`;
-            for (const user of readCacheResponseModel.users) {
-                if (user.publicContributions > 0 && index <= 1000) {
-                    table = table + `\t<tr>\n`;
-                    table = table + `\t\t<td>${index}</td>\n`;
-                    table = table + `\t\t<td>\n`;
-                    table = table + `\t\t\t<a href="https://github.com/${user.login}">\n`;
-                    table = table + `\t\t\t\t<img src="${user.avatarUrl}" width="24" alt="Avatar of ${user.login}"> ${user.login}\n`;
-                    table = table + `\t\t\t</a><br/>\n`;
-                    table = table + `\t\t\t${formatMarkdown.getName(user.name)}\n`;
-                    table = table + `\t\t</td>\n`;
-                    table = table + `\t\t<td>${formatMarkdown.getCompany(user.company)}</td>\n`;
-                    table = table + `\t\t<td>${formatMarkdown.getTwitterUsername(user.twitterUsername)}</td>\n`;
-                    table = table + `\t\t<td>${user.location}</td>\n`;
-                    table = table + `\t\t<td>${user.publicContributions}</td>\n`;
-                    table = table + `\t</tr>\n`;
-                }
-                index++;
-            }
-            table = table + `</table>\n\n`;
-        }
-        return table;
-    }
-    let create = function (outputMarkdownModel) {
-        let country = formatMarkdown.capitalizeTheFirstLetterOfEachWord(outputMarkdownModel.locationDataModel.country);
-        let markdown = headerComponent.create(`Public Contributions`, country);
-        markdown = markdown + `<a href="https://gayanvoice.github.io/top-github-users/index.html">\n`;
-        markdown = markdown + `\t<img align="right" width="200" src="${outputMarkdownModel.locationDataModel.imageUrl}" alt="${country}">\n`;
-        markdown = markdown + `</a>\n\n`;
-        markdown = markdown + `The \`public contributions\` by users in ${country} on \`${formatMarkdown.getDate()}\`. `;
-        markdown = markdown + `This list contains users from ${formatMarkdown.getLocations(outputMarkdownModel.locationDataModel)}.\n\n`;
-        markdown = markdown + `There are \`${outputMarkdownModel.readConfigResponseModel.locations.length} countries\` and \`${formatMarkdown.getNumberOfCities(outputMarkdownModel.readConfigResponseModel)} cities\` can be found [here](https://github.com/${outputMarkdownModel.githubUsernameAndRepository}).\n\n`;
-        markdown = markdown + `There are \`${outputMarkdownModel.readCacheResponseModel.users.length} users\`  in ${country}. You need at least \`${formatMarkdown.getMinimumFollowersRequirement(outputMarkdownModel.readCacheResponseModel)} followers\` to be on this list.\n\n`;
-        markdown = markdown + starComponent.create();
-        markdown = markdown + shortcutMenuComponent.create(
-            `https://github.com/${outputMarkdownModel.githubUsernameAndRepository}`,
-            outputMarkdownModel.locationDataModel.country,
-            0);
-        markdown = markdown + `### 🚀 Share on\n\n`;
-        markdown = markdown + socialMediaComponent.create(
-            `Top GitHub Users By Public Contributions in ${country}`,
-            "List of most active github users based on public contributions by country",
-            `https://github.com/${outputMarkdownModel.githubUsernameAndRepository}/blob/main/markdown/public_contributions/${formatMarkdown.getCountryName(outputMarkdownModel.locationDataModel.country)}.md`);
-        markdown = markdown + createUserTableByPublicContributions(outputMarkdownModel.readCacheResponseModel);
-        markdown = markdown + `### 🚀 Share on\n\n`;
-        markdown = markdown + socialMediaComponent.create(
-            `Top GitHub Users By Public Contributions in ${country}`,
-            `List of most active github users based on public contributions by country`,
-            `https://github.com/${outputMarkdownModel.githubUsernameAndRepository}/blob/main/markdown/public_contributions/${formatMarkdown.getCountryName(outputMarkdownModel.locationDataModel.country)}.md`);
-        markdown = markdown + thirdPartyComponent.create();
-        markdown = markdown + licenseComponent.create(outputMarkdownModel.githubUsernameAndRepository);
-        return markdown;
-    }
-    return {
-        create: create,
-    };
-})();
-module.exports = createPublicContributionsPage;
-
-/***/ }),
-
-/***/ 5389:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-const formatMarkdown = __nccwpck_require__(3164);
-const headerComponent = __nccwpck_require__(5091);
-const starComponent = __nccwpck_require__(8810);
-const socialMediaComponent = __nccwpck_require__(8272);
-const shortcutMenuComponent = __nccwpck_require__(1049);
-const thirdPartyComponent = __nccwpck_require__(6433);
-const licenseComponent = __nccwpck_require__(9805);
-let createTotalContributionsPage = (function () {
-    let createUserTableByPublicContributions = function (readCacheResponseModel) {
-        readCacheResponseModel.users.sort((a, b) => parseFloat(b.publicContributions + b.privateContributions) - parseFloat(a.publicContributions + a.privateContributions));
-        let index = 1;
-        let table = ``;
-        if (readCacheResponseModel.users === undefined || readCacheResponseModel.users.length === 0) {
-            table = table + `<h4>The table is empty</h4>`;
-        } else {
-            table = table + `<table>\n`;
-            table = table + `\t<tr>\n`;
-            table = table + `\t\t<th>#</th>\n`;
-            table = table + `\t\t<th>Name</th>\n`;
-            table = table + `\t\t<th>Company</th>\n`;
-            table = table + `\t\t<th>Twitter Username</th>\n`;
-            table = table + `\t\t<th>Location</th>\n`;
-            table = table + `\t\t<th>Public Contributions</th>\n`;
-            table = table + `\t\t<th>Total Contributions</th>\n`;
-            table = table + `\t</tr>\n`;
-            for (const user of readCacheResponseModel.users) {
-                if (user.publicContributions + user.privateContributions > 0 && index <= 1000) {
-                    table = table + `\t<tr>\n`;
-                    table = table + `\t\t<td>${index}</td>\n`;
-                    table = table + `\t\t<td>\n`;
-                    table = table + `\t\t\t<a href="https://github.com/${user.login}">\n`;
-                    table = table + `\t\t\t\t<img src="${user.avatarUrl}" width="24" alt="Avatar of ${user.login}"> ${user.login}\n`;
-                    table = table + `\t\t\t</a><br/>\n`;
-                    table = table + `\t\t\t${formatMarkdown.getName(user.name)}\n`;
-                    table = table + `\t\t</td>\n`;
-                    table = table + `\t\t<td>${formatMarkdown.getCompany(user.company)}</td>\n`;
-                    table = table + `\t\t<td>${formatMarkdown.getTwitterUsername(user.twitterUsername)}</td>\n`;
-                    table = table + `\t\t<td>${user.location}</td>\n`;
-                    table = table + `\t\t<td>${user.publicContributions}</td>\n`;
-                    table = table + `\t\t<td>${user.publicContributions + user.privateContributions}</td>\n`;
-                    table = table + `\t</tr>\n`;
-                }
-                index++;
-            }
-            table = table + `</table>\n\n`;
-        }
-        return table;
-    }
-    let create = function (outputMarkdownModel) {
-        let country = formatMarkdown.capitalizeTheFirstLetterOfEachWord(outputMarkdownModel.locationDataModel.country);
-        let markdown = headerComponent.create(`Total Contributions`, country);
-        markdown = markdown + `<a href="https://gayanvoice.github.io/top-github-users/index.html">\n`;
-        markdown = markdown + `\t<img align="right" width="200" src="${outputMarkdownModel.locationDataModel.imageUrl}" alt="${country}">\n`;
-        markdown = markdown + `</a>\n\n`;
-        markdown = markdown + `The \`public contributions\` and \`private contributions\` by users in ${country} on \`${formatMarkdown.getDate()}\`. `;
-        markdown = markdown + `This list contains users from ${formatMarkdown.getLocations(outputMarkdownModel.locationDataModel)}.\n\n`;
-        markdown = markdown + `There are \`${outputMarkdownModel.readConfigResponseModel.locations.length} countries\` and \`${formatMarkdown.getNumberOfCities(outputMarkdownModel.readConfigResponseModel)} cities\` can be found [here](https://github.com/${outputMarkdownModel.githubUsernameAndRepository}).\n\n`;
-        markdown = markdown + `There are \`${outputMarkdownModel.readCacheResponseModel.users.length} users\`  in ${country}. You need at least \`${formatMarkdown.getMinimumFollowersRequirement(outputMarkdownModel.readCacheResponseModel)} followers\` to be on this list.\n\n`;
-        markdown = markdown + starComponent.create();
-        markdown = markdown + shortcutMenuComponent.create(
-            `https://github.com/${outputMarkdownModel.githubUsernameAndRepository}`,
-            outputMarkdownModel.locationDataModel.country,
-            1);
-        markdown = markdown + `### 🚀 Share on\n\n`;
-        markdown = markdown + socialMediaComponent.create(
-            `Top GitHub Users By Total Contributions in ${country}`,
-            "List of most active github users based on total contributions by country",
-            `https://github.com/${outputMarkdownModel.githubUsernameAndRepository}/blob/main/markdown/total_contributions/${formatMarkdown.getCountryName(outputMarkdownModel.locationDataModel.country)}.md`);
-        markdown = markdown + createUserTableByPublicContributions(outputMarkdownModel.readCacheResponseModel);
-        markdown = markdown + `### 🚀 Share on\n\n`;
-        markdown = markdown + socialMediaComponent.create(
-            `Top GitHub Users By Total Contributions in ${country}`,
-            `List of most active github users based on total contributions by country`,
-            `https://github.com/${outputMarkdownModel.githubUsernameAndRepository}/blob/main/markdown/total_contributions/${formatMarkdown.getCountryName(outputMarkdownModel.locationDataModel.country)}.md`);
-        markdown = markdown + thirdPartyComponent.create();
-        markdown = markdown + licenseComponent.create(outputMarkdownModel.githubUsernameAndRepository);
-        return markdown;
-    }
-    return {
-        create: create,
-    };
-})();
-module.exports = createTotalContributionsPage;
-
-/***/ }),
-
-/***/ 128:
-/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
-
-const UserDataModel = __nccwpck_require__(1689);
-
-let ReadCacheResponseModel = function (status, content) {
-    let validate = function (value) {
-        return (value === '' || value === null || value === undefined);
-    }
-    let setValue = function (value) {
-        if (validate(value)) {
-            return "undefined value";
-        } else {
-            return value;
-        }
-    }
-    let setUsers = function (content) {
-        let array = [];
-        for (const user of content) {
-            let userDataModel = new UserDataModel(
-                setValue(user.login),
-                setValue(user.name),
-                setValue(user.avatarUrl),
-                setValue(user.location),
-                setValue(user.company),
-                setValue(user.twitterUsername),
-                setValue(user.followers),
-                setValue(user.privateContributions),
-                setValue(user.publicContributions))
-            array.push(userDataModel)
-        }
-        return array;
-    }
-    this.status = status;
-    if (status) this.users = setUsers(content)
-}
-module.exports = ReadCacheResponseModel;
-
-/***/ }),
-
-/***/ 9510:
-/***/ ((module) => {
-
-let CheckpointDataModel = function (checkpoint) {
-    this.checkpoint = checkpoint;
-}
-module.exports = CheckpointDataModel;
-
-/***/ }),
-
-/***/ 1689:
-/***/ ((__unused_webpack_module, __webpack_exports__, __nccwpck_require__) => {
-
-"use strict";
-__nccwpck_require__.r(__webpack_exports__);
-/* harmony export */ __nccwpck_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-class UserDataModel {
-    #login;
-    #name;
-    #avatarUrl;
-    #location;
-    #company;
-    #twitterUsername;
-    #followers;
-    #privateContributions;
-    #publicContributions;
-
-    constructor({
-        login,
-        name,
-        avatarUrl,
-        location,
-        company,
-        twitterUsername,
-        followers,
-        privateContributions,
-        publicContributions
-    }) {
-        this.#login = this.#validateString(login, 'login');
-        this.#name = this.#validateString(name, 'name');
-        this.#avatarUrl = this.#validateString(avatarUrl, 'avatarUrl');
-        this.#location = this.#validateString(location, 'location');
-        this.#company = this.#validateString(company, 'company');
-        this.#twitterUsername = this.#validateString(twitterUsername, 'twitterUsername');
-        this.#followers = this.#validateNumber(followers, 'followers');
-        this.#privateContributions = this.#validateNumber(privateContributions, 'privateContributions');
-        this.#publicContributions = this.#validateNumber(publicContributions, 'publicContributions');
-    }
-
-    #validateString(value, field) {
-        if (value === null || value === undefined) {
-            console.warn(`${field} is undefined or null`);
-            return 'undefined value';
-        }
-        return String(value).trim();
-    }
-
-    #validateNumber(value, field) {
-        if (value === null || value === undefined) {
-            console.warn(`${field} is undefined or null`);
-            return 0;
-        }
-        const num = Number(value);
-        if (isNaN(num)) {
-            console.warn(`${field} is not a valid number: ${value}`);
-            return 0;
-        }
-        return num;
-    }
-
-    get login() { return this.#login; }
-    get name() { return this.#name; }
-    get avatarUrl() { return this.#avatarUrl; }
-    get location() { return this.#location; }
-    get company() { return this.#company; }
-    get twitterUsername() { return this.#twitterUsername; }
-    get followers() { return this.#followers; }
-    get privateContributions() { return this.#privateContributions; }
-    get publicContributions() { return this.#publicContributions; }
-
-    getTotalContributions() {
-        return this.#publicContributions + this.#privateContributions;
-    }
-
-    getContributionStats() {
-        return {
-            total: this.getTotalContributions(),
-            public: this.#publicContributions,
-            private: this.#privateContributions,
-            publicPercentage: this.#calculatePercentage(this.#publicContributions),
-            privatePercentage: this.#calculatePercentage(this.#privateContributions)
-        };
-    }
-
-    #calculatePercentage(value) {
-        const total = this.getTotalContributions();
-        return total === 0 ? 0 : ((value / total) * 100).toFixed(1);
-    }
-
-    getSocialLinks() {
-        return {
-            github: `https://github.com/${this.#login}`,
-            twitter: this.#twitterUsername !== 'undefined value' 
-                ? `https://twitter.com/${this.#twitterUsername}`
-                : null
-        };
-    }
-
-    toJSON() {
-        return {
-            login: this.#login,
-            name: this.#name,
-            avatarUrl: this.#avatarUrl,
-            location: this.#location,
-            company: this.#company,
-            twitterUsername: this.#twitterUsername,
-            followers: this.#followers,
-            contributions: this.getContributionStats(),
-            socialLinks: this.getSocialLinks()
-        };
-    }
-
-    toString() {
-        return `UserDataModel(login=${this.#login}, name=${this.#name}, contributions=${this.getTotalContributions()})`;
-    }
-
-    static fromGitHubData(data) {
-        return new UserDataModel({
-            login: data.login,
-            name: data.name,
-            avatarUrl: data.avatar_url,
-            location: data.location,
-            company: data.company,
-            twitterUsername: data.twitter_username,
-            followers: data.followers,
-            privateContributions: data.private_contributions || 0,
-            publicContributions: data.public_contributions || 0
-        });
-    }
-
-    static fromGraphQLData(data) {
-        return new UserDataModel({
-            login: data.login,
-            name: data.name,
-            avatarUrl: data.avatarUrl,
-            location: data.location,
-            company: data.company,
-            twitterUsername: data.twitterUsername,
-            followers: data.followers?.totalCount,
-            privateContributions: data.contributionsCollection?.restrictedContributionsCount,
-            publicContributions: data.contributionsCollection?.totalContributions - 
-                               (data.contributionsCollection?.restrictedContributionsCount || 0)
-        });
-    }
-}
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (UserDataModel);
-
-/***/ }),
-
-/***/ 5961:
-/***/ ((module) => {
-
-let OutputFileResponseModel = function (status, message) {
-    this.status = status;
-    this.message = message;
-}
-module.exports = OutputFileResponseModel;
-
-/***/ }),
-
-/***/ 9810:
-/***/ ((module) => {
-
-let ReadFileResponseModel = function (status, message, content) {
-    this.status = status;
-    this.message = message;
-    if (status) this.content = content;
-}
-module.exports = ReadFileResponseModel;
-
-/***/ }),
-
-/***/ 4343:
-/***/ ((module) => {
-
-let OutputMarkdownModel = function (githubUsernameAndRepository,
-    locationDataModel,
-    readCacheResponseModel,
-    readConfigResponseModel) {
-    this.githubUsernameAndRepository = githubUsernameAndRepository;
-    this.locationDataModel = locationDataModel;
-    this.readCacheResponseModel = readCacheResponseModel;
-    this.readConfigResponseModel = readConfigResponseModel;
-}
-module.exports = OutputMarkdownModel;
-
-/***/ }),
-
-/***/ 9491:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("assert");
-
-/***/ }),
-
-/***/ 2057:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("constants");
-
-/***/ }),
-
-/***/ 7147:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("fs");
-
-/***/ }),
-
-/***/ 2037:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("os");
-
-/***/ }),
-
-/***/ 1017:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("path");
-
-/***/ }),
-
-/***/ 2781:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("stream");
-
-/***/ }),
-
-/***/ 6224:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("tty");
-
-/***/ }),
-
-/***/ 3837:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("util");
-
-/***/ })
-
-/******/ 	});
-/************************************************************************/
-/******/ 	// The module cache
-/******/ 	var __webpack_module_cache__ = {};
-/******/ 	
-/******/ 	// The require function
-/******/ 	function __nccwpck_require__(moduleId) {
-/******/ 		// Check if module is in cache
-/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
-/******/ 		if (cachedModule !== undefined) {
-/******/ 			return cachedModule.exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = __webpack_module_cache__[moduleId] = {
-/******/ 			// no module.id needed
-/******/ 			// no module.loaded needed
-/******/ 			exports: {}
-/******/ 		};
-/******/ 	
-/******/ 		// Execute the module function
-/******/ 		var threw = true;
-/******/ 		try {
-/******/ 			__webpack_modules__[moduleId].call(module.exports, module, module.exports, __nccwpck_require__);
-/******/ 			threw = false;
-/******/ 		} finally {
-/******/ 			if(threw) delete __webpack_module_cache__[moduleId];
-/******/ 		}
-/******/ 	
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/ 	
-/************************************************************************/
-/******/ 	/* webpack/runtime/compat get default export */
-/******/ 	(() => {
-/******/ 		// getDefaultExport function for compatibility with non-harmony modules
-/******/ 		__nccwpck_require__.n = (module) => {
-/******/ 			var getter = module && module.__esModule ?
-/******/ 				() => (module['default']) :
-/******/ 				() => (module);
-/******/ 			__nccwpck_require__.d(getter, { a: getter });
-/******/ 			return getter;
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/define property getters */
-/******/ 	(() => {
-/******/ 		// define getter functions for harmony exports
-/******/ 		__nccwpck_require__.d = (exports, definition) => {
-/******/ 			for(var key in definition) {
-/******/ 				if(__nccwpck_require__.o(definition, key) && !__nccwpck_require__.o(exports, key)) {
-/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
-/******/ 				}
-/******/ 			}
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
-/******/ 	(() => {
-/******/ 		__nccwpck_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/make namespace object */
-/******/ 	(() => {
-/******/ 		// define __esModule on exports
-/******/ 		__nccwpck_require__.r = (exports) => {
-/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 			}
-/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/compat */
-/******/ 	
-/******/ 	if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = __dirname + "/";
-/******/ 	
-/************************************************************************/
-var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be in strict mode.
-(() => {
-"use strict";
-// ESM COMPAT FLAG
-__nccwpck_require__.r(__webpack_exports__);
-
-// NAMESPACE OBJECT: ./src/helper/git/pull-git.js
-var pull_git_namespaceObject = {};
-__nccwpck_require__.r(pull_git_namespaceObject);
-
-// NAMESPACE OBJECT: ./src/helper/markdown/output_markdown.js
-var output_markdown_namespaceObject = {};
-__nccwpck_require__.r(output_markdown_namespaceObject);
-
-// NAMESPACE OBJECT: ./src/helper/html/output_html.js
-var output_html_namespaceObject = {};
-__nccwpck_require__.r(output_html_namespaceObject);
-
-// EXTERNAL MODULE: ./src/core/git.js + 3 modules
-var core_git = __nccwpck_require__(8369);
-;// CONCATENATED MODULE: ./src/helper/git/pull-git.js
-
-
-class GitPuller {
-    static async pull() {
-        console.log('Git Pull');
-        try {
-            await git.pull();
-        } catch (error) {
-            console.error('Error during git pull:', error);
-            throw error; // Re-throw to allow caller to handle the error
+            console.error('Error executing git push:', error);
+            return false;
         }
     }
 }
 
-/* harmony default export */ const pull_git = ((/* unused pure expression or super */ null && (GitPuller)));
-// EXTERNAL MODULE: ./src/helper/git/commit-git.js
-var commit_git = __nccwpck_require__(6763);
-// EXTERNAL MODULE: ./src/helper/git/push-git.js
-var push_git = __nccwpck_require__(6278);
+
+// EXTERNAL MODULE: external "fs"
+var external_fs_ = __nccwpck_require__(7147);
 // EXTERNAL MODULE: external "path"
 var external_path_ = __nccwpck_require__(1017);
-// EXTERNAL MODULE: ./src/core/file.js
-var core_file = __nccwpck_require__(6990);
+;// CONCATENATED MODULE: external "url"
+const external_url_namespaceObject = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("url");
 ;// CONCATENATED MODULE: ./src/model/data/LocationDataModel.js
 class LocationDataModel {
     #country;
@@ -11363,7 +10129,7 @@ class LocationDataModel {
     }
 }
 
-/* harmony default export */ const data_LocationDataModel = (LocationDataModel);
+
 ;// CONCATENATED MODULE: ./src/model/config/ReadConfigResponseModel.js
 
 
@@ -11430,7 +10196,7 @@ class ReadConfigResponseModel {
 
                     const allLocations = [country, ...cities];
                     
-                    return new data_LocationDataModel(country, geoName, allLocations, imageUrl);
+                    return new LocationDataModel(country, geoName, allLocations, imageUrl);
                 } catch (error) {
                     console.warn(`Skipping invalid location: ${error.message}`);
                     return null;
@@ -11465,7 +10231,7 @@ class ReadConfigResponseModel {
 
     addLocation(country, geoName = null, cities = [], imageUrl = null) {
         const locations = [country, ...cities];
-        const locationModel = new data_LocationDataModel(country, geoName, locations, imageUrl);
+        const locationModel = new LocationDataModel(country, geoName, locations, imageUrl);
         this.#locations.push(locationModel);
     }
 
@@ -11503,6 +10269,10 @@ class ReadConfigResponseModel {
 
 
 
+
+const config_file_filename = (0,external_url_namespaceObject.fileURLToPath)(import.meta.url);
+const config_file_dirname = external_path_.dirname(config_file_filename);
+
 class ConfigFileHandler {
     static CONFIG_PATHS = [
         __nccwpck_require__.ab + "config.json",
@@ -11516,30 +10286,27 @@ class ConfigFileHandler {
         for (const configPath of this.CONFIG_PATHS) {
             try {
                 console.log(`Attempting to read config from: ${configPath}`);
-                const response = await core_file["default"].readJson(configPath);
+                const response = await external_fs_.promises.readFile(configPath, 'utf8');
                 
-                if (!response.status) {
-                    console.error(`Config file read failed at ${configPath}: ${response.message}`);
-                    continue;
-                }
-
-                if (!response.content) {
+                if (!response) {
                     console.error(`Config file is empty or invalid at ${configPath}`);
                     continue;
                 }
 
-                if (!response.content.settings) {
+                const configContent = JSON.parse(response);
+
+                if (!configContent.settings) {
                     console.error(`Config file missing required settings section at ${configPath}`);
                     continue;
                 }
 
-                if (!response.content.locations) {
+                if (!configContent.locations) {
                     console.error(`Config file missing required locations section at ${configPath}`);
                     continue;
                 }
 
                 console.log(`Successfully loaded config file from ${configPath}`);
-                return new config_ReadConfigResponseModel(true, response.content);
+                return new config_ReadConfigResponseModel(true, configContent);
             } catch (error) {
                 console.error(`Error reading config file from ${configPath}:`, error);
                 lastError = error;
@@ -11562,11 +10329,11 @@ class ConfigFileHandler {
                 lastUpdated: new Date().toISOString()
             };
 
-            const response = await core_file["default"].outputJson(this.CONFIG_PATHS[0], updatedConfig);
-            console.log(response.message);
+            const response = await external_fs_.promises.writeFile(this.CONFIG_PATHS[0], JSON.stringify(updatedConfig));
+            console.log(response);
             
-            if (!response.status) {
-                throw new Error(response.message);
+            if (!response) {
+                throw new Error('Failed to write config file');
             }
 
             return new config_ReadConfigResponseModel(true, updatedConfig);
@@ -11589,6 +10356,108 @@ class ConfigFileHandler {
 }
 
 /* harmony default export */ const config_file = (ConfigFileHandler);
+// EXTERNAL MODULE: ./node_modules/fs-extra/lib/index.js
+var lib = __nccwpck_require__(5630);
+;// CONCATENATED MODULE: ./src/model/file/OutputFileResponseModel.js
+class OutputFileResponseModel {
+    #status;
+    #message;
+
+    constructor(status, message) {
+        this.#status = status;
+        this.#message = message;
+    }
+
+    get status() {
+        return this.#status;
+    }
+
+    get message() {
+        return this.#message;
+    }
+
+    toJSON() {
+        return {
+            status: this.#status,
+            message: this.#message
+        };
+    }
+}
+
+/* harmony default export */ const file_OutputFileResponseModel = (OutputFileResponseModel);
+;// CONCATENATED MODULE: ./src/model/file/ReadFileResponseModel.js
+class ReadFileResponseModel {
+    #status;
+    #message;
+    #content;
+
+    constructor(status, message, content) {
+        this.#status = status;
+        this.#message = message;
+        this.#content = content;
+    }
+
+    get status() {
+        return this.#status;
+    }
+
+    get message() {
+        return this.#message;
+    }
+
+    get content() {
+        return this.#content;
+    }
+
+    toJSON() {
+        return {
+            status: this.#status,
+            message: this.#message,
+            content: this.#content
+        };
+    }
+}
+
+/* harmony default export */ const file_ReadFileResponseModel = (ReadFileResponseModel);
+;// CONCATENATED MODULE: ./src/core/file.js
+
+
+
+
+class FileHandler {
+    static async outputJson(fileName, json) {
+        try {
+            await lib.outputJson(fileName, json);
+            return new file_OutputFileResponseModel(true, `Json file has been updated at ${fileName}`);
+        } catch (error) {
+            console.error('Error writing JSON file:', error);
+            return new file_OutputFileResponseModel(false, `Json file has not been updated at ${fileName}: ${error.message}`);
+        }
+    }
+
+    static async outputOther(fileName, file) {
+        try {
+            await lib.outputFile(fileName, file);
+            return new file_OutputFileResponseModel(true, `Other file has been updated at ${fileName}`);
+        } catch (error) {
+            console.error('Error writing file:', error);
+            return new file_OutputFileResponseModel(false, `Other file has not been updated at ${fileName}: ${error.message}`);
+        }
+    }
+
+    static async readJson(fileName) {
+        try {
+            const json = await lib.readJson(fileName);
+            return new file_ReadFileResponseModel(true, `Json file has been read at ${fileName}`, json);
+        } catch (error) {
+            console.error('Error reading JSON file:', error);
+            return new file_ReadFileResponseModel(false, `Json file has not been read at ${fileName}: ${error.message}`);
+        }
+    }
+}
+
+/* harmony default export */ const file = (FileHandler);
+
 ;// CONCATENATED MODULE: ./src/model/checkpoint/ReadCheckpointResponseModel.js
 class ReadCheckpointResponseModel {
     #status;
@@ -11637,7 +10506,7 @@ class CheckpointFileHandler {
 
     static async outputCheckpointFile(checkpointData) {
         try {
-            const response = await core_file["default"].outputJson(this.CHECKPOINT_PATH, checkpointData);
+            const response = await file.outputJson(this.CHECKPOINT_PATH, checkpointData);
             console.log(`Checkpoint saved: ${response.message}`);
             return response;
         } catch (error) {
@@ -11648,7 +10517,7 @@ class CheckpointFileHandler {
 
     static async readCheckpointFile() {
         try {
-            const response = await core_file["default"].readJson(this.CHECKPOINT_PATH);
+            const response = await file.readJson(this.CHECKPOINT_PATH);
             console.log(`Checkpoint read: ${response.message}`);
 
             if (!response.status) {
@@ -11687,9 +10556,33 @@ class CheckpointFileHandler {
 }
 
 /* harmony default export */ const checkpoint_file = (CheckpointFileHandler);
-// EXTERNAL MODULE: ./src/model/data/CheckpointDataModel.js
-var CheckpointDataModel = __nccwpck_require__(9510);
-var CheckpointDataModel_default = /*#__PURE__*/__nccwpck_require__.n(CheckpointDataModel);
+;// CONCATENATED MODULE: ./src/model/data/CheckpointDataModel.js
+class CheckpointDataModel {
+    #checkpoint;
+    #country;
+
+    constructor(checkpoint, country) {
+        this.#checkpoint = checkpoint;
+        this.#country = country;
+    }
+
+    get checkpoint() {
+        return this.#checkpoint;
+    }
+
+    get country() {
+        return this.#country;
+    }
+
+    toJSON() {
+        return {
+            checkpoint: this.#checkpoint,
+            country: this.#country
+        };
+    }
+}
+
+/* harmony default export */ const data_CheckpointDataModel = (CheckpointDataModel);
 ;// CONCATENATED MODULE: ./src/helper/checkpoint/output_checkpoint.js
 
 
@@ -11721,7 +10614,7 @@ class CheckpointHandler {
 
     static async updateCheckpointFile(checkpoint) {
         try {
-            const checkpointData = new (CheckpointDataModel_default())(checkpoint);
+            const checkpointData = new data_CheckpointDataModel(checkpoint);
             await checkpoint_file.outputCheckpointFile(checkpointData);
             console.log(`Checkpoint file updated to: ${checkpoint}`);
         } catch (error) {
@@ -11754,86 +10647,616 @@ class CheckpointHandler {
 }
 
 /* harmony default export */ const output_checkpoint = (CheckpointHandler);
-// EXTERNAL MODULE: ./src/helper/cache/output_cache.js
-var output_cache = __nccwpck_require__(9862);
-var output_cache_default = /*#__PURE__*/__nccwpck_require__.n(output_cache);
-;// CONCATENATED MODULE: ./src/helper/file/markdown_file.js
+;// CONCATENATED MODULE: ./src/helper/cache/output_cache.js
 
 
-class MarkdownFileHandler {
-    static async outputMarkdownFile(fileName, markdown) {
+
+class CacheHandler {
+    static async readCacheFile(country) {
         try {
-            const response = await file.outputOther(fileName, markdown);
-            console.log(response.message);
-            return response;
+            const cacheFilePath = external_path_.join('cache', country.toLowerCase() + '.json');
+            const cacheFileContent = await external_fs_.promises.readFile(cacheFilePath, 'utf8');
+            return { status: true, users: JSON.parse(cacheFileContent).users };
         } catch (error) {
-            console.error(`Error writing markdown file ${fileName}:`, error);
-            throw error;
+            console.error(`Error reading cache file for ${country}:`, error);
+            return { status: false, users: [] };
         }
     }
 
-    static async appendToMarkdownFile(fileName, content) {
+    static async writeCacheFile(country, users) {
         try {
-            const existingContent = await file.readJson(fileName).catch(() => '');
-            const newContent = existingContent ? `${existingContent}\n${content}` : content;
-            return await this.outputMarkdownFile(fileName, newContent);
+            const cacheFilePath = external_path_.join('cache', country.toLowerCase() + '.json');
+            await external_fs_.promises.mkdir(external_path_.dirname(cacheFilePath), { recursive: true });
+            await external_fs_.promises.writeFile(cacheFilePath, JSON.stringify({ users }, null, 2));
+            return true;
         } catch (error) {
-            console.error(`Error appending to markdown file ${fileName}:`, error);
-            throw error;
+            console.error(`Error writing cache file for ${country}:`, error);
+            return false;
         }
     }
 }
 
-/* harmony default export */ const markdown_file = ((/* unused pure expression or super */ null && (MarkdownFileHandler)));
+
+
+;// CONCATENATED MODULE: ./src/helper/markdown/format_markdown.js
+class FormatMarkdown {
+    static capitalizeTheFirstLetterOfEachWord(words) {
+        let separateWord = words.toLowerCase().split(' ');
+        for (let i = 0; i < separateWord.length; i++) {
+            separateWord[i] = separateWord[i].charAt(0).toUpperCase() +
+                separateWord[i].substring(1);
+        }
+        return separateWord.join(' ');
+    }
+
+    static breakWords(words, numberOfWords) {
+        let separateWord = words.toLowerCase().split(' ');
+        let sentence = '';
+        let iterations = 1;
+        for (const word of separateWord) {
+            if (iterations === numberOfWords) {
+                iterations = numberOfWords;
+                sentence = sentence + `${this.capitalizeTheFirstLetterOfEachWord(word).substring(0, 20)}<br/>`;
+            } else {
+                iterations++;
+                sentence = sentence + `${this.capitalizeTheFirstLetterOfEachWord(word).substring(0, 20)} `;
+            }
+        }
+        return sentence;
+    }
+
+    static getDate() {
+        let date = new Date();
+        return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+    }
+
+    static getCompany(company) {
+        if (company === null || company === undefined || company === '') {
+            return '-';
+        } else {
+            return company;
+        }
+    }
+
+    static getName(name) {
+        if (name === null || name === undefined || name === '') {
+            return '-';
+        } else {
+            return name;
+        }
+    }
+
+    static getTwitterUsername(twitterUsername) {
+        if (twitterUsername === null || twitterUsername === undefined || twitterUsername === '') {
+            return '-';
+        } else {
+            return `<a href="https://twitter.com/${twitterUsername}">@${twitterUsername}</a>`;
+        }
+    }
+
+    static getLocations(locationDataModel) {
+        let locations = '';
+        if (locationDataModel.cities === undefined || locationDataModel.cities.length === 0) {
+            locations = locations + `<h4>No cities in ${this.capitalizeTheFirstLetterOfEachWord(locationDataModel.country)}</h4>`;
+        } else {
+            for (const city of locationDataModel.cities) {
+                locations = locations + `<code>${city}</code> `;
+            }
+        }
+        return locations;
+    }
+
+    static getMinimumFollowersRequirement(readCacheResponseModel) {
+        if (readCacheResponseModel.users === undefined || readCacheResponseModel.users.length === 0) {
+            return 0;
+        }
+        return readCacheResponseModel.users[readCacheResponseModel.users.length - 1].followers;
+    }
+
+    static getCountryName(country) {
+        return country.toLowerCase().replace(/ /g, '-');
+    }
+
+    static getNumberOfCities(readConfigResponseModel) {
+        let count = 0;
+        for (const country of readConfigResponseModel.countries) {
+            if (country.cities !== undefined) {
+                count = count + country.cities.length;
+            }
+        }
+        return count;
+    }
+}
+
+
+
+;// CONCATENATED MODULE: ./src/helper/markdown/component/header_component.js
+class HeaderComponent {
+    static create(pageTitle, country) {
+        let markdown = '';
+        if (pageTitle === undefined && country === undefined) {
+            markdown = markdown + '# Top GitHub Users By Country ';
+            markdown = markdown + '[<img alt="Image of insights" src="https://github.com/gayanvoice/insights/blob/master/graph/373383893/small/week.png" height="24">](https://github.com/gayanvoice/insights/blob/master/readme/373383893/week.md)\n';
+            markdown = markdown + '[![Top GitHub Users](https://github.com/gayanvoice/top-github-users/actions/workflows/action.yml/badge.svg)](https://github.com/gayanvoice/top-github-users/actions/workflows/action.yml) ';
+            markdown = markdown + '[![Image of insights](https://github.com/gayanvoice/insights/blob/master/svg/373383893/badge.svg)](https://github.com/gayanvoice/insights/blob/master/readme/373383893/week.md)\n\n';
+        } else {
+            markdown = markdown + `# Top GitHub Users By ${pageTitle} in ${country} `;
+            markdown = markdown + '[<img alt="Image of insights" src="https://github.com/gayanvoice/insights/blob/master/graph/373383893/small/week.png" height="24">](https://github.com/gayanvoice/insights/blob/master/readme/373383893/week.md)\n';
+            markdown = markdown + '[![Top GitHub Users](https://github.com/gayanvoice/top-github-users/actions/workflows/action.yml/badge.svg)](https://github.com/gayanvoice/top-github-users/actions/workflows/action.yml) ';
+            markdown = markdown + '[![Image of insights](https://github.com/gayanvoice/insights/blob/master/svg/373383893/badge.svg)](https://github.com/gayanvoice/insights/blob/master/readme/373383893/week.md)\n\n';
+        }
+        return markdown;
+    }
+}
+
+
+;// CONCATENATED MODULE: ./src/helper/markdown/component/star_component.js
+class StarComponent {
+    static create(githubUsernameAndRepository) {
+        let markdown = '';
+        markdown = markdown + '### ⭐ Give a Star\n\n';
+        markdown = markdown + `You can also give a star to support the project. Feel free to follow ${githubUsernameAndRepository.split('/')[0]} to get notified about new updates.\n\n`;
+        return markdown;
+    }
+}
+
+
+;// CONCATENATED MODULE: ./src/helper/markdown/component/social_media_component.js
+class SocialMediaComponent {
+    static create(title = '', description = '', url = '') {
+        let markdown = '';
+        markdown = markdown + '<table>\n';
+        markdown = markdown + '<tr>\n';
+        markdown = markdown + '<td>\n';
+        markdown = markdown + `<a href="https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}"><img src="https://github.com/gayanvoice/github-active-users-monitor/raw/master/public/images/icons/twitter.svg" height="48" width="48" alt="Twitter"/></a>\n`;
+        markdown = markdown + '</td>\n';
+        markdown = markdown + '<td>\n';
+        markdown = markdown + `<a href="https://web.facebook.com/sharer.php?title=${encodeURIComponent(title)}&u=${encodeURIComponent(url)}"><img src="https://github.com/gayanvoice/github-active-users-monitor/raw/master/public/images/icons/facebook.svg" height="48" width="48" alt="Facebook"/></a>\n`;
+        markdown = markdown + '</td>\n';
+        markdown = markdown + '<td>\n';
+        markdown = markdown + `<a href="https://www.linkedin.com/shareArticle?title=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}"><img src="https://github.com/gayanvoice/github-active-users-monitor/raw/master/public/images/icons/linkedin.svg" height="48" width="48" alt="LinkedIn"/></a>\n`;
+        markdown = markdown + '</td>\n';
+        markdown = markdown + '<td>\n';
+        markdown = markdown + `<a href="https://reddit.com/submit?title=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}"><img src="https://github.com/gayanvoice/github-active-users-monitor/raw/master/public/images/icons/reddit.svg" height="48" width="48" alt="Reddit"/></a>\n`;
+        markdown = markdown + '</td>\n';
+        markdown = markdown + '</tr>\n';
+        markdown = markdown + '</table>\n\n';
+        return markdown;
+    }
+}
+
+
+
+;// CONCATENATED MODULE: ./src/helper/markdown/component/third_party_component.js
+class ThirdPartyComponent {
+    static create() {
+        let markdown = `## 📦 Third party\n\n`;
+        markdown = markdown + `- [@octokit/graphql](https://www.npmjs.com/package/@octokit/graphql) - Send GraphQL requests to GitHub API.\n`;
+        markdown = markdown + `- [fs-extra](https://www.npmjs.com/package/fs-extra) - Creating directories and files.\n`
+        markdown = markdown + `- [simple-git](https://www.npmjs.com/package/simple-git) - Handling Git commands.\n`
+        return markdown;
+    }
+}
+
+
+
+;// CONCATENATED MODULE: ./src/helper/markdown/component/license_component.js
+class LicenseComponent {
+    static create(githubUsernameAndRepository) {
+        let markdown = '';
+        markdown = markdown + '### 📝 License\n\n';
+        markdown = markdown + '- GitHub Action - [' + githubUsernameAndRepository + '/blob/main/LICENSE](https://github.com/' + githubUsernameAndRepository + '/blob/main/LICENSE)\n';
+        markdown = markdown + '- Repository - [' + githubUsernameAndRepository + '](https://github.com/' + githubUsernameAndRepository + ')\n';
+        markdown = markdown + '- Data in the `./cache` directory - [Open Database License](https://opendatacommons.org/licenses/odbl/1-0/)\n';
+        markdown = markdown + '- Code - [MIT](./LICENSE) © [Gayan Kuruppu](https://github.com/gayanvoice)\n';
+        return markdown;
+    }
+}
+
+
+;// CONCATENATED MODULE: ./src/helper/markdown/page/create_index_page.js
+
+
+
+
+
+
+
+class IndexPageCreator {
+    static createListOfCities(locationDataModel) {
+        let cities = '';
+        for(const location of locationDataModel.locations) {
+            if(locationDataModel.country !== location) {
+                cities = cities + `\t\t\t<code>${FormatMarkdown.capitalizeTheFirstLetterOfEachWord(location)}</code> \n`;
+            }
+        }
+        return cities;
+    }
+
+    static createListOfCountriesAndCitiesTable(indexUrl, readConfigResponseModel) {
+        readConfigResponseModel.locations.sort((a,b) => a.country > b.country ? 1 : -1);
+        let table = `<table>\n`;
+        table = table + `\t<tr>\n`;
+        table = table + `\t\t<th>\n`;
+        table = table + `\t\t\tCountry/State\n`;
+        table = table + `\t\t</th>\n`;
+        table = table + `\t\t<th>\n`;
+        table = table + `\t\t\tCities\n`;
+        table = table + `\t\t</th>\n`;
+        table = table + `\t</tr>\n`;
+        for(const locationDataModel of readConfigResponseModel.locations) {
+            table = table + `\t<tr>\n`;
+            table = table + `\t\t<td>\n`;
+            table = table + `\t\t\t<a href="${indexUrl}/blob/main/markdown/public_contributions/${FormatMarkdown.getCountryName(locationDataModel.country)}.md">\n`;
+            table = table + `\t\t\t\t${FormatMarkdown.capitalizeTheFirstLetterOfEachWord(locationDataModel.country)}\n`;
+            table = table + `\t\t\t</a>\n`;
+            table = table + `\t\t</td>\n`;
+            table = table + `\t\t<td>\n`;
+            table = table + IndexPageCreator.createListOfCities(locationDataModel);
+            table = table + `\t\t</td>\n`;
+            table = table + `\t</tr>\n`;
+        }
+        table = table + `</table>\n\n`;
+        return table;
+    }
+
+    static create(outputMarkdownModel) {
+        let markdown = HeaderComponent.create();
+        markdown = markdown + `<a href="https://gayanvoice.github.io/top-github-users/index.html">\n`;
+        markdown = markdown + `\t<img align="right" width="400" src="https://github.com/gayanvoice/top-github-users-monitor/raw/master/public/images/banner/top-github-users-map.png" alt="top-github-users-by-country">\n`;
+        markdown = markdown + `</a>\n\n`;
+        markdown = markdown + `List of most active GitHub users based on \`public contributions\` \`private contributions\` and \`number of followers\`  by country or state. `;
+        markdown = markdown + `The list updated \`${FormatMarkdown.getDate()}\`.\n\n`;
+        markdown = markdown + `This repository contains users \`${outputMarkdownModel.readConfigResponseModel.locations.length} countries\` and \`${FormatMarkdown.getNumberOfCities(outputMarkdownModel.readConfigResponseModel)} cities\`. \n`;
+        markdown = markdown + `To get into the list you need to have minimum number of followers that varies in each country. `;
+        markdown = markdown + `The list can be found in [config.json](https://github.com/${outputMarkdownModel.githubUsernameAndRepository}/blob/main/config.json).\n\n`;
+        markdown = markdown + `Contribute to GitHub action [gayanvoice/top-github-users-action](https://github.com/gayanvoice/top-github-users-action). `;
+        markdown = markdown + `The project maintained by [gayanvoice](https://github.com/gayanvoice). `;
+        markdown = markdown + `Don't forget to follow him on [GitHub](https://github.com/gayanvoice), [Twitter](https://twitter.com/gayanvoice), and [Medium](https://gayanvoice.medium.com/).\n\n`;
+        markdown = markdown + StarComponent.create();
+        markdown = markdown + `### 🚀 Share on\n\n`;
+        markdown = markdown + SocialMediaComponent.create(
+            "Top GitHub Users By Country",
+            "List of most active github users based on public contributions, total contributions, and number of followers by country",
+            `https://github.com/${outputMarkdownModel.githubUsernameAndRepository}`);
+        markdown = markdown + IndexPageCreator.createListOfCountriesAndCitiesTable(
+            `https://github.com/${outputMarkdownModel.githubUsernameAndRepository}`,
+            outputMarkdownModel.readConfigResponseModel);
+        markdown = markdown + `### 🚀 Share on\n\n`;
+        markdown = markdown + SocialMediaComponent.create(
+            "Top GitHub Users By Country",
+            "List of most active github users based on public contributions, total contributions, and number of followers by country",
+            `https://github.com/${outputMarkdownModel.githubUsernameAndRepository}`);
+        markdown = markdown + ThirdPartyComponent.create();
+        markdown = markdown + LicenseComponent.create(outputMarkdownModel.githubUsernameAndRepository);
+        return markdown;
+    }
+}
+
+
+;// CONCATENATED MODULE: ./src/helper/markdown/component/shortcut_menu_component.js
+
+
+class ShortcutMenuComponent {
+    static create(indexUrl, country, index) {
+        let publicContributionsUrl  = `${indexUrl}/blob/main/markdown/public_contributions/${FormatMarkdown.getCountryName(country)}.md`;
+        let totalContributionsUrl  = `${indexUrl}/blob/main/markdown/total_contributions/${FormatMarkdown.getCountryName(country)}.md`;
+        let followersUrl  = `${indexUrl}/blob/main/markdown/followers/${FormatMarkdown.getCountryName(country)}.md`;
+        let table = '<table>\n';
+        table = table + '<tr>\n';
+        if(index === 0){
+            table = table + '<td>\n';
+            table = table + '<strong>Top Users By Public Contributions</strong>\n';
+            table = table + '</td>\n';
+        } else {
+            table = table + '<td>\n';
+            table = table + `<a href="${publicContributionsUrl}">Top Users By Public Contributions</a>\n`;
+            table = table + '</td>\n';
+        }
+        if(index === 1){
+            table = table + '<td>\n';
+            table = table + '<strong>Top Users By Total Contributions</strong>\n';
+            table = table + '</td>\n';
+        } else {
+            table = table + '<td>\n';
+            table = table + `<a href="${totalContributionsUrl}">Top Users By Total Contributions</a>\n`;
+            table = table + '</td>\n';
+        }
+        if(index === 2){
+            table = table + '<td>\n';
+            table = table + '<strong>Top Users By Followers</strong>\n';
+            table = table + '</td>\n';
+        } else {
+            table = table + '<td>\n';
+            table = table + `<a href="${followersUrl}">Top Users By Followers</a>\n`;
+            table = table + '</td>\n';
+        }
+        table = table + '</tr>\n';
+        table = table + '</table>\n\n';
+        return table;
+    }
+}
+
+
+
+;// CONCATENATED MODULE: ./src/helper/markdown/page/create_public_contributions_page.js
+
+
+
+
+
+
+
+
+class PublicContributionsPageCreator {
+    static createUserTableByPublicContributions(readCacheResponseModel) {
+        readCacheResponseModel.users.sort((a, b) => parseFloat(b.publicContributions) - parseFloat(a.publicContributions));
+        let index = 1;
+        let table = '';
+        if (readCacheResponseModel.users === undefined || readCacheResponseModel.users.length === 0) {
+            table = table + '<h4>The table is empty</h4>';
+        } else {
+            table = table + '<table>\n';
+            table = table + '<tr>\n';
+            table = table + '<th>#</th>\n';
+            table = table + '<th>Name</th>\n';
+            table = table + '<th>Company</th>\n';
+            table = table + '<th>Twitter Username</th>\n';
+            table = table + '<th>Location</th>\n';
+            table = table + '<th>Public Contributions</th>\n';
+            table = table + '</tr>\n';
+            for (const user of readCacheResponseModel.users) {
+                if (user.publicContributions > 0 && index <= 1000) {
+                    table = table + '<tr>\n';
+                    table = table + `<td>${index}</td>\n`;
+                    table = table + `<td>\n`;
+                    table = table + `<a href="https://github.com/${user.login}">\n`;
+                    table = table + `<img src="${user.avatarUrl}" width="24" alt="Avatar of ${user.login}"> ${user.login}\n`;
+                    table = table + `</a><br/>\n`;
+                    table = table + `${FormatMarkdown.getName(user.name)}\n`;
+                    table = table + `</td>\n`;
+                    table = table + `<td>${FormatMarkdown.getCompany(user.company)}</td>\n`;
+                    table = table + `<td>${FormatMarkdown.getTwitterUsername(user.twitterUsername)}</td>\n`;
+                    table = table + `<td>${user.location}</td>\n`;
+                    table = table + `<td>${user.publicContributions}</td>\n`;
+                    table = table + '</tr>\n';
+                }
+                index++;
+            }
+            table = table + '</table>\n\n';
+        }
+        return table;
+    }
+
+    static create(outputMarkdownModel) {
+        let country = FormatMarkdown.capitalizeTheFirstLetterOfEachWord(outputMarkdownModel.locationDataModel.country);
+        let markdown = HeaderComponent.create(`Public Contributions`, country);
+        markdown = markdown + `<a href="https://gayanvoice.github.io/top-github-users/index.html">\n`;
+        markdown = markdown + `<img align="right" width="200" src="${outputMarkdownModel.locationDataModel.imageUrl}" alt="${country}">\n`;
+        markdown = markdown + `</a>\n\n`;
+        markdown = markdown + `The \`public contributions\` by users in ${country} on \`${FormatMarkdown.getDate()}\`. `;
+        markdown = markdown + `This list contains users from ${FormatMarkdown.getLocations(outputMarkdownModel.locationDataModel)}.\n\n`;
+        markdown = markdown + `There are \`${outputMarkdownModel.readConfigResponseModel.locations.length} countries\` and \`${FormatMarkdown.getNumberOfCities(outputMarkdownModel.readConfigResponseModel)} cities\` can be found [here](https://github.com/${outputMarkdownModel.githubUsernameAndRepository}).\n\n`;
+        markdown = markdown + `There are \`${outputMarkdownModel.readCacheResponseModel.users.length} users\`  in ${country}. You need at least \`${FormatMarkdown.getMinimumFollowersRequirement(outputMarkdownModel.readCacheResponseModel)} followers\` to be on this list.\n\n`;
+        markdown = markdown + StarComponent.create();
+        markdown = markdown + ShortcutMenuComponent.create(
+            `https://github.com/${outputMarkdownModel.githubUsernameAndRepository}`,
+            outputMarkdownModel.locationDataModel.country,
+            0);
+        markdown = markdown + `### 🚀 Share on\n\n`;
+        markdown = markdown + SocialMediaComponent.create(
+            `Top GitHub Users By Public Contributions in ${country}`,
+            "List of most active github users based on public contributions by country",
+            `https://github.com/${outputMarkdownModel.githubUsernameAndRepository}/blob/main/markdown/public_contributions/${FormatMarkdown.getCountryName(outputMarkdownModel.locationDataModel.country)}.md`);
+        markdown = markdown + this.createUserTableByPublicContributions(outputMarkdownModel.readCacheResponseModel);
+        markdown = markdown + `### 🚀 Share on\n\n`;
+        markdown = markdown + SocialMediaComponent.create(
+            `Top GitHub Users By Public Contributions in ${country}`,
+            `List of most active github users based on public contributions by country`,
+            `https://github.com/${outputMarkdownModel.githubUsernameAndRepository}/blob/main/markdown/public_contributions/${FormatMarkdown.getCountryName(outputMarkdownModel.locationDataModel.country)}.md`);
+        markdown = markdown + ThirdPartyComponent.create();
+        markdown = markdown + LicenseComponent.create(outputMarkdownModel.githubUsernameAndRepository);
+        return markdown;
+    }
+}
+
+
+;// CONCATENATED MODULE: ./src/helper/markdown/page/create_total_contributions_page.js
+
+
+
+
+
+
+
+
+class TotalContributionsPageCreator {
+    static createUserTableByTotalContributions(readCacheResponseModel) {
+        readCacheResponseModel.users.sort((a, b) => parseFloat(b.totalContributions) - parseFloat(a.totalContributions));
+        let index = 1;
+        let table = '';
+        if (readCacheResponseModel.users === undefined || readCacheResponseModel.users.length === 0) {
+            table = table + '<h4>The table is empty</h4>';
+        } else {
+            table = table + '<table>\n';
+            table = table + '<tr>\n';
+            table = table + '<th>#</th>\n';
+            table = table + '<th>Name</th>\n';
+            table = table + '<th>Company</th>\n';
+            table = table + '<th>Twitter Username</th>\n';
+            table = table + '<th>Location</th>\n';
+            table = table + '<th>Total Contributions</th>\n';
+            table = table + '</tr>\n';
+            for (const user of readCacheResponseModel.users) {
+                if (user.totalContributions > 0 && index <= 1000) {
+                    table = table + '<tr>\n';
+                    table = table + `<td>${index}</td>\n`;
+                    table = table + `<td>\n`;
+                    table = table + `<a href="https://github.com/${user.login}">\n`;
+                    table = table + `<img src="${user.avatarUrl}" width="24" alt="Avatar of ${user.login}"> ${user.login}\n`;
+                    table = table + `</a><br/>\n`;
+                    table = table + `${FormatMarkdown.getName(user.name)}\n`;
+                    table = table + `</td>\n`;
+                    table = table + `<td>${FormatMarkdown.getCompany(user.company)}</td>\n`;
+                    table = table + `<td>${FormatMarkdown.getTwitterUsername(user.twitterUsername)}</td>\n`;
+                    table = table + `<td>${user.location}</td>\n`;
+                    table = table + `<td>${user.totalContributions}</td>\n`;
+                    table = table + '</tr>\n';
+                }
+                index++;
+            }
+            table = table + '</table>\n\n';
+        }
+        return table;
+    }
+
+    static create(outputMarkdownModel) {
+        let country = FormatMarkdown.capitalizeTheFirstLetterOfEachWord(outputMarkdownModel.locationDataModel.country);
+        let markdown = HeaderComponent.create('Total Contributions', country);
+        markdown = markdown + `<a href="https://gayanvoice.github.io/top-github-users/index.html">\n`;
+        markdown = markdown + `<img align="right" width="200" src="${outputMarkdownModel.locationDataModel.imageUrl}" alt="${country}">\n`;
+        markdown = markdown + `</a>\n\n`;
+        markdown = markdown + `The \`total contributions\` by users in ${country} on \`${FormatMarkdown.getDate()}\`. `;
+        markdown = markdown + `This list contains users from ${FormatMarkdown.getLocations(outputMarkdownModel.locationDataModel)}.\n\n`;
+        markdown = markdown + StarComponent.create(outputMarkdownModel.githubUsernameAndRepository);
+        markdown = markdown + SocialMediaComponent.create(
+            `Top GitHub Users By Total Contributions in ${country}`,
+            "List of most active github users based on total contributions by country",
+            `https://github.com/${outputMarkdownModel.githubUsernameAndRepository}/blob/main/markdown/total_contributions/${FormatMarkdown.getCountryName(outputMarkdownModel.locationDataModel.country)}.md`);
+        markdown = markdown + this.createUserTableByTotalContributions(outputMarkdownModel.readCacheResponseModel);
+        markdown = markdown + `### 🚀 Share on\n\n`;
+        markdown = markdown + SocialMediaComponent.create(
+            `Top GitHub Users By Total Contributions in ${country}`,
+            "List of most active github users based on total contributions by country",
+            `https://github.com/${outputMarkdownModel.githubUsernameAndRepository}/blob/main/markdown/total_contributions/${FormatMarkdown.getCountryName(outputMarkdownModel.locationDataModel.country)}.md`);
+        markdown = markdown + LicenseComponent.create(outputMarkdownModel.githubUsernameAndRepository);
+        return markdown;
+    }
+}
+
+
+;// CONCATENATED MODULE: ./src/helper/markdown/page/create_followers_page.js
+
+
+
+
+
+
+
+
+class FollowersPageCreator {
+    static createUserTableByPublicContributions(readCacheResponseModel) {
+        readCacheResponseModel.users.sort((a, b) => parseFloat(b.followers) - parseFloat(a.followers));
+        let index = 1;
+        let table = '';
+        if (readCacheResponseModel.users === undefined || readCacheResponseModel.users.length === 0) {
+            table = table + '<h4>The table is empty</h4>';
+        } else {
+            table = table + '<table>\n';
+            table = table + '\t<tr>\n';
+            table = table + '\t\t<th>#</th>\n';
+            table = table + '\t\t<th>Name</th>\n';
+            table = table + '\t\t<th>Company</th>\n';
+            table = table + '\t\t<th>Twitter Username</th>\n';
+            table = table + '\t\t<th>Location</th>\n';
+            table = table + '\t\t<th>Followers</th>\n';
+            table = table + '\t</tr>\n';
+            for (const user of readCacheResponseModel.users) {
+                if (user.followers > 0 && index <= 1000) {
+                    table = table + '\t<tr>\n';
+                    table = table + `\t\t<td>${index}</td>\n`;
+                    table = table + '\t\t<td>\n';
+                    table = table + `\t\t\t<a href="https://github.com/${user.login}">\n`;
+                    table = table + `\t\t\t\t<img src="${user.avatarUrl}" width="24" alt="Avatar of ${user.login}"> ${user.login}\n`;
+                    table = table + '\t\t\t</a><br/>\n';
+                    table = table + `\t\t\t${FormatMarkdown.getName(user.name)}\n`;
+                    table = table + '\t\t</td>\n';
+                    table = table + `\t\t<td>${FormatMarkdown.getCompany(user.company)}</td>\n`;
+                    table = table + `\t\t<td>${FormatMarkdown.getTwitterUsername(user.twitterUsername)}</td>\n`;
+                    table = table + `\t\t<td>${user.location}</td>\n`;
+                    table = table + `\t\t<td>${user.followers}</td>\n`;
+                    table = table + '\t</tr>\n';
+                }
+                index++;
+            }
+            table = table + '</table>\n\n';
+        }
+        return table;
+    }
+
+    static create(outputMarkdownModel) {
+        let country = FormatMarkdown.capitalizeTheFirstLetterOfEachWord(outputMarkdownModel.locationDataModel.country);
+        let markdown = HeaderComponent.create(`Followers`, country);
+        markdown = markdown + `<a href="https://gayanvoice.github.io/top-github-users/index.html">\n`;
+        markdown = markdown + `\t<img align="right" width="200" src="${outputMarkdownModel.locationDataModel.imageUrl}" alt="${country}">\n`;
+        markdown = markdown + `</a>\n\n`;
+        markdown = markdown + `The \`number of followers\` of users in ${country} on \`${FormatMarkdown.getDate()}\`. `;
+        markdown = markdown + `This list contains users from ${FormatMarkdown.getLocations(outputMarkdownModel.locationDataModel)}.\n\n`;
+        markdown = markdown + `There are \`${outputMarkdownModel.readConfigResponseModel.locations.length} countries\` and \`${FormatMarkdown.getNumberOfCities(outputMarkdownModel.readConfigResponseModel)} cities\` can be found [here](https://github.com/${outputMarkdownModel.githubUsernameAndRepository}).\n\n`;
+        markdown = markdown + `There are \`${outputMarkdownModel.readCacheResponseModel.users.length} users\`  in ${country}. You need at least \`${FormatMarkdown.getMinimumFollowersRequirement(outputMarkdownModel.readCacheResponseModel)} followers\` to be on this list.\n\n`;
+        markdown = markdown + StarComponent.create();
+        markdown = markdown + ShortcutMenuComponent.create(
+            `https://github.com/${outputMarkdownModel.githubUsernameAndRepository}`,
+            outputMarkdownModel.locationDataModel.country,
+            2);
+        markdown = markdown + `### 🚀 Share on\n\n`;
+        markdown = markdown + SocialMediaComponent.create(
+            `Top GitHub Users By Followers in ${country}`,
+            "Most active github users based on number of followers by country",
+            `https://github.com/${outputMarkdownModel.githubUsernameAndRepository}/blob/main/markdown/followers/${FormatMarkdown.getCountryName(outputMarkdownModel.locationDataModel.country)}.md`);
+        markdown = markdown + this.createUserTableByPublicContributions(outputMarkdownModel.readCacheResponseModel);
+        markdown = markdown + `### 🚀 Share on\n\n`;
+        markdown = markdown + SocialMediaComponent.create(
+            `Top GitHub Users By Followers in ${country}`,
+            `List of most active github users based on number of followers by country`,
+            `https://github.com/${outputMarkdownModel.githubUsernameAndRepository}/blob/main/markdown/followers/${FormatMarkdown.getCountryName(outputMarkdownModel.locationDataModel.country)}.md`);
+        markdown = markdown + ThirdPartyComponent.create();
+        markdown = markdown + LicenseComponent.create(outputMarkdownModel.githubUsernameAndRepository);
+        return markdown;
+    }
+}
+
+
 ;// CONCATENATED MODULE: ./src/helper/markdown/output_markdown.js
 
 
 
-class MarkdownOutputHandler {
-    static formatCountryName(country) {
-        return country.replace(/\s/g, '_').toLowerCase();
-    }
 
-    static getFilePaths() {
-        return {
-            index: 'README.md',
-            publicContributions: country => path.join('markdown', 'public_contributions', `${this.formatCountryName(country)}.md`),
-            totalContributions: country => path.join('markdown', 'total_contributions', `${this.formatCountryName(country)}.md`),
-            followers: country => path.join('markdown', 'followers', `${this.formatCountryName(country)}.md`)
-        };
-    }
 
-    static async saveMarkdownFile(filePath, content) {
+
+
+class OutputMarkdownHandler {
+    static async create(outputMarkdownModel) {
         try {
-            await markdownFile.outputMarkdownFile(filePath, content);
+            // Create index page
+            const indexPagePath = external_path_.join('markdown', 'index.md');
+            await external_fs_.promises.mkdir(external_path_.dirname(indexPagePath), { recursive: true });
+            await external_fs_.promises.writeFile(indexPagePath, IndexPageCreator.create(outputMarkdownModel));
+
+            // Create public contributions page
+            const publicContributionsPagePath = external_path_.join('markdown', 'public_contributions', outputMarkdownModel.locationDataModel.country.toLowerCase() + '.md');
+            await external_fs_.promises.mkdir(external_path_.dirname(publicContributionsPagePath), { recursive: true });
+            await external_fs_.promises.writeFile(publicContributionsPagePath, PublicContributionsPageCreator.create(outputMarkdownModel));
+
+            // Create total contributions page
+            const totalContributionsPagePath = external_path_.join('markdown', 'total_contributions', outputMarkdownModel.locationDataModel.country.toLowerCase() + '.md');
+            await external_fs_.promises.mkdir(external_path_.dirname(totalContributionsPagePath), { recursive: true });
+            await external_fs_.promises.writeFile(totalContributionsPagePath, TotalContributionsPageCreator.create(outputMarkdownModel));
+
+            // Create followers page
+            const followersPagePath = external_path_.join('markdown', 'followers', outputMarkdownModel.locationDataModel.country.toLowerCase() + '.md');
+            await external_fs_.promises.mkdir(external_path_.dirname(followersPagePath), { recursive: true });
+            await external_fs_.promises.writeFile(followersPagePath, FollowersPageCreator.create(outputMarkdownModel));
+
+            return true;
         } catch (error) {
-            console.error(`Error saving markdown file ${filePath}:`, error);
-            throw error;
+            console.error('Error creating markdown files:', error);
+            return false;
         }
-    }
-
-    static async saveIndexMarkdown(markdown) {
-        const filePath = this.getFilePaths().index;
-        await this.saveMarkdownFile(filePath, markdown);
-    }
-
-    static async savePublicContributionsMarkdown(country, markdown) {
-        const filePath = this.getFilePaths().publicContributions(country);
-        await this.saveMarkdownFile(filePath, markdown);
-    }
-
-    static async saveTotalContributionsMarkdown(country, markdown) {
-        const filePath = this.getFilePaths().totalContributions(country);
-        await this.saveMarkdownFile(filePath, markdown);
-    }
-
-    static async saveFollowersMarkdown(country, markdown) {
-        const filePath = this.getFilePaths().followers(country);
-        await this.saveMarkdownFile(filePath, markdown);
     }
 }
 
-/* harmony default export */ const output_markdown = ((/* unused pure expression or super */ null && (MarkdownOutputHandler)));
+
 ;// CONCATENATED MODULE: ./src/helper/file/html_file.js
 
 
@@ -11885,150 +11308,249 @@ class HtmlFileHandler {
     }
 }
 
-/* harmony default export */ const html_file = ((/* unused pure expression or super */ null && (HtmlFileHandler)));
+/* harmony default export */ const html_file = (HtmlFileHandler);
 ;// CONCATENATED MODULE: ./src/helper/html/output_html.js
 
 
 
 class HtmlOutputHandler {
-    static DOCS_DIR = (/* unused pure expression or super */ null && ('docs'));
-    static HTML_FILE = (/* unused pure expression or super */ null && ('index.html'));
-    static RANKING_FILE = (/* unused pure expression or super */ null && ('ranking.json'));
+    static DOCS_DIR = 'docs';
+    static HTML_FILE = 'index.html';
+    static RANKING_FILE = 'ranking.json';
 
     static getPaths() {
         return {
-            html: path.join(this.DOCS_DIR, this.HTML_FILE),
-            ranking: path.join(this.DOCS_DIR, this.RANKING_FILE)
+            html: external_path_.join(this.DOCS_DIR, this.HTML_FILE),
+            ranking: external_path_.join(this.DOCS_DIR, this.RANKING_FILE)
         };
     }
 
     static async saveHtmlFile(html) {
         try {
             const filePath = this.getPaths().html;
-            await htmlFile.outputHtmlFile(filePath, html);
+            await html_file.outputHtmlFile(filePath, html);
             console.log(`HTML file saved successfully at ${filePath}`);
             return true;
         } catch (error) {
-            console.error('Error saving HTML file:', error);
-            throw error;
+            console.error(`Error saving HTML file: ${error.message}`);
+            return false;
         }
     }
 
-    static async saveRankingFile(rankingData) {
+    static async saveRankingFile(data) {
         try {
             const filePath = this.getPaths().ranking;
-            const jsonData = {
-                lastUpdated: new Date().toISOString(),
-                data: rankingData
-            };
-
-            await htmlFile.outputJsonFile(filePath, jsonData);
-            console.log(`Ranking data saved successfully at ${filePath}`);
+            await html_file.outputJsonFile(filePath, data);
+            console.log(`Ranking file saved successfully at ${filePath}`);
             return true;
         } catch (error) {
-            console.error('Error saving ranking file:', error);
-            throw error;
+            console.error(`Error saving ranking file: ${error.message}`);
+            return false;
         }
     }
 
-    static async updateRankingFile(newData) {
+    static async create(outputHtmlModel) {
         try {
-            const filePath = this.getPaths().ranking;
-            const existingData = await htmlFile.readJsonFile(filePath).catch(() => ({ data: [] }));
-            
-            const updatedData = {
-                lastUpdated: new Date().toISOString(),
-                data: [...existingData.data, ...newData]
-            };
-
-            await htmlFile.outputJsonFile(filePath, updatedData);
-            console.log(`Ranking data updated successfully at ${filePath}`);
+            const htmlContent = this.generateHtml(outputHtmlModel);
+            await this.saveHtmlFile(htmlContent);
+            await this.saveRankingFile(outputHtmlModel);
             return true;
         } catch (error) {
-            console.error('Error updating ranking file:', error);
-            throw error;
+            console.error(`Error creating HTML output: ${error.message}`);
+            return false;
         }
+    }
+
+    static generateHtml(data) {
+        return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Users Ranking</title>
+</head>
+<body>
+    <h1>GitHub Users Ranking</h1>
+    <pre>${JSON.stringify(data, null, 2)}</pre>
+</body>
+</html>`;
     }
 }
 
+
 /* harmony default export */ const output_html = ((/* unused pure expression or super */ null && (HtmlOutputHandler)));
-// EXTERNAL MODULE: ./src/helper/html/file/create_html_file.js
-var create_html_file = __nccwpck_require__(8900);
-// EXTERNAL MODULE: ./src/helper/html/file/create_ranking_json_file.js
-var create_ranking_json_file = __nccwpck_require__(7818);
-// EXTERNAL MODULE: ./src/helper/markdown/page/create_index_page.js
-var create_index_page = __nccwpck_require__(2833);
-// EXTERNAL MODULE: ./src/helper/markdown/page/create_public_contributions_page.js
-var create_public_contributions_page = __nccwpck_require__(4486);
-// EXTERNAL MODULE: ./src/helper/markdown/page/create_total_contributions_page.js
-var create_total_contributions_page = __nccwpck_require__(5389);
-// EXTERNAL MODULE: ./src/helper/markdown/page/create_followers_page.js
-var create_followers_page = __nccwpck_require__(5815);
+;// CONCATENATED MODULE: ./src/helper/html/file/create_ranking_json_file.js
+
+
+
+
+class RankingJsonFileCreator {
+    static async create(readConfigResponseModel) {
+        const countriesArray = [];
+        for await (const locationDataModel of readConfigResponseModel.locations) {
+            if (locationDataModel.geoName === null) {
+                console.log(`Ranking not available for ${locationDataModel.country}`);
+            } else {
+                console.log(`Ranking available for ${locationDataModel.country}`);
+                const readCacheResponseModel = await CacheHandler.readCacheFile(locationDataModel.country);
+                let totalPublicContributions = 0;
+                if (readCacheResponseModel.status) {
+                    for (const user of readCacheResponseModel.users) {
+                        if (user.publicContributions > 10000) {
+                            totalPublicContributions = totalPublicContributions + 10000;
+                        } else {
+                            totalPublicContributions = totalPublicContributions + (user.publicContributions);
+                        }
+                    }
+                    countriesArray.push({ name: locationDataModel.geoName, value: totalPublicContributions });
+                }
+            }
+        }
+        return { ranking: countriesArray };
+    }
+}
+
+
 // EXTERNAL MODULE: ./node_modules/@octokit/graphql/dist-node/index.js
 var dist_node = __nccwpck_require__(8467);
 ;// CONCATENATED MODULE: ./src/model/octokit/OctokitPageInfoModel.js
 class OctokitPageInfoModel {
-    #endCursor;
     #hasNextPage;
+    #endCursor;
 
-    constructor({ endCursor = null, hasNextPage = false } = {}) {
-        this.#endCursor = this.#validateCursor(endCursor);
-        this.#hasNextPage = Boolean(hasNextPage);
-    }
-
-    #validateCursor(cursor) {
-        return cursor && typeof cursor === 'string' ? cursor : null;
-    }
-
-    get endCursor() {
-        return this.#endCursor;
+    constructor(hasNextPage, endCursor) {
+        this.#hasNextPage = hasNextPage;
+        this.#endCursor = endCursor;
     }
 
     get hasNextPage() {
         return this.#hasNextPage;
     }
 
-    hasMore() {
-        return this.#hasNextPage === true;
-    }
-
-    getNextCursor() {
+    get endCursor() {
         return this.#endCursor;
-    }
-
-    clone() {
-        return new OctokitPageInfoModel({
-            endCursor: this.#endCursor,
-            hasNextPage: this.#hasNextPage
-        });
     }
 
     toJSON() {
         return {
-            endCursor: this.endCursor,
-            hasNextPage: this.hasNextPage
+            hasNextPage: this.#hasNextPage,
+            endCursor: this.#endCursor
         };
-    }
-
-    toString() {
-        return `OctokitPageInfoModel(cursor=${this.endCursor}, hasNext=${this.hasNextPage})`;
-    }
-
-    static createEmpty() {
-        return new OctokitPageInfoModel();
-    }
-
-    static fromJSON(json) {
-        return new OctokitPageInfoModel({
-            endCursor: json?.endCursor,
-            hasNextPage: json?.hasNextPage
-        });
     }
 }
 
 /* harmony default export */ const octokit_OctokitPageInfoModel = (OctokitPageInfoModel);
-// EXTERNAL MODULE: ./src/model/data/UserDataModel.js
-var UserDataModel = __nccwpck_require__(1689);
+;// CONCATENATED MODULE: ./src/model/data/UserDataModel.js
+class UserDataModel {
+    #login;
+    #name;
+    #avatarUrl;
+    #url;
+    #company;
+    #blog;
+    #location;
+    #email;
+    #bio;
+    #twitter;
+    #followers;
+    #following;
+    #contributions;
+    #publicContributions;
+
+    constructor(login, name, avatarUrl, url, company, blog, location, email, bio, twitter, followers, following, contributions, publicContributions) {
+        this.#login = login;
+        this.#name = name;
+        this.#avatarUrl = avatarUrl;
+        this.#url = url;
+        this.#company = company;
+        this.#blog = blog;
+        this.#location = location;
+        this.#email = email;
+        this.#bio = bio;
+        this.#twitter = twitter;
+        this.#followers = followers;
+        this.#following = following;
+        this.#contributions = contributions;
+        this.#publicContributions = publicContributions;
+    }
+
+    get login() {
+        return this.#login;
+    }
+
+    get name() {
+        return this.#name;
+    }
+
+    get avatarUrl() {
+        return this.#avatarUrl;
+    }
+
+    get url() {
+        return this.#url;
+    }
+
+    get company() {
+        return this.#company;
+    }
+
+    get blog() {
+        return this.#blog;
+    }
+
+    get location() {
+        return this.#location;
+    }
+
+    get email() {
+        return this.#email;
+    }
+
+    get bio() {
+        return this.#bio;
+    }
+
+    get twitter() {
+        return this.#twitter;
+    }
+
+    get followers() {
+        return this.#followers;
+    }
+
+    get following() {
+        return this.#following;
+    }
+
+    get contributions() {
+        return this.#contributions;
+    }
+
+    get publicContributions() {
+        return this.#publicContributions;
+    }
+
+    toJSON() {
+        return {
+            login: this.#login,
+            name: this.#name,
+            avatarUrl: this.#avatarUrl,
+            url: this.#url,
+            company: this.#company,
+            blog: this.#blog,
+            location: this.#location,
+            email: this.#email,
+            bio: this.#bio,
+            twitter: this.#twitter,
+            followers: this.#followers,
+            following: this.#following,
+            contributions: this.#contributions,
+            publicContributions: this.#publicContributions
+        };
+    }
+}
+
+/* harmony default export */ const data_UserDataModel = (UserDataModel);
 ;// CONCATENATED MODULE: ./src/model/octokit/OctokitResponseModel.js
 
 
@@ -12055,7 +11577,7 @@ class OctokitResponseModel {
             console.warn('Users must be an array, received:', typeof users);
             return [];
         }
-        return users.filter(user => user instanceof UserDataModel["default"]);
+        return users.filter(user => user instanceof data_UserDataModel);
     }
 
     #validatePageInfo(pageInfo) {
@@ -12089,7 +11611,7 @@ class OctokitResponseModel {
     }
 
     addUsers(newUsers) {
-        const validUsers = newUsers.filter(user => user instanceof UserDataModel["default"]);
+        const validUsers = newUsers.filter(user => user instanceof data_UserDataModel);
         this.#users.push(...validUsers);
     }
 
@@ -12150,7 +11672,7 @@ class OctokitResponseModel {
         }
 
         try {
-            return UserDataModel["default"].fromGraphQLData(userData);
+            return data_UserDataModel.fromGraphQLData(userData);
         } catch (error) {
             console.warn('Error processing user data:', error);
             return null;
@@ -12323,10 +11845,40 @@ class OctokitRequestHandler {
 }
 
 /* harmony default export */ const request_octokit = (OctokitRequestHandler);
-// EXTERNAL MODULE: ./src/helper/markdown/format_markdown.js
-var format_markdown = __nccwpck_require__(3164);
-// EXTERNAL MODULE: ./src/model/markdown/OutputMarkdownModel.js
-var OutputMarkdownModel = __nccwpck_require__(4343);
+;// CONCATENATED MODULE: ./src/model/markdown/OutputMarkdownModel.js
+class OutputMarkdownModel {
+    #country;
+    #type;
+    #markdown;
+
+    constructor(country, type, markdown) {
+        this.#country = country;
+        this.#type = type;
+        this.#markdown = markdown;
+    }
+
+    get country() {
+        return this.#country;
+    }
+
+    get type() {
+        return this.#type;
+    }
+
+    get markdown() {
+        return this.#markdown;
+    }
+
+    toJSON() {
+        return {
+            country: this.#country,
+            type: this.#type,
+            markdown: this.#markdown
+        };
+    }
+}
+
+
 ;// CONCATENATED MODULE: ./src/index.js
 /*!
  * Top GitHub Users Action
@@ -12348,7 +11900,6 @@ var OutputMarkdownModel = __nccwpck_require__(4343);
  * 
  * Released under the MIT License
  */
-
 
 
 
@@ -12394,7 +11945,7 @@ class GitHubUsersMonitor {
                         continue;
                     }
 
-                    await output_cache_default().saveCacheFile(response.content);
+                    await CacheHandler.saveCacheFile(response.content);
                 } else {
                     console.log('Checkpoint not set for', location.country);
                 }
@@ -12411,27 +11962,27 @@ class GitHubUsersMonitor {
                 if (await this.#isCheckpoint(config.locations, location.country, checkpoint.checkpoint)) {
                     console.log('Checkpoint set for', location.country);
 
-                    const cacheResponse = await output_cache_default().readCacheFile();
+                    const cacheResponse = await CacheHandler.readCacheFile();
                     if (!cacheResponse.status) {
                         console.error(`Error reading cache for ${location.country}:`, cacheResponse.message);
                         continue;
                     }
 
                     const cache = cacheResponse.content;
-                    const outputModel = new OutputMarkdownModel.OutputMarkdownModel(location, cache);
+                    const outputModel = new OutputMarkdownModel(location, cache);
 
                     await Promise.all([
-                        output_markdown_namespaceObject.outputMarkdown.saveIndexFile(
-                            create_index_page.createIndexPage.create(outputModel)
+                        OutputMarkdownHandler.saveIndexFile(
+                            IndexPageCreator.create(outputModel)
                         ),
-                        output_markdown_namespaceObject.outputMarkdown.savePublicContributionsFile(
-                            create_public_contributions_page.createPublicContributionsPage.create(outputModel)
+                        OutputMarkdownHandler.savePublicContributionsFile(
+                            PublicContributionsPageCreator.create(outputModel)
                         ),
-                        output_markdown_namespaceObject.outputMarkdown.saveTotalContributionsFile(
-                            create_total_contributions_page.createTotalContributionsPage.create(outputModel)
+                        OutputMarkdownHandler.saveTotalContributionsFile(
+                            TotalContributionsPageCreator.create(outputModel)
                         ),
-                        output_markdown_namespaceObject.outputMarkdown.saveFollowersFile(
-                            create_followers_page.createFollowersPage.create(outputModel)
+                        OutputMarkdownHandler.saveFollowersFile(
+                            FollowersPageCreator.create(outputModel)
                         )
                     ]);
 
@@ -12448,10 +11999,10 @@ class GitHubUsersMonitor {
     static async #saveHtml(config) {
         console.log('########## SaveHtml ##########');
         try {
-            const rankingJson = await create_ranking_json_file.createRankingJsonFile.create(config);
+            const rankingJson = await RankingJsonFileCreator.create(config);
             await Promise.all([
-                output_html_namespaceObject.outputHtml.saveRankingJsonFile(rankingJson),
-                output_html_namespaceObject.outputHtml.saveHtmlFile(await create_html_file.createHtmlFile.create())
+                HtmlOutputHandler.saveRankingJsonFile(rankingJson),
+                HtmlOutputHandler.saveHtmlFile(await HtmlOutputHandler.create())
             ]);
         } catch (error) {
             console.error('Error generating HTML files:', error);
@@ -12479,7 +12030,7 @@ class GitHubUsersMonitor {
             const config = configResponse.content;
 
             if (!config.settings.devMode) {
-                await pull_git_namespaceObject.pullGit.pull();
+                await GitPullHandler.pull();
             }
 
             const checkpointCountry = config.locations[checkpoint.checkpoint].country;
@@ -12489,9 +12040,9 @@ class GitHubUsersMonitor {
             await this.#saveHtml(config);
 
             if (!config.settings.devMode) {
-                const countryName = format_markdown.formatMarkdown.capitalizeTheFirstLetterOfEachWord(checkpointCountry);
-                await commit_git.commitGit.commit(`Update ${countryName}`);
-                await push_git.pushGit.push();
+                const countryName = FormatMarkdown.capitalizeTheFirstLetterOfEachWord(checkpointCountry);
+                await GitCommitter.commit(`Update ${countryName}`);
+                await GitPushHandler.push();
             }
         } catch (error) {
             console.error('Error in GitHub Users Monitor:', error);
@@ -12505,9 +12056,11 @@ GitHubUsersMonitor.run().catch(error => {
     console.error('Fatal error:', error);
     process.exit(1);
 });
+
+
 })();
 
-module.exports = __webpack_exports__;
-/******/ })()
-;
+var __webpack_exports__GitHubUsersMonitor = __webpack_exports__.l;
+export { __webpack_exports__GitHubUsersMonitor as GitHubUsersMonitor };
+
 //# sourceMappingURL=index.js.map
