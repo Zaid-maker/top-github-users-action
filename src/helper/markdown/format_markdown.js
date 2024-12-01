@@ -1,5 +1,5 @@
-let formatMarkdown = function () {
-    let capitalizeTheFirstLetterOfEachWord = function (words) {
+class FormatMarkdown {
+    static capitalizeTheFirstLetterOfEachWord(words) {
         let separateWord = words.toLowerCase().split(' ');
         for (let i = 0; i < separateWord.length; i++) {
             separateWord[i] = separateWord[i].charAt(0).toUpperCase() +
@@ -7,90 +7,84 @@ let formatMarkdown = function () {
         }
         return separateWord.join(' ');
     }
-    let breakWords = function (words, numberOfWords) {
+
+    static breakWords(words, numberOfWords) {
         let separateWord = words.toLowerCase().split(' ');
-        let sentence = ``;
+        let sentence = '';
         let iterations = 1;
         for (const word of separateWord) {
-           if(iterations === numberOfWords){
-               iterations = numberOfWords;
-               sentence  = sentence + `${capitalizeTheFirstLetterOfEachWord(word).substring(0, 20)}<br/>`;
-           } else {
-               iterations++;
-               sentence  = sentence + `${capitalizeTheFirstLetterOfEachWord(word).substring(0, 20)} `;
-           }
-        }
-        return sentence
-    }
-    let getDate = function () {
-        let date = new Date();
-        let time = date.toLocaleString('en-US', { timeZone: 'UTC', hour: 'numeric', minute: 'numeric', hour12: true })
-        return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()} ${time} UTC`
-    }
-    let getCompany = function (company) {
-        if(company === 'undefined value'){
-            return `No Company`;
-        } else {
-            return breakWords(company, 4)
-        }
-    }
-    let getName = function (name) {
-        if(name === 'undefined value'){
-            return `No Name`;
-        } else {
-            return name
-        }
-    }
-    let getTwitterUsername = function (twitterUsername) {
-        if(twitterUsername === 'undefined value'){
-            return `No Twitter Username`;
-        } else {
-            return `<a href="https://twitter.com/${twitterUsername}">${twitterUsername}</a>`
-        }
-    }
-    let getLocations = function (locationDataModel) {
-        let locations = locationDataModel.locations;
-        let placesString = ``;
-        for(const location of locations){
-            if(location === locations[0]) {
-                placesString = placesString +  `\`${capitalizeTheFirstLetterOfEachWord(location)}\` and cities`;
+            if (iterations === numberOfWords) {
+                iterations = numberOfWords;
+                sentence = sentence + `${this.capitalizeTheFirstLetterOfEachWord(word).substring(0, 20)}<br/>`;
             } else {
-                placesString = placesString + ` \`${capitalizeTheFirstLetterOfEachWord(location)}\``
+                iterations++;
+                sentence = sentence + `${this.capitalizeTheFirstLetterOfEachWord(word).substring(0, 20)} `;
             }
         }
-        return placesString
+        return sentence;
     }
-    let getMinimumFollowersRequirement = function (readCacheResponseModel) {
-        let users = readCacheResponseModel.users;
-        users.sort((a, b) => parseFloat(b.followers) - parseFloat(a.followers));
-        return users[users.length - 1].followers;
-    }
-    let getCountryName = function (country) {
-        return country.replace(/\s/g, '_').toLowerCase();
-    }
-    let getNumberOfCities = function (readConfigResponseModel) {
-        let numberOfCities = 0;
-        for(const locationDataModel of readConfigResponseModel.locations) {
-            for (const location of locationDataModel.locations) {
-                if (locationDataModel.country !== location) {
-                    numberOfCities++;
-                }
-            }
-        }
-        return numberOfCities;
-    }
-    return {
-        capitalizeTheFirstLetterOfEachWord: capitalizeTheFirstLetterOfEachWord,
-        breakWords: breakWords,
-        getDate: getDate,
-        getCompany: getCompany,
-        getName: getName,
-        getTwitterUsername: getTwitterUsername,
-        getLocations: getLocations,
-        getMinimumFollowersRequirement: getMinimumFollowersRequirement,
-        getCountryName: getCountryName,
-        getNumberOfCities: getNumberOfCities
 
-    };
-}();
-module.exports = formatMarkdown;
+    static getDate() {
+        let date = new Date();
+        return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+    }
+
+    static getCompany(company) {
+        if (company === null || company === undefined || company === '') {
+            return '-';
+        } else {
+            return company;
+        }
+    }
+
+    static getName(name) {
+        if (name === null || name === undefined || name === '') {
+            return '-';
+        } else {
+            return name;
+        }
+    }
+
+    static getTwitterUsername(twitterUsername) {
+        if (twitterUsername === null || twitterUsername === undefined || twitterUsername === '') {
+            return '-';
+        } else {
+            return `<a href="https://twitter.com/${twitterUsername}">@${twitterUsername}</a>`;
+        }
+    }
+
+    static getLocations(locationDataModel) {
+        let locations = '';
+        if (locationDataModel.cities === undefined || locationDataModel.cities.length === 0) {
+            locations = locations + `<h4>No cities in ${this.capitalizeTheFirstLetterOfEachWord(locationDataModel.country)}</h4>`;
+        } else {
+            for (const city of locationDataModel.cities) {
+                locations = locations + `<code>${city}</code> `;
+            }
+        }
+        return locations;
+    }
+
+    static getMinimumFollowersRequirement(readCacheResponseModel) {
+        if (readCacheResponseModel.users === undefined || readCacheResponseModel.users.length === 0) {
+            return 0;
+        }
+        return readCacheResponseModel.users[readCacheResponseModel.users.length - 1].followers;
+    }
+
+    static getCountryName(country) {
+        return country.toLowerCase().replace(/ /g, '-');
+    }
+
+    static getNumberOfCities(readConfigResponseModel) {
+        let count = 0;
+        for (const country of readConfigResponseModel.countries) {
+            if (country.cities !== undefined) {
+                count = count + country.cities.length;
+            }
+        }
+        return count;
+    }
+}
+
+export { FormatMarkdown as formatMarkdown };
