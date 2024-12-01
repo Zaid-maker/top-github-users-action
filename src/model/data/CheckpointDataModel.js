@@ -1,4 +1,26 @@
-let CheckpointDataModel = function (checkpoint) {
-    this.checkpoint = checkpoint;
+class CheckpointDataModel {
+    #checkpoint;
+    #country;
+
+    constructor(checkpoint, country) {
+        this.#checkpoint = checkpoint;
+        this.#country = country;
+    }
+
+    get checkpoint() {
+        return this.#checkpoint;
+    }
+
+    get country() {
+        return this.#country;
+    }
+
+    toJSON() {
+        return {
+            checkpoint: this.#checkpoint,
+            country: this.#country
+        };
+    }
 }
-module.exports = CheckpointDataModel;
+
+export default CheckpointDataModel;

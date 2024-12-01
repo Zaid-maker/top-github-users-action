@@ -1,4 +1,4 @@
-import path from 'path.js';
+import path from 'path';
 import markdownFile from '../../helper/file/markdown_file.js';
 
 class MarkdownOutputHandler {

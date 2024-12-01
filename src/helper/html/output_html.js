@@ -1,4 +1,4 @@
-import path from 'path.js';
+import path from 'path';
 import htmlFile from '../../helper/file/html_file.js';
 
 class HtmlOutputHandler {

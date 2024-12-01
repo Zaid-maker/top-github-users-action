@@ -1,4 +1,4 @@
-import { graphql } from '@octokit/graphql.js';
+import { graphql } from '@octokit/graphql';
 import OctokitResponseModel from '../model/octokit/OctokitResponseModel.js';
 
 class OctokitHandler {

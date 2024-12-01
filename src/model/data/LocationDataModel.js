@@ -80,4 +80,4 @@ class LocationDataModel {
     }
 }
 
-export default LocationDataModel;
+export { LocationDataModel as default };

@@ -1,4 +1,4 @@
-import simpleGit from 'simple-git.js';
+import simpleGit from 'simple-git';
 
 class GitHandler {
     constructor() {

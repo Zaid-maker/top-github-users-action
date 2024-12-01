@@ -1,34 +1,47 @@
-const UserDataModel = require('../data/UserDataModel');
+import UserDataModel from '../data/UserDataModel.js';
 
-let ReadCacheResponseModel = function (status, content) {
-    let validate = function (value) {
-        return (value === '' || value === null || value === undefined);
+class ReadCacheResponseModel {
+    #status;
+    #content;
+
+    constructor(status, content = null) {
+        this.#status = status;
+        this.#content = content;
     }
-    let setValue = function (value) {
-        if (validate(value)) {
-            return "undefined value";
-        } else {
-            return value;
+
+    get status() {
+        return this.#status;
+    }
+
+    get content() {
+        return this.#content;
+    }
+
+    toJSON() {
+        let validate = (value) => (value === '' || value === null || value === undefined);
+        let setValue = (value) => validate(value) ? "undefined value" : value;
+        let setUsers = (content) => {
+            let array = [];
+            for (const user of content) {
+                let userDataModel = new UserDataModel(
+                    setValue(user.login),
+                    setValue(user.name),
+                    setValue(user.avatarUrl),
+                    setValue(user.location),
+                    setValue(user.company),
+                    setValue(user.twitterUsername),
+                    setValue(user.followers),
+                    setValue(user.privateContributions),
+                    setValue(user.publicContributions))
+                array.push(userDataModel)
+            }
+            return array;
         }
+        return {
+            status: this.#status,
+            users: this.#status ? setUsers(this.#content) : null
+        };
     }
-    let setUsers = function (content) {
-        let array = [];
-        for (const user of content) {
-            let userDataModel = new UserDataModel(
-                setValue(user.login),
-                setValue(user.name),
-                setValue(user.avatarUrl),
-                setValue(user.location),
-                setValue(user.company),
-                setValue(user.twitterUsername),
-                setValue(user.followers),
-                setValue(user.privateContributions),
-                setValue(user.publicContributions))
-            array.push(userDataModel)
-        }
-        return array;
-    }
-    this.status = status;
-    if (status) this.users = setUsers(content)
 }
-module.exports = ReadCacheResponseModel;
+
+export default ReadCacheResponseModel;

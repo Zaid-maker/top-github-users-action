@@ -1,10 +1,33 @@
-let OutputMarkdownModel = function (githubUsernameAndRepository,
-    locationDataModel,
-    readCacheResponseModel,
-    readConfigResponseModel) {
-    this.githubUsernameAndRepository = githubUsernameAndRepository;
-    this.locationDataModel = locationDataModel;
-    this.readCacheResponseModel = readCacheResponseModel;
-    this.readConfigResponseModel = readConfigResponseModel;
+class OutputMarkdownModel {
+    #country;
+    #type;
+    #markdown;
+
+    constructor(country, type, markdown) {
+        this.#country = country;
+        this.#type = type;
+        this.#markdown = markdown;
+    }
+
+    get country() {
+        return this.#country;
+    }
+
+    get type() {
+        return this.#type;
+    }
+
+    get markdown() {
+        return this.#markdown;
+    }
+
+    toJSON() {
+        return {
+            country: this.#country,
+            type: this.#type,
+            markdown: this.#markdown
+        };
+    }
 }
-module.exports = OutputMarkdownModel;
+
+export { OutputMarkdownModel };
