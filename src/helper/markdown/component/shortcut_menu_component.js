@@ -1,4 +1,4 @@
-import formatMarkdown from '../format_markdown';
+import { formatMarkdown } from '../format_markdown.js';
 
 class ShortcutMenuComponent {
     static create(indexUrl, country, index) {

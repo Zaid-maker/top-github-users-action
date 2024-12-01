@@ -20,46 +20,50 @@ class HtmlOutputHandler {
             console.log(`HTML file saved successfully at ${filePath}`);
             return true;
         } catch (error) {
-            console.error('Error saving HTML file:', error);
-            throw error;
+            console.error(`Error saving HTML file: ${error.message}`);
+            return false;
         }
     }
 
-    static async saveRankingFile(rankingData) {
+    static async saveRankingFile(data) {
         try {
             const filePath = this.getPaths().ranking;
-            const jsonData = {
-                lastUpdated: new Date().toISOString(),
-                data: rankingData
-            };
-
-            await htmlFile.outputJsonFile(filePath, jsonData);
-            console.log(`Ranking data saved successfully at ${filePath}`);
+            await htmlFile.outputJsonFile(filePath, data);
+            console.log(`Ranking file saved successfully at ${filePath}`);
             return true;
         } catch (error) {
-            console.error('Error saving ranking file:', error);
-            throw error;
+            console.error(`Error saving ranking file: ${error.message}`);
+            return false;
         }
     }
 
-    static async updateRankingFile(newData) {
+    static async create(outputHtmlModel) {
         try {
-            const filePath = this.getPaths().ranking;
-            const existingData = await htmlFile.readJsonFile(filePath).catch(() => ({ data: [] }));
-            
-            const updatedData = {
-                lastUpdated: new Date().toISOString(),
-                data: [...existingData.data, ...newData]
-            };
-
-            await htmlFile.outputJsonFile(filePath, updatedData);
-            console.log(`Ranking data updated successfully at ${filePath}`);
+            const htmlContent = this.generateHtml(outputHtmlModel);
+            await this.saveHtmlFile(htmlContent);
+            await this.saveRankingFile(outputHtmlModel);
             return true;
         } catch (error) {
-            console.error('Error updating ranking file:', error);
-            throw error;
+            console.error(`Error creating HTML output: ${error.message}`);
+            return false;
         }
+    }
+
+    static generateHtml(data) {
+        return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Users Ranking</title>
+</head>
+<body>
+    <h1>GitHub Users Ranking</h1>
+    <pre>${JSON.stringify(data, null, 2)}</pre>
+</body>
+</html>`;
     }
 }
 
+export { HtmlOutputHandler as createHtmlFile };
 export default HtmlOutputHandler;

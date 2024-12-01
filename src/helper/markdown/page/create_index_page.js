@@ -1,12 +1,13 @@
-const formatMarkdown = require('../format_markdown');
-const headerComponent = require('../component/header_component');
-const starComponent = require('../component/star_component');
-const socialMediaComponent = require('../component/social_media_component');
-const thirdPartyComponent = require('../component/third_party_component');
-const licenseComponent = require('../component/license_component');
-let createIndexPage = (function () {
-    let createListOfCities = function (locationDataModel) {
-        let cities = ``;
+import { formatMarkdown } from '../format_markdown.js';
+import { headerComponent } from '../component/header_component.js';
+import { starComponent } from '../component/star_component.js';
+import { socialMediaComponent } from '../component/social_media_component.js';
+import { thirdPartyComponent } from '../component/third_party_component.js';
+import { licenseComponent } from '../component/license_component.js';
+
+class IndexPageCreator {
+    static createListOfCities(locationDataModel) {
+        let cities = '';
         for(const location of locationDataModel.locations) {
             if(locationDataModel.country !== location) {
                 cities = cities + `\t\t\t<code>${formatMarkdown.capitalizeTheFirstLetterOfEachWord(location)}</code> \n`;
@@ -14,7 +15,8 @@ let createIndexPage = (function () {
         }
         return cities;
     }
-    let createListOfCountriesAndCitiesTable = function (indexUrl, readConfigResponseModel) {
+
+    static createListOfCountriesAndCitiesTable(indexUrl, readConfigResponseModel) {
         readConfigResponseModel.locations.sort((a,b) => a.country > b.country ? 1 : -1);
         let table = `<table>\n`;
         table = table + `\t<tr>\n`;
@@ -33,46 +35,45 @@ let createIndexPage = (function () {
             table = table + `\t\t\t</a>\n`;
             table = table + `\t\t</td>\n`;
             table = table + `\t\t<td>\n`;
-            table = table + createListOfCities(locationDataModel);
+            table = table + IndexPageCreator.createListOfCities(locationDataModel);
             table = table + `\t\t</td>\n`;
             table = table + `\t</tr>\n`;
         }
         table = table + `</table>\n\n`;
         return table;
     }
-    let create = function (githubUsernameAndRepository, readConfigResponseModel) {
+
+    static create(outputMarkdownModel) {
         let markdown = headerComponent.create();
         markdown = markdown + `<a href="https://gayanvoice.github.io/top-github-users/index.html">\n`;
         markdown = markdown + `\t<img align="right" width="400" src="https://github.com/gayanvoice/top-github-users-monitor/raw/master/public/images/banner/top-github-users-map.png" alt="top-github-users-by-country">\n`;
         markdown = markdown + `</a>\n\n`;
         markdown = markdown + `List of most active GitHub users based on \`public contributions\` \`private contributions\` and \`number of followers\`  by country or state. `;
         markdown = markdown + `The list updated \`${formatMarkdown.getDate()}\`.\n\n`;
-        markdown = markdown + `This repository contains users \`${readConfigResponseModel.locations.length} countries\` and \`${formatMarkdown.getNumberOfCities(readConfigResponseModel)} cities\`. \n`;
+        markdown = markdown + `This repository contains users \`${outputMarkdownModel.readConfigResponseModel.locations.length} countries\` and \`${formatMarkdown.getNumberOfCities(outputMarkdownModel.readConfigResponseModel)} cities\`. \n`;
         markdown = markdown + `To get into the list you need to have minimum number of followers that varies in each country. `;
-        markdown = markdown + `The list can be found in [config.json](https://github.com/${githubUsernameAndRepository}/blob/main/config.json).\n\n`;
+        markdown = markdown + `The list can be found in [config.json](https://github.com/${outputMarkdownModel.githubUsernameAndRepository}/blob/main/config.json).\n\n`;
         markdown = markdown + `Contribute to GitHub action [gayanvoice/top-github-users-action](https://github.com/gayanvoice/top-github-users-action). `;
-        markdown = markdown + `The project maintained by [gayanvoice](https://github.com/gayanvoice). `
+        markdown = markdown + `The project maintained by [gayanvoice](https://github.com/gayanvoice). `;
         markdown = markdown + `Don't forget to follow him on [GitHub](https://github.com/gayanvoice), [Twitter](https://twitter.com/gayanvoice), and [Medium](https://gayanvoice.medium.com/).\n\n`;
         markdown = markdown + starComponent.create();
         markdown = markdown + `### 🚀 Share on\n\n`;
         markdown = markdown + socialMediaComponent.create(
             "Top GitHub Users By Country",
             "List of most active github users based on public contributions, total contributions, and number of followers by country",
-            `https://github.com/${githubUsernameAndRepository}`);
-        markdown = markdown + createListOfCountriesAndCitiesTable(
-            `https://github.com/${githubUsernameAndRepository}`,
-            readConfigResponseModel);
+            `https://github.com/${outputMarkdownModel.githubUsernameAndRepository}`);
+        markdown = markdown + IndexPageCreator.createListOfCountriesAndCitiesTable(
+            `https://github.com/${outputMarkdownModel.githubUsernameAndRepository}`,
+            outputMarkdownModel.readConfigResponseModel);
         markdown = markdown + `### 🚀 Share on\n\n`;
         markdown = markdown + socialMediaComponent.create(
             "Top GitHub Users By Country",
             "List of most active github users based on public contributions, total contributions, and number of followers by country",
-            `https://github.com/${githubUsernameAndRepository}`);
+            `https://github.com/${outputMarkdownModel.githubUsernameAndRepository}`);
         markdown = markdown + thirdPartyComponent.create();
-        markdown = markdown + licenseComponent.create(githubUsernameAndRepository);
+        markdown = markdown + licenseComponent.create(outputMarkdownModel.githubUsernameAndRepository);
         return markdown;
     }
-    return {
-        create: create,
-    };
-})();
-module.exports = createIndexPage;
+}
+
+export { IndexPageCreator as createIndexPage };
