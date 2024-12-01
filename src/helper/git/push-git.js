@@ -1,18 +1,22 @@
-const git = require('../../core/git');
+import { exec } from 'child_process';
+import { promisify } from 'util';
 
-let pushGit = function () {
-    const BRANCH = 'main';
-    let push = async function () {
-        console.log(`Git Push`);
+const execAsync = promisify(exec);
+
+class GitPushHandler {
+    static async push() {
         try {
-            await git.push(BRANCH);
+            const { stdout, stderr } = await execAsync('git push');
+            if (stderr) {
+                console.error('Git push stderr:', stderr);
+            }
+            console.log('Git push stdout:', stdout);
+            return true;
         } catch (error) {
-            console.log(error);
+            console.error('Error executing git push:', error);
+            return false;
         }
     }
-    return {
-        push: push
-    };
-}();
+}
 
-module.exports = pushGit;
+export { GitPushHandler as pushGit };

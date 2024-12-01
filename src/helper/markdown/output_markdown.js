@@ -1,48 +1,39 @@
+import fs from 'fs';
 import path from 'path';
-import markdownFile from '../../helper/file/markdown_file.js';
+import { createIndexPage } from './page/create_index_page.js';
+import { createPublicContributionsPage } from './page/create_public_contributions_page.js';
+import { createTotalContributionsPage } from './page/create_total_contributions_page.js';
+import { createFollowersPage } from './page/create_followers_page.js';
 
-class MarkdownOutputHandler {
-    static formatCountryName(country) {
-        return country.replace(/\s/g, '_').toLowerCase();
-    }
-
-    static getFilePaths() {
-        return {
-            index: 'README.md',
-            publicContributions: country => path.join('markdown', 'public_contributions', `${this.formatCountryName(country)}.md`),
-            totalContributions: country => path.join('markdown', 'total_contributions', `${this.formatCountryName(country)}.md`),
-            followers: country => path.join('markdown', 'followers', `${this.formatCountryName(country)}.md`)
-        };
-    }
-
-    static async saveMarkdownFile(filePath, content) {
+class OutputMarkdownHandler {
+    static async create(outputMarkdownModel) {
         try {
-            await markdownFile.outputMarkdownFile(filePath, content);
+            // Create index page
+            const indexPagePath = path.join('markdown', 'index.md');
+            await fs.promises.mkdir(path.dirname(indexPagePath), { recursive: true });
+            await fs.promises.writeFile(indexPagePath, createIndexPage.create(outputMarkdownModel));
+
+            // Create public contributions page
+            const publicContributionsPagePath = path.join('markdown', 'public_contributions', outputMarkdownModel.locationDataModel.country.toLowerCase() + '.md');
+            await fs.promises.mkdir(path.dirname(publicContributionsPagePath), { recursive: true });
+            await fs.promises.writeFile(publicContributionsPagePath, createPublicContributionsPage.create(outputMarkdownModel));
+
+            // Create total contributions page
+            const totalContributionsPagePath = path.join('markdown', 'total_contributions', outputMarkdownModel.locationDataModel.country.toLowerCase() + '.md');
+            await fs.promises.mkdir(path.dirname(totalContributionsPagePath), { recursive: true });
+            await fs.promises.writeFile(totalContributionsPagePath, createTotalContributionsPage.create(outputMarkdownModel));
+
+            // Create followers page
+            const followersPagePath = path.join('markdown', 'followers', outputMarkdownModel.locationDataModel.country.toLowerCase() + '.md');
+            await fs.promises.mkdir(path.dirname(followersPagePath), { recursive: true });
+            await fs.promises.writeFile(followersPagePath, createFollowersPage.create(outputMarkdownModel));
+
+            return true;
         } catch (error) {
-            console.error(`Error saving markdown file ${filePath}:`, error);
-            throw error;
+            console.error('Error creating markdown files:', error);
+            return false;
         }
-    }
-
-    static async saveIndexMarkdown(markdown) {
-        const filePath = this.getFilePaths().index;
-        await this.saveMarkdownFile(filePath, markdown);
-    }
-
-    static async savePublicContributionsMarkdown(country, markdown) {
-        const filePath = this.getFilePaths().publicContributions(country);
-        await this.saveMarkdownFile(filePath, markdown);
-    }
-
-    static async saveTotalContributionsMarkdown(country, markdown) {
-        const filePath = this.getFilePaths().totalContributions(country);
-        await this.saveMarkdownFile(filePath, markdown);
-    }
-
-    static async saveFollowersMarkdown(country, markdown) {
-        const filePath = this.getFilePaths().followers(country);
-        await this.saveMarkdownFile(filePath, markdown);
     }
 }
 
-export default MarkdownOutputHandler;
+export { OutputMarkdownHandler as outputMarkdown };

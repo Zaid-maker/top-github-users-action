@@ -23,7 +23,7 @@ import { commitGit } from './helper/git/commit-git.js';
 import { pushGit } from './helper/git/push-git.js';
 import ConfigFileHandler from './helper/file/config_file.js';
 import CheckpointHandler from './helper/checkpoint/output_checkpoint.js';
-import CacheHandler from './helper/cache/output_cache.js';
+import { CacheHandler } from './helper/cache/output_cache.js';
 import { outputMarkdown } from './helper/markdown/output_markdown.js';
 import { createHtmlFile } from './helper/html/output_html.js';
 import { createRankingJsonFile } from './helper/html/file/create_ranking_json_file.js';
@@ -119,8 +119,8 @@ class GitHubUsersMonitor {
         try {
             const rankingJson = await createRankingJsonFile.create(config);
             await Promise.all([
-                outputHtml.saveRankingJsonFile(rankingJson),
-                outputHtml.saveHtmlFile(await createHtmlFile.create())
+                createHtmlFile.saveRankingJsonFile(rankingJson),
+                createHtmlFile.saveHtmlFile(await createHtmlFile.create())
             ]);
         } catch (error) {
             console.error('Error generating HTML files:', error);
@@ -174,3 +174,5 @@ GitHubUsersMonitor.run().catch(error => {
     console.error('Fatal error:', error);
     process.exit(1);
 });
+
+export { GitHubUsersMonitor };

@@ -1,15 +1,22 @@
-import git from '../../core/git.js';
+import { exec } from 'child_process';
+import { promisify } from 'util';
 
-class GitPuller {
+const execAsync = promisify(exec);
+
+class GitPullHandler {
     static async pull() {
-        console.log('Git Pull');
         try {
-            await git.pull();
+            const { stdout, stderr } = await execAsync('git pull');
+            if (stderr) {
+                console.error('Git pull stderr:', stderr);
+            }
+            console.log('Git pull stdout:', stdout);
+            return true;
         } catch (error) {
-            console.error('Error during git pull:', error);
-            throw error; // Re-throw to allow caller to handle the error
+            console.error('Error executing git pull:', error);
+            return false;
         }
     }
 }
 
-export default GitPuller;
+export { GitPullHandler as pullGit };

@@ -1,4 +1,6 @@
-import outputCache from '../../../helper/cache/output_cache';
+import fs from 'fs';
+import path from 'path';
+import { CacheHandler } from '../../../helper/cache/output_cache.js';
 
 class RankingJsonFileCreator {
     static async create(readConfigResponseModel) {
@@ -8,7 +10,7 @@ class RankingJsonFileCreator {
                 console.log(`Ranking not available for ${locationDataModel.country}`);
             } else {
                 console.log(`Ranking available for ${locationDataModel.country}`);
-                const readCacheResponseModel = await outputCache.readCacheFile(locationDataModel.country);
+                const readCacheResponseModel = await CacheHandler.readCacheFile(locationDataModel.country);
                 let totalPublicContributions = 0;
                 if (readCacheResponseModel.status) {
                     for (const user of readCacheResponseModel.users) {

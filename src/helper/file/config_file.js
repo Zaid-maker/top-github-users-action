@@ -1,6 +1,10 @@
+import fs from 'fs';
 import path from 'path';
-import file from '../../core/file.js';
+import { fileURLToPath } from 'url';
 import ReadConfigResponseModel from '../../model/config/ReadConfigResponseModel.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 class ConfigFileHandler {
     static CONFIG_PATHS = [
@@ -15,30 +19,27 @@ class ConfigFileHandler {
         for (const configPath of this.CONFIG_PATHS) {
             try {
                 console.log(`Attempting to read config from: ${configPath}`);
-                const response = await file.readJson(configPath);
+                const response = await fs.promises.readFile(configPath, 'utf8');
                 
-                if (!response.status) {
-                    console.error(`Config file read failed at ${configPath}: ${response.message}`);
-                    continue;
-                }
-
-                if (!response.content) {
+                if (!response) {
                     console.error(`Config file is empty or invalid at ${configPath}`);
                     continue;
                 }
 
-                if (!response.content.settings) {
+                const configContent = JSON.parse(response);
+
+                if (!configContent.settings) {
                     console.error(`Config file missing required settings section at ${configPath}`);
                     continue;
                 }
 
-                if (!response.content.locations) {
+                if (!configContent.locations) {
                     console.error(`Config file missing required locations section at ${configPath}`);
                     continue;
                 }
 
                 console.log(`Successfully loaded config file from ${configPath}`);
-                return new ReadConfigResponseModel(true, response.content);
+                return new ReadConfigResponseModel(true, configContent);
             } catch (error) {
                 console.error(`Error reading config file from ${configPath}:`, error);
                 lastError = error;
@@ -61,11 +62,11 @@ class ConfigFileHandler {
                 lastUpdated: new Date().toISOString()
             };
 
-            const response = await file.outputJson(this.CONFIG_PATHS[0], updatedConfig);
-            console.log(response.message);
+            const response = await fs.promises.writeFile(this.CONFIG_PATHS[0], JSON.stringify(updatedConfig));
+            console.log(response);
             
-            if (!response.status) {
-                throw new Error(response.message);
+            if (!response) {
+                throw new Error('Failed to write config file');
             }
 
             return new ReadConfigResponseModel(true, updatedConfig);
