@@ -23,7 +23,7 @@ import { commitGit } from './helper/git/commit-git';
 import { pushGit } from './helper/git/push-git';
 import ConfigFileHandler from './helper/file/config_file';
 import CheckpointHandler from './helper/checkpoint/output_checkpoint';
-import { outputCache } from './helper/cache/output_cache';
+import CacheHandler from './helper/cache/output_cache';
 import { outputMarkdown } from './helper/markdown/output_markdown';
 import { outputHtml } from './helper/html/output_html';
 import { createHtmlFile } from './helper/html/file/create_html_file';
@@ -32,7 +32,7 @@ import { createIndexPage } from './helper/markdown/page/create_index_page';
 import { createPublicContributionsPage } from './helper/markdown/page/create_public_contributions_page';
 import { createTotalContributionsPage } from './helper/markdown/page/create_total_contributions_page';
 import { createFollowersPage } from './helper/markdown/page/create_followers_page';
-import { requestOctokit } from './helper/octokit/request_octokit';
+import OctokitHandler from './helper/octokit/request_octokit';
 import { formatMarkdown } from './helper/markdown/format_markdown';
 import { OutputMarkdownModel } from './model/markdown/OutputMarkdownModel';
 
@@ -49,49 +49,25 @@ class GitHubUsersMonitor {
         return isMatch;
     }
 
-    static async #validateAndSaveCache(country, newUsers, existingUsers) {
-        if (!existingUsers) {
-            console.log(`Request success: new cache with ${newUsers.length} users`);
-            await outputCache.saveCacheFile(country, newUsers);
-            return;
-        }
-
-        if (existingUsers.length <= newUsers.length) {
-            console.log(`Cache update: ${existingUsers.length} → ${newUsers.length} users`);
-            await outputCache.saveCacheFile(country, newUsers);
-            return;
-        }
-
-        if (newUsers.length >= this.MINIMUM_USERS_THRESHOLD) {
-            console.log(`Minimum threshold met: ${newUsers.length} users (minimum: ${this.MINIMUM_USERS_THRESHOLD})`);
-            await outputCache.saveCacheFile(country, newUsers);
-            return;
-        }
-
-        console.warn(`Cache update skipped: ${newUsers.length} users below minimum threshold of ${this.MINIMUM_USERS_THRESHOLD}`);
-    }
-
     static async #saveCache(config, checkpoint) {
         console.log('########## SaveCache ##########');
-        
         for (const location of config.locations) {
-            if (!await this.#isCheckpoint(config.locations, location.country, checkpoint.checkpoint)) {
-                continue;
-            }
-
             try {
-                const users = await requestOctokit.request(
-                    this.AUTH_KEY,
-                    this.MAXIMUM_ERROR_ITERATIONS,
-                    location.locations
-                );
+                if (await this.#isCheckpoint(config.locations, location.country, checkpoint.checkpoint)) {
+                    console.log('Checkpoint set for', location.country);
 
-                const existingCache = await outputCache.readCacheFile(location.country);
-                await this.#validateAndSaveCache(
-                    location.country,
-                    users,
-                    existingCache.status ? existingCache.users : null
-                );
+                    const octokit = new OctokitHandler(this.AUTH_KEY);
+                    const response = await octokit.request(location);
+
+                    if (!response.status) {
+                        console.error(`Error fetching data for ${location.country}:`, response.message);
+                        continue;
+                    }
+
+                    await CacheHandler.saveCacheFile(response.content);
+                } else {
+                    console.log('Checkpoint not set for', location.country);
+                }
             } catch (error) {
                 console.error(`Error processing cache for ${location.country}:`, error);
             }
@@ -100,51 +76,42 @@ class GitHubUsersMonitor {
 
     static async #saveMarkdown(config, checkpoint) {
         console.log('########## SaveMarkDown ##########');
-        
         for (const location of config.locations) {
-            if (!await this.#isCheckpoint(config.locations, location.country, checkpoint.checkpoint)) {
-                continue;
-            }
-
             try {
-                const cache = await outputCache.readCacheFile(location.country);
-                if (!cache.status) {
-                    console.warn(`No cache found for ${location.country}, skipping markdown generation`);
-                    continue;
+                if (await this.#isCheckpoint(config.locations, location.country, checkpoint.checkpoint)) {
+                    console.log('Checkpoint set for', location.country);
+
+                    const cacheResponse = await CacheHandler.readCacheFile();
+                    if (!cacheResponse.status) {
+                        console.error(`Error reading cache for ${location.country}:`, cacheResponse.message);
+                        continue;
+                    }
+
+                    const cache = cacheResponse.content;
+                    const outputModel = new OutputMarkdownModel(location, cache);
+
+                    await Promise.all([
+                        outputMarkdown.saveIndexFile(
+                            createIndexPage.create(outputModel)
+                        ),
+                        outputMarkdown.savePublicContributionsFile(
+                            createPublicContributionsPage.create(outputModel)
+                        ),
+                        outputMarkdown.saveTotalContributionsFile(
+                            createTotalContributionsPage.create(outputModel)
+                        ),
+                        outputMarkdown.saveFollowersFile(
+                            createFollowersPage.create(outputModel)
+                        )
+                    ]);
+
+                    await CheckpointHandler.updateCheckpointFile(checkpoint.checkpoint + 1);
+                } else {
+                    console.log('Checkpoint not set for', location.country);
                 }
-
-                const markdownModel = new OutputMarkdownModel(
-                    this.GITHUB_REPOSITORY,
-                    location,
-                    cache,
-                    config
-                );
-
-                await Promise.all([
-                    outputMarkdown.savePublicContributionsMarkdownFile(
-                        location.country,
-                        createPublicContributionsPage.create(markdownModel)
-                    ),
-                    outputMarkdown.saveTotalContributionsMarkdownFile(
-                        location.country,
-                        createTotalContributionsPage.create(markdownModel)
-                    ),
-                    outputMarkdown.saveFollowersMarkdownFile(
-                        location.country,
-                        createFollowersPage.create(markdownModel)
-                    )
-                ]);
-
-                await CheckpointHandler.updateCheckpointFile(checkpoint.checkpoint + 1);
             } catch (error) {
                 console.error(`Error generating markdown for ${location.country}:`, error);
             }
-        }
-
-        if (!config.settings.devMode) {
-            await outputMarkdown.saveIndexMarkdownFile(
-                createIndexPage.create(this.GITHUB_REPOSITORY, config)
-            );
         }
     }
 
@@ -154,7 +121,7 @@ class GitHubUsersMonitor {
             const rankingJson = await createRankingJsonFile.create(config);
             await Promise.all([
                 outputHtml.saveRankingJsonFile(rankingJson),
-                outputHtml.saveHtmlFile(createHtmlFile.create())
+                outputHtml.saveHtmlFile(await createHtmlFile.create())
             ]);
         } catch (error) {
             console.error('Error generating HTML files:', error);
