@@ -22,7 +22,7 @@ import { pullGit } from './helper/git/pull-git';
 import { commitGit } from './helper/git/commit-git';
 import { pushGit } from './helper/git/push-git';
 import ConfigFileHandler from './helper/file/config_file';
-import { outputCheckpoint } from './helper/checkpoint/output_checkpoint';
+import CheckpointHandler from './helper/checkpoint/output_checkpoint';
 import { outputCache } from './helper/cache/output_cache';
 import { outputMarkdown } from './helper/markdown/output_markdown';
 import { outputHtml } from './helper/html/output_html';
@@ -135,11 +135,7 @@ class GitHubUsersMonitor {
                     )
                 ]);
 
-                await outputCheckpoint.saveCheckpointFile(
-                    config.locations,
-                    location.country,
-                    checkpoint.checkpoint
-                );
+                await CheckpointHandler.updateCheckpointFile(checkpoint.checkpoint + 1);
             } catch (error) {
                 console.error(`Error generating markdown for ${location.country}:`, error);
             }
@@ -168,7 +164,16 @@ class GitHubUsersMonitor {
     static async run() {
         try {
             const configResponse = await ConfigFileHandler.readConfigFile();
-            const checkpoint = await outputCheckpoint.readCheckpointFile();
+            
+            // Initialize checkpoint if it doesn't exist
+            let checkpoint;
+            try {
+                checkpoint = await CheckpointHandler.readCheckpoint();
+            } catch (error) {
+                console.log('No checkpoint found, initializing to 0');
+                await CheckpointHandler.updateCheckpointFile(0);
+                checkpoint = { status: true, checkpoint: 0 };
+            }
 
             if (!configResponse.status || !checkpoint.status) {
                 throw new Error('Failed to read configuration or checkpoint');

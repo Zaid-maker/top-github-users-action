@@ -10233,10 +10233,6 @@ __nccwpck_require__.r(__webpack_exports__);
 var pull_git_namespaceObject = {};
 __nccwpck_require__.r(pull_git_namespaceObject);
 
-// NAMESPACE OBJECT: ./src/helper/checkpoint/output_checkpoint.js
-var output_checkpoint_namespaceObject = {};
-__nccwpck_require__.r(output_checkpoint_namespaceObject);
-
 // NAMESPACE OBJECT: ./src/helper/markdown/output_markdown.js
 var output_markdown_namespaceObject = {};
 __nccwpck_require__.r(output_markdown_namespaceObject);
@@ -10584,16 +10580,55 @@ class ConfigFileHandler {
 }
 
 /* harmony default export */ const config_file = (ConfigFileHandler);
+;// CONCATENATED MODULE: ./src/model/checkpoint/ReadCheckpointResponseModel.js
+class ReadCheckpointResponseModel {
+    #status;
+    #checkpoint;
+
+    constructor(status, content) {
+        this.#status = status;
+        this.#checkpoint = status ? this.#validateAndSetCheckpoint(content?.checkpoint) : 0;
+    }
+
+    static #isValid(value) {
+        return value !== '' && value !== null && value !== undefined;
+    }
+
+    #validateAndSetCheckpoint(checkpoint) {
+        return ReadCheckpointResponseModel.#isValid(checkpoint) ? checkpoint : 0;
+    }
+
+    get status() {
+        return this.#status;
+    }
+
+    get checkpoint() {
+        return this.#checkpoint;
+    }
+
+    toJSON() {
+        return {
+            status: this.status,
+            checkpoint: this.checkpoint
+        };
+    }
+
+    toString() {
+        return `ReadCheckpointResponseModel(status=${this.status}, checkpoint=${this.checkpoint})`;
+    }
+}
+
+/* harmony default export */ const checkpoint_ReadCheckpointResponseModel = (ReadCheckpointResponseModel);
 ;// CONCATENATED MODULE: ./src/helper/file/checkpoint_file.js
 
 
 
 class CheckpointFileHandler {
-    static CHECKPOINT_PATH = (/* unused pure expression or super */ null && ('checkpoint.json'));
+    static CHECKPOINT_PATH = 'checkpoint.json';
 
     static async outputCheckpointFile(checkpointData) {
         try {
-            const response = await file.outputJson(this.CHECKPOINT_PATH, checkpointData);
+            const response = await core_file["default"].outputJson(this.CHECKPOINT_PATH, checkpointData);
             console.log(`Checkpoint saved: ${response.message}`);
             return response;
         } catch (error) {
@@ -10604,18 +10639,18 @@ class CheckpointFileHandler {
 
     static async readCheckpointFile() {
         try {
-            const response = await file.readJson(this.CHECKPOINT_PATH);
+            const response = await core_file["default"].readJson(this.CHECKPOINT_PATH);
             console.log(`Checkpoint read: ${response.message}`);
 
             if (!response.status) {
                 throw new Error(`Failed to read checkpoint: ${response.message}`);
             }
 
-            return new ReadCheckpointResponseModel(true, response.content);
+            return new checkpoint_ReadCheckpointResponseModel(true, response.content);
         } catch (error) {
             console.error('Error reading checkpoint file:', error);
             // Return a new checkpoint starting at 0 if file doesn't exist or is corrupted
-            return new ReadCheckpointResponseModel(false, { checkpoint: 0 });
+            return new checkpoint_ReadCheckpointResponseModel(false, { checkpoint: 0 });
         }
     }
 
@@ -10642,9 +10677,10 @@ class CheckpointFileHandler {
     }
 }
 
-/* harmony default export */ const checkpoint_file = ((/* unused pure expression or super */ null && (CheckpointFileHandler)));
+/* harmony default export */ const checkpoint_file = (CheckpointFileHandler);
 // EXTERNAL MODULE: ./src/model/data/CheckpointDataModel.js
-var data_CheckpointDataModel = __nccwpck_require__(9510);
+var CheckpointDataModel = __nccwpck_require__(9510);
+var CheckpointDataModel_default = /*#__PURE__*/__nccwpck_require__.n(CheckpointDataModel);
 ;// CONCATENATED MODULE: ./src/helper/checkpoint/output_checkpoint.js
 
 
@@ -10676,8 +10712,8 @@ class CheckpointHandler {
 
     static async updateCheckpointFile(checkpoint) {
         try {
-            const checkpointData = new CheckpointDataModel(checkpoint);
-            await checkpointFile.outputCheckpointFile(checkpointData);
+            const checkpointData = new (CheckpointDataModel_default())(checkpoint);
+            await checkpoint_file.outputCheckpointFile(checkpointData);
             console.log(`Checkpoint file updated to: ${checkpoint}`);
         } catch (error) {
             console.error('Error updating checkpoint file:', error);
@@ -10687,7 +10723,7 @@ class CheckpointHandler {
 
     static async readCheckpoint() {
         try {
-            const response = await checkpointFile.readCheckpointFile();
+            const response = await checkpoint_file.readCheckpointFile();
             console.log('Current checkpoint:', response.checkpoint);
             return response;
         } catch (error) {
@@ -10708,7 +10744,7 @@ class CheckpointHandler {
     }
 }
 
-/* harmony default export */ const output_checkpoint = ((/* unused pure expression or super */ null && (CheckpointHandler)));
+/* harmony default export */ const output_checkpoint = (CheckpointHandler);
 // EXTERNAL MODULE: ./src/helper/cache/output_cache.js
 var output_cache = __nccwpck_require__(9862);
 ;// CONCATENATED MODULE: ./src/helper/file/markdown_file.js
@@ -11130,11 +11166,7 @@ class GitHubUsersMonitor {
                     )
                 ]);
 
-                await output_checkpoint_namespaceObject.outputCheckpoint.saveCheckpointFile(
-                    config.locations,
-                    location.country,
-                    checkpoint.checkpoint
-                );
+                await output_checkpoint.updateCheckpointFile(checkpoint.checkpoint + 1);
             } catch (error) {
                 console.error(`Error generating markdown for ${location.country}:`, error);
             }
@@ -11163,7 +11195,16 @@ class GitHubUsersMonitor {
     static async run() {
         try {
             const configResponse = await config_file.readConfigFile();
-            const checkpoint = await output_checkpoint_namespaceObject.outputCheckpoint.readCheckpointFile();
+            
+            // Initialize checkpoint if it doesn't exist
+            let checkpoint;
+            try {
+                checkpoint = await output_checkpoint.readCheckpoint();
+            } catch (error) {
+                console.log('No checkpoint found, initializing to 0');
+                await output_checkpoint.updateCheckpointFile(0);
+                checkpoint = { status: true, checkpoint: 0 };
+            }
 
             if (!configResponse.status || !checkpoint.status) {
                 throw new Error('Failed to read configuration or checkpoint');
