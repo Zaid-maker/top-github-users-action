@@ -1,3 +1,17 @@
+## 1.1.0 (2024-12-03)
+
+* docs: update CHANGELOG.md [skip changelog] ([e1f54b2](https://github.com/Zaid-maker/top-github-users-action/commit/e1f54b2))
+* docs: update CHANGELOG.md for v1.0.7 [skip ci] ([6c5019f](https://github.com/Zaid-maker/top-github-users-action/commit/6c5019f))
+* FIX ([ab0cd95](https://github.com/Zaid-maker/top-github-users-action/commit/ab0cd95))
+* Fix Import ([55c21e2](https://github.com/Zaid-maker/top-github-users-action/commit/55c21e2))
+* Fix more files ([58117a8](https://github.com/Zaid-maker/top-github-users-action/commit/58117a8))
+* FIXES ([fce408e](https://github.com/Zaid-maker/top-github-users-action/commit/fce408e))
+* Fixing alot of files ([006477e](https://github.com/Zaid-maker/top-github-users-action/commit/006477e))
+* more fixes ([9037907](https://github.com/Zaid-maker/top-github-users-action/commit/9037907))
+* fix: correct module imports and method calls ([637c625](https://github.com/Zaid-maker/top-github-users-action/commit/637c625))
+
+
+
 ## [1.0.8](https://github.com/Zaid-maker/top-github-users-action/compare/v1.0.7...v1.0.8) (2024-12-01)
 
 

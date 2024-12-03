@@ -5014,56 +5014,56 @@ function wrappy (fn, cb) {
 /***/ 9491:
 /***/ ((module) => {
 
-module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("assert");
+module.exports = require("assert");
 
 /***/ }),
 
 /***/ 2057:
 /***/ ((module) => {
 
-module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("constants");
+module.exports = require("constants");
 
 /***/ }),
 
 /***/ 7147:
 /***/ ((module) => {
 
-module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("fs");
+module.exports = require("fs");
 
 /***/ }),
 
 /***/ 2037:
 /***/ ((module) => {
 
-module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("os");
+module.exports = require("os");
 
 /***/ }),
 
 /***/ 1017:
 /***/ ((module) => {
 
-module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("path");
+module.exports = require("path");
 
 /***/ }),
 
 /***/ 2781:
 /***/ ((module) => {
 
-module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("stream");
+module.exports = require("stream");
 
 /***/ }),
 
 /***/ 6224:
 /***/ ((module) => {
 
-module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("tty");
+module.exports = require("tty");
 
 /***/ }),
 
 /***/ 3837:
 /***/ ((module) => {
 
-module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("util");
+module.exports = require("util");
 
 /***/ })
 
@@ -5132,7 +5132,7 @@ __nccwpck_require__.d(__webpack_exports__, {
 });
 
 ;// CONCATENATED MODULE: external "child_process"
-const external_child_process_namespaceObject = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("child_process");
+const external_child_process_namespaceObject = require("child_process");
 // EXTERNAL MODULE: external "util"
 var external_util_ = __nccwpck_require__(3837);
 ;// CONCATENATED MODULE: ./src/helper/git/pull-git.js
@@ -5165,7 +5165,7 @@ var src = __nccwpck_require__(8237);
 // EXTERNAL MODULE: ./node_modules/@kwsites/promise-deferred/dist/index.js
 var promise_deferred_dist = __nccwpck_require__(9819);
 ;// CONCATENATED MODULE: external "node:events"
-const external_node_events_namespaceObject = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("node:events");
+const external_node_events_namespaceObject = require("node:events");
 ;// CONCATENATED MODULE: ./node_modules/simple-git/dist/esm/index.js
 var __defProp = Object.defineProperty;
 var __defProps = Object.defineProperties;
@@ -10040,230 +10040,12 @@ class GitPushHandler {
 }
 
 
-// EXTERNAL MODULE: external "fs"
-var external_fs_ = __nccwpck_require__(7147);
+// EXTERNAL MODULE: ./node_modules/fs-extra/lib/index.js
+var lib = __nccwpck_require__(5630);
 // EXTERNAL MODULE: external "path"
 var external_path_ = __nccwpck_require__(1017);
 ;// CONCATENATED MODULE: external "url"
 const external_url_namespaceObject = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("url");
-;// CONCATENATED MODULE: ./src/model/data/LocationDataModel.js
-class LocationDataModel {
-    #country;
-    #geoName;
-    #locations;
-    #imageUrl;
-
-    constructor(country, geoName, locations, imageUrl) {
-        if (!country) {
-            throw new Error('Country is required');
-        }
-        this.#country = country;
-        this.#geoName = geoName || null;
-        this.#locations = this.#validateLocations(locations);
-        this.#imageUrl = imageUrl || null;
-    }
-
-    #validateLocations(locations) {
-        if (!Array.isArray(locations)) {
-            throw new Error('Locations must be an array');
-        }
-        return locations.filter(location => location && typeof location === 'string');
-    }
-
-    get country() {
-        return this.#country;
-    }
-
-    get geoName() {
-        return this.#geoName;
-    }
-
-    get locations() {
-        return [...this.#locations];
-    }
-
-    get imageUrl() {
-        return this.#imageUrl;
-    }
-
-    get cities() {
-        return this.#locations.slice(1);
-    }
-
-    addCity(city) {
-        if (!city || typeof city !== 'string') {
-            throw new Error('City must be a non-empty string');
-        }
-        if (!this.#locations.includes(city)) {
-            this.#locations.push(city);
-        }
-    }
-
-    removeCity(city) {
-        const index = this.#locations.indexOf(city);
-        if (index > 0) { // Don't remove the country (index 0)
-            this.#locations.splice(index, 1);
-        }
-    }
-
-    toJSON() {
-        return {
-            country: this.country,
-            geoName: this.geoName,
-            locations: this.locations,
-            imageUrl: this.imageUrl
-        };
-    }
-
-    toString() {
-        return `LocationDataModel(country=${this.country}, geoName=${this.geoName}, cities=[${this.cities.join(', ')}])`;
-    }
-
-    static fromJSON(json) {
-        return new LocationDataModel(
-            json.country,
-            json.geoName,
-            json.locations || [json.country],
-            json.imageUrl
-        );
-    }
-}
-
-
-;// CONCATENATED MODULE: ./src/model/config/ReadConfigResponseModel.js
-
-
-class ReadConfigResponseModel {
-    #status;
-    #content;
-    #message;
-    #devMode;
-    #locations;
-    #checkpoint;
-
-    constructor(status, content, message = '') {
-        this.#status = status;
-        this.#content = content;
-        this.#message = message;
-
-        if (status && content) {
-            this.#devMode = this.#validateAndSetDevMode(content.devMode);
-            this.#locations = this.#validateAndSetLocations(content.locations);
-            this.#checkpoint = content.checkpoint ?? 0;
-        } else {
-            this.#devMode = true;
-            this.#locations = [];
-            this.#checkpoint = 0;
-        }
-    }
-
-    static #isValidString(value) {
-        return typeof value === 'string' && value !== '';
-    }
-
-    #validateAndSetDevMode(devMode) {
-        if (ReadConfigResponseModel.#isValidString(devMode)) {
-            return devMode.toLowerCase() === 'true';
-        }
-        return true; // Default to dev mode if invalid
-    }
-
-    #validateGeoName(geoName) {
-        return ReadConfigResponseModel.#isValidString(geoName) ? geoName : null;
-    }
-
-    #validateAndSetLocations(locations) {
-        if (!Array.isArray(locations)) {
-            console.warn('Invalid locations format: expected array');
-            return [];
-        }
-
-        return locations
-            .filter(location => location && typeof location === 'object')
-            .map(location => {
-                try {
-                    const country = location.country;
-                    const geoName = this.#validateGeoName(location.geoName);
-                    const imageUrl = location.imageUrl;
-                    
-                    if (!ReadConfigResponseModel.#isValidString(country)) {
-                        throw new Error(`Invalid country: ${country}`);
-                    }
-
-                    const cities = Array.isArray(location.cities) 
-                        ? location.cities.filter(city => ReadConfigResponseModel.#isValidString(city))
-                        : [];
-
-                    const allLocations = [country, ...cities];
-                    
-                    return new LocationDataModel(country, geoName, allLocations, imageUrl);
-                } catch (error) {
-                    console.warn(`Skipping invalid location: ${error.message}`);
-                    return null;
-                }
-            })
-            .filter(Boolean); // Remove null entries
-    }
-
-    get status() {
-        return this.#status;
-    }
-
-    get content() {
-        return this.#content;
-    }
-
-    get message() {
-        return this.#message;
-    }
-
-    get devMode() {
-        return this.#devMode;
-    }
-
-    get locations() {
-        return [...this.#locations];
-    }
-
-    get checkpoint() {
-        return this.#checkpoint;
-    }
-
-    addLocation(country, geoName = null, cities = [], imageUrl = null) {
-        const locations = [country, ...cities];
-        const locationModel = new LocationDataModel(country, geoName, locations, imageUrl);
-        this.#locations.push(locationModel);
-    }
-
-    removeLocation(country) {
-        this.#locations = this.#locations.filter(loc => loc.country !== country);
-    }
-
-    toJSON() {
-        return {
-            status: this.status,
-            content: this.content,
-            message: this.message,
-            devMode: this.devMode,
-            locations: this.locations.map(loc => loc.toJSON()),
-            checkpoint: this.checkpoint
-        };
-    }
-
-    toString() {
-        return `ReadConfigResponseModel(status=${this.status}, content=${this.content}, message=${this.message}, devMode=${this.devMode}, locations=${this.locations.length}, checkpoint=${this.checkpoint})`;
-    }
-
-    static fromJSON(json) {
-        return new ReadConfigResponseModel(true, {
-            devMode: json.devMode,
-            locations: json.locations,
-            checkpoint: json.checkpoint
-        }, json.message);
-    }
-}
-
-/* harmony default export */ const config_ReadConfigResponseModel = (ReadConfigResponseModel);
 ;// CONCATENATED MODULE: ./src/helper/file/config_file.js
 
 
@@ -10271,7 +10053,15 @@ class ReadConfigResponseModel {
 
 
 const config_file_filename = (0,external_url_namespaceObject.fileURLToPath)(import.meta.url);
-const config_file_dirname = external_path_.dirname(config_file_filename);
+const config_file_dirname = (0,external_path_.dirname)(config_file_filename);
+
+class ReadConfigResponseModel {
+    constructor(status, content = null, error = null) {
+        this.status = status;
+        this.content = content;
+        this.error = error;
+    }
+}
 
 class ConfigFileHandler {
     static CONFIG_PATHS = [
@@ -10280,84 +10070,99 @@ class ConfigFileHandler {
         __nccwpck_require__.ab + "config1.json"
     ];
 
-    static async readConfigFile() {
-        let lastError = null;
-
-        for (const configPath of this.CONFIG_PATHS) {
-            try {
-                console.log(`Attempting to read config from: ${configPath}`);
-                const response = await external_fs_.promises.readFile(configPath, 'utf8');
-                
-                if (!response) {
-                    console.error(`Config file is empty or invalid at ${configPath}`);
-                    continue;
-                }
-
-                const configContent = JSON.parse(response);
-
-                if (!configContent.settings) {
-                    console.error(`Config file missing required settings section at ${configPath}`);
-                    continue;
-                }
-
-                if (!configContent.locations) {
-                    console.error(`Config file missing required locations section at ${configPath}`);
-                    continue;
-                }
-
-                console.log(`Successfully loaded config file from ${configPath}`);
-                return new config_ReadConfigResponseModel(true, configContent);
-            } catch (error) {
-                console.error(`Error reading config file from ${configPath}:`, error);
-                lastError = error;
-            }
-        }
-
-        return new config_ReadConfigResponseModel(false, null, lastError ? lastError.message : 'Failed to read config file from any location');
-    }
-
-    static async updateConfigFile(updates) {
-        try {
-            const currentConfig = await this.readConfigFile();
-            if (!currentConfig.status) {
-                throw new Error('Failed to read existing config');
-            }
-
-            const updatedConfig = {
-                ...currentConfig.content,
-                ...updates,
-                lastUpdated: new Date().toISOString()
-            };
-
-            const response = await external_fs_.promises.writeFile(this.CONFIG_PATHS[0], JSON.stringify(updatedConfig));
-            console.log(response);
-            
-            if (!response) {
-                throw new Error('Failed to write config file');
-            }
-
-            return new config_ReadConfigResponseModel(true, updatedConfig);
-        } catch (error) {
-            console.error('Error updating config file:', error);
-            return new config_ReadConfigResponseModel(false, null, error.message);
-        }
-    }
-
     static validateConfig(config) {
-        const requiredFields = ['locations'];
-        const missingFields = requiredFields.filter(field => !(field in config));
-        
-        if (missingFields.length > 0) {
-            throw new Error(`Missing required fields in config: ${missingFields.join(', ')}`);
+        // Check if config is empty
+        if (!config || Object.keys(config).length === 0) {
+            throw new Error('Config file is empty');
+        }
+
+        // Check required sections
+        if (!config.settings || typeof config.settings !== 'object') {
+            throw new Error('Invalid config format: missing or invalid settings section');
+        }
+
+        if (!config.locations || !Array.isArray(config.locations)) {
+            throw new Error('Invalid config format: missing or invalid locations section');
+        }
+
+        // Validate settings fields
+        const requiredSettings = ['devMode', 'minUsersThreshold', 'maxErrorIterations', 'updateFrequency'];
+        const missingSettings = requiredSettings.filter(field => !(field in config.settings));
+        if (missingSettings.length > 0) {
+            throw new Error(`Missing required settings fields: ${missingSettings.join(', ')}`);
         }
 
         return true;
     }
+
+    static getDefaultConfig(config = {}) {
+        return {
+            $schema: "http://json-schema.org/draft-07/schema#",
+            title: "GitHub Users Monitor Configuration",
+            description: "Configuration for tracking top GitHub users by country",
+            version: "2.0.0",
+            ...config,
+            lastUpdated: new Date().toISOString()
+        };
+    }
+
+    static async readConfigFile() {
+        for (const configPath of this.CONFIG_PATHS) {
+            try {
+                console.log(`Attempting to read config from: ${configPath}`);
+                const config = await lib.readJson(configPath);
+
+                // Validate the config
+                try {
+                    this.validateConfig(config);
+                } catch (validationError) {
+                    console.error(`Validation error for ${configPath}:`, validationError);
+                    return new ReadConfigResponseModel(false, null, validationError);
+                }
+
+                console.log(`Successfully loaded config file from ${configPath}`);
+                return new ReadConfigResponseModel(true, this.getDefaultConfig(config));
+            } catch (error) {
+                console.error(`Error reading config file from ${configPath}:`, error);
+                
+                // If it's not a file not found error, return immediately
+                if (!error.message.includes('ENOENT')) {
+                    return new ReadConfigResponseModel(false, null, error);
+                }
+
+                // If we've tried all paths, return the error
+                if (configPath === this.CONFIG_PATHS[this.CONFIG_PATHS.length - 1]) {
+                    return new ReadConfigResponseModel(false, null, new Error('Failed to read config file from any location'));
+                }
+            }
+        }
+
+        return new ReadConfigResponseModel(false, null, new Error('Failed to read config file'));
+    }
+
+    static async updateConfigFile(updates) {
+        try {
+            // Validate the updates
+            try {
+                this.validateConfig(updates);
+            } catch (validationError) {
+                return new ReadConfigResponseModel(false, null, validationError);
+            }
+
+            const configPath = this.CONFIG_PATHS[0];
+            const updatedConfig = this.getDefaultConfig(updates);
+
+            await lib.outputJson(configPath, updatedConfig, { spaces: 2 });
+            console.log(`Config file updated at ${configPath}`);
+            return new ReadConfigResponseModel(true, updatedConfig);
+        } catch (error) {
+            console.error('Error updating config file:', error);
+            return new ReadConfigResponseModel(false, null, error);
+        }
+    }
 }
 
 /* harmony default export */ const config_file = (ConfigFileHandler);
-// EXTERNAL MODULE: ./node_modules/fs-extra/lib/index.js
-var lib = __nccwpck_require__(5630);
 ;// CONCATENATED MODULE: ./src/model/file/OutputFileResponseModel.js
 class OutputFileResponseModel {
     #status;
@@ -10647,6 +10452,8 @@ class CheckpointHandler {
 }
 
 /* harmony default export */ const output_checkpoint = (CheckpointHandler);
+// EXTERNAL MODULE: external "fs"
+var external_fs_ = __nccwpck_require__(7147);
 ;// CONCATENATED MODULE: ./src/helper/cache/output_cache.js
 
 

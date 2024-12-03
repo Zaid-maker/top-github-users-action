@@ -1,16 +1,31 @@
-import fs from 'fs-extra';
-import path from 'path';
-import ConfigFileHandler from '../../../helper/file/config_file';
+import { jest } from '@jest/globals';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+import ConfigFileHandler from '../../../helper/file/config_file.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+// Create mock functions
+const mockReadJson = jest.fn();
+const mockOutputJson = jest.fn();
 
 // Mock fs-extra
-jest.mock('fs-extra');
+jest.mock('fs-extra', () => ({
+    readJson: (...args) => mockReadJson(...args),
+    outputJson: (...args) => mockOutputJson(...args)
+}));
+
+// Import fs-extra after mocking
+import fs from 'fs-extra';
 
 describe('ConfigFileHandler', () => {
     const mockConfigPaths = [
-        path.join(process.cwd(), 'config.json'),
-        path.join(__dirname, '../../../config.json'),
-        path.join(__dirname, '../../../dist/config.json')
+        join(process.cwd(), 'config.json'),
+        join(dirname(dirname(dirname(__dirname))), 'config.json'),
+        join(dirname(dirname(dirname(__dirname))), 'dist/config.json')
     ];
+    
     const validConfig = {
         settings: {
             devMode: false,
@@ -25,122 +40,134 @@ describe('ConfigFileHandler', () => {
                 cities: ["city1", "city2"],
                 imageUrl: "https://example.com/flag.svg"
             }
-        ]
+        ],
+        $schema: "http://json-schema.org/draft-07/schema#",
+        title: "GitHub Users Monitor Configuration",
+        description: "Configuration for tracking top GitHub users by country",
+        version: "2.0.0",
+        lastUpdated: expect.any(String)
     };
 
     beforeEach(() => {
         // Clear all mocks before each test
-        jest.clearAllMocks();
+        mockReadJson.mockReset();
+        mockOutputJson.mockReset();
     });
 
     describe('readConfigFile', () => {
         it('should successfully read a valid config file', async () => {
             // Mock successful file read for first path
-            fs.readJson.mockResolvedValueOnce(validConfig);
+            const mockConfig = {
+                settings: validConfig.settings,
+                locations: validConfig.locations
+            };
+            mockReadJson.mockResolvedValueOnce(mockConfig);
 
             const result = await ConfigFileHandler.readConfigFile();
 
             expect(result.status).toBe(true);
             expect(result.content).toEqual(validConfig);
-            expect(fs.readJson).toHaveBeenCalledWith(mockConfigPaths[0]);
+            expect(mockReadJson).toHaveBeenCalledWith(mockConfigPaths[0]);
         });
 
         it('should handle missing config file', async () => {
             // Mock file not found error for all paths
+            const enoentError = new Error('ENOENT: no such file or directory');
             mockConfigPaths.forEach(() => {
-                fs.readJson.mockRejectedValueOnce(new Error('ENOENT: no such file or directory'));
+                mockReadJson.mockRejectedValueOnce(enoentError);
             });
 
             const result = await ConfigFileHandler.readConfigFile();
 
             expect(result.status).toBe(false);
-            expect(result.content).toBeNull();
-            expect(result.message).toContain('Failed to read config file from any location');
+            expect(result.error).toBeDefined();
+            expect(result.error.message).toBe('Failed to read config file from any location');
+            expect(mockReadJson).toHaveBeenCalledTimes(mockConfigPaths.length);
         });
 
         it('should handle invalid JSON in config file', async () => {
-            // Mock JSON parse error for all paths
-            mockConfigPaths.forEach(() => {
-                fs.readJson.mockRejectedValueOnce(new SyntaxError('Unexpected token'));
-            });
+            // Mock JSON parse error
+            const parseError = new SyntaxError('Unexpected token');
+            mockReadJson.mockRejectedValueOnce(parseError);
 
             const result = await ConfigFileHandler.readConfigFile();
 
             expect(result.status).toBe(false);
-            expect(result.content).toBeNull();
-            expect(result.message).toContain('Failed to read config file from any location');
+            expect(result.error).toBe(parseError);
+            expect(mockReadJson).toHaveBeenCalledWith(mockConfigPaths[0]);
         });
 
         it('should validate required settings section', async () => {
-            // Mock config without settings for all paths
-            const invalidConfig = {
+            // Mock config without settings
+            mockReadJson.mockResolvedValueOnce({
                 locations: validConfig.locations
-            };
-            mockConfigPaths.forEach(() => {
-                fs.readJson.mockResolvedValueOnce(invalidConfig);
             });
 
             const result = await ConfigFileHandler.readConfigFile();
 
             expect(result.status).toBe(false);
-            expect(result.content).toBeNull();
-            expect(result.message).toContain('Failed to read config file from any location');
+            expect(result.error).toBeDefined();
+            expect(result.error.message).toContain('missing or invalid settings section');
+            expect(mockReadJson).toHaveBeenCalledWith(mockConfigPaths[0]);
         });
 
         it('should validate required locations section', async () => {
-            // Mock config without locations for all paths
-            const invalidConfig = {
+            // Mock config without locations
+            mockReadJson.mockResolvedValueOnce({
                 settings: validConfig.settings
-            };
-            mockConfigPaths.forEach(() => {
-                fs.readJson.mockResolvedValueOnce(invalidConfig);
             });
 
             const result = await ConfigFileHandler.readConfigFile();
 
             expect(result.status).toBe(false);
-            expect(result.content).toBeNull();
-            expect(result.message).toContain('Failed to read config file from any location');
+            expect(result.error).toBeDefined();
+            expect(result.error.message).toContain('missing or invalid locations section');
+            expect(mockReadJson).toHaveBeenCalledWith(mockConfigPaths[0]);
         });
 
         it('should handle empty config file', async () => {
-            // Mock empty config for all paths
-            mockConfigPaths.forEach(() => {
-                fs.readJson.mockResolvedValueOnce({});
-            });
+            // Mock empty config
+            mockReadJson.mockResolvedValueOnce({});
 
             const result = await ConfigFileHandler.readConfigFile();
 
             expect(result.status).toBe(false);
-            expect(result.content).toBeNull();
-            expect(result.message).toContain('Failed to read config file from any location');
+            expect(result.error).toBeDefined();
+            expect(result.error.message).toBe('Config file is empty');
+            expect(mockReadJson).toHaveBeenCalledWith(mockConfigPaths[0]);
         });
     });
 
     describe('updateConfigFile', () => {
         it('should successfully update config file', async () => {
-            // Mock successful file read and write
-            fs.readJson.mockResolvedValue(validConfig);
-            fs.outputJson.mockResolvedValue();
+            // Mock successful file write
+            mockOutputJson.mockResolvedValueOnce();
 
-            const updates = { settings: { devMode: true } };
-            const result = await ConfigFileHandler.updateConfigFile(updates);
+            const result = await ConfigFileHandler.updateConfigFile(validConfig);
 
             expect(result.status).toBe(true);
-            expect(result.content).toEqual(expect.objectContaining(updates));
+            expect(mockOutputJson).toHaveBeenCalledWith(
+                mockConfigPaths[0],
+                {
+                    ...validConfig,
+                    $schema: "http://json-schema.org/draft-07/schema#",
+                    title: "GitHub Users Monitor Configuration",
+                    description: "Configuration for tracking top GitHub users by country",
+                    version: "2.0.0",
+                    lastUpdated: expect.any(String)
+                },
+                { spaces: 2 }
+            );
         });
 
-        it('should handle update failure', async () => {
-            // Mock successful read but failed write
-            fs.readJson.mockResolvedValue(validConfig);
-            fs.outputJson.mockRejectedValue(new Error('Write failed'));
+        it('should handle write errors', async () => {
+            const writeError = new Error('Write failed');
+            mockOutputJson.mockRejectedValueOnce(writeError);
 
-            const updates = { settings: { devMode: true } };
-            const result = await ConfigFileHandler.updateConfigFile(updates);
+            const result = await ConfigFileHandler.updateConfigFile(validConfig);
 
             expect(result.status).toBe(false);
-            expect(result.content).toBeNull();
-            expect(result.message).toContain('Write failed');
+            expect(result.error).toBe(writeError);
         });
     });
 });
