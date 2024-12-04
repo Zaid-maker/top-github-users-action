@@ -1,8 +1,10 @@
 import fs from 'fs/promises';
 import path from 'path';
+import fetch from 'node-fetch';
 
 const CONFIG_FILE_PATH = path.join(process.cwd(), 'config.json');
 const BACKUP_DIR = path.join(process.cwd(), 'backups');
+const RESTCOUNTRIES_API = 'https://restcountries.com/v3.1';
 
 // Configuration constants
 const CONFIG_SCHEMA = {
@@ -18,6 +20,9 @@ const DEFAULT_SETTINGS = {
     maxErrorIterations: 4,
     updateFrequency: "daily"
 };
+
+// Cache for validated countries
+let validatedCountries = new Map();
 
 // Countries to exclude - those with typically low GitHub activity or limited tech presence
 const EXCLUDED_COUNTRIES = new Set([
@@ -39,24 +44,68 @@ const PRIORITY_COUNTRIES = new Set([
     'poland', 'ukraine', 'taiwan', 'hong kong'
 ]);
 
+// Country name mappings for normalization
+const COUNTRY_MAPPINGS = {
+    'usa': 'united states of america',
+    'united states': 'united states of america',
+    'uk': 'united kingdom',
+    'great britain': 'united kingdom',
+    'south korea': 'korea',
+    'uae': 'united arab emirates',
+};
+
+/**
+ * Validates a country name against the REST Countries API
+ * @param {string} countryName - Name of the country to validate
+ * @returns {Promise<boolean>} - True if country is valid, false otherwise
+ */
+async function validateCountryWithAPI(countryName) {
+    try {
+        // Check cache first
+        if (validatedCountries.has(countryName)) {
+            return validatedCountries.get(countryName);
+        }
+
+        // Normalize country name
+        const normalizedName = COUNTRY_MAPPINGS[countryName.toLowerCase()] || countryName;
+
+        // Query REST Countries API
+        const response = await fetch(`${RESTCOUNTRIES_API}/name/${encodeURIComponent(normalizedName)}`);
+        const isValid = response.status === 200;
+        
+        // Cache the result
+        validatedCountries.set(countryName, isValid);
+        return isValid;
+    } catch (error) {
+        console.error(`Error validating country ${countryName}:`, error.message);
+        return false;
+    }
+}
+
 /**
  * Validates a location object
  * @param {Object} location - Location object to validate
- * @returns {string|null} - Error message if invalid, null if valid
+ * @returns {Promise<string|null>} - Error message if invalid, null if valid
  */
-function validateLocation(location) {
+async function validateLocation(location) {
     if (!location.country || typeof location.country !== 'string') {
         return 'Invalid or missing country';
     }
     if (!location.geoName || typeof location.geoName !== 'string') {
         return 'Invalid or missing geoName';
     }
-    if (!Array.isArray(location.cities) || location.cities.length === 0) {
-        return 'Invalid or empty cities array';
+
+    // Skip validation for priority countries
+    if (PRIORITY_COUNTRIES.has(location.country.toLowerCase())) {
+        return null;
     }
-    if (!location.imageUrl || typeof location.imageUrl !== 'string' || !location.imageUrl.startsWith('http')) {
-        return 'Invalid or missing imageUrl';
+
+    // Validate country with API
+    const isValid = await validateCountryWithAPI(location.country);
+    if (!isValid) {
+        return `Invalid country: ${location.country}`;
     }
+
     return null;
 }
 
@@ -65,109 +114,86 @@ function validateLocation(location) {
  */
 async function createBackup() {
     try {
-        // Ensure backup directory exists
-        await fs.mkdir(BACKUP_DIR, { recursive: true });
-
         const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
         const backupPath = path.join(BACKUP_DIR, `config-${timestamp}.json`);
         
+        // Ensure backup directory exists
+        await fs.mkdir(BACKUP_DIR, { recursive: true });
+        
+        // Copy current config to backup
         await fs.copyFile(CONFIG_FILE_PATH, backupPath);
-        console.log(`📦 Created backup: ${path.basename(backupPath)}`);
+        console.log(`Backup created: ${backupPath}`);
     } catch (error) {
-        console.warn('⚠️ Failed to create backup:', error.message);
+        console.error('Failed to create backup:', error);
     }
 }
 
 /**
  * Processes and filters locations data
  * @param {Array} locations - Array of location objects
- * @returns {Array} - Processed and filtered locations
+ * @returns {Promise<Array>} - Processed and filtered locations
  */
-function processLocations(locations) {
+async function processLocations(locations) {
     const validLocations = [];
-    const invalidLocations = [];
+    const errors = [];
 
-    // Validate and filter locations
-    locations.forEach(location => {
-        const error = validateLocation(location);
+    for (const location of locations) {
+        const error = await validateLocation(location);
         if (error) {
-            invalidLocations.push({ location, error });
-            return;
+            errors.push(`${location.country}: ${error}`);
+            continue;
         }
-        if (!EXCLUDED_COUNTRIES.has(location.country.toLowerCase())) {
-            validLocations.push(location);
-        }
-    });
 
-    // Log validation results
-    if (invalidLocations.length > 0) {
-        console.warn('⚠️ Found invalid locations:');
-        invalidLocations.forEach(({ location, error }) => {
-            console.warn(`   - ${location.country || 'Unknown country'}: ${error}`);
+        const countryLower = location.country.toLowerCase();
+        if (EXCLUDED_COUNTRIES.has(countryLower)) {
+            continue;
+        }
+
+        validLocations.push({
+            country: location.country,
+            geoName: location.geoName,
+            priority: PRIORITY_COUNTRIES.has(countryLower)
         });
     }
 
-    // Sort locations
-    return validLocations.sort((a, b) => {
-        const aPriority = PRIORITY_COUNTRIES.has(a.country.toLowerCase());
-        const bPriority = PRIORITY_COUNTRIES.has(b.country.toLowerCase());
-        if (aPriority && !bPriority) return -1;
-        if (!aPriority && bPriority) return 1;
-        return a.country.localeCompare(b.country);
-    });
+    if (errors.length > 0) {
+        console.warn('Validation errors:', errors);
+    }
+
+    return validLocations;
 }
 
+/**
+ * Updates the country data in the configuration file
+ */
 async function updateCountryData() {
     try {
-        console.log('🔄 Starting country data update...');
-
-        // Create backup before making changes
+        // Read current config
+        const configData = JSON.parse(await fs.readFile(CONFIG_FILE_PATH, 'utf8'));
+        
+        // Create backup before modifications
         await createBackup();
-
-        // Read and parse current config
-        const configData = await fs.readFile(CONFIG_FILE_PATH, 'utf8');
-        const config = JSON.parse(configData);
-
-        // Process locations
-        const filteredLocations = processLocations(config.locations);
-
-        // Create new config
-        const newConfig = {
-            ...CONFIG_SCHEMA,
-            settings: {
-                ...DEFAULT_SETTINGS,
-                ...config.settings
-            },
-            locations: filteredLocations,
-            lastUpdated: new Date().toISOString()
-        };
-
+        
+        // Process and validate locations
+        const validLocations = await processLocations(configData.locations || []);
+        
+        // Update config with validated locations
+        configData.locations = validLocations;
+        configData.lastUpdated = new Date().toISOString();
+        configData.version = CONFIG_SCHEMA.version;
+        
+        // Ensure required settings
+        configData.settings = { ...DEFAULT_SETTINGS, ...(configData.settings || {}) };
+        
         // Write updated config
-        await fs.writeFile(
-            CONFIG_FILE_PATH,
-            JSON.stringify(newConfig, null, 2),
-            'utf8'
-        );
-
-        // Log results
-        console.log('\n✅ Successfully updated country data in config.json');
-        console.log('📊 Statistics:');
-        console.log(`   - Total countries: ${newConfig.locations.length}`);
-        console.log(`   - Priority countries: ${PRIORITY_COUNTRIES.size}`);
-        console.log(`   - Excluded countries: ${EXCLUDED_COUNTRIES.size}`);
+        await fs.writeFile(CONFIG_FILE_PATH, JSON.stringify(configData, null, 2));
+        console.log('Country data updated successfully');
         
-        const priorityCountriesPresent = filteredLocations
-            .filter(loc => PRIORITY_COUNTRIES.has(loc.country.toLowerCase()))
-            .length;
-        console.log(`   - Priority countries present: ${priorityCountriesPresent}/${PRIORITY_COUNTRIES.size}`);
-        
-        // Calculate coverage
-        const coverage = (priorityCountriesPresent / PRIORITY_COUNTRIES.size * 100).toFixed(1);
-        console.log(`   - Priority country coverage: ${coverage}%`);
-
+        // Log validation summary
+        console.log(`Total locations: ${validLocations.length}`);
+        console.log(`Priority countries: ${validLocations.filter(l => l.priority).length}`);
     } catch (error) {
-        console.error('\n❌ Error updating country data:');
-        console.error(`   ${error.message}`);
+        console.error('Failed to update country data:', error);
         process.exit(1);
     }
 }
